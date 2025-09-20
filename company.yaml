@@ -1,0 +1,34 @@
+company:
+  name: Happy Buttons GmbH
+  domain: h-bu.de
+  culture:
+    royal_english_courtesy: true
+    greeting: "We are most delighted to serve you."
+    signature: |
+      With the greatest pleasure,
+      Happy Buttons Service
+  sla:
+    default_response_hours: 12
+    expedite_window_hours: 24
+priority:
+  oem_over_b2c: true
+escalation:
+  ambiguous_to: management@h-bu.de
+mailboxes:
+  - info@h-bu.de
+  - orders@h-bu.de
+  - oem1@h-bu.de
+  - supplier@h-bu.de
+  - logistics@h-bu.de
+  - support@h-bu.de
+  - hr@h-bu.de
+  - finance@h-bu.de
+  - quality@h-bu.de
+  - management@h-bu.de
+sites:
+  production: [CN, PL, MX, MD]
+  distribution: [NY, MD]
+systems:
+  erp: stub
+  crm: stub
+  wms: stub

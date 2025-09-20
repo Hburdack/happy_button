@@ -1,0 +1,31 @@
+use_case:
+  name: info_mail_handling
+  sources: [info@h-bu.de]
+  rules:
+    triage:
+      order_pdf: orders@h-bu.de
+      invoice_pdf: finance@h-bu.de
+      supplier_keywords: supplier@h-bu.de
+      complaint_keywords: quality@h-bu.de
+      else: support@h-bu.de
+    priority:
+      oem_domain_list: [oem1.com]
+    escalation:
+      ambiguous: management@h-bu.de
+  autoreply:
+    enabled: true
+    style: royal
+    templates:
+      order_received: "We are most delighted to confirm receipt of your order…"
+      generic_ack: "Kindly note we have received your message and shall revert most promptly."
+      invoice_received: "We gratefully acknowledge your invoice and shall process it forthwith."
+      expedite_ack: "We are honoured to prioritise your request and shall strive for delivery within 24 hours."
+  kpi_targets:
+    auto_handled_share: 0.70
+    avg_response_hours: 1
+  sim:
+    history_days: 30
+    day_script:
+      morning: [endcustomer_order_pdf, oem_bulk_order_pdf, supplier_delivery_conf]
+      afternoon: [invoice_pdf, customer_question]
+      evening: [urgent_oem_order]
