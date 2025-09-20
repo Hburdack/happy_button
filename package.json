@@ -1,5 +1,23 @@
 {
+  "name": "happy-button-agentic-simulation",
+  "version": "1.0.0",
+  "description": "Agentic Simulation System for Happy Buttons GmbH",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node src/index.js",
+    "build": "echo 'Build completed'",
+    "test": "python -m pytest tests/ -v"
+  },
   "dependencies": {
-    "better-sqlite3": "^11.10.0"
-  }
+    "better-sqlite3": "^8.7.0",
+    "claude-flow": "^2.0.0-alpha.113"
+  },
+  "keywords": [
+    "email",
+    "automation",
+    "agents",
+    "simulation"
+  ],
+  "author": "Happy Buttons GmbH",
+  "license": "MIT"
 }

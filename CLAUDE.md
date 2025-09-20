@@ -1,261 +1,352 @@
-# Happy Buttons Agentic Simulation System - Claude Code Configuration
+# Claude Code Configuration - SPARC Development Environment
+
+## 🚨 CRITICAL: CONCURRENT EXECUTION & FILE MANAGEMENT
+
+**ABSOLUTE RULES**:
+1. ALL operations MUST be concurrent/parallel in a single message
+2. **NEVER save working files, text/mds and tests to the root folder**
+3. ALWAYS organize files in appropriate subdirectories
+4. **USE CLAUDE CODE'S TASK TOOL** for spawning agents concurrently, not just MCP
+
+### ⚡ GOLDEN RULE: "1 MESSAGE = ALL RELATED OPERATIONS"
+
+**MANDATORY PATTERNS:**
+- **TodoWrite**: ALWAYS batch ALL todos in ONE call (5-10+ todos minimum)
+- **Task tool (Claude Code)**: ALWAYS spawn ALL agents in ONE message with full instructions
+- **File operations**: ALWAYS batch ALL reads/writes/edits in ONE message
+- **Bash commands**: ALWAYS batch ALL terminal operations in ONE message
+- **Memory operations**: ALWAYS batch ALL memory store/retrieve in ONE message
+
+### 🎯 CRITICAL: Claude Code Task Tool for Agent Execution
+
+**Claude Code's Task tool is the PRIMARY way to spawn agents:**
+```javascript
+// ✅ CORRECT: Use Claude Code's Task tool for parallel agent execution
+[Single Message]:
+  Task("Research agent", "Analyze requirements and patterns...", "researcher")
+  Task("Coder agent", "Implement core features...", "coder")
+  Task("Tester agent", "Create comprehensive tests...", "tester")
+  Task("Reviewer agent", "Review code quality...", "reviewer")
+  Task("Architect agent", "Design system architecture...", "system-architect")
+```
+
+**MCP tools are ONLY for coordination setup:**
+- `mcp__claude-flow__swarm_init` - Initialize coordination topology
+- `mcp__claude-flow__agent_spawn` - Define agent types for coordination
+- `mcp__claude-flow__task_orchestrate` - Orchestrate high-level workflows
+
+### 📁 File Organization Rules
+
+**NEVER save to root folder. Use these directories:**
+- `/src` - Source code files
+- `/tests` - Test files
+- `/docs` - Documentation and markdown files
+- `/config` - Configuration files
+- `/scripts` - Utility scripts
+- `/examples` - Example code
 
 ## Project Overview
 
-This project implements an **Agentic Simulation System** for Happy Buttons GmbH, enabling automated email processing, customer service, and business process simulation through AI agents.
+This project uses SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) methodology with Claude-Flow orchestration for systematic Test-Driven Development.
 
-### Business Context
-- **Company**: Happy Buttons GmbH (h-bu.de)
-- **Culture**: Royal English courtesy style
-- **Core Business**: Button manufacturing with global supply chain
-- **Target KPIs**:
-  - Auto-handled share ≥ 70%
-  - Average response ≤ 1h
-  - On-time ship ≥ 90%
+## SPARC Commands
 
-## Architecture
+### Core Commands
+- `npx claude-flow sparc modes` - List available modes
+- `npx claude-flow sparc run <mode> "<task>"` - Execute specific mode
+- `npx claude-flow sparc tdd "<feature>"` - Run complete TDD workflow
+- `npx claude-flow sparc info <mode>` - Get mode details
 
-### Business Units & Mailboxes
-```yaml
-Mailboxes:
-- info@h-bu.de (main entry point)
-- orders@h-bu.de (order processing)
-- oem1@h-bu.de (OEM customers)
-- supplier@h-bu.de (supply chain)
-- logistics@h-bu.de (shipping/receiving)
-- support@h-bu.de (customer support)
-- hr@h-bu.de (human resources)
-- finance@h-bu.de (invoicing/payments)
-- quality@h-bu.de (quality control)
-- management@h-bu.de (escalations)
-```
+### Batchtools Commands
+- `npx claude-flow sparc batch <modes> "<task>"` - Parallel execution
+- `npx claude-flow sparc pipeline "<task>"` - Full pipeline processing
+- `npx claude-flow sparc concurrent <mode> "<tasks-file>"` - Multi-task processing
 
-### Production & Distribution Sites
-- **Production**: CN, PL, MX, MD
-- **Distribution**: NY, MD
+### Build Commands
+- `npm run build` - Build project
+- `npm run test` - Run tests
+- `npm run lint` - Linting
+- `npm run typecheck` - Type checking
 
-### Systems Integration
-- **ERP**: Stub implementation
-- **CRM**: Stub implementation
-- **WMS**: Stub implementation
+## SPARC Workflow Phases
 
-## Email Processing Rules
+1. **Specification** - Requirements analysis (`sparc run spec-pseudocode`)
+2. **Pseudocode** - Algorithm design (`sparc run spec-pseudocode`)
+3. **Architecture** - System design (`sparc run architect`)
+4. **Refinement** - TDD implementation (`sparc tdd`)
+5. **Completion** - Integration (`sparc run integration`)
 
-### Triage Rules (info@h-bu.de)
-```yaml
-- order_pdf → orders@h-bu.de
-- invoice_pdf → finance@h-bu.de
-- supplier_keywords → supplier@h-bu.de
-- complaint_keywords → quality@h-bu.de
-- else → support@h-bu.de
-```
+## Code Style & Best Practices
 
-### Priority System
-- **OEM customers** (oem1.com) get priority
-- **Escalation**: Ambiguous cases → management@h-bu.de
-- **SLA**: Default response within 12 hours, expedite within 24 hours
+- **Modular Design**: Files under 500 lines
+- **Environment Safety**: Never hardcode secrets
+- **Test-First**: Write tests before implementation
+- **Clean Architecture**: Separate concerns
+- **Documentation**: Keep updated
 
-### Autoreply Templates (Royal Style)
-- Order received: "We are most delighted to confirm receipt of your order..."
-- Generic ack: "Kindly note we have received your message and shall revert most promptly."
-- Invoice received: "We gratefully acknowledge your invoice and shall process it forthwith."
-- Expedite ack: "We are honoured to prioritise your request and shall strive for delivery within 24 hours."
-
-## Development Commands
+## 🚀 Available Agents (54 Total)
 
 ### Core Development
+`coder`, `reviewer`, `tester`, `planner`, `researcher`
+
+### Swarm Coordination
+`hierarchical-coordinator`, `mesh-coordinator`, `adaptive-coordinator`, `collective-intelligence-coordinator`, `swarm-memory-manager`
+
+### Consensus & Distributed
+`byzantine-coordinator`, `raft-manager`, `gossip-coordinator`, `consensus-builder`, `crdt-synchronizer`, `quorum-manager`, `security-manager`
+
+### Performance & Optimization
+`perf-analyzer`, `performance-benchmarker`, `task-orchestrator`, `memory-coordinator`, `smart-agent`
+
+### GitHub & Repository
+`github-modes`, `pr-manager`, `code-review-swarm`, `issue-tracker`, `release-manager`, `workflow-automation`, `project-board-sync`, `repo-architect`, `multi-repo-swarm`
+
+### SPARC Methodology
+`sparc-coord`, `sparc-coder`, `specification`, `pseudocode`, `architecture`, `refinement`
+
+### Specialized Development
+`backend-dev`, `mobile-dev`, `ml-developer`, `cicd-engineer`, `api-docs`, `system-architect`, `code-analyzer`, `base-template-generator`
+
+### Testing & Validation
+`tdd-london-swarm`, `production-validator`
+
+### Migration & Planning
+`migration-planner`, `swarm-init`
+
+## 🎯 Claude Code vs MCP Tools
+
+### Claude Code Handles ALL EXECUTION:
+- **Task tool**: Spawn and run agents concurrently for actual work
+- File operations (Read, Write, Edit, MultiEdit, Glob, Grep)
+- Code generation and programming
+- Bash commands and system operations
+- Implementation work
+- Project navigation and analysis
+- TodoWrite and task management
+- Git operations
+- Package management
+- Testing and debugging
+
+### MCP Tools ONLY COORDINATE:
+- Swarm initialization (topology setup)
+- Agent type definitions (coordination patterns)
+- Task orchestration (high-level planning)
+- Memory management
+- Neural features
+- Performance tracking
+- GitHub integration
+
+**KEY**: MCP coordinates the strategy, Claude Code's Task tool executes with real agents.
+
+## 🚀 Quick Setup
+
 ```bash
-# Start development
-npm run dev
-
-# Build project
-npm run build
-
-# Run tests
-npm run test
-
-# Generate sample documents
-python pdf_generator.py --type order --seed 123 --out samples/order_123.pdf
-python pdf_generator.py --type invoice --seed 456 --out samples/invoice_456.pdf
+# Add MCP servers (Claude Flow required, others optional)
+claude mcp add claude-flow npx claude-flow@alpha mcp start
+claude mcp add ruv-swarm npx ruv-swarm mcp start  # Optional: Enhanced coordination
+claude mcp add flow-nexus npx flow-nexus@latest mcp start  # Optional: Cloud features
 ```
 
-### Claude Flow Commands
+## MCP Tool Categories
+
+### Coordination
+`swarm_init`, `agent_spawn`, `task_orchestrate`
+
+### Monitoring
+`swarm_status`, `agent_list`, `agent_metrics`, `task_status`, `task_results`
+
+### Memory & Neural
+`memory_usage`, `neural_status`, `neural_train`, `neural_patterns`
+
+### GitHub Integration
+`github_swarm`, `repo_analyze`, `pr_enhance`, `issue_triage`, `code_review`
+
+### System
+`benchmark_run`, `features_detect`, `swarm_monitor`
+
+### Flow-Nexus MCP Tools (Optional Advanced Features)
+Flow-Nexus extends MCP capabilities with 70+ cloud-based orchestration tools:
+
+**Key MCP Tool Categories:**
+- **Swarm & Agents**: `swarm_init`, `swarm_scale`, `agent_spawn`, `task_orchestrate`
+- **Sandboxes**: `sandbox_create`, `sandbox_execute`, `sandbox_upload` (cloud execution)
+- **Templates**: `template_list`, `template_deploy` (pre-built project templates)
+- **Neural AI**: `neural_train`, `neural_patterns`, `seraphina_chat` (AI assistant)
+- **GitHub**: `github_repo_analyze`, `github_pr_manage` (repository management)
+- **Real-time**: `execution_stream_subscribe`, `realtime_subscribe` (live monitoring)
+- **Storage**: `storage_upload`, `storage_list` (cloud file management)
+
+**Authentication Required:**
+- Register: `mcp__flow-nexus__user_register` or `npx flow-nexus@latest register`
+- Login: `mcp__flow-nexus__user_login` or `npx flow-nexus@latest login`
+- Access 70+ specialized MCP tools for advanced orchestration
+
+## 🚀 Agent Execution Flow with Claude Code
+
+### The Correct Pattern:
+
+1. **Optional**: Use MCP tools to set up coordination topology
+2. **REQUIRED**: Use Claude Code's Task tool to spawn agents that do actual work
+3. **REQUIRED**: Each agent runs hooks for coordination
+4. **REQUIRED**: Batch all operations in single messages
+
+### Example Full-Stack Development:
+
+```javascript
+// Single message with all agent spawning via Claude Code's Task tool
+[Parallel Agent Execution]:
+  Task("Backend Developer", "Build REST API with Express. Use hooks for coordination.", "backend-dev")
+  Task("Frontend Developer", "Create React UI. Coordinate with backend via memory.", "coder")
+  Task("Database Architect", "Design PostgreSQL schema. Store schema in memory.", "code-analyzer")
+  Task("Test Engineer", "Write Jest tests. Check memory for API contracts.", "tester")
+  Task("DevOps Engineer", "Setup Docker and CI/CD. Document in memory.", "cicd-engineer")
+  Task("Security Auditor", "Review authentication. Report findings via hooks.", "reviewer")
+  
+  // All todos batched together
+  TodoWrite { todos: [...8-10 todos...] }
+  
+  // All file operations together
+  Write "backend/server.js"
+  Write "frontend/App.jsx"
+  Write "database/schema.sql"
+```
+
+## 📋 Agent Coordination Protocol
+
+### Every Agent Spawned via Task Tool MUST:
+
+**1️⃣ BEFORE Work:**
 ```bash
-# Initialize swarm for email processing
-npx claude-flow@alpha swarm "email processing simulation" --claude
-
-# Initialize business unit agents
-npx claude-flow@alpha hive-mind spawn "business units coordination" --claude
-
-# SPARC development workflow
-npx claude-flow sparc tdd "email automation feature"
+npx claude-flow@alpha hooks pre-task --description "[task]"
+npx claude-flow@alpha hooks session-restore --session-id "swarm-[id]"
 ```
 
-## Agent Configuration
-
-### Business Unit Agents
-- **Info Agent**: Main email triage and routing
-- **Orders Agent**: Order processing and confirmation
-- **OEM Agent**: Premium customer handling
-- **Supplier Agent**: Supply chain coordination
-- **Logistics Agent**: Shipping and receiving
-- **Support Agent**: Customer service
-- **Finance Agent**: Invoice and payment processing
-- **Quality Agent**: Complaint handling and QC
-- **Management Agent**: Escalation and oversight
-
-### Simulation Agents
-- **Email Generator**: Creates realistic test emails
-- **PDF Generator**: Creates order/invoice attachments
-- **Performance Monitor**: Tracks KPIs and metrics
-- **Royal Courtesy**: Ensures proper communication style
-
-## File Structure
-
-```
-/home/pi/happy_button/
-├── config/
-│   ├── company.yaml              # Global company configuration
-│   └── units/*.yaml             # Business unit configurations
-├── src/
-│   ├── agents/                  # Business unit agent implementations
-│   ├── email/                   # Email processing logic
-│   ├── simulation/              # Simulation engine
-│   └── utils/                   # Utility functions
-├── tests/
-│   ├── unit/                    # Unit tests
-│   ├── integration/             # Integration tests
-│   └── simulation/              # Simulation tests
-├── templates/
-│   └── replies/*.txt            # Royal courtesy templates
-├── samples/                     # Generated sample documents
-└── docs/                       # Documentation
-```
-
-## Development Workflow
-
-### 1. Email Processing Development
+**2️⃣ DURING Work:**
 ```bash
-# Start with email agent development
-npx claude-flow sparc run spec-pseudocode "email triage system"
-npx claude-flow sparc run architect "multi-agent email processing"
-npx claude-flow sparc tdd "email routing functionality"
+npx claude-flow@alpha hooks post-edit --file "[file]" --memory-key "swarm/[agent]/[step]"
+npx claude-flow@alpha hooks notify --message "[what was done]"
 ```
 
-### 2. Business Unit Integration
+**3️⃣ AFTER Work:**
 ```bash
-# Develop business unit agents
-npx claude-flow@alpha swarm "implement business unit agents" --claude
+npx claude-flow@alpha hooks post-task --task-id "[task]"
+npx claude-flow@alpha hooks session-end --export-metrics true
 ```
 
-### 3. Simulation System
-```bash
-# Build simulation engine
-npx claude-flow sparc pipeline "email simulation system"
+## 🎯 Concurrent Execution Examples
+
+### ✅ CORRECT WORKFLOW: MCP Coordinates, Claude Code Executes
+
+```javascript
+// Step 1: MCP tools set up coordination (optional, for complex tasks)
+[Single Message - Coordination Setup]:
+  mcp__claude-flow__swarm_init { topology: "mesh", maxAgents: 6 }
+  mcp__claude-flow__agent_spawn { type: "researcher" }
+  mcp__claude-flow__agent_spawn { type: "coder" }
+  mcp__claude-flow__agent_spawn { type: "tester" }
+
+// Step 2: Claude Code Task tool spawns ACTUAL agents that do the work
+[Single Message - Parallel Agent Execution]:
+  // Claude Code's Task tool spawns real agents concurrently
+  Task("Research agent", "Analyze API requirements and best practices. Check memory for prior decisions.", "researcher")
+  Task("Coder agent", "Implement REST endpoints with authentication. Coordinate via hooks.", "coder")
+  Task("Database agent", "Design and implement database schema. Store decisions in memory.", "code-analyzer")
+  Task("Tester agent", "Create comprehensive test suite with 90% coverage.", "tester")
+  Task("Reviewer agent", "Review code quality and security. Document findings.", "reviewer")
+  
+  // Batch ALL todos in ONE call
+  TodoWrite { todos: [
+    {id: "1", content: "Research API patterns", status: "in_progress", priority: "high"},
+    {id: "2", content: "Design database schema", status: "in_progress", priority: "high"},
+    {id: "3", content: "Implement authentication", status: "pending", priority: "high"},
+    {id: "4", content: "Build REST endpoints", status: "pending", priority: "high"},
+    {id: "5", content: "Write unit tests", status: "pending", priority: "medium"},
+    {id: "6", content: "Integration tests", status: "pending", priority: "medium"},
+    {id: "7", content: "API documentation", status: "pending", priority: "low"},
+    {id: "8", content: "Performance optimization", status: "pending", priority: "low"}
+  ]}
+  
+  // Parallel file operations
+  Bash "mkdir -p app/{src,tests,docs,config}"
+  Write "app/package.json"
+  Write "app/src/server.js"
+  Write "app/tests/server.test.js"
+  Write "app/docs/API.md"
 ```
 
-## Testing Strategy
-
-### Unit Tests
-- Email parsing and routing logic
-- Business rule validation
-- Template rendering
-- PDF generation
-
-### Integration Tests
-- End-to-end email processing
-- Multi-agent coordination
-- System integration points
-
-### Simulation Tests
-- Performance under load
-- KPI achievement validation
-- Royal courtesy compliance
-
-## Monitoring & KPIs
-
-### Key Metrics
-- **Auto-handled Share**: Target ≥ 70%
-- **Response Time**: Target ≤ 1 hour average
-- **Escalation Rate**: Track management escalations
-- **Customer Satisfaction**: Based on response quality
-
-### Performance Tracking
-```bash
-# Monitor simulation performance
-npx claude-flow@alpha swarm_monitor --metrics
-
-# Check agent performance
-npx claude-flow@alpha agent_metrics --unit all
+### ❌ WRONG (Multiple Messages):
+```javascript
+Message 1: mcp__claude-flow__swarm_init
+Message 2: Task("agent 1")
+Message 3: TodoWrite { todos: [single todo] }
+Message 4: Write "file.js"
+// This breaks parallel coordination!
 ```
 
-## Deployment Configuration
+## Performance Benefits
 
-### Environment Variables
-```bash
-# Email server configuration
-IMAP_HOST=mail.h-bu.de
-SMTP_HOST=mail.h-bu.de
-COMPANY_DOMAIN=h-bu.de
+- **84.8% SWE-Bench solve rate**
+- **32.3% token reduction**
+- **2.8-4.4x speed improvement**
+- **27+ neural models**
 
-# Database configuration
-DATABASE_URL=sqlite:./simulation.db
+## Hooks Integration
 
-# API endpoints (stub implementations)
-ERP_ENDPOINT=http://localhost:3001/erp
-CRM_ENDPOINT=http://localhost:3002/crm
-WMS_ENDPOINT=http://localhost:3003/wms
-```
+### Pre-Operation
+- Auto-assign agents by file type
+- Validate commands for safety
+- Prepare resources automatically
+- Optimize topology by complexity
+- Cache searches
 
-### Docker Setup
-```bash
-# Build and run simulation
-docker-compose up --build
+### Post-Operation
+- Auto-format code
+- Train neural patterns
+- Update memory
+- Analyze performance
+- Track token usage
 
-# Scale agents
-docker-compose scale email-agent=3 orders-agent=2
-```
+### Session Management
+- Generate summaries
+- Persist state
+- Track metrics
+- Restore context
+- Export workflows
 
-## Security & Compliance
+## Advanced Features (v2.0.0)
 
-### Data Protection
-- No hardcoded credentials
-- Secure email server connections
-- Customer data anonymization in tests
+- 🚀 Automatic Topology Selection
+- ⚡ Parallel Execution (2.8-4.4x speed)
+- 🧠 Neural Training
+- 📊 Bottleneck Analysis
+- 🤖 Smart Auto-Spawning
+- 🛡️ Self-Healing Workflows
+- 💾 Cross-Session Memory
+- 🔗 GitHub Integration
 
-### Royal Courtesy Compliance
-- All communications must follow template standards
-- Escalation procedures for ambiguous cases
-- Quality assurance on automated responses
+## Integration Tips
 
-## Troubleshooting
+1. Start with basic swarm init
+2. Scale agents gradually
+3. Use memory for context
+4. Monitor progress regularly
+5. Train patterns from success
+6. Enable hooks automation
+7. Use GitHub tools first
 
-### Common Issues
-1. **Email routing failures**: Check triage rules in config
-2. **Template rendering errors**: Validate royal courtesy templates
-3. **Performance issues**: Monitor agent coordination overhead
-4. **Integration failures**: Verify stub system responses
+## Support
 
-### Debug Commands
-```bash
-# Check swarm status
-npx claude-flow@alpha swarm_status
-
-# Validate configuration
-python -m yaml config/company.yaml
-
-# Test PDF generation
-python pdf_generator.py --test
-```
-
-## Next Steps
-
-1. **Phase 1**: Implement core email processing
-2. **Phase 2**: Add business unit agents
-3. **Phase 3**: Build simulation engine
-4. **Phase 4**: Performance optimization
-5. **Phase 5**: Production deployment
+- Documentation: https://github.com/ruvnet/claude-flow
+- Issues: https://github.com/ruvnet/claude-flow/issues
+- Flow-Nexus Platform: https://flow-nexus.ruv.io (registration required for cloud features)
 
 ---
 
-**Remember**: Maintain Royal English courtesy in all automated communications!
+Remember: **Claude Flow coordinates, Claude Code creates!**
+
+# important-instruction-reminders
+Do what has been asked; nothing more, nothing less.
+NEVER create files unless they're absolutely necessary for achieving your goal.
+ALWAYS prefer editing an existing file to creating a new one.
+NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
+Never save working files, text/mds and tests to the root folder.
