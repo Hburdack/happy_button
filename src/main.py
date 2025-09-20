@@ -9,8 +9,8 @@ import logging
 from pathlib import Path
 from datetime import datetime
 
-from email.parser import EmailParser, create_test_email
-from email.router import EmailRouter
+from email_processing.parser import EmailParser, create_test_email
+from email_processing.router import EmailRouter
 from agents.business_agents import create_business_agents
 from agents.base_agent import AgentCoordinator
 from utils.templates import RoyalCourtesyTemplates

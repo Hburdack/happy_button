@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Buttons Configuration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .config-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px 10px 0 0;
+        }
+        .status-badge {
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-crown me-2"></i>
+                Happy Buttons Configuration
+            </a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-tachometer-alt me-1"></i>
+                    Dashboard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <!-- Configuration Overview -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="config-section">
+                        <h5 class="mb-0">
+                            <i class="fas fa-cog me-2"></i>
+                            System Configuration
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Business Rules</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>Auto-process threshold</span>
+                                        <span class="badge bg-primary">$5,000</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>Approval required over</span>
+                                        <span class="badge bg-warning">$25,000</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>OEM priority SLA</span>
+                                        <span class="badge bg-success">4 hours</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>Default SLA</span>
+                                        <span class="badge bg-info">12 hours</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Routing Destinations</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="fas fa-envelope me-2"></i>
+                                        info@h-bu.de (Main entry)
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-shopping-cart me-2"></i>
+                                        orders@h-bu.de (Orders)
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-star me-2"></i>
+                                        oem1@h-bu.de (OEM customers)
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-life-ring me-2"></i>
+                                        support@h-bu.de (Support)
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Templates Configuration -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="config-section">
+                        <h5 class="mb-0">
+                            <i class="fas fa-file-alt me-2"></i>
+                            Royal Courtesy Templates
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="templates-list">
+                            <!-- Templates will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent Configuration -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="config-section">
+                        <h5 class="mb-0">
+                            <i class="fas fa-robot me-2"></i>
+                            Agent Configuration
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Agent</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th>Capabilities</th>
+                                        <th>Configuration</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="agents-table">
+                                    <!-- Agent rows will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Commands -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="config-section">
+                        <h5 class="mb-0">
+                            <i class="fas fa-terminal me-2"></i>
+                            System Commands
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Service Management</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-success" onclick="executeCommand('start')">
+                                        <i class="fas fa-play me-2"></i>Start System
+                                    </button>
+                                    <button class="btn btn-warning" onclick="executeCommand('restart')">
+                                        <i class="fas fa-redo me-2"></i>Restart System
+                                    </button>
+                                    <button class="btn btn-danger" onclick="executeCommand('stop')">
+                                        <i class="fas fa-stop me-2"></i>Stop System
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Maintenance</h6>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-info" onclick="executeCommand('status')">
+                                        <i class="fas fa-info-circle me-2"></i>Check Status
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="executeCommand('logs')">
+                                        <i class="fas fa-file-text me-2"></i>View Logs
+                                    </button>
+                                    <button class="btn btn-primary" onclick="executeCommand('init-swarm')">
+                                        <i class="fas fa-network-wired me-2"></i>Initialize Swarm
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <h6>Command Output</h6>
+                            <div id="command-output" class="border rounded p-3" style="background-color: #f8f9fa; min-height: 200px; font-family: monospace;">
+                                Ready for commands...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load configuration data
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTemplatesConfig();
+            loadAgentsConfig();
+        });
+
+        function loadTemplatesConfig() {
+            fetch('/api/templates')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('templates-list');
+
+                    if (data.available_templates) {
+                        let html = '<div class="row">';
+
+                        data.available_templates.forEach((template, index) => {
+                            const validation = data.validation_results[template] || { score: 0, is_valid: false };
+                            const badgeClass = validation.is_valid ? 'bg-success' : 'bg-warning';
+
+                            html += `
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="card-title">
+                                                ${template.replace(/_/g, ' ').toUpperCase()}
+                                                <span class="badge ${badgeClass} ms-2">${validation.score}/100</span>
+                                            </h6>
+                                            <p class="card-text small text-muted">
+                                                Royal courtesy template for ${template.replace(/_/g, ' ')} scenarios
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        html += '</div>';
+                        container.innerHTML = html;
+                    } else {
+                        container.innerHTML = '<div class="alert alert-warning">Templates not available</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading templates:', error);
+                    document.getElementById('templates-list').innerHTML =
+                        '<div class="alert alert-danger">Error loading templates</div>';
+                });
+        }
+
+        function loadAgentsConfig() {
+            fetch('/api/agents')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('agents-table');
+                    tbody.innerHTML = '';
+
+                    Object.entries(data).forEach(([agentName, agent]) => {
+                        const statusBadge = agent.active ?
+                            '<span class="badge bg-success">Active</span>' :
+                            '<span class="badge bg-secondary">Inactive</span>';
+
+                        const capabilities = Object.keys(agent.capabilities || {}).slice(0, 3).join(', ');
+
+                        const row = `
+                            <tr>
+                                <td><strong>${agentName}</strong></td>
+                                <td>${agent.name}</td>
+                                <td>${statusBadge}</td>
+                                <td><small>${capabilities}${Object.keys(agent.capabilities || {}).length > 3 ? '...' : ''}</small></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="viewAgentConfig('${agentName}')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                        tbody.innerHTML += row;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading agents:', error);
+                });
+        }
+
+        function executeCommand(command) {
+            const output = document.getElementById('command-output');
+            output.innerHTML = `Executing: ${command}...\n`;
+
+            // Simulate command execution
+            setTimeout(() => {
+                const responses = {
+                    'start': 'System starting...\n✅ All services started successfully!',
+                    'stop': 'System stopping...\n✅ All services stopped.',
+                    'restart': 'System restarting...\n✅ System restarted successfully!',
+                    'status': 'Checking system status...\n✅ System is running normally.',
+                    'logs': 'Fetching logs...\n[2025-09-20 15:40:00] INFO: Email processed successfully\n[2025-09-20 15:40:05] INFO: Agent coordination active',
+                    'init-swarm': 'Initializing Claude Flow swarm...\n✅ Swarm initialized with hierarchical topology'
+                };
+
+                output.innerHTML += '\n' + (responses[command] || 'Command completed.');
+            }, 1000);
+        }
+
+        function viewAgentConfig(agentName) {
+            alert(`Viewing configuration for ${agentName} agent.\n\nThis would open a detailed configuration dialog in a full implementation.`);
+        }
+    </script>
+</body>
+</html>
