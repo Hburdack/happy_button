@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Management - Happy Buttons</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .agent-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .agent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .agent-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 20px;
+        }
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        .status-active {
+            background-color: #28a745;
+            color: white;
+        }
+        .status-inactive {
+            background-color: #dc3545;
+            color: white;
+        }
+        .status-busy {
+            background-color: #ffc107;
+            color: black;
+        }
+        .email-item {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .email-from {
+            font-weight: bold;
+            color: #495057;
+        }
+        .email-subject {
+            font-size: 1.1rem;
+            color: #212529;
+            margin: 5px 0;
+        }
+        .email-time {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .metrics-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .metric-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            text-transform: uppercase;
+        }
+        .agent-actions {
+            padding: 20px;
+            background: #fff;
+            border-radius: 0 0 15px 15px;
+        }
+        .refresh-indicator {
+            color: #28a745;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .mailbox-panel {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .mailbox-header {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-robot me-2"></i>Happy Buttons - Agent Management
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-home me-1"></i>Dashboard
+                </a>
+                <a class="nav-link" href="/external">
+                    <i class="fas fa-handshake me-1"></i>Externe Partner
+                </a>
+                <a class="nav-link" href="/config">
+                    <i class="fas fa-cog me-1"></i>Konfiguration
+                </a>
+                <span class="navbar-text">
+                    <i id="refresh-indicator" class="fas fa-sync-alt me-1"></i>
+                    Live Updates
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <!-- Info Mailbox Panel -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="mailbox-panel">
+                    <div class="mailbox-header">
+                        <h4><i class="fas fa-inbox me-2"></i>Info Mailbox (info@h-bu.de)</h4>
+                        <p class="mb-0">Haupteingang für alle eingehenden E-Mails</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h5>Letzte E-Mails</h5>
+                                <div id="info-mailbox-emails">
+                                    <div class="email-item">
+                                        <div class="email-from">john@oem1.com</div>
+                                        <div class="email-subject">Urgent Order Request - 5000 Blue Buttons</div>
+                                        <div class="email-time">vor 2 Minuten</div>
+                                        <div class="mt-2">
+                                            <span class="badge bg-primary">Weitergeleitet an orders@h-bu.de</span>
+                                        </div>
+                                    </div>
+                                    <div class="email-item">
+                                        <div class="email-from">customer@example.com</div>
+                                        <div class="email-subject">Product Quality Issue</div>
+                                        <div class="email-time">vor 5 Minuten</div>
+                                        <div class="mt-2">
+                                            <span class="badge bg-warning">Weitergeleitet an quality@h-bu.de</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="metrics-card text-center">
+                                    <div class="metric-value" id="total-emails">245</div>
+                                    <div class="metric-label">Gesamt E-Mails</div>
+                                </div>
+                                <div class="metrics-card text-center">
+                                    <div class="metric-value" id="emails-today">38</div>
+                                    <div class="metric-label">Heute</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agents Grid -->
+        <div class="row">
+            <div class="col-lg-6 col-xl-4 mb-4">
+                <!-- Info Agent -->
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1"><i class="fas fa-route me-2"></i>Info Agent</h5>
+                                <small>E-Mail Triage & Routing</small>
+                            </div>
+                            <span class="status-badge status-active" id="info-agent-status">
+                                <i class="fas fa-circle me-1"></i>Aktiv
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center mb-3">
+                            <div class="col-4">
+                                <div class="metric-value" id="info-processed">127</div>
+                                <div class="metric-label">Verarbeitet</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="info-queue">2</div>
+                                <div class="metric-label">Warteschlange</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="info-errors">0</div>
+                                <div class="metric-label">Fehler</div>
+                            </div>
+                        </div>
+                        <h6>Letzte Aktivitäten:</h6>
+                        <div id="info-activities">
+                            <div class="email-item">
+                                <small class="email-from">supplier@materials.com</small>
+                                <div class="email-subject">Delivery Update</div>
+                                <small class="email-time">→ supplier@h-bu.de</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="agent-actions">
+                        <button class="btn btn-primary btn-sm me-2" onclick="restartAgent('info')">
+                            <i class="fas fa-redo me-1"></i>Neustart
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="showAgentDetails('info')">
+                            <i class="fas fa-info-circle me-1"></i>Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-xl-4 mb-4">
+                <!-- Orders Agent -->
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1"><i class="fas fa-shopping-cart me-2"></i>Orders Agent</h5>
+                                <small>Bestellungsverarbeitung</small>
+                            </div>
+                            <span class="status-badge status-active" id="orders-agent-status">
+                                <i class="fas fa-circle me-1"></i>Aktiv
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center mb-3">
+                            <div class="col-4">
+                                <div class="metric-value" id="orders-processed">89</div>
+                                <div class="metric-label">Bestellungen</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="orders-queue">1</div>
+                                <div class="metric-label">Warteschlange</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="orders-errors">0</div>
+                                <div class="metric-label">Fehler</div>
+                            </div>
+                        </div>
+                        <h6>Letzte E-Mails:</h6>
+                        <div id="orders-activities">
+                            <div class="email-item">
+                                <small class="email-from">john@oem1.com</small>
+                                <div class="email-subject">Order #12345 - 5000 Buttons</div>
+                                <small class="email-time">Bestätigt vor 3 min</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="agent-actions">
+                        <button class="btn btn-primary btn-sm me-2" onclick="restartAgent('orders')">
+                            <i class="fas fa-redo me-1"></i>Neustart
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="showAgentDetails('orders')">
+                            <i class="fas fa-info-circle me-1"></i>Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-xl-4 mb-4">
+                <!-- OEM Agent -->
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1"><i class="fas fa-star me-2"></i>OEM Agent</h5>
+                                <small>Premium Kundenbetreuung</small>
+                            </div>
+                            <span class="status-badge status-active" id="oem-agent-status">
+                                <i class="fas fa-circle me-1"></i>Aktiv
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center mb-3">
+                            <div class="col-4">
+                                <div class="metric-value" id="oem-processed">45</div>
+                                <div class="metric-label">VIP Anfragen</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="oem-queue">0</div>
+                                <div class="metric-label">Warteschlange</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="oem-errors">0</div>
+                                <div class="metric-label">Fehler</div>
+                            </div>
+                        </div>
+                        <h6>Premium Kunden:</h6>
+                        <div id="oem-activities">
+                            <div class="email-item">
+                                <small class="email-from">premium@oem1.com</small>
+                                <div class="email-subject">Quarterly Order Planning</div>
+                                <small class="email-time">Priorität: Hoch</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="agent-actions">
+                        <button class="btn btn-primary btn-sm me-2" onclick="restartAgent('oem')">
+                            <i class="fas fa-redo me-1"></i>Neustart
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="showAgentDetails('oem')">
+                            <i class="fas fa-info-circle me-1"></i>Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-xl-4 mb-4">
+                <!-- Quality Agent -->
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1"><i class="fas fa-shield-alt me-2"></i>Quality Agent</h5>
+                                <small>Qualitätsmanagement</small>
+                            </div>
+                            <span class="status-badge status-busy" id="quality-agent-status">
+                                <i class="fas fa-circle me-1"></i>Beschäftigt
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center mb-3">
+                            <div class="col-4">
+                                <div class="metric-value" id="quality-processed">23</div>
+                                <div class="metric-label">Beschwerden</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="quality-queue">3</div>
+                                <div class="metric-label">Warteschlange</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="quality-errors">1</div>
+                                <div class="metric-label">Eskalationen</div>
+                            </div>
+                        </div>
+                        <h6>Aktuelle Fälle:</h6>
+                        <div id="quality-activities">
+                            <div class="email-item">
+                                <small class="email-from">customer@company.com</small>
+                                <div class="email-subject">Defective Buttons Batch #B2401</div>
+                                <small class="email-time">Bearbeitung läuft...</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="agent-actions">
+                        <button class="btn btn-primary btn-sm me-2" onclick="restartAgent('quality')">
+                            <i class="fas fa-redo me-1"></i>Neustart
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="showAgentDetails('quality')">
+                            <i class="fas fa-info-circle me-1"></i>Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-xl-4 mb-4">
+                <!-- Supplier Agent -->
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1"><i class="fas fa-truck me-2"></i>Supplier Agent</h5>
+                                <small>Lieferantenkoordination</small>
+                            </div>
+                            <span class="status-badge status-active" id="supplier-agent-status">
+                                <i class="fas fa-circle me-1"></i>Aktiv
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center mb-3">
+                            <div class="col-4">
+                                <div class="metric-value" id="supplier-processed">67</div>
+                                <div class="metric-label">Lieferungen</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="supplier-queue">0</div>
+                                <div class="metric-label">Warteschlange</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="supplier-errors">0</div>
+                                <div class="metric-label">Verzögerungen</div>
+                            </div>
+                        </div>
+                        <h6>Lieferanten-Updates:</h6>
+                        <div id="supplier-activities">
+                            <div class="email-item">
+                                <small class="email-from">materials@supplier.com</small>
+                                <div class="email-subject">Shipment Tracking #SP4401</div>
+                                <small class="email-time">Pünktlich geliefert</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="agent-actions">
+                        <button class="btn btn-primary btn-sm me-2" onclick="restartAgent('supplier')">
+                            <i class="fas fa-redo me-1"></i>Neustart
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="showAgentDetails('supplier')">
+                            <i class="fas fa-info-circle me-1"></i>Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-xl-4 mb-4">
+                <!-- Management Agent -->
+                <div class="agent-card">
+                    <div class="agent-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1"><i class="fas fa-users-cog me-2"></i>Management Agent</h5>
+                                <small>Eskalations-Management</small>
+                            </div>
+                            <span class="status-badge status-active" id="management-agent-status">
+                                <i class="fas fa-circle me-1"></i>Aktiv
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center mb-3">
+                            <div class="col-4">
+                                <div class="metric-value" id="management-processed">12</div>
+                                <div class="metric-label">Eskalationen</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="management-queue">1</div>
+                                <div class="metric-label">Warteschlange</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="metric-value" id="management-errors">0</div>
+                                <div class="metric-label">Kritisch</div>
+                            </div>
+                        </div>
+                        <h6>Management Fälle:</h6>
+                        <div id="management-activities">
+                            <div class="email-item">
+                                <small class="email-from">System Escalation</small>
+                                <div class="email-subject">Quality Issue Escalation #Q2401</div>
+                                <small class="email-time">Wartet auf Bearbeitung</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="agent-actions">
+                        <button class="btn btn-primary btn-sm me-2" onclick="restartAgent('management')">
+                            <i class="fas fa-redo me-1"></i>Neustart
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="showAgentDetails('management')">
+                            <i class="fas fa-info-circle me-1"></i>Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agent Details Modal -->
+    <div class="modal fade" id="agentDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agentDetailsTitle">Agent Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="agentDetailsBody">
+                    <!-- Agent details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Socket.io connection
+        const socket = io();
+
+        // Update indicators
+        let isUpdating = false;
+
+        function showUpdateIndicator() {
+            if (!isUpdating) {
+                isUpdating = true;
+                document.getElementById('refresh-indicator').classList.add('refresh-indicator');
+                setTimeout(() => {
+                    document.getElementById('refresh-indicator').classList.remove('refresh-indicator');
+                    isUpdating = false;
+                }, 1000);
+            }
+        }
+
+        // Real-time updates from socket
+        socket.on('agent_update', function(data) {
+            showUpdateIndicator();
+            updateAgentData(data);
+        });
+
+        socket.on('email_update', function(data) {
+            showUpdateIndicator();
+            updateEmailData(data);
+        });
+
+        // Update agent data
+        function updateAgentData(agents) {
+            for (const [agentName, agentData] of Object.entries(agents)) {
+                updateAgentStatus(agentName, agentData);
+                updateAgentMetrics(agentName, agentData);
+                updateAgentActivities(agentName, agentData.recent_emails || []);
+            }
+        }
+
+        function updateAgentStatus(agentName, agentData) {
+            const statusElement = document.getElementById(`${agentName}-agent-status`);
+            if (statusElement) {
+                const isActive = agentData.active || agentData.status === 'active';
+                const isBusy = agentData.queue_size > 2;
+
+                statusElement.className = 'status-badge ' +
+                    (isActive ? (isBusy ? 'status-busy' : 'status-active') : 'status-inactive');
+                statusElement.innerHTML = `<i class="fas fa-circle me-1"></i>${
+                    isActive ? (isBusy ? 'Beschäftigt' : 'Aktiv') : 'Inaktiv'
+                }`;
+            }
+        }
+
+        function updateAgentMetrics(agentName, agentData) {
+            const processedElement = document.getElementById(`${agentName}-processed`);
+            const queueElement = document.getElementById(`${agentName}-queue`);
+            const errorsElement = document.getElementById(`${agentName}-errors`);
+
+            if (processedElement) processedElement.textContent = agentData.processed_tasks || 0;
+            if (queueElement) queueElement.textContent = agentData.queue_size || 0;
+            if (errorsElement) errorsElement.textContent = agentData.error_count || 0;
+        }
+
+        function updateAgentActivities(agentName, emails) {
+            const activitiesElement = document.getElementById(`${agentName}-activities`);
+            if (activitiesElement && emails.length > 0) {
+                activitiesElement.innerHTML = emails.slice(0, 2).map(email => `
+                    <div class="email-item">
+                        <small class="email-from">${email.from || 'System'}</small>
+                        <div class="email-subject">${email.subject || 'Keine Betreff'}</div>
+                        <small class="email-time">${email.status || 'Bearbeitet'}</small>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateEmailData(emailData) {
+            // Update info mailbox
+            const totalEmailsElement = document.getElementById('total-emails');
+            const emailsTodayElement = document.getElementById('emails-today');
+
+            if (totalEmailsElement) totalEmailsElement.textContent = emailData.total || 245;
+            if (emailsTodayElement) emailsTodayElement.textContent = emailData.today || 38;
+
+            // Update recent emails in info mailbox
+            const infoMailboxElement = document.getElementById('info-mailbox-emails');
+            if (infoMailboxElement && emailData.recent) {
+                infoMailboxElement.innerHTML = emailData.recent.slice(0, 3).map(email => `
+                    <div class="email-item">
+                        <div class="email-from">${email.from}</div>
+                        <div class="email-subject">${email.subject}</div>
+                        <div class="email-time">${email.time}</div>
+                        <div class="mt-2">
+                            <span class="badge bg-primary">Weitergeleitet an ${email.routed_to}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Agent management functions
+        function restartAgent(agentName) {
+            if (confirm(`Möchten Sie den ${agentName} Agent wirklich neu starten?`)) {
+                fetch(`/api/agents/${agentName}/restart`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(`${agentName} Agent wurde neu gestartet.`);
+                    loadAgentData();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Fehler beim Neustart des Agents.');
+                });
+            }
+        }
+
+        function showAgentDetails(agentName) {
+            fetch(`/api/agents/${agentName}/details`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('agentDetailsTitle').textContent = `${agentName} Agent - Details`;
+                    document.getElementById('agentDetailsBody').innerHTML = `
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Konfiguration:</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>Status:</span>
+                                        <span class="badge bg-success">${data.status || 'Aktiv'}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>Verarbeitete E-Mails:</span>
+                                        <span>${data.processed_emails || 0}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>Warteschlange:</span>
+                                        <span>${data.queue_size || 0}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>Uptime:</span>
+                                        <span>${data.uptime || '2h 15m'}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Capabilities:</h6>
+                                <div class="mb-3">
+                                    ${(data.capabilities || ['E-Mail-Verarbeitung', 'Automatische Antworten']).map(cap =>
+                                        `<span class="badge bg-secondary me-1">${cap}</span>`
+                                    ).join('')}
+                                </div>
+                                <h6>Letzte Fehler:</h6>
+                                <div class="alert alert-info">
+                                    ${data.last_error || 'Keine Fehler in den letzten 24 Stunden.'}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    new bootstrap.Modal(document.getElementById('agentDetailsModal')).show();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Fehler beim Laden der Agent-Details.');
+                });
+        }
+
+        // Load initial data
+        function loadAgentData() {
+            showUpdateIndicator();
+
+            // Load agent statuses
+            fetch('/api/agents')
+                .then(response => response.json())
+                .then(data => {
+                    updateAgentData(data);
+                })
+                .catch(error => console.error('Error loading agent data:', error));
+
+            // Load email statistics
+            fetch('/api/email/stats')
+                .then(response => response.json())
+                .then(data => {
+                    updateEmailData({
+                        total: data.total_processed || 245,
+                        today: data.today || 38,
+                        recent: [
+                            {
+                                from: 'john@oem1.com',
+                                subject: 'Urgent Order Request - 5000 Blue Buttons',
+                                time: 'vor 2 Minuten',
+                                routed_to: 'orders@h-bu.de'
+                            },
+                            {
+                                from: 'customer@example.com',
+                                subject: 'Product Quality Issue',
+                                time: 'vor 5 Minuten',
+                                routed_to: 'quality@h-bu.de'
+                            },
+                            {
+                                from: 'supplier@materials.com',
+                                subject: 'Delivery Confirmation',
+                                time: 'vor 8 Minuten',
+                                routed_to: 'supplier@h-bu.de'
+                            }
+                        ]
+                    });
+                })
+                .catch(error => console.error('Error loading email data:', error));
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadAgentData, 30000);
+
+        // Load initial data when page loads
+        document.addEventListener('DOMContentLoaded', loadAgentData);
+    </script>
+</body>
+</html>

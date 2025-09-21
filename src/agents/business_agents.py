@@ -9,9 +9,9 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 import re
 
-from base_agent import BaseAgent, AgentResponse, AgentTask
-from email.parser import ParsedEmail
-from email.router import RoutingDecision
+from .base_agent import BaseAgent, AgentResponse, AgentTask
+from ..email_processing.parser import ParsedEmail
+from ..email_processing.router import RoutingDecision
 
 logger = logging.getLogger(__name__)
 

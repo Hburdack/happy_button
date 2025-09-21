@@ -1,0 +1,43 @@
+# Orders Agent Konfiguration
+agent:
+  name: "Orders Agent"
+  mailbox: "orders@h-bu.de"
+  role: "Bestellungsverarbeitung"
+
+# Bestellungsverarbeitung
+order_processing:
+  auto_confirm: true
+  require_approval_above: 50000  # EUR
+  default_lead_time_days: 14
+  expedite_available: true
+
+# ERP-Integration
+erp_integration:
+  endpoint: "http://localhost:3001/erp"
+  auto_create_orders: true
+  stock_check: true
+
+# Validation-Regeln
+validation:
+  required_fields:
+    - "customer_info"
+    - "product_specification"
+    - "quantity"
+    - "delivery_date"
+
+  min_order_quantity: 100
+  max_order_quantity: 1000000
+
+# Auto-Reply-Templates
+auto_reply:
+  enabled: true
+  templates:
+    order_received: "Vielen Dank für Ihre Bestellung. Wir prüfen die Verfügbarkeit und senden Ihnen umgehend eine Bestätigung."
+    order_confirmed: "Ihre Bestellung wurde bestätigt. Liefertermin: {delivery_date}"
+    stock_unavailable: "Leider ist der gewünschte Artikel nicht verfügbar. Wir schlagen folgende Alternativen vor:"
+
+# Eskalation
+escalation:
+  large_orders_to: "management@h-bu.de"
+  complex_requests_to: "support@h-bu.de"
+  urgent_threshold_hours: 2

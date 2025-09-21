@@ -1,0 +1,56 @@
+# Happy Buttons GmbH - Firmenkonfiguration
+company:
+  name: "Happy Buttons GmbH"
+  domain: "h-bu.de"
+  culture: "Royal English Courtesy"
+
+# Globale KPIs
+kpis:
+  auto_handled_share_target: 70  # %
+  average_response_time_target: 1  # Stunden
+  on_time_ship_target: 90  # %
+
+# E-Mail-Einstellungen
+email:
+  main_entry: "info@h-bu.de"
+  server:
+    imap_host: "mail.h-bu.de"
+    smtp_host: "mail.h-bu.de"
+    port: 993
+    use_ssl: true
+
+# Produktionsstandorte
+production_sites:
+  - name: "China"
+    code: "CN"
+    capacity: 1000000
+  - name: "Polen"
+    code: "PL"
+    capacity: 500000
+  - name: "Mexiko"
+    code: "MX"
+    capacity: 750000
+  - name: "Moldawien"
+    code: "MD"
+    capacity: 250000
+
+# Distributionszentren
+distribution_centers:
+  - name: "New York"
+    code: "NY"
+    region: "North America"
+  - name: "Maryland"
+    code: "MD"
+    region: "East Coast"
+
+# SLA-Zeiten
+sla:
+  default_response_hours: 12
+  oem_priority_hours: 24
+  escalation_hours: 4
+
+# Eskalationsregeln
+escalation:
+  management_threshold: 3  # Anzahl fehlgeschlagener Versuche
+  quality_issues_auto_escalate: true
+  oem_complaints_priority: true

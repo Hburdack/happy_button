@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Externe Partner - Happy Buttons Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.2/dist/socket.io.min.js"></script>
+    <style>
+        :root {
+            --royal-blue: #2E4BC6;
+            --royal-purple: #6B46C1;
+            --royal-gold: #F59E0B;
+            --royal-silver: #E5E7EB;
+            --royal-dark: #1F2937;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-purple) 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .royal-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+            padding: 30px;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--royal-dark) 0%, var(--royal-blue) 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--royal-gold) !important;
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            padding: 10px 20px !important;
+            border-radius: 10px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--royal-gold) !important;
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(46, 75, 198, 0.3);
+        }
+
+        .partner-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--royal-blue);
+        }
+
+        .partner-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .partner-info h5 {
+            color: var(--royal-dark);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .partner-type {
+            color: var(--royal-purple);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .status-active {
+            background: #DEF7EC;
+            color: #047857;
+        }
+
+        .status-busy {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .status-offline {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .mailbox-section {
+            background: #F8FAFC;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .mailbox-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .mailbox-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--royal-blue);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #6B7280;
+            margin-top: 5px;
+        }
+
+        .email-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .email-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--royal-blue);
+            transition: all 0.3s ease;
+        }
+
+        .email-item:hover {
+            background: #F1F5F9;
+            transform: translateX(5px);
+        }
+
+        .email-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .email-sender {
+            font-weight: bold;
+            color: var(--royal-dark);
+        }
+
+        .email-time {
+            font-size: 0.8rem;
+            color: #6B7280;
+        }
+
+        .email-subject {
+            color: var(--royal-purple);
+            margin-bottom: 5px;
+        }
+
+        .email-routing {
+            font-size: 0.85rem;
+            color: #059669;
+            font-style: italic;
+        }
+
+        .btn-royal {
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-royal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(46, 75, 198, 0.3);
+            color: white;
+        }
+
+        .email-processor-section {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 2px solid #0EA5E9;
+        }
+
+        .processor-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .processor-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .update-indicator {
+            animation: spin 2s linear infinite;
+            color: var(--royal-blue);
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--royal-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .detailed-email-list {
+            max-height: 600px;
+            overflow-y: auto;
+            background: #F8FAFC;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .detailed-email-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--royal-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .detailed-email-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .email-detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .email-detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .email-detail-label {
+            font-weight: 600;
+            color: var(--royal-dark);
+            min-width: 120px;
+            font-size: 0.9rem;
+        }
+
+        .email-detail-value {
+            color: #374151;
+            flex: 1;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .email-priority-critical {
+            color: #DC2626;
+            font-weight: bold;
+        }
+
+        .email-priority-high {
+            color: #EA580C;
+            font-weight: bold;
+        }
+
+        .email-priority-medium {
+            color: #0891B2;
+        }
+
+        .email-priority-low {
+            color: #059669;
+        }
+
+        .email-status-processed {
+            background: #DEF7EC;
+            color: #047857;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .email-status-routed {
+            background: #DBEAFE;
+            color: #1D4ED8;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .email-status-escalated {
+            background: #FEE2E2;
+            color: #DC2626;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .email-status-auto_replied {
+            background: #F3E8FF;
+            color: #7C3AED;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .email-subject-line {
+            font-weight: bold;
+            color: var(--royal-purple);
+            background: #F8FAFC;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        .attachment-badge {
+            background: var(--royal-gold);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .attachment-list {
+            margin-top: 10px;
+            padding: 10px;
+            background: #F8FAFC;
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .attachment-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #D1D5DB;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .attachment-item:hover {
+            background: #EBF8FF;
+            border-color: var(--royal-blue);
+            transform: translateX(3px);
+        }
+
+        .attachment-icon {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .attachment-info {
+            flex: 1;
+        }
+
+        .attachment-name {
+            font-weight: 600;
+            color: var(--royal-dark);
+            font-size: 0.9rem;
+        }
+
+        .attachment-details {
+            font-size: 0.8rem;
+            color: #6B7280;
+        }
+
+        .attachment-download {
+            color: var(--royal-blue);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .email-content-preview {
+            background: #F8FAFC;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #374151;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .email-content-toggle {
+            color: var(--royal-blue);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .email-content-toggle:hover {
+            text-decoration: underline;
+        }
+
+        .file-icon-pdf { color: #DC2626; }
+        .file-icon-word { color: #2563EB; }
+        .file-icon-excel { color: #059669; }
+        .file-icon-image { color: #7C3AED; }
+        .file-icon-default { color: #6B7280; }
+
+        .processing-time-badge {
+            background: #E0F2FE;
+            color: #0891B2;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .royal-container {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            .partner-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .mailbox-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .detailed-email-list {
+                max-height: 400px;
+            }
+
+            .email-detail-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .email-detail-value {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="royal-container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <i class="fas fa-crown me-2"></i>Happy Buttons Dashboard
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="/">
+                            <i class="fas fa-home me-1"></i>Dashboard
+                        </a>
+                        <a class="nav-link" href="/agents">
+                            <i class="fas fa-robot me-1"></i>Agents
+                        </a>
+                        <a class="nav-link active" href="/external">
+                            <i class="fas fa-handshake me-1"></i>Externe Partner
+                        </a>
+                        <a class="nav-link" href="/config">
+                            <i class="fas fa-cog me-1"></i>Config
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Header -->
+        <div class="section-header">
+            <h2><i class="fas fa-handshake me-3"></i>Externe Partner & Email Processing</h2>
+            <p class="mb-0">Übersicht aller externen Partner, Kunden und Email-Verarbeitung</p>
+        </div>
+
+        <!-- Email Processing Section -->
+        <div class="email-processor-section">
+            <div class="processor-header">
+                <div>
+                    <h4><i class="fas fa-envelope-open-text me-2"></i>Email Processing System</h4>
+                    <p class="mb-0 text-muted">Zentrale E-Mail-Verarbeitung und Routing</p>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-success fs-6">
+                        <i class="fas fa-check-circle me-1"></i>AKTIV
+                    </span>
+                    <div class="text-muted small mt-1">
+                        <i class="fas fa-sync-alt update-indicator me-1"></i>Live Updates
+                    </div>
+                </div>
+            </div>
+
+            <div class="processor-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="total-processed">-</div>
+                    <div class="stat-label">Gesamt verarbeitet</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="auto-replies">-</div>
+                    <div class="stat-label">Auto-Replies</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="escalations">-</div>
+                    <div class="stat-label">Eskalationen</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="uptime">-</div>
+                    <div class="stat-label">Laufzeit (Std)</div>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <h6><i class="fas fa-route me-2"></i>Routing-Statistiken</h6>
+                <div class="row">
+                    <div class="col-md-6" id="routing-stats"></div>
+                    <div class="col-md-6" id="category-stats"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OEM Partners Section -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="d-flex align-items-center">
+                            <div class="company-logo me-3">OEM1</div>
+                            <div class="partner-info">
+                                <h5>OEM Customer 1</h5>
+                                <div class="partner-type">Premium OEM Partner</div>
+                            </div>
+                        </div>
+                        <span class="status-badge status-active" id="oem1-status">
+                            <i class="fas fa-circle me-1"></i>Aktiv
+                        </span>
+                    </div>
+
+                    <div class="mailbox-section">
+                        <div class="mailbox-header">
+                            <h6><i class="fas fa-inbox me-2"></i>oem1@h-bu.de</h6>
+                            <button class="btn btn-sm btn-royal">
+                                <i class="fas fa-envelope me-1"></i>Details
+                            </button>
+                        </div>
+
+                        <div class="mailbox-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="oem1-total">45</div>
+                                <div class="stat-label">VIP Anfragen</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="oem1-queue">0</div>
+                                <div class="stat-label">Warteschlange</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="oem1-response">15min</div>
+                                <div class="stat-label">Ø Response</div>
+                            </div>
+                        </div>
+
+                        <div class="email-list" id="oem1-emails">
+                            <div class="email-item">
+                                <div class="email-header">
+                                    <span class="email-sender">premium@oem1.com</span>
+                                    <span class="email-time">vor 15 Min</span>
+                                </div>
+                                <div class="email-subject">"Urgent: 50,000 Blue Buttons Required"</div>
+                                <div class="email-routing">→ Priorität: HÖCHSTE → Auto-Bestätigung gesendet</div>
+                            </div>
+                            <div class="email-item">
+                                <div class="email-header">
+                                    <span class="email-sender">orders@oem1.com</span>
+                                    <span class="email-time">vor 1 Std</span>
+                                </div>
+                                <div class="email-subject">"Monthly Order Schedule Update"</div>
+                                <div class="email-routing">→ Weiterleitung an orders@h-bu.de → Bestätigt</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="d-flex align-items-center">
+                            <div class="company-logo me-3">SUP</div>
+                            <div class="partner-info">
+                                <h5>Hauptlieferant China</h5>
+                                <div class="partner-type">Produktionspartner</div>
+                            </div>
+                        </div>
+                        <span class="status-badge status-active" id="supplier-status">
+                            <i class="fas fa-circle me-1"></i>Aktiv
+                        </span>
+                    </div>
+
+                    <div class="mailbox-section">
+                        <div class="mailbox-header">
+                            <h6><i class="fas fa-inbox me-2"></i>supplier@h-bu.de</h6>
+                            <button class="btn btn-sm btn-royal">
+                                <i class="fas fa-truck me-1"></i>Lieferungen
+                            </button>
+                        </div>
+
+                        <div class="mailbox-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="supplier-total">67</div>
+                                <div class="stat-label">Lieferungen</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="supplier-queue">0</div>
+                                <div class="stat-label">Warteschlange</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="supplier-delays">0</div>
+                                <div class="stat-label">Verzögerungen</div>
+                            </div>
+                        </div>
+
+                        <div class="email-list" id="supplier-emails">
+                            <div class="email-item">
+                                <div class="email-header">
+                                    <span class="email-sender">logistics@supplier-cn.com</span>
+                                    <span class="email-time">vor 30 Min</span>
+                                </div>
+                                <div class="email-subject">"Shipment #CN-2401 Dispatched"</div>
+                                <div class="email-routing">→ Automatische Bestätigung → ERP System aktualisiert</div>
+                            </div>
+                            <div class="email-item">
+                                <div class="email-header">
+                                    <span class="email-sender">quality@supplier-cn.com</span>
+                                    <span class="email-time">vor 2 Std</span>
+                                </div>
+                                <div class="email-subject">"Quality Report - Batch #24-09-20"</div>
+                                <div class="email-routing">→ Weiterleitung an quality@h-bu.de → Verarbeitet</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Partners Row -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="d-flex align-items-center">
+                            <div class="company-logo me-3">LOG</div>
+                            <div class="partner-info">
+                                <h5>Logistikpartner</h5>
+                                <div class="partner-type">Transport & Distribution</div>
+                            </div>
+                        </div>
+                        <span class="status-badge status-active" id="logistics-status">
+                            <i class="fas fa-circle me-1"></i>Aktiv
+                        </span>
+                    </div>
+
+                    <div class="mailbox-section">
+                        <div class="mailbox-header">
+                            <h6><i class="fas fa-inbox me-2"></i>logistics@h-bu.de</h6>
+                            <button class="btn btn-sm btn-royal">
+                                <i class="fas fa-map-marked-alt me-1"></i>Tracking
+                            </button>
+                        </div>
+
+                        <div class="mailbox-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="logistics-shipments">234</div>
+                                <div class="stat-label">Sendungen</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="logistics-ontime">94%</div>
+                                <div class="stat-label">Pünktlich</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="logistics-pending">3</div>
+                                <div class="stat-label">Ausstehend</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="partner-card">
+                    <div class="partner-header">
+                        <div class="d-flex align-items-center">
+                            <div class="company-logo me-3">FIN</div>
+                            <div class="partner-info">
+                                <h5>Finanzpartner</h5>
+                                <div class="partner-type">Rechnungen & Zahlungen</div>
+                            </div>
+                        </div>
+                        <span class="status-badge status-busy" id="finance-status">
+                            <i class="fas fa-circle me-1"></i>Beschäftigt
+                        </span>
+                    </div>
+
+                    <div class="mailbox-section">
+                        <div class="mailbox-header">
+                            <h6><i class="fas fa-inbox me-2"></i>finance@h-bu.de</h6>
+                            <button class="btn btn-sm btn-royal">
+                                <i class="fas fa-euro-sign me-1"></i>Rechnungen
+                            </button>
+                        </div>
+
+                        <div class="mailbox-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="finance-invoices">89</div>
+                                <div class="stat-label">Rechnungen</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="finance-pending">12</div>
+                                <div class="stat-label">Ausstehend</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="finance-paid">77</div>
+                                <div class="stat-label">Bezahlt</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Mailbox Section -->
+        <div class="mt-4">
+            <div class="partner-card">
+                <div class="partner-header">
+                    <div class="d-flex align-items-center">
+                        <div class="company-logo me-3">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="partner-info">
+                            <h5>Haupteingang - Info Mailbox</h5>
+                            <div class="partner-type">info@h-bu.de - Zentrale E-Mail-Verteilung</div>
+                        </div>
+                    </div>
+                    <span class="status-badge status-active" id="info-mailbox-status">
+                        <i class="fas fa-circle me-1"></i>Aktiv
+                    </span>
+                </div>
+
+                <div class="mailbox-section">
+                    <div class="mailbox-header">
+                        <h6><i class="fas fa-route me-2"></i>Aktuelle Routing-Aktivitäten</h6>
+                        <div class="text-muted small">
+                            <i class="fas fa-sync-alt update-indicator me-1"></i>Letzte Aktualisierung: <span id="last-update">-</span>
+                        </div>
+                    </div>
+
+                    <div class="mailbox-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" id="info-total">245</div>
+                            <div class="stat-label">Gesamt E-Mails</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="info-today">38</div>
+                            <div class="stat-label">Heute</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="info-queue">2</div>
+                            <div class="stat-label">Warteschlange</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="info-routing-success">100%</div>
+                            <div class="stat-label">Routing-Erfolg</div>
+                        </div>
+                    </div>
+
+                    <div class="email-list" id="info-recent-emails">
+                        <!-- Recent emails will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Email History Section -->
+        <div class="mt-4">
+            <div class="partner-card">
+                <div class="partner-header">
+                    <div class="d-flex align-items-center">
+                        <div class="company-logo me-3">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="partner-info">
+                            <h5>Detaillierte E-Mail Historie</h5>
+                            <div class="partner-type">Letzte 100 verarbeitete E-Mails (Von • An • Betreff)</div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-sm btn-royal me-2" onclick="refreshEmailHistory()">
+                            <i class="fas fa-refresh me-1"></i>Aktualisieren
+                        </button>
+                        <span class="status-badge status-active">
+                            <i class="fas fa-circle me-1"></i>Live
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mailbox-section">
+                    <div class="mailbox-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6><i class="fas fa-list me-2"></i>E-Mail Details (Line-by-Line)</h6>
+                            <div class="text-muted small">
+                                <span id="email-count">-</span> E-Mails geladen
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Email List -->
+                    <div class="detailed-email-list" id="detailed-email-list">
+                        <div class="text-center p-4">
+                            <i class="fas fa-spinner fa-spin fa-2x text-primary"></i>
+                            <p class="mt-2 text-muted">Lade E-Mail-Details...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Details Modal -->
+    <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(90deg, var(--royal-dark) 0%, var(--royal-blue) 100%);" class="text-white">
+                    <h5 class="modal-title" id="emailModalLabel">
+                        <i class="fas fa-envelope me-2"></i>E-Mail Details
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="emailModalBody">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Schließen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize WebSocket connection for real-time updates
+        const socket = io();
+
+        // Global variable to store email data for popups
+        let emailsData = [];
+
+        // Update timestamps
+        function updateTimestamps() {
+            const now = new Date();
+            document.getElementById('last-update').textContent = now.toLocaleTimeString('de-DE');
+        }
+
+        // Load email processor data
+        async function loadEmailStats() {
+            try {
+                const response = await fetch('/api/email/stats');
+                const data = await response.json();
+
+                document.getElementById('total-processed').textContent = data.total_processed || 0;
+                document.getElementById('auto-replies').textContent = data.auto_replies_sent || 0;
+                document.getElementById('escalations').textContent = data.escalations || 0;
+
+                // Load routing stats
+                const routingContainer = document.getElementById('routing-stats');
+                let routingHtml = '<div class="small"><strong>Routing-Ziele:</strong><br>';
+                Object.entries(data.routing_destinations || {}).forEach(([dest, count]) => {
+                    routingHtml += `<div class="d-flex justify-content-between"><span>${dest}:</span><span class="text-primary">${count}</span></div>`;
+                });
+                routingHtml += '</div>';
+                routingContainer.innerHTML = routingHtml;
+
+                // Load category stats
+                const categoryContainer = document.getElementById('category-stats');
+                let categoryHtml = '<div class="small"><strong>Kategorien:</strong><br>';
+                Object.entries(data.categories || {}).forEach(([cat, count]) => {
+                    categoryHtml += `<div class="d-flex justify-content-between"><span>${cat}:</span><span class="text-success">${count}</span></div>`;
+                });
+                categoryHtml += '</div>';
+                categoryContainer.innerHTML = categoryHtml;
+
+            } catch (error) {
+                console.error('Error loading email stats:', error);
+            }
+        }
+
+        // Load email processor health for uptime
+        async function loadProcessorHealth() {
+            try {
+                const response = await fetch('http://localhost:8081/health');
+                const data = await response.json();
+
+                if (data.uptime_seconds) {
+                    const hours = Math.floor(data.uptime_seconds / 3600);
+                    document.getElementById('uptime').textContent = `${hours}h`;
+                }
+            } catch (error) {
+                console.error('Error loading processor health:', error);
+                document.getElementById('uptime').textContent = 'N/A';
+            }
+        }
+
+        // Generate sample recent emails for info mailbox
+        function loadRecentEmails() {
+            const recentEmails = [
+                {
+                    sender: 'john@oem1.com',
+                    subject: 'Urgent Order Request - 5000 Blue Buttons',
+                    time: 'vor 2 Min',
+                    routing: '→ Weitergeleitet an orders@h-bu.de (OEM Priority)'
+                },
+                {
+                    sender: 'supplier@production-cn.com',
+                    subject: 'Delivery Confirmation - Batch #CN240920',
+                    time: 'vor 15 Min',
+                    routing: '→ Weitergeleitet an supplier@h-bu.de'
+                },
+                {
+                    sender: 'support@customer-request.com',
+                    subject: 'Question about Button Specifications',
+                    time: 'vor 1 Std',
+                    routing: '→ Weitergeleitet an support@h-bu.de'
+                },
+                {
+                    sender: 'invoicing@finance-dept.com',
+                    subject: 'Invoice #INV-240920-001',
+                    time: 'vor 2 Std',
+                    routing: '→ Weitergeleitet an finance@h-bu.de'
+                }
+            ];
+
+            const container = document.getElementById('info-recent-emails');
+            container.innerHTML = recentEmails.map(email => `
+                <div class="email-item">
+                    <div class="email-header">
+                        <span class="email-sender">${email.sender}</span>
+                        <span class="email-time">${email.time}</span>
+                    </div>
+                    <div class="email-subject">"${email.subject}"</div>
+                    <div class="email-routing">${email.routing}</div>
+                </div>
+            `).join('');
+        }
+
+        // Load detailed email history
+        async function loadDetailedEmailHistory() {
+            console.log('Loading detailed email history...');
+            try {
+                const response = await fetch('/api/emails/recent');
+                const data = await response.json();
+                console.log('Email API response:', data);
+
+                if (data.status === 'success') {
+                    const container = document.getElementById('detailed-email-list');
+                    const emailCount = document.getElementById('email-count');
+
+                    // Store emails data globally for popups
+                    emailsData = data.emails;
+                    console.log('Stored emails data:', emailsData.length, 'emails');
+
+                    emailCount.textContent = data.total_count;
+
+                    console.log('Rendering emails into container...');
+                    container.innerHTML = data.emails.map((email, index) => `
+                        <div class="simple-email-line" onclick="showEmailModal('${email.id}')" style="cursor: pointer; padding: 8px; border-bottom: 1px solid #eee; hover: background-color: #f8f9fa;">
+                            <i class="fas fa-envelope me-2 text-muted"></i>
+                            <strong>Von:</strong> ${email.from_name || email.from.split('@')[0]} (${email.from})
+                            <strong>→ An:</strong> ${email.to}
+                            <strong>• Betreff:</strong> ${email.subject}
+                        </div>
+                    `).join('');
+                } else {
+                    console.error('Error loading email history:', data.message);
+                }
+            } catch (error) {
+                console.error('Error loading detailed email history:', error);
+                document.getElementById('detailed-email-list').innerHTML = `
+                    <div class="text-center p-4">
+                        <i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
+                        <p class="mt-2 text-muted">Fehler beim Laden der E-Mail-Details</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Helper functions for labels
+        function getStatusLabel(status) {
+            const labels = {
+                'processed': 'Verarbeitet',
+                'routed': 'Weitergeleitet',
+                'escalated': 'Eskaliert',
+                'auto_replied': 'Auto-Reply'
+            };
+            return labels[status] || status;
+        }
+
+        function getPriorityLabel(priority) {
+            const labels = {
+                'critical': 'KRITISCH',
+                'high': 'HOCH',
+                'medium': 'MITTEL',
+                'low': 'NIEDRIG'
+            };
+            return labels[priority] || priority;
+        }
+
+        function getCategoryLabel(category) {
+            const labels = {
+                'order': 'Bestellung',
+                'oem': 'OEM Partner',
+                'supplier': 'Lieferant',
+                'support': 'Support',
+                'quality': 'Qualität',
+                'finance': 'Finanzen',
+                'logistics': 'Logistik'
+            };
+            return labels[category] || category;
+        }
+
+        function getEscalationLabel(level) {
+            const labels = {
+                'management': 'An Management',
+                'urgent': 'Eilbearbeitung'
+            };
+            return labels[level] || level;
+        }
+
+        // Toggle email content visibility
+        function toggleEmailContent(emailId) {
+            const contentDiv = document.getElementById(`content-${emailId}`);
+            const toggleButton = contentDiv.previousElementSibling;
+
+            if (contentDiv.style.display === 'none') {
+                contentDiv.style.display = 'block';
+                toggleButton.innerHTML = '<i class="fas fa-eye-slash me-1"></i>E-Mail-Inhalt verbergen';
+            } else {
+                contentDiv.style.display = 'none';
+                toggleButton.innerHTML = '<i class="fas fa-eye me-1"></i>E-Mail-Inhalt anzeigen';
+            }
+        }
+
+        // Show email details in modal popup
+        function showEmailModal(emailId) {
+            console.log('showEmailModal called with ID:', emailId);
+            console.log('Available emailsData:', emailsData);
+            const email = emailsData.find(e => e.id === emailId);
+            if (!email) {
+                console.error('Email not found:', emailId, 'Available IDs:', emailsData.map(e => e.id));
+                return;
+            }
+            console.log('Found email:', email);
+
+            // Set modal title
+            document.getElementById('emailModalLabel').innerHTML = `
+                <i class="fas fa-envelope me-2"></i>E-Mail Details - #${emailId}
+            `;
+
+            // Generate attachments HTML
+            const attachmentsHtml = email.attachments > 0 ? `
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <h6><i class="fas fa-paperclip me-2"></i>Anhänge (${email.attachments}):</h6>
+                        <div class="attachments-grid">
+                            ${email.attachments_list.map(attachment => `
+                                <div class="attachment-item mb-2 p-2 border rounded"
+                                     onclick="downloadAttachment('${email.id}', '${attachment.name}')"
+                                     style="cursor: pointer; display: inline-block; margin-right: 10px;">
+                                    <i class="${attachment.icon} me-2 text-primary"></i>
+                                    <span>${attachment.name}</span>
+                                    <small class="text-muted ms-2">(${attachment.size})</small>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            ` : '<div class="alert alert-info mt-3"><i class="fas fa-info-circle me-2"></i>Keine Anhänge vorhanden</div>';
+
+            // Set modal body content
+            document.getElementById('emailModalBody').innerHTML = `
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-user me-2"></i>Absender</h6>
+                            <p><strong>${email.from_name || email.from.split('@')[0]}</strong><br>
+                               <small class="text-muted">${email.from}</small></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-inbox me-2"></i>Empfänger</h6>
+                            <p>${email.to}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-clock me-2"></i>Zeitpunkt</h6>
+                            <p>${email.time_ago} <small class="text-muted">(${email.timestamp})</small></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-route me-2"></i>Routing</h6>
+                            <p>→ <span class="badge bg-primary">${email.routed_to}</span></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6><i class="fas fa-flag me-2"></i>Status</h6>
+                            <span class="badge email-status-${email.status}">${getStatusLabel(email.status)}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <h6><i class="fas fa-exclamation me-2"></i>Priorität</h6>
+                            <span class="badge ${email.priority === 'critical' ? 'bg-danger' : email.priority === 'high' ? 'bg-warning' : 'bg-info'}">${getPriorityLabel(email.priority)}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <h6><i class="fas fa-tag me-2"></i>Kategorie</h6>
+                            <span class="badge bg-secondary">${email.category}</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h6><i class="fas fa-quote-left me-2"></i>Betreff</h6>
+                            <div class="p-3 bg-light rounded">
+                                <strong>${email.subject}</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h6><i class="fas fa-envelope-open me-2"></i>E-Mail-Inhalt</h6>
+                            <div class="p-3 border rounded" style="max-height: 300px; overflow-y: auto; background: #f8f9fa;">
+                                ${email.content ? email.content.replace(/\n/g, '<br>') : '<em class="text-muted">Kein Inhalt verfügbar</em>'}
+                            </div>
+                        </div>
+                    </div>
+
+                    ${attachmentsHtml}
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-cog me-2"></i>Verarbeitungszeit</h6>
+                            <p>${email.processing_time}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-database me-2"></i>Größe</h6>
+                            <p>${email.size}</p>
+                        </div>
+                    </div>
+
+                    ${email.escalation_level ? `
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <strong>Eskalation:</strong> ${getEscalationLabel(email.escalation_level)}
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    ${email.auto_reply_sent ? `
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-success">
+                                    <i class="fas fa-reply me-2"></i>
+                                    <strong>Auto-Reply gesendet</strong>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            // Show the modal
+            const modal = new bootstrap.Modal(document.getElementById('emailModal'));
+            modal.show();
+        }
+
+        // Download attachment
+        function downloadAttachment(emailId, filename) {
+            const url = `/api/emails/attachment/${emailId}/${filename}`;
+
+            // Create temporary link for download
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Show feedback
+            const originalText = event.target.closest('.attachment-item').querySelector('.attachment-download').innerHTML;
+            event.target.closest('.attachment-item').querySelector('.attachment-download').innerHTML = '<i class="fas fa-check text-success"></i>';
+
+            setTimeout(() => {
+                if (event.target.closest('.attachment-item')) {
+                    event.target.closest('.attachment-item').querySelector('.attachment-download').innerHTML = originalText;
+                }
+            }, 2000);
+        }
+
+        // Get file icon class for styling
+        function getFileIconClass(iconClass) {
+            if (iconClass.includes('file-pdf')) return 'file-icon-pdf';
+            if (iconClass.includes('file-word')) return 'file-icon-word';
+            if (iconClass.includes('file-excel')) return 'file-icon-excel';
+            if (iconClass.includes('file-image')) return 'file-icon-image';
+            return 'file-icon-default';
+        }
+
+        // Refresh email history manually
+        function refreshEmailHistory() {
+            document.getElementById('detailed-email-list').innerHTML = `
+                <div class="text-center p-4">
+                    <i class="fas fa-spinner fa-spin fa-2x text-primary"></i>
+                    <p class="mt-2 text-muted">Aktualisiere E-Mail-Details...</p>
+                </div>
+            `;
+            loadDetailedEmailHistory();
+        }
+
+        // Initialize dashboard
+        function init() {
+            loadEmailStats();
+            loadProcessorHealth();
+            loadRecentEmails();
+            loadDetailedEmailHistory();
+            updateTimestamps();
+
+            // Update every 30 seconds
+            setInterval(() => {
+                loadEmailStats();
+                loadProcessorHealth();
+                updateTimestamps();
+                // Refresh detailed email history every 2 minutes
+                if (Date.now() % 120000 < 30000) {
+                    loadDetailedEmailHistory();
+                }
+            }, 30000);
+        }
+
+        // Socket.IO real-time updates
+        socket.on('connect', function() {
+            console.log('Connected to dashboard');
+        });
+
+        socket.on('email_processed', function(data) {
+            // Update counters when new email is processed
+            loadEmailStats();
+        });
+
+        socket.on('agent_update', function(data) {
+            // Update agent statuses
+            console.log('Agent update:', data);
+        });
+
+        // Start the dashboard
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

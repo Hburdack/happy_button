@@ -1,0 +1,50 @@
+# Info Agent Konfiguration - Haupteingang
+agent:
+  name: "Info Agent"
+  mailbox: "info@h-bu.de"
+  role: "Triage und Routing"
+
+# Routing-Regeln (Priorität von oben nach unten)
+routing_rules:
+  - condition: "has_pdf_attachment and contains('order', 'bestellung')"
+    destination: "orders@h-bu.de"
+    priority: "high"
+
+  - condition: "has_pdf_attachment and contains('invoice', 'rechnung')"
+    destination: "finance@h-bu.de"
+    priority: "medium"
+
+  - condition: "sender_domain in ['oem1.com', 'oem2.com']"
+    destination: "oem1@h-bu.de"
+    priority: "critical"
+
+  - condition: "contains('supplier', 'lieferant', 'delivery')"
+    destination: "supplier@h-bu.de"
+    priority: "medium"
+
+  - condition: "contains('complaint', 'defect', 'quality', 'beschwerde')"
+    destination: "quality@h-bu.de"
+    priority: "high"
+    escalate_to: "management@h-bu.de"
+
+  - condition: "contains('hr', 'bewerbung', 'job')"
+    destination: "hr@h-bu.de"
+    priority: "low"
+
+  - condition: "default"
+    destination: "support@h-bu.de"
+    priority: "medium"
+
+# Auto-Reply-Templates
+auto_reply:
+  enabled: true
+  default_template: "generic_ack"
+  templates:
+    generic_ack: "Wir haben Ihre Nachricht dankend erhalten und werden uns umgehend bei Ihnen melden."
+    oem_priority: "Als geschätzter OEM-Partner behandeln wir Ihre Anfrage mit höchster Priorität."
+
+# Verarbeitungseinstellungen
+processing:
+  max_queue_size: 100
+  timeout_seconds: 30
+  retry_attempts: 3

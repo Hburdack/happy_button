@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 
 import psutil
-from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
+from flask import Flask, render_template, jsonify, request, redirect, url_for, flash, make_response
 from flask_socketio import SocketIO, emit
 import requests
 
@@ -24,8 +24,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
 # Import our modules
 try:
     from utils.templates import RoyalCourtesyTemplates
-    from email.router import EmailRouter
-    from email.parser import EmailParser
+    from email_processing.router import EmailRouter
+    from email_processing.parser import EmailParser
     from agents.business_agents import create_business_agents
 except ImportError as e:
     print(f"Warning: Could not import some modules: {e}")
@@ -330,6 +330,361 @@ def config():
     """Configuration management page"""
     return render_template('config.html')
 
+@app.route('/agents')
+def agents():
+    """Agent management page"""
+    return render_template('agents.html')
+
+
+@app.route('/external')
+def external():
+    """External partners and email processing page"""
+    return render_template('external.html')
+
+@app.route('/api/agents/<agent_name>/restart', methods=['POST'])
+def restart_agent(agent_name):
+    """Restart a specific agent"""
+    try:
+        # Simulate agent restart
+        logger.info(f"Restarting {agent_name} agent")
+        return jsonify({
+            'status': 'success',
+            'message': f'{agent_name} agent restarted successfully',
+            'timestamp': datetime.now().isoformat()
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/api/agents/<agent_name>/details')
+def agent_details(agent_name):
+    """Get detailed information about a specific agent"""
+    try:
+        # Mock agent details
+        agent_details = {
+            'info': {
+                'status': 'active',
+                'processed_emails': 127,
+                'queue_size': 2,
+                'uptime': '2h 15m',
+                'capabilities': ['E-Mail Triage', 'Routing', 'Auto-Reply'],
+                'last_error': None
+            },
+            'orders': {
+                'status': 'active',
+                'processed_emails': 89,
+                'queue_size': 1,
+                'uptime': '2h 15m',
+                'capabilities': ['Bestellungsverarbeitung', 'ERP-Integration', 'Bestätigungen'],
+                'last_error': None
+            },
+            'oem': {
+                'status': 'active',
+                'processed_emails': 45,
+                'queue_size': 0,
+                'uptime': '2h 15m',
+                'capabilities': ['VIP-Behandlung', 'Priority Routing', 'Escalation'],
+                'last_error': None
+            },
+            'quality': {
+                'status': 'busy',
+                'processed_emails': 23,
+                'queue_size': 3,
+                'uptime': '2h 15m',
+                'capabilities': ['Qualitätskontrolle', 'Beschwerdemanagement', 'Eskalation'],
+                'last_error': 'Warning: High queue size detected'
+            },
+            'supplier': {
+                'status': 'active',
+                'processed_emails': 67,
+                'queue_size': 0,
+                'uptime': '2h 15m',
+                'capabilities': ['Lieferantenkoordination', 'Tracking', 'Benachrichtigungen'],
+                'last_error': None
+            },
+            'management': {
+                'status': 'active',
+                'processed_emails': 12,
+                'queue_size': 1,
+                'uptime': '2h 15m',
+                'capabilities': ['Eskalation', 'Management Reports', 'Kritische Fälle'],
+                'last_error': None
+            }
+        }
+
+        return jsonify(agent_details.get(agent_name, {
+            'status': 'unknown',
+            'processed_emails': 0,
+            'queue_size': 0,
+            'uptime': 'N/A',
+            'capabilities': [],
+            'last_error': 'Agent not found'
+        }))
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+@app.route('/api/emails/recent')
+def recent_emails():
+    """Get the last 100 processed emails with full details"""
+    try:
+        # Generate realistic email data for the last 100 emails
+        import random
+        from datetime import datetime, timedelta
+
+        # More detailed email configurations with human-like content
+        email_scenarios = [
+            {
+                'type': 'order', 'route': 'orders@h-bu.de', 'priority': 'high',
+                'senders': ['john.smith@oem1.com', 'sarah.jones@manufacturing-corp.com', 'orders@premium-buttons.com'],
+                'subjects': [
+                    'URGENT: Need 15,000 Navy Blue Buttons for Q4 Production',
+                    'Re: Bulk Order Quote - Custom Logo Buttons Required',
+                    'Follow-up: December Delivery Timeline for Holiday Orders',
+                    'Special Request: Eco-Friendly Button Materials'
+                ],
+                'content_templates': [
+                    "Hi Happy Buttons team,\n\nWe're facing an unexpected demand surge and urgently need 15,000 navy blue buttons (part #HB-NB-2024) for our Q4 production line. Can you please confirm availability and expedited shipping options?\n\nOur production deadline is November 15th, so timing is critical.\n\nBest regards,\n{sender_name}",
+                    "Dear procurement team,\n\nFollowing up on our previous discussion about custom logo buttons. We've finalized our design and need 8,500 units with our company logo embossed.\n\nAttached you'll find:\n- Final logo specifications\n- Preferred button dimensions\n- Color matching requirements\n\nLooking forward to your quote.\n\nKind regards,\n{sender_name}"
+                ],
+                'attachment_types': ['order_form.pdf', 'specifications.docx', 'logo_design.ai', 'purchase_order.xlsx']
+            },
+            {
+                'type': 'oem', 'route': 'oem1@h-bu.de', 'priority': 'critical',
+                'senders': ['premium.orders@bmw-supplier.com', 'procurement@audi-parts.de', 'vip@luxury-brands.com'],
+                'subjects': [
+                    'BMW Project X7: Critical Timeline Update Required',
+                    'Audi Q8 Interior - Button Quality Specifications',
+                    'CONFIDENTIAL: New Luxury Brand Partnership Opportunity'
+                ],
+                'content_templates': [
+                    "Dear Happy Buttons VIP Team,\n\nRegarding the BMW Project X7 initiative, we need to discuss potential timeline adjustments. Our engineering team has identified some specification refinements that may impact delivery.\n\nCould we schedule a priority call this week? This project is mission-critical for our Q1 2025 launch.\n\nConfidential regards,\n{sender_name}\nSenior Procurement Manager",
+                    "Happy Buttons Premium Division,\n\nOur quality assurance team requires additional documentation for the Audi Q8 interior button specifications. The automotive grade requirements are more stringent than initially outlined.\n\nPlease prioritize this request as it affects our production certification timeline.\n\nBest,\n{sender_name}"
+                ],
+                'attachment_types': ['nda_agreement.pdf', 'technical_specs.dwg', 'quality_standards.pdf', 'project_timeline.mpp']
+            },
+            {
+                'type': 'supplier', 'route': 'supplier@h-bu.de', 'priority': 'medium',
+                'senders': ['logistics@china-materials.com', 'dispatch@mexico-production.mx', 'shipping@poland-factory.pl'],
+                'subjects': [
+                    'Shipment Delay: Raw Materials from Guangzhou Factory',
+                    'Weekly Production Report - Mexico Facility',
+                    'Quality Control Update: Poland Manufacturing Line'
+                ],
+                'content_templates': [
+                    "Dear Happy Buttons Supply Chain,\n\nWe regret to inform you of a 3-day delay in shipment HB-GM-240920 from our Guangzhou facility. This is due to unexpected customs inspections and port congestion.\n\nNew estimated arrival: September 27th\nOriginal ETA: September 24th\n\nWe're working with our logistics partners to minimize further delays.\n\nApologies for any inconvenience,\n{sender_name}\nSupply Chain Coordinator",
+                    "Hello Happy Buttons Team,\n\nPlease find attached our weekly production report from the Mexico facility. We've exceeded targets by 12% this week and quality metrics remain at 99.2%.\n\nNotable achievements:\n- Zero safety incidents\n- Improved efficiency in button finishing\n- Successful implementation of new quality protocols\n\nBest regards,\n{sender_name}"
+                ],
+                'attachment_types': ['shipping_manifest.pdf', 'production_report.xlsx', 'quality_certificate.pdf', 'customs_docs.pdf']
+            },
+            {
+                'type': 'quality', 'route': 'quality@h-bu.de', 'priority': 'high',
+                'senders': ['inspector@quality-control.com', 'compliance@certification-body.org', 'lab@materials-testing.de'],
+                'subjects': [
+                    'Quality Alert: Batch HB-2024-0920 Color Variance Detected',
+                    'ISO 9001 Compliance Audit - Action Items',
+                    'Material Testing Results: New Polymer Samples'
+                ],
+                'content_templates': [
+                    "QUALITY ALERT - IMMEDIATE ATTENTION REQUIRED\n\nBatch ID: HB-2024-0920\nIssue: Color variance exceeding tolerance (±2.3 Delta E)\nAffected Units: 2,847 buttons\n\nOur quality team detected color inconsistencies during routine inspection. Batch is currently quarantined pending investigation.\n\nRoot cause analysis initiated.\nCustomer notification: Pending your approval\n\nPlease advise on next steps.\n\n{sender_name}\nQuality Assurance Manager",
+                    "Dear Happy Buttons Quality Team,\n\nFollowing our ISO 9001 compliance audit, please find attached the detailed findings report. Overall performance is excellent with minor improvement opportunities identified.\n\nKey action items:\n1. Update calibration records for measurement equipment\n2. Enhance traceability documentation\n3. Review supplier qualification process\n\nCompliance deadline: October 15th, 2024\n\nRegards,\n{sender_name}"
+                ],
+                'attachment_types': ['quality_report.pdf', 'test_results.xlsx', 'audit_findings.docx', 'calibration_cert.pdf']
+            }
+        ]
+
+        def get_file_icon(filename):
+            """Return appropriate icon for file type"""
+            extension = filename.split('.')[-1].lower()
+            icon_map = {
+                'pdf': 'fas fa-file-pdf',
+                'docx': 'fas fa-file-word',
+                'doc': 'fas fa-file-word',
+                'xlsx': 'fas fa-file-excel',
+                'xls': 'fas fa-file-excel',
+                'ai': 'fas fa-file-image',
+                'dwg': 'fas fa-drafting-compass',
+                'mpp': 'fas fa-project-diagram',
+                'zip': 'fas fa-file-archive',
+                'jpg': 'fas fa-file-image',
+                'png': 'fas fa-file-image'
+            }
+            return icon_map.get(extension, 'fas fa-file')
+
+        recent_emails = []
+        now = datetime.now()
+
+        for i in range(100):
+            # Choose a scenario and generate human-like email
+            scenario = random.choice(email_scenarios)
+            sender = random.choice(scenario['senders'])
+            subject = random.choice(scenario['subjects'])
+
+            # Extract sender name for content personalization
+            sender_name = sender.split('@')[0].replace('.', ' ').title()
+            if '.' in sender_name:
+                sender_name = sender_name.replace('.', ' ')
+
+            # Generate email content
+            content_template = random.choice(scenario['content_templates'])
+            email_content = content_template.format(sender_name=sender_name)
+
+            # Create realistic attachments with clickable details
+            num_attachments = random.randint(0, 3)
+            attachments_list = []
+            if num_attachments > 0:
+                available_attachments = scenario['attachment_types']
+                selected_attachments = random.sample(available_attachments, min(num_attachments, len(available_attachments)))
+
+                for attachment_name in selected_attachments:
+                    attachments_list.append({
+                        'name': attachment_name,
+                        'size': f'{random.randint(50, 2500)}KB',
+                        'type': attachment_name.split('.')[-1].upper(),
+                        'url': f'/api/emails/attachment/{i+1}/{attachment_name}',
+                        'icon': get_file_icon(attachment_name)
+                    })
+
+            # Create timestamp going backwards
+            minutes_ago = i * random.randint(2, 15)
+            timestamp = now - timedelta(minutes=minutes_ago)
+
+            email = {
+                'id': f'email_{i+1}',
+                'from': sender,
+                'from_name': sender_name,
+                'to': 'info@h-bu.de',
+                'subject': subject,
+                'content': email_content,
+                'timestamp': timestamp.isoformat(),
+                'time_ago': f'vor {minutes_ago} Min' if minutes_ago < 60 else f'vor {minutes_ago//60}h {minutes_ago%60}m',
+                'routed_to': scenario['route'],
+                'priority': scenario['priority'],
+                'status': random.choice(['processed', 'routed', 'escalated', 'auto_replied']),
+                'category': scenario['type'],
+                'size': f'{random.randint(15, 250)}KB',
+                'attachments': num_attachments,
+                'attachments_list': attachments_list,
+                'processing_time': f'{random.randint(50, 500)}ms',
+                'auto_reply_sent': random.choice([True, False]),
+                'escalation_level': random.choice([None, 'management', 'urgent']) if scenario['priority'] == 'critical' else None,
+                'importance': random.choice(['normal', 'high', 'urgent']) if scenario['priority'] in ['high', 'critical'] else 'normal',
+                'read_receipt_requested': random.choice([True, False]) if scenario['priority'] == 'critical' else False
+            }
+
+            recent_emails.append(email)
+
+        return jsonify({
+            'status': 'success',
+            'total_count': 20,
+            'emails': recent_emails,
+            'last_updated': now.isoformat()
+        })
+
+    except Exception as e:
+        logger.error(f"Error retrieving recent emails: {e}")
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+
+@app.route('/api/emails/attachment/<email_id>/<filename>')
+def download_attachment(email_id, filename):
+    """Mock attachment download endpoint"""
+    try:
+        # In a real system, this would serve actual files
+        # For simulation, we generate a mock response
+
+        file_types = {
+            'pdf': 'application/pdf',
+            'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'dwg': 'application/acad',
+            'mpp': 'application/vnd.ms-project',
+            'ai': 'application/postscript'
+        }
+
+        extension = filename.split('.')[-1].lower()
+        content_type = file_types.get(extension, 'application/octet-stream')
+
+        # Generate mock file content based on file type
+        if extension == 'pdf':
+            mock_content = b'%PDF-1.4\n%Mock PDF content for Happy Buttons simulation\n%%EOF'
+        elif extension == 'docx':
+            mock_content = b'Mock Microsoft Word document content for ' + filename.encode()
+        elif extension == 'xlsx':
+            mock_content = b'Mock Excel spreadsheet content for ' + filename.encode()
+        else:
+            mock_content = f'Mock file content for {filename} - Happy Buttons simulation'.encode()
+
+        response = make_response(mock_content)
+        response.headers['Content-Type'] = content_type
+        response.headers['Content-Disposition'] = f'attachment; filename="{filename}"'
+        response.headers['Content-Length'] = len(mock_content)
+
+        logger.info(f"Attachment download: {filename} for email {email_id}")
+        return response
+
+    except Exception as e:
+        logger.error(f"Error downloading attachment {filename}: {e}")
+        return jsonify({
+            'status': 'error',
+            'message': f'Failed to download {filename}'
+        }), 500
+
+@app.route('/api/agents/mailbox/<mailbox_name>')
+def mailbox_details(mailbox_name):
+    """Get detailed mailbox information"""
+    try:
+        # Mock mailbox data
+        mailbox_data = {
+            'info': {
+                'address': 'info@h-bu.de',
+                'total_emails': 245,
+                'today_emails': 38,
+                'recent_emails': [
+                    {
+                        'from': 'john@oem1.com',
+                        'subject': 'Urgent Order Request - 5000 Blue Buttons',
+                        'time': 'vor 2 Minuten',
+                        'routed_to': 'orders@h-bu.de',
+                        'status': 'routed'
+                    },
+                    {
+                        'from': 'customer@example.com',
+                        'subject': 'Product Quality Issue',
+                        'time': 'vor 5 Minuten',
+                        'routed_to': 'quality@h-bu.de',
+                        'status': 'escalated'
+                    },
+                    {
+                        'from': 'supplier@materials.com',
+                        'subject': 'Delivery Confirmation',
+                        'time': 'vor 8 Minuten',
+                        'routed_to': 'supplier@h-bu.de',
+                        'status': 'processed'
+                    }
+                ]
+            }
+        }
+
+        return jsonify(mailbox_data.get(mailbox_name, {
+            'address': f'{mailbox_name}@h-bu.de',
+            'total_emails': 0,
+            'today_emails': 0,
+            'recent_emails': []
+        }))
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
 
 @socketio.on('connect')
 def handle_connect():
@@ -381,4 +736,4 @@ if __name__ == '__main__':
 
     # Run the dashboard
     logger.info("🌐 Starting Happy Buttons Dashboard on http://localhost:8080")
-    socketio.run(app, host='0.0.0.0', port=8080, debug=False)
+    socketio.run(app, host='0.0.0.0', port=8080, debug=False, allow_unsafe_werkzeug=True)

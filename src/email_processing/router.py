@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 import logging
 
-from parser import ParsedEmail, EmailMetadata
+from .parser import ParsedEmail, EmailMetadata
 
 logger = logging.getLogger(__name__)
 

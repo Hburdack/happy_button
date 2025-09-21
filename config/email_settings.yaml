@@ -1,0 +1,83 @@
+# E-Mail-Server Konfiguration für echte Integration
+
+# BETRIEBSMODUS
+mode: "simulation"  # Optionen: "simulation" | "production"
+
+# PRODUCTION E-MAIL-SERVER (wenn mode: "production")
+production_email:
+  # IMAP-Einstellungen (Eingehende E-Mails)
+  imap:
+    host: "imap.ihr-provider.de"
+    port: 993
+    use_ssl: true
+    username: "info@h-bu.de"
+    password: "${EMAIL_PASSWORD}"  # Umgebungsvariable
+
+  # SMTP-Einstellungen (Ausgehende E-Mails)
+  smtp:
+    host: "smtp.ihr-provider.de"
+    port: 587
+    use_starttls: true
+    username: "info@h-bu.de"
+    password: "${EMAIL_PASSWORD}"
+
+  # Mailbox-Zuordnungen
+  mailboxes:
+    - address: "info@h-bu.de"
+      folder: "INBOX"
+      agent: "info_agent"
+
+    - address: "orders@h-bu.de"
+      folder: "INBOX.Orders"
+      agent: "orders_agent"
+
+    - address: "oem1@h-bu.de"
+      folder: "INBOX.OEM"
+      agent: "oem_agent"
+
+    - address: "quality@h-bu.de"
+      folder: "INBOX.Quality"
+      agent: "quality_agent"
+
+# SIMULATION SETTINGS (wenn mode: "simulation")
+simulation:
+  # E-Mail-Generierung
+  auto_generate: true
+  interval_seconds: 30
+
+  # Test-E-Mails
+  demo_emails:
+    - sender: "john@oem1.com"
+      subject: "Urgent Order Request"
+      body: "We need 5000 buttons urgently."
+      interval: 30
+
+    - sender: "customer@email.com"
+      subject: "Button Order"
+      body: "I need 100 blue buttons."
+      interval: 45
+
+    - sender: "supplier@materials.com"
+      subject: "Delivery Confirmation"
+      body: "Your raw materials delivered."
+      interval: 60
+
+# PROVIDER-BEISPIELE
+providers:
+  gmail:
+    imap_host: "imap.gmail.com"
+    smtp_host: "smtp.gmail.com"
+    imap_port: 993
+    smtp_port: 587
+
+  outlook:
+    imap_host: "outlook.office365.com"
+    smtp_host: "smtp-mail.outlook.com"
+    imap_port: 993
+    smtp_port: 587
+
+  ionos:
+    imap_host: "imap.ionos.de"
+    smtp_host: "smtp.ionos.de"
+    imap_port: 993
+    smtp_port: 587
