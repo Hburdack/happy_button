@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Buttons GmbH - Royal Quality Since 1847</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --royal-blue: #2E4BC6;
+            --royal-purple: #7C3AED;
+            --royal-gold: #F59E0B;
+            --royal-dark: #1E293B;
+            --royal-light: #F8FAFC;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--royal-light) 0%, #E0E7FF 100%);
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+            box-shadow: 0 4px 20px rgba(46, 75, 198, 0.3);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-purple) 100%);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .card-royal {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card-royal:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .org-map {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .department-box {
+            background: linear-gradient(135deg, var(--royal-blue), var(--royal-purple));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 15px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .department-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(46, 75, 198, 0.4);
+        }
+
+        .department-box.external {
+            background: linear-gradient(135deg, var(--royal-gold), #F97316);
+        }
+
+        .department-box.active {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 75, 198, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(46, 75, 198, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 75, 198, 0); }
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #10B981;
+            animation: blink 2s infinite;
+        }
+
+        .status-indicator.busy {
+            background: #F59E0B;
+        }
+
+        .status-indicator.offline {
+            background: #EF4444;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .task-flow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .task-line {
+            position: absolute;
+            background: var(--royal-gold);
+            height: 3px;
+            border-radius: 2px;
+            opacity: 0;
+            animation: flow 4s infinite;
+        }
+
+        .email-icon {
+            position: absolute;
+            background: var(--royal-gold);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            opacity: 0;
+            z-index: 10;
+            animation: emailFlow 4s infinite;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+        }
+
+        @keyframes flow {
+            0% { opacity: 0; transform: scale(0); }
+            20% { opacity: 1; transform: scale(1); }
+            80% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+
+        @keyframes emailFlow {
+            0% {
+                opacity: 0;
+                transform: translateX(0) scale(0.5);
+            }
+            10% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(50%) scale(1);
+                animation-timing-function: ease-in-out;
+            }
+            90% {
+                opacity: 1;
+                transform: translateX(100%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(100%) scale(0.5);
+            }
+        }
+
+        .email-feed {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .email-item {
+            border-bottom: 1px solid #E5E7EB;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .email-item:hover {
+            background: var(--royal-light);
+            padding-left: 10px;
+            border-radius: 8px;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(46, 75, 198, 0.1);
+        }
+
+        .email-modal {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .email-modal-header {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-purple) 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .email-modal-body {
+            padding: 30px;
+        }
+
+        .email-content {
+            background: #F8FAFC;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            border-left: 4px solid var(--royal-gold);
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .priority-high { background: #DC2626; }
+        .priority-medium { background: #F59E0B; }
+        .priority-low { background: #059669; }
+
+        .email-type-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .email-type-order { background: var(--royal-purple); }
+        .email-type-inquiry { background: var(--royal-blue); }
+        .email-type-logistics { background: var(--royal-gold); }
+        .email-type-quality { background: #10B981; }
+        .email-type-finance { background: #F59E0B; }
+        .email-type-internal { background: #6B7280; }
+        .email-type-supplier { background: #8B5CF6; }
+
+        .attachment-list {
+            background: #F8FAFC;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid var(--royal-blue);
+        }
+
+        .attachment-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border: 1px solid #E5E7EB;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .attachment-item:hover {
+            background: #F0F9FF;
+            border-color: var(--royal-blue);
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(46, 75, 198, 0.1);
+        }
+
+        .attachment-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .attachment-icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 12px;
+            color: var(--royal-blue);
+        }
+
+        .attachment-info {
+            flex-grow: 1;
+        }
+
+        .attachment-name {
+            font-weight: 600;
+            color: var(--royal-dark);
+            margin-bottom: 2px;
+        }
+
+        .attachment-size {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        .attachment-download {
+            color: var(--royal-blue);
+            font-size: 1.2rem;
+        }
+
+        .company-stats {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--royal-purple);
+        }
+
+        .royal-crown {
+            color: var(--royal-gold);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-crown me-2"></i>
+                Happy Buttons GmbH
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link active" href="/"><i class="fas fa-home me-1"></i> Home</a>
+                <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
+                <a class="nav-link" href="/shop"><i class="fas fa-shopping-bag me-1"></i> Shop</a>
+                <a class="nav-link" href="/agents"><i class="fas fa-robot me-1"></i> Agents</a>
+                <a class="nav-link" href="/teams"><i class="fas fa-users me-1"></i> Teams</a>
+                <a class="nav-link" href="/kpi"><i class="fas fa-chart-line me-1"></i> KPIs</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <div class="royal-crown">
+                <i class="fas fa-crown"></i>
+            </div>
+            <h1 class="display-3 fw-bold mb-4">Happy Buttons GmbH</h1>
+            <p class="lead fs-4 mb-4">Royal Quality Button Manufacturing Since 1847</p>
+            <p class="fs-5 mb-5">Trusted by premium manufacturers worldwide • ISO Certified Excellence</p>
+
+            <!-- Company Stats -->
+            <div class="row company-stats">
+                <div class="col-md-2 stat-item">
+                    <div class="stat-number">{{ company_stats.total_products }}</div>
+                    <div class="text-muted">Premium Products</div>
+                </div>
+                <div class="col-md-2 stat-item">
+                    <div class="stat-number">{{ company_stats.active_departments }}</div>
+                    <div class="text-muted">Active Departments</div>
+                </div>
+                <div class="col-md-2 stat-item">
+                    <div class="stat-number">{{ company_stats.global_locations }}</div>
+                    <div class="text-muted">Global Locations</div>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number">{{ company_stats.annual_production }}</div>
+                    <div class="text-muted">Annual Production</div>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number">{{ company_stats.customer_satisfaction }}</div>
+                    <div class="text-muted">Customer Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Profile -->
+    <div class="container mt-5">
+        <div class="card-royal">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-building me-2 text-primary"></i>
+                Company Profile
+            </h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Our Heritage</h4>
+                    <p>Founded in 1847, Happy Buttons GmbH has been the premier manufacturer of high-quality buttons for over 175 years. Our royal warrant of excellence has made us the trusted choice for luxury fashion houses, automotive manufacturers, and premium brands worldwide.</p>
+
+                    <h4>Global Operations</h4>
+                    <ul>
+                        <li><strong>Production Centers:</strong> China, Poland, Mexico, Moldova</li>
+                        <li><strong>Distribution Hubs:</strong> New York, Maryland</li>
+                        <li><strong>Quality Control:</strong> ISO 9001:2015 Certified</li>
+                        <li><strong>Sustainability:</strong> Eco-friendly materials & processes</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4>Core Values</h4>
+                    <div class="mb-3">
+                        <i class="fas fa-crown text-warning me-2"></i>
+                        <strong>Royal Quality:</strong> Uncompromising excellence in every button
+                    </div>
+                    <div class="mb-3">
+                        <i class="fas fa-globe text-primary me-2"></i>
+                        <strong>Global Reach:</strong> Serving customers across all continents
+                    </div>
+                    <div class="mb-3">
+                        <i class="fas fa-leaf text-success me-2"></i>
+                        <strong>Sustainability:</strong> Environmentally conscious manufacturing
+                    </div>
+                    <div class="mb-3">
+                        <i class="fas fa-handshake text-info me-2"></i>
+                        <strong>Partnership:</strong> Building lasting relationships with clients
+                    </div>
+
+                    <h4>Specializations</h4>
+                    <p>We specialize in premium buttons for automotive (BMW, Audi), fashion, and industrial applications. Our royal courtesy service ensures every customer receives the attention befitting their importance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Organizational Map -->
+    <div class="container">
+        <div class="org-map">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-sitemap me-2 text-primary"></i>
+                Live Organizational Map
+            </h2>
+            <p class="text-center text-muted mb-5">Real-time view of departments and task flow</p>
+
+            <!-- Task Flow Animation Layer -->
+            <div class="task-flow" id="task-flow"></div>
+
+            <!-- Internal Departments -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="department-box" data-dept="info">
+                        <div class="status-indicator" id="status-info"></div>
+                        <h5><i class="fas fa-envelope me-2"></i>Info Center</h5>
+                        <small>Email Triage & Routing</small>
+                        <div class="mt-2"><span class="badge bg-light text-dark">Active: 24/7</span></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="department-box" data-dept="orders">
+                        <div class="status-indicator busy" id="status-orders"></div>
+                        <h5><i class="fas fa-shopping-cart me-2"></i>Orders</h5>
+                        <small>Order Processing</small>
+                        <div class="mt-2"><span class="badge bg-light text-dark">Processing: 12</span></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="department-box" data-dept="oem">
+                        <div class="status-indicator" id="status-oem"></div>
+                        <h5><i class="fas fa-star me-2"></i>OEM Division</h5>
+                        <small>Premium Customers</small>
+                        <div class="mt-2"><span class="badge bg-light text-dark">BMW • Audi</span></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="department-box" data-dept="quality">
+                        <div class="status-indicator" id="status-quality"></div>
+                        <h5><i class="fas fa-check-circle me-2"></i>Quality</h5>
+                        <small>QC & Compliance</small>
+                        <div class="mt-2"><span class="badge bg-light text-dark">ISO Certified</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="department-box" data-dept="logistics">
+                        <div class="status-indicator busy" id="status-logistics"></div>
+                        <h5><i class="fas fa-truck me-2"></i>Logistics</h5>
+                        <small>Shipping & Receiving</small>
+                        <div class="mt-2"><span class="badge bg-light text-dark">In Transit: 8</span></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="department-box" data-dept="finance">
+                        <div class="status-indicator" id="status-finance"></div>
+                        <h5><i class="fas fa-euro-sign me-2"></i>Finance</h5>
+                        <small>Invoicing & Payments</small>
+                        <div class="mt-2"><span class="badge bg-light text-dark">Pending: 5</span></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="department-box" data-dept="support">
+                        <div class="status-indicator" id="status-support"></div>
+                        <h5><i class="fas fa-headset me-2"></i>Support</h5>
+                        <small>Customer Service</small>
+                        <div class="mt-2"><span class="badge bg-light text-dark">Online: 4</span></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="department-box" data-dept="management">
+                        <div class="status-indicator" id="status-management"></div>
+                        <h5><i class="fas fa-crown me-2"></i>Management</h5>
+                        <small>Executive Oversight</small>
+                        <div class="mt-2"><span class="badge bg-light text-dark">Strategic</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- External Partners -->
+            <div class="row mt-4">
+                <div class="col-12"><h4 class="text-center text-muted">External Partners</h4></div>
+                <div class="col-md-2">
+                    <div class="department-box external" data-dept="china">
+                        <div class="status-indicator" id="status-china"></div>
+                        <h6><i class="fas fa-industry me-1"></i>China Plant</h6>
+                        <small>Production Hub</small>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="department-box external" data-dept="poland">
+                        <div class="status-indicator" id="status-poland"></div>
+                        <h6><i class="fas fa-industry me-1"></i>Poland Plant</h6>
+                        <small>EU Production</small>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="department-box external" data-dept="suppliers">
+                        <div class="status-indicator busy" id="status-suppliers"></div>
+                        <h6><i class="fas fa-boxes me-1"></i>Suppliers</h6>
+                        <small>Raw Materials</small>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="department-box external" data-dept="shipping">
+                        <div class="status-indicator busy" id="status-shipping"></div>
+                        <h6><i class="fas fa-ship me-1"></i>Shipping</h6>
+                        <small>Global Logistics</small>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="department-box external" data-dept="retail">
+                        <div class="status-indicator" id="status-retail"></div>
+                        <h6><i class="fas fa-store me-1"></i>Retail</h6>
+                        <small>Distribution</small>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="department-box external" data-dept="customers">
+                        <div class="status-indicator" id="status-customers"></div>
+                        <h6><i class="fas fa-users me-1"></i>Customers</h6>
+                        <small>End Users</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Emails from info@h-bu.de -->
+    <div class="container">
+        <div class="email-feed">
+            <h2 class="mb-4">
+                <i class="fas fa-inbox me-2 text-primary"></i>
+                Recent Emails - info@h-bu.de
+                <span class="badge bg-primary ms-2">Live Feed</span>
+            </h2>
+            <div id="email-list">
+                {% for email in recent_emails %}
+                <div class="email-item"
+                     data-email-type="{{ email.type }}"
+                     data-email-id="{{ email.id }}"
+                     data-email-from="{{ email.from }}"
+                     data-email-subject="{{ email.subject }}"
+                     data-email-timestamp="{{ email.timestamp }}"
+                     data-email-status="{{ email.status }}"
+                     data-email-route="{{ email.route }}"
+                     data-email-content="{{ email.content|escape }}"
+                     data-email-priority="{{ email.priority }}"
+                     data-email-attachments="{{ email.attachments_list|tojson }}"
+                     onclick="showEmailDetail(this)">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="flex-grow-1">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="email-type-badge email-type-{{ email.type }}">{{ email.type.upper() }}</span>
+                                <span class="priority-badge priority-{{ email.priority }}">{{ email.priority.upper() }}</span>
+                                <small class="text-muted ms-2">{{ email.timestamp }}</small>
+                                <small class="text-info ms-2">→ {{ email.route }}</small>
+                            </div>
+                            <div class="fw-bold">{{ email.from }}</div>
+                            <div class="text-dark">{{ email.subject }}</div>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-success">{{ email.status.upper() }}</span>
+                            {% if email.attachments_list %}
+                            <div class="mt-1">
+                                <small class="text-warning">
+                                    <i class="fas fa-paperclip me-1"></i>{{ email.attachments_list|length }} attachment{% if email.attachments_list|length != 1 %}s{% endif %}
+                                </small>
+                            </div>
+                            {% endif %}
+                            <small class="text-muted d-block mt-1">
+                                <i class="fas fa-envelope-open me-1"></i>Click to view
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">
+                <i class="fas fa-crown me-2 text-warning"></i>
+                Happy Buttons GmbH - Royal Quality Since 1847
+            </p>
+            <small class="text-muted">Königstraße 47, 10117 Berlin, Germany • +49 30 2468 0000 • info@h-bu.de</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Task Flow Animation System
+        function createTaskFlow() {
+            const taskFlow = document.getElementById('task-flow');
+            const departments = document.querySelectorAll('.department-box');
+
+            // Simulate task flows between departments
+            setInterval(() => {
+                // Random task flow
+                const fromDept = departments[Math.floor(Math.random() * departments.length)];
+                const toDept = departments[Math.floor(Math.random() * departments.length)];
+
+                if (fromDept !== toDept) {
+                    animateTaskFlow(fromDept, toDept);
+                }
+            }, 3000);
+        }
+
+        function animateTaskFlow(from, to) {
+            const fromRect = from.getBoundingClientRect();
+            const toRect = to.getBoundingClientRect();
+            const containerRect = document.querySelector('.org-map').getBoundingClientRect();
+
+            const line = document.createElement('div');
+            line.className = 'task-line';
+
+            const startX = fromRect.left + fromRect.width/2 - containerRect.left;
+            const startY = fromRect.top + fromRect.height/2 - containerRect.top;
+            const endX = toRect.left + toRect.width/2 - containerRect.left;
+            const endY = toRect.top + toRect.height/2 - containerRect.top;
+
+            const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+            const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+
+            line.style.left = startX + 'px';
+            line.style.top = startY + 'px';
+            line.style.width = length + 'px';
+            line.style.transformOrigin = '0 50%';
+            line.style.transform = `rotate(${angle}deg)`;
+
+            // Create animated email icon
+            const emailIcon = document.createElement('div');
+            emailIcon.className = 'email-icon';
+            emailIcon.innerHTML = '<i class="fas fa-envelope"></i>';
+
+            // Position email icon at the start of the line
+            emailIcon.style.left = startX + 'px';
+            emailIcon.style.top = (startY - 12) + 'px'; // Center vertically on line
+            emailIcon.style.transformOrigin = '50% 50%';
+            emailIcon.style.transform = `rotate(${angle}deg)`;
+
+            document.getElementById('task-flow').appendChild(line);
+            document.getElementById('task-flow').appendChild(emailIcon);
+
+            // Add pulse effect to destination
+            to.classList.add('active');
+
+            setTimeout(() => {
+                line.remove();
+                emailIcon.remove();
+                to.classList.remove('active');
+            }, 4000);
+        }
+
+        // Department Status Randomizer
+        function updateDepartmentStatus() {
+            const statusElements = document.querySelectorAll('.status-indicator');
+            const statusTypes = ['', 'busy', 'offline'];
+
+            statusElements.forEach(status => {
+                if (Math.random() > 0.8) { // 20% chance to change status
+                    const currentClass = status.className.split(' ').find(c => statusTypes.includes(c));
+                    if (currentClass) status.classList.remove(currentClass);
+
+                    const newStatus = statusTypes[Math.floor(Math.random() * statusTypes.length)];
+                    if (newStatus) status.classList.add(newStatus);
+                }
+            });
+        }
+
+        // Email Feed Auto-Update
+        function updateEmailFeed() {
+            const emailItems = document.querySelectorAll('.email-item');
+            emailItems.forEach((item, index) => {
+                if (Math.random() > 0.95) { // 5% chance for new email effect
+                    item.style.animation = 'pulse 1s ease-in-out';
+                    setTimeout(() => {
+                        item.style.animation = '';
+                    }, 1000);
+                }
+            });
+        }
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            createTaskFlow();
+
+            // Update statuses periodically
+            setInterval(updateDepartmentStatus, 5000);
+            setInterval(updateEmailFeed, 8000);
+
+            // Department hover effects
+            document.querySelectorAll('.department-box').forEach(box => {
+                box.addEventListener('click', function() {
+                    const dept = this.dataset.dept;
+                    console.log(`Accessing ${dept} department...`);
+                    // Could route to specific department dashboards
+                });
+            });
+
+            console.log('Happy Buttons Landing Page initialized');
+            console.log('Live organizational map active');
+            console.log('Email feed monitoring info@h-bu.de');
+        });
+
+        // Email Detail Modal Function
+        function showEmailDetail(emailElement) {
+            console.log('Email clicked!', emailElement);
+
+            const emailData = {
+                type: emailElement.dataset.emailType,
+                id: emailElement.dataset.emailId,
+                from: emailElement.dataset.emailFrom,
+                subject: emailElement.dataset.emailSubject,
+                timestamp: emailElement.dataset.emailTimestamp,
+                status: emailElement.dataset.emailStatus,
+                route: emailElement.dataset.emailRoute,
+                content: emailElement.dataset.emailContent,
+                priority: emailElement.dataset.emailPriority,
+                attachments: (() => {
+                    try {
+                        const attachmentsStr = emailElement.dataset.emailAttachments || '[]';
+                        console.log('Raw attachments string:', attachmentsStr);
+                        const parsed = JSON.parse(attachmentsStr);
+                        console.log('Parsed attachments:', parsed);
+                        return parsed;
+                    } catch (e) {
+                        console.error('Error parsing attachments:', e);
+                        return [];
+                    }
+                })()
+            };
+
+            console.log('Email data:', emailData);
+
+            // Check if modal elements exist
+            const modalElement = document.getElementById('emailDetailModal');
+            console.log('Modal element:', modalElement);
+
+            if (!modalElement) {
+                console.error('Modal element not found!');
+                return;
+            }
+
+            // Populate modal content
+            const titleElement = document.getElementById('emailModalTitle');
+            const fromElement = document.getElementById('emailFrom');
+            const timestampElement = document.getElementById('emailTimestamp');
+            const statusElement = document.getElementById('emailStatus');
+            const routeElement = document.getElementById('emailRoute');
+            const contentElement = document.getElementById('emailContent');
+            const priorityElement = document.getElementById('emailPriority');
+
+            if (titleElement) titleElement.textContent = emailData.subject || 'No Subject';
+            if (fromElement) fromElement.textContent = emailData.from || 'Unknown Sender';
+            if (timestampElement) timestampElement.textContent = emailData.timestamp ? new Date(emailData.timestamp).toLocaleString() : 'Unknown Time';
+            if (statusElement) statusElement.textContent = emailData.status || 'Unknown Status';
+            if (routeElement) routeElement.textContent = emailData.route || 'Unknown Route';
+            if (contentElement) contentElement.innerHTML = emailData.content ? emailData.content.replace(/\n/g, '<br>') : 'No content available';
+
+            // Set priority badge
+            if (priorityElement) {
+                priorityElement.textContent = emailData.priority || 'medium';
+                priorityElement.className = `badge priority-${(emailData.priority || 'medium').toLowerCase()}`;
+            }
+
+            // Handle attachments
+            const attachmentsSection = document.getElementById('emailAttachmentsSection');
+            const attachmentsContainer = document.getElementById('emailAttachments');
+
+            console.log('=== ATTACHMENT DEBUG ===');
+            console.log('attachmentsSection element:', attachmentsSection);
+            console.log('attachmentsContainer element:', attachmentsContainer);
+            console.log('emailData.attachments:', emailData.attachments);
+            console.log('typeof emailData.attachments:', typeof emailData.attachments);
+            console.log('Array.isArray(emailData.attachments):', Array.isArray(emailData.attachments));
+
+            if (emailData.attachments && emailData.attachments.length > 0) {
+                console.log('✅ Attachments found - Count:', emailData.attachments.length);
+                console.log('✅ Attachments data:', emailData.attachments);
+
+                if (attachmentsSection) {
+                    attachmentsSection.style.display = 'block';
+                    console.log('✅ Made attachments section visible');
+                } else {
+                    console.error('❌ attachmentsSection element not found!');
+                }
+
+                let attachmentsHtml = '';
+                emailData.attachments.forEach((attachment, index) => {
+                    console.log(`Processing attachment ${index}:`, attachment);
+                    const icon = getFileIcon(attachment.type);
+                    console.log(`Icon for type '${attachment.type}':`, icon);
+                    attachmentsHtml += `
+                        <div class="attachment-item" onclick="downloadAttachment('${emailData.id}', '${attachment.name}')">
+                            <i class="fas ${icon} attachment-icon"></i>
+                            <div class="attachment-info">
+                                <div class="attachment-name">${attachment.name}</div>
+                                <div class="attachment-size">${attachment.size}</div>
+                            </div>
+                            <i class="fas fa-download attachment-download"></i>
+                        </div>
+                    `;
+                });
+
+                console.log('Generated attachments HTML:', attachmentsHtml);
+
+                if (attachmentsContainer) {
+                    attachmentsContainer.innerHTML = attachmentsHtml;
+                    console.log('✅ Set attachments HTML to container');
+                } else {
+                    console.error('❌ attachmentsContainer element not found!');
+                }
+            } else {
+                attachmentsSection.style.display = 'none';
+            }
+
+            // Show modal
+            try {
+                const modal = new bootstrap.Modal(modalElement);
+                console.log('Modal created:', modal);
+                modal.show();
+                console.log('Modal show() called');
+            } catch (error) {
+                console.error('Error showing modal:', error);
+            }
+        }
+
+        // Helper function to get appropriate icon for file types
+        function getFileIcon(fileType) {
+            switch (fileType) {
+                case 'document':
+                    return 'fa-file-pdf';
+                case 'image':
+                    return 'fa-file-image';
+                case 'spreadsheet':
+                    return 'fa-file-excel';
+                default:
+                    return 'fa-file';
+            }
+        }
+
+        // Function to download attachment
+        function downloadAttachment(emailId, filename) {
+            console.log('Downloading attachment:', filename, 'from email:', emailId);
+
+            // Create a temporary link to trigger download
+            const downloadUrl = `/api/emails/attachment/${emailId}/${filename}`;
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            console.log('Download triggered for:', filename);
+        }
+    </script>
+
+    <!-- Email Detail Modal -->
+    <div class="modal fade" id="emailDetailModal" tabindex="-1" aria-labelledby="emailModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple)); color: white;">
+                    <h5 class="modal-title" id="emailModalTitle">Email Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>From:</strong> <span id="emailFrom"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Priority:</strong> <span id="emailPriority" class="badge"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Received:</strong> <span id="emailTimestamp"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Status:</strong> <span id="emailStatus" class="badge bg-secondary"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <strong>Routed to:</strong> <span id="emailRoute"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <strong>Content:</strong>
+                            <div id="emailContent" class="mt-2 p-3 border rounded" style="background-color: #f8f9fa; min-height: 200px; white-space: pre-wrap;"></div>
+                        </div>
+                    </div>
+                    <div class="row" id="emailAttachmentsSection" style="display: none;">
+                        <div class="col-12">
+                            <strong>Attachments:</strong>
+                            <div id="emailAttachments" class="attachment-list"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-royal" data-bs-dismiss="modal">
+                        <i class="fas fa-check me-2"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -2,9 +2,9 @@
 
 ## Project Status Tracker
 
-**Last Updated**: 2025-09-20
-**Current Phase**: Initial Setup Complete
-**Next Phase**: Core Email Processing Implementation
+**Last Updated**: 2025-09-21
+**Current Phase**: New Feature Development - Webshop & Business Intelligence
+**Next Phase**: Sprint 1 - Webshop Simulation Implementation
 
 ## Completed Tasks ✅
 
@@ -17,96 +17,126 @@
 - [x] Set up 64 specialized agents and 151 command files
 - [x] Created comprehensive taskmanager.md for continuity
 
-## Current Task Backlog 📋
+## NEW FEATURE DEVELOPMENT - 4-PHASE PLAN 🚀
 
-### Phase 1: Core Email Processing (Priority: HIGH)
-- [ ] **1.1 Email Triage System**
-  - [ ] Implement email parsing logic (src/email/parser.js)
-  - [ ] Build routing engine based on config rules (src/email/router.js)
-  - [ ] Create PDF attachment detection (src/email/attachments.js)
-  - [ ] Test with sample emails
+### **SPRINT 1: Webshop Simulation** 🛒 (Week 1-2)
+**Objective**: Build foundational e-commerce platform with email integration
 
-- [ ] **1.2 Business Rule Engine**
-  - [ ] Implement triage rules from config/company.yaml
-  - [ ] Add OEM priority handling
-  - [ ] Create escalation logic for ambiguous cases
-  - [ ] Build SLA tracking system
+#### **Database & Models (Priority: HIGH)**
+- [ ] Create database schema for products table
+- [ ] Implement Product model with categories (Navy Blue, Custom Logo, Eco-Friendly, Premium)
+- [ ] Add sample product data with pricing and stock levels
+- [ ] Create orders table with customer information
+- [ ] Implement Order model with status tracking
 
-- [ ] **1.3 Royal Courtesy Templates**
-  - [ ] Implement template rendering engine
-  - [ ] Create template validation
-  - [ ] Add dynamic content insertion
-  - [ ] Test all reply scenarios
+#### **Webshop Backend (Priority: HIGH)**
+- [ ] Create `/shop` route for product catalog display
+- [ ] Implement `/shop/product/<id>` for detailed product views
+- [ ] Build `/shop/cart` for shopping cart management
+- [ ] Develop `/shop/checkout` for order processing
+- [ ] Add API endpoints: `/api/shop/products`, `/api/shop/cart/*`, `/api/shop/orders`
 
-### Phase 2: Business Unit Agents (Priority: HIGH)
-- [ ] **2.1 Core Agent Framework**
-  - [ ] Design base agent class (src/agents/BaseAgent.js)
-  - [ ] Implement agent communication protocol
-  - [ ] Create memory sharing system
-  - [ ] Add performance monitoring
+#### **Order-to-Email Integration (Priority: CRITICAL)**
+- [ ] Create order PDF generation system
+- [ ] Implement automatic email creation from completed orders
+- [ ] Route generated orders to orders@h-bu.de in existing email flow
+- [ ] Add order confirmation emails with royal courtesy templates
+- [ ] Test order integration with current email processing system
 
-- [ ] **2.2 Specialized Agents**
-  - [ ] Info Agent (main triage)
-  - [ ] Orders Agent (order processing)
-  - [ ] OEM Agent (premium customers)
-  - [ ] Supplier Agent (supply chain)
-  - [ ] Logistics Agent (shipping)
-  - [ ] Support Agent (customer service)
-  - [ ] Finance Agent (invoicing)
-  - [ ] Quality Agent (complaints)
-  - [ ] Management Agent (escalations)
+#### **Frontend Templates (Priority: HIGH)**
+- [ ] Design shop.html with royal courtesy theme matching dashboard
+- [ ] Create product_detail.html with product specifications
+- [ ] Build cart.html with dynamic cart updates
+- [ ] Implement checkout.html with form validation
+- [ ] Ensure mobile-responsive design
 
-### Phase 3: Simulation Engine (Priority: MEDIUM)
-- [ ] **3.1 Email Generation**
-  - [ ] Build realistic email generator
-  - [ ] Create customer persona templates
-  - [ ] Implement seasonal/daily patterns
-  - [ ] Add attachment generation
+---
 
-- [ ] **3.2 Performance Simulation**
-  - [ ] Implement KPI tracking
-  - [ ] Create load testing scenarios
-  - [ ] Add performance analytics
-  - [ ] Build reporting dashboard
+### **SPRINT 2: Landing Page & Organizational Map** 🏢 (Week 3-4)
+**Objective**: Create professional company presence with live organizational visualization
 
-### Phase 4: System Integration (Priority: MEDIUM)
-- [ ] **4.1 Stub Systems**
-  - [ ] ERP integration stub
-  - [ ] CRM integration stub
-  - [ ] WMS integration stub
-  - [ ] Database persistence layer
+#### **Company Profile Landing Page (Priority: HIGH)**
+- [ ] Create main landing page route `/`
+- [ ] Design company profile section with Happy Buttons GmbH history
+- [ ] Add global production sites information (CN, PL, MX, MD)
+- [ ] Include distribution network details (NY, MD)
+- [ ] Add sustainability and quality standards sections
 
-- [ ] **4.2 API Development**
-  - [ ] REST API for external systems
-  - [ ] Webhook endpoints
-  - [ ] Authentication & authorization
-  - [ ] API documentation
+#### **Interactive Organizational Map (Priority: HIGH)**
+- [ ] Design dynamic org chart layout with departments
+- [ ] Implement real-time status tracking for all departments
+- [ ] Create live animation system showing task flow between units
+- [ ] Add WebSocket updates for real-time status changes
+- [ ] Build external partner integration display
+- [ ] Add status indicators: Green (Active), Yellow (Busy), Red (Issues), Blue (Idle)
 
-### Phase 5: Testing & Quality (Priority: HIGH)
-- [ ] **5.1 Unit Testing**
-  - [ ] Email processing tests
-  - [ ] Agent behavior tests
-  - [ ] Template rendering tests
-  - [ ] Business rule validation tests
+#### **Email Integration Display (Priority: MEDIUM)**
+- [ ] Create sidebar displaying last 20 info@h-bu.de emails
+- [ ] Implement real-time email updates via WebSocket
+- [ ] Add click-to-view detailed email functionality
+- [ ] Style integration to match royal courtesy theme
 
-- [ ] **5.2 Integration Testing**
-  - [ ] End-to-end email flow tests
-  - [ ] Multi-agent coordination tests
-  - [ ] Performance under load tests
-  - [ ] Royal courtesy compliance tests
+---
 
-### Phase 6: Deployment & Operations (Priority: LOW)
-- [ ] **6.1 Production Setup**
-  - [ ] Docker configuration
-  - [ ] Environment management
-  - [ ] Logging and monitoring
-  - [ ] Error handling & recovery
+### **SPRINT 3: Teams Representation** 👥 (Week 5-6)
+**Objective**: Transform agent displays into human teams with realistic personas
 
-- [ ] **6.2 Documentation**
-  - [ ] API documentation
-  - [ ] Deployment guide
-  - [ ] User manual
-  - [ ] Troubleshooting guide
+#### **Team Data Models (Priority: HIGH)**
+- [ ] Create teams table schema with roles and departments
+- [ ] Implement Team model with hierarchy structure
+- [ ] Add sample team member data with realistic names and photos
+- [ ] Design team collaboration and reporting relationships
+
+#### **Human Team Visualization (Priority: HIGH)**
+- [ ] Replace all agent displays with human team representations
+- [ ] Create professional team profile cards with photos and roles
+- [ ] Implement dynamic team status indicators
+- [ ] Add collaboration flow visualization between teams
+- [ ] Build workload distribution charts and metrics
+- [ ] Show team hierarchy and reporting structure
+
+---
+
+### **SPRINT 4: Business KPI Dashboard** 📊 (Week 7-8)
+**Objective**: Comprehensive business intelligence and optimization system
+
+#### **KPI Tracking System (Priority: CRITICAL)**
+- [ ] Create KPIs table schema for metrics storage
+- [ ] Implement core business metrics tracking
+- [ ] Add auto-handled email percentage calculator (Target: ≥70%)
+- [ ] Build average response time analytics (Target: ≤1h)
+- [ ] Create on-time shipping rate tracker (Target: ≥90%)
+- [ ] Implement order fulfillment accuracy monitoring
+
+#### **Business Intelligence Dashboard (Priority: HIGH)**
+- [ ] Design comprehensive KPI dashboard layout
+- [ ] Implement real-time charts and graphs with Chart.js
+- [ ] Add info@h-bu.de specific performance metrics
+- [ ] Create business optimization recommendation engine
+- [ ] Build alert system for KPI deviations
+- [ ] Add financial KPIs: revenue, profit margins, customer acquisition cost
+
+#### **Advanced Analytics (Priority: MEDIUM)**
+- [ ] Implement trend analysis algorithms
+- [ ] Add automated issue detection system
+- [ ] Create AI-powered optimization suggestion engine
+- [ ] Build historical performance tracking
+- [ ] Add comparative analysis tools
+- [ ] Implement predictive analytics for business metrics
+
+---
+
+## **LEGACY BACKLOG** 📋
+*Moved to lower priority - focus on new 4-phase plan above*
+
+### Phase 1: Core Email Processing (Priority: DEFERRED)
+- [ ] Email Triage System - *Currently functional in dashboard*
+- [ ] Business Rule Engine - *Basic implementation exists*
+- [ ] Royal Courtesy Templates - *Implemented*
+
+### Phase 2: Business Unit Agents (Priority: DEFERRED)
+- [ ] Core Agent Framework - *Basic agents exist*
+- [ ] Specialized Agents - *Stub implementations available*
 
 ## Quick Restart Commands
 

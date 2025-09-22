@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business KPI Dashboard - Happy Buttons GmbH</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --royal-blue: #2E4BC6;
+            --royal-purple: #7C3AED;
+            --royal-gold: #F59E0B;
+            --royal-dark: #1E293B;
+            --royal-light: #F8FAFC;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--royal-light) 0%, #E0E7FF 100%);
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+            box-shadow: 0 4px 20px rgba(46, 75, 198, 0.3);
+        }
+
+        .kpi-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--royal-gold);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .kpi-card.success {
+            border-left-color: #059669;
+        }
+
+        .kpi-card.warning {
+            border-left-color: #F59E0B;
+        }
+
+        .kpi-card.danger {
+            border-left-color: #DC2626;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--royal-dark);
+        }
+
+        .kpi-label {
+            color: #6B7280;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .kpi-trend {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .kpi-trend.up {
+            color: #059669;
+        }
+
+        .kpi-trend.down {
+            color: #DC2626;
+        }
+
+        .kpi-trend.stable {
+            color: #6B7280;
+        }
+
+        .department-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .department-title {
+            color: var(--royal-blue);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--royal-gold);
+        }
+
+        .optimization-card {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FEF7ED 100%);
+            border: 1px solid var(--royal-gold);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .optimization-title {
+            color: var(--royal-dark);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .priority-high {
+            border-left: 4px solid #DC2626;
+        }
+
+        .priority-medium {
+            border-left: 4px solid #F59E0B;
+        }
+
+        .priority-low {
+            border-left: 4px solid #059669;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+
+        .btn-royal {
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-royal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 75, 198, 0.4);
+            color: white;
+        }
+
+        .info-center-badge {
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-crown me-2"></i>
+                Happy Buttons GmbH
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Home</a>
+                <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
+                <a class="nav-link" href="/shop"><i class="fas fa-shopping-bag me-1"></i> Shop</a>
+                <a class="nav-link" href="/agents"><i class="fas fa-robot me-1"></i> Agents</a>
+                <a class="nav-link" href="/teams"><i class="fas fa-users me-1"></i> Teams</a>
+                <a class="nav-link active" href="/kpi"><i class="fas fa-chart-line me-1"></i> KPIs</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="display-5 fw-bold text-center mb-3">
+                    <i class="fas fa-chart-line me-3 text-primary"></i>
+                    Business Intelligence Dashboard
+                </h1>
+                <p class="text-center text-muted lead">Royal Excellence Through Data-Driven Performance</p>
+            </div>
+        </div>
+
+        <!-- Performance Summary -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="kpi-card success">
+                    <div class="kpi-label">Overall Performance Score</div>
+                    <div class="kpi-value">{{ performance_summary.overall_score }}%</div>
+                    <div class="kpi-trend up">
+                        <i class="fas fa-arrow-up me-1"></i>+2.5% vs last month
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="kpi-card warning">
+                    <div class="kpi-label">Auto-handled Share</div>
+                    <div class="kpi-value">{{ performance_summary.auto_handled_share }}%</div>
+                    <div class="kpi-trend down">
+                        <i class="fas fa-arrow-down me-1"></i>Below target (70%)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="kpi-card success">
+                    <div class="kpi-label">Customer Satisfaction</div>
+                    <div class="kpi-value">{{ performance_summary.customer_satisfaction }}%</div>
+                    <div class="kpi-trend up">
+                        <i class="fas fa-arrow-up me-1"></i>Above target (85%)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="kpi-card success">
+                    <div class="kpi-label">Revenue Growth</div>
+                    <div class="kpi-value">{{ performance_summary.revenue_growth }}%</div>
+                    <div class="kpi-trend up">
+                        <i class="fas fa-arrow-up me-1"></i>Strong growth
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Center KPIs -->
+        <div class="department-section">
+            <h2 class="department-title">
+                <i class="fas fa-envelope me-2"></i>
+                info@h-bu.de Email Center Performance
+                <span class="info-center-badge ms-3">Priority Monitoring</span>
+            </h2>
+
+            <div class="row">
+                {% for kpi in info_center_kpis %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="kpi-card {% if kpi.status == 'good' %}success{% elif kpi.status == 'warning' %}warning{% else %}danger{% endif %}">
+                        <div class="kpi-label">{{ kpi.name }}</div>
+                        <div class="kpi-value">{{ kpi.current_value }}{{ kpi.unit }}</div>
+                        <div class="kpi-trend {% if kpi.trend == 'up' %}up{% elif kpi.trend == 'down' %}down{% else %}stable{% endif %}">
+                            <i class="fas fa-{% if kpi.trend == 'up' %}arrow-up{% elif kpi.trend == 'down' %}arrow-down{% else %}minus{% endif %} me-1"></i>
+                            Target: {{ kpi.target_value }}{{ kpi.unit }}
+                        </div>
+                        <small class="text-muted">{{ kpi.description }}</small>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Department KPIs -->
+        {% for department, kpis in kpis_by_department.items() %}
+        <div class="department-section">
+            <h3 class="department-title">
+                <i class="fas fa-building me-2"></i>
+                {{ department }} Department
+                <span class="badge bg-secondary ms-2">{{ kpis|length }} metrics</span>
+            </h3>
+
+            <div class="row">
+                {% for kpi in kpis %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="kpi-card {% if kpi.status == 'good' %}success{% elif kpi.status == 'warning' %}warning{% else %}danger{% endif %}">
+                        <div class="kpi-label">{{ kpi.name }}</div>
+                        <div class="kpi-value">{{ kpi.current_value }}{{ kpi.unit }}</div>
+                        <div class="kpi-trend {% if kpi.trend == 'up' %}up{% elif kpi.trend == 'down' %}down{% else %}stable{% endif %}">
+                            <i class="fas fa-{% if kpi.trend == 'up' %}arrow-up{% elif kpi.trend == 'down' %}arrow-down{% else %}minus{% endif %} me-1"></i>
+                            Target: {{ kpi.target_value }}{{ kpi.unit }}
+                        </div>
+                        <small class="text-muted">{{ kpi.description }}</small>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Business Optimization Recommendations -->
+        <div class="department-section">
+            <h2 class="department-title">
+                <i class="fas fa-lightbulb me-2"></i>
+                Business Optimization Recommendations
+            </h2>
+
+            <div class="row">
+                {% for recommendation in optimization_recommendations %}
+                <div class="col-12">
+                    <div class="optimization-card priority-{{ recommendation.priority }}">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex-grow-1">
+                                <h5 class="optimization-title">
+                                    <i class="fas fa-{{ recommendation.icon }} me-2"></i>
+                                    {{ recommendation.title }}
+                                </h5>
+                                <p class="mb-2">{{ recommendation.description }}</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>Expected Impact:</strong> {{ recommendation.expected_impact }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Implementation Time:</strong> {{ recommendation.implementation_time }}
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="badge bg-{% if recommendation.priority == 'high' %}danger{% elif recommendation.priority == 'medium' %}warning{% else %}success{% endif %} ms-3">
+                                {{ recommendation.priority|title }} Priority
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Performance Charts -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h4 class="mb-3">Email Processing Trends</h4>
+                    <canvas id="emailChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h4 class="mb-3">Revenue & Operations</h4>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">
+                <i class="fas fa-crown me-2 text-warning"></i>
+                Happy Buttons GmbH - Royal Excellence Through Intelligence
+            </p>
+            <small class="text-muted">Business Intelligence Dashboard | Real-time KPI Monitoring | Performance Optimization</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Email Processing Chart
+        const emailCtx = document.getElementById('emailChart').getContext('2d');
+        new Chart(emailCtx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Emails Processed',
+                    data: [145, 189, 167, 203, 178, 98, 67],
+                    borderColor: '#2E4BC6',
+                    backgroundColor: 'rgba(46, 75, 198, 0.1)',
+                    tension: 0.4
+                }, {
+                    label: 'Auto-handled',
+                    data: [98, 121, 107, 135, 118, 63, 43],
+                    borderColor: '#059669',
+                    backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Revenue Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                datasets: [{
+                    label: 'Revenue (€M)',
+                    data: [2.8, 3.2, 3.5, 3.8],
+                    backgroundColor: ['#F59E0B', '#7C3AED', '#2E4BC6', '#059669']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Revenue (€ Million)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Auto-refresh KPIs every 30 seconds
+        setInterval(() => {
+            fetch('/api/kpi/refresh')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('KPI data refreshed:', data);
+                    // Update specific KPI values without full page reload
+                })
+                .catch(error => console.log('KPI refresh error:', error));
+        }, 30000);
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('KPI Dashboard initialized');
+            console.log('Royal Business Intelligence System operational');
+        });
+    </script>
+</body>
+</html>

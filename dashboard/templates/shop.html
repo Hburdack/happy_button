@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Buttons Shop - Royal Quality Since 1847</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --royal-blue: #2E4BC6;
+            --royal-purple: #7C3AED;
+            --royal-gold: #F59E0B;
+            --royal-dark: #1E293B;
+            --royal-light: #F8FAFC;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--royal-light) 0%, #E0E7FF 100%);
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+            box-shadow: 0 4px 20px rgba(46, 75, 198, 0.3);
+        }
+
+        .shop-hero {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-purple) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-title {
+            color: var(--royal-blue);
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--royal-gold);
+            padding-bottom: 10px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--royal-gold);
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-left-color: var(--royal-purple);
+        }
+
+        .product-name {
+            color: var(--royal-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: var(--royal-purple);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .product-stock {
+            color: #059669;
+            font-size: 0.9rem;
+        }
+
+        .product-stock.low {
+            color: #DC2626;
+        }
+
+        .btn-royal {
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-royal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 75, 198, 0.4);
+            color: white;
+        }
+
+        .btn-outline-royal {
+            border: 2px solid var(--royal-blue);
+            color: var(--royal-blue);
+            background: transparent;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-royal:hover {
+            background: var(--royal-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--royal-gold);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--royal-purple);
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .stats-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .quality-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--royal-gold), #F97316);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-crown me-2"></i>
+                Happy Buttons GmbH
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Home</a>
+                <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
+                <a class="nav-link active" href="/shop"><i class="fas fa-shopping-bag me-1"></i> Shop</a>
+                <a class="nav-link" href="/agents"><i class="fas fa-robot me-1"></i> Agents</a>
+                <a class="nav-link" href="/teams"><i class="fas fa-users me-1"></i> Teams</a>
+                <a class="nav-link" href="/kpi"><i class="fas fa-chart-line me-1"></i> KPIs</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shopping Cart Icon -->
+    <div class="cart-icon" onclick="viewCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <div class="cart-count" id="cart-count">0</div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="shop-hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold">
+                <i class="fas fa-crown me-3"></i>
+                Royal Button Collection
+            </h1>
+            <p class="lead">Premium quality buttons crafted with royal precision since 1847</p>
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    <h5><i class="fas fa-globe me-2"></i> Global Production</h5>
+                    <small>China • Poland • Mexico • Moldova</small>
+                </div>
+                <div class="col-md-3">
+                    <h5><i class="fas fa-shipping-fast me-2"></i> Fast Delivery</h5>
+                    <small>NY & MD Distribution Centers</small>
+                </div>
+                <div class="col-md-3">
+                    <h5><i class="fas fa-award me-2"></i> Premium Quality</h5>
+                    <small>ISO Certified Excellence</small>
+                </div>
+                <div class="col-md-3">
+                    <h5><i class="fas fa-leaf me-2"></i> Eco-Friendly</h5>
+                    <small>Sustainable Materials</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shop Stats -->
+    <div class="container mt-4">
+        <div class="stats-bar">
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <h4 class="text-primary">{{ total_products }}</h4>
+                    <small class="text-muted">Premium Products</small>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="text-success">{{ products_by_category.keys()|length }}</h4>
+                    <small class="text-muted">Categories</small>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="text-warning">5-7 Days</h4>
+                    <small class="text-muted">Production Time</small>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="text-info">24/7</h4>
+                    <small class="text-muted">Customer Support</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Categories -->
+    <div class="container mb-5">
+        {% for category, products in products_by_category.items() %}
+        <div class="category-card">
+            <h3 class="category-title">
+                <i class="fas fa-tag me-2"></i>
+                {{ category }} Buttons
+                <span class="badge bg-primary ms-2">{{ products|length }} products</span>
+            </h3>
+
+            <div class="row">
+                {% for product in products %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <div class="product-name">{{ product.name }}</div>
+                                <div class="product-price">€{{ "%.2f"|format(product.price) }}</div>
+                            </div>
+                            <div class="text-end">
+                                <div class="product-stock {% if product.stock_quantity < 100 %}low{% endif %}">
+                                    <i class="fas fa-box me-1"></i>
+                                    {{ product.stock_quantity }} in stock
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-muted mb-3">{{ product.description }}</p>
+
+                        {% if product.category == 'Premium' %}
+                            <span class="quality-badge">
+                                <i class="fas fa-star me-1"></i> Premium Quality
+                            </span>
+                        {% elif product.category == 'OEM' %}
+                            <span class="quality-badge">
+                                <i class="fas fa-certificate me-1"></i> OEM Certified
+                            </span>
+                        {% elif product.category == 'Eco-Friendly' %}
+                            <span class="quality-badge">
+                                <i class="fas fa-leaf me-1"></i> Eco-Friendly
+                            </span>
+                        {% endif %}
+
+                        <div class="mt-3 d-flex gap-2">
+                            <button class="btn btn-outline-royal btn-sm" onclick="viewProduct({{ product.id }})">
+                                <i class="fas fa-eye me-1"></i> Details
+                            </button>
+                            <button class="btn btn-royal btn-sm" onclick="addToCart({{ product.id }}, '{{ product.name }}', {{ product.price }})">
+                                <i class="fas fa-cart-plus me-1"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container text-center">
+            <p class="mb-0">
+                <i class="fas fa-crown me-2 text-warning"></i>
+                Happy Buttons GmbH - Royal Quality Since 1847
+            </p>
+            <small class="text-muted">Premium Button Manufacturing | Global Distribution | Sustainable Excellence</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Shopping cart functionality
+        let cart = JSON.parse(localStorage.getItem('happy_buttons_cart') || '[]');
+        updateCartCount();
+
+        function addToCart(productId, productName, price) {
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: price,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('happy_buttons_cart', JSON.stringify(cart));
+            updateCartCount();
+
+            // Show success notification
+            showNotification(`${productName} added to cart!`, 'success');
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        function viewCart() {
+            window.location.href = '/shop/cart';
+        }
+
+        function viewProduct(productId) {
+            window.location.href = `/shop/product/${productId}`;
+        }
+
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 100px; right: 20px; z-index: 9999; min-width: 300px;';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" onclick="this.parentElement.remove()"></button>
+            `;
+
+            document.body.appendChild(notification);
+
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Happy Buttons Shop initialized');
+            console.log(`Total products: {{ total_products }}`);
+            console.log(`Categories: {{ products_by_category.keys()|list }}`);
+        });
+    </script>
+</body>
+</html>

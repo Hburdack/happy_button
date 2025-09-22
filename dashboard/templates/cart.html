@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Happy Buttons GmbH</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --royal-blue: #2E4BC6;
+            --royal-purple: #7C3AED;
+            --royal-gold: #F59E0B;
+            --royal-dark: #1E293B;
+            --royal-light: #F8FAFC;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--royal-light) 0%, #E0E7FF 100%);
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+            box-shadow: 0 4px 20px rgba(46, 75, 198, 0.3);
+        }
+
+        .cart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #E5E7EB;
+            padding: 20px 0;
+        }
+
+        .btn-royal {
+            background: linear-gradient(90deg, var(--royal-blue), var(--royal-purple));
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-royal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 75, 198, 0.4);
+            color: white;
+        }
+
+        .total-section {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-crown me-2"></i>
+                Happy Buttons GmbH
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Home</a>
+                <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
+                <a class="nav-link" href="/shop"><i class="fas fa-shopping-bag me-1"></i> Shop</a>
+                <a class="nav-link active" href="/shop/cart"><i class="fas fa-shopping-cart me-1"></i> Cart</a>
+                <a class="nav-link" href="/agents"><i class="fas fa-robot me-1"></i> Agents</a>
+                <a class="nav-link" href="/teams"><i class="fas fa-users me-1"></i> Teams</a>
+                <a class="nav-link" href="/kpi"><i class="fas fa-chart-line me-1"></i> KPIs</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="cart-container">
+            <h2 class="mb-4">
+                <i class="fas fa-shopping-cart me-2 text-primary"></i>
+                Your Shopping Cart
+            </h2>
+
+            <div id="cart-items">
+                <!-- Cart items will be loaded here -->
+            </div>
+
+            <div class="total-section" id="cart-total" style="display: none;">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>Order Summary</h5>
+                        <p class="text-muted">Premium button selection with royal quality guarantee</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <h4 id="total-amount">€0.00</h4>
+                        <button class="btn btn-royal mt-2" onclick="proceedToCheckout()">
+                            <i class="fas fa-credit-card me-2"></i>
+                            Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="empty-cart" class="text-center py-5">
+                <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Your cart is empty</h4>
+                <p class="text-muted">Browse our premium button collection to get started</p>
+                <a href="/shop" class="btn btn-royal">
+                    <i class="fas fa-shopping-bag me-2"></i>
+                    Continue Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let cart = JSON.parse(localStorage.getItem('happy_buttons_cart') || '[]');
+
+        function loadCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyCartDiv = document.getElementById('empty-cart');
+            const cartTotalDiv = document.getElementById('cart-total');
+
+            if (cart.length === 0) {
+                emptyCartDiv.style.display = 'block';
+                cartTotalDiv.style.display = 'none';
+                return;
+            }
+
+            emptyCartDiv.style.display = 'none';
+            cartTotalDiv.style.display = 'block';
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                html += `
+                    <div class="cart-item">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h5>${item.name}</h5>
+                                <p class="text-muted">€${item.price.toFixed(2)} per unit</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary" onclick="updateQuantity(${index}, ${item.quantity - 1})">-</button>
+                                    <input type="number" class="form-control text-center" value="${item.quantity}" readonly>
+                                    <button class="btn btn-outline-secondary" onclick="updateQuantity(${index}, ${item.quantity + 1})">+</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-end">
+                                <strong>€${itemTotal.toFixed(2)}</strong>
+                            </div>
+                            <div class="col-md-1 text-end">
+                                <button class="btn btn-outline-danger btn-sm" onclick="removeItem(${index})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML = html;
+            document.getElementById('total-amount').textContent = `€${total.toFixed(2)}`;
+        }
+
+        function updateQuantity(index, newQuantity) {
+            if (newQuantity <= 0) {
+                removeItem(index);
+                return;
+            }
+
+            cart[index].quantity = newQuantity;
+            localStorage.setItem('happy_buttons_cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('happy_buttons_cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            window.location.href = '/shop/checkout';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>
