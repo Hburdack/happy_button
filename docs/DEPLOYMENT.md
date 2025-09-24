@@ -511,4 +511,4 @@ sudo tail -f /var/log/nginx/access.log
 ---
 
 **Last Updated**: September 2025
-**Deployment Version**: 1.0.0
+**Deployment Version**: Release 1.0

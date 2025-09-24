@@ -541,5 +541,5 @@ const downloadAttachment = async (emailId, filename) => {
 ---
 
 **Last Updated**: September 2025
-**API Version**: 1.0.0
+**API Version**: Release 1.0
 **Base URL**: `http://localhost` (port 80)
