@@ -149,23 +149,16 @@
                     <div class="p-4">
                         <div class="row">
                             <div class="col-md-8">
-                                <h5>Letzte E-Mails</h5>
-                                <div id="info-mailbox-emails">
-                                    <div class="email-item">
-                                        <div class="email-from">john@oem1.com</div>
-                                        <div class="email-subject">Urgent Order Request - 5000 Blue Buttons</div>
-                                        <div class="email-time">vor 2 Minuten</div>
-                                        <div class="mt-2">
-                                            <span class="badge bg-primary">Weitergeleitet an orders@h-bu.de</span>
-                                        </div>
-                                    </div>
-                                    <div class="email-item">
-                                        <div class="email-from">customer@example.com</div>
-                                        <div class="email-subject">Product Quality Issue</div>
-                                        <div class="email-time">vor 5 Minuten</div>
-                                        <div class="mt-2">
-                                            <span class="badge bg-warning">Weitergeleitet an quality@h-bu.de</span>
-                                        </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5>Letzte E-Mails</h5>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="refreshEmails()">
+                                        <i class="fas fa-refresh me-1"></i>Aktualisieren
+                                    </button>
+                                </div>
+                                <div id="info-mailbox-emails" style="max-height: 400px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px;">
+                                    <div class="text-center text-muted p-3">
+                                        <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+                                        <div>Lade E-Mails...</div>
                                     </div>
                                 </div>
                             </div>
@@ -713,11 +706,177 @@
                 .catch(error => console.error('Error loading email data:', error));
         }
 
+        // Email loading functionality
+        async function loadRecentEmails() {
+            try {
+                const response = await fetch('/api/recent_emails?limit=100');
+                const data = await response.json();
+
+                if (data.success) {
+                    displayEmails(data.emails);
+                } else {
+                    showEmailError('Fehler beim Laden der E-Mails: ' + data.error);
+                }
+            } catch (error) {
+                showEmailError('Netzwerkfehler beim Laden der E-Mails');
+                console.error('Error loading emails:', error);
+            }
+        }
+
+        function displayEmails(emails) {
+            const container = document.getElementById('info-mailbox-emails');
+            if (!container) return;
+
+            if (emails.length === 0) {
+                container.innerHTML = '<div class="text-center text-muted p-3">Keine E-Mails gefunden</div>';
+                return;
+            }
+
+            container.innerHTML = emails.map(email => `
+                <div class="email-item" onclick="showEmailDetails('${email.id}')" style="cursor: pointer; border-bottom: 1px solid #eee; padding: 10px; margin-bottom: 5px;">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="flex-grow-1">
+                            <div class="email-from fw-bold">${email.from}</div>
+                            <div class="email-subject text-truncate">${email.subject}</div>
+                            <div class="email-time text-muted small">${email.time_ago}</div>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-${getBadgeColor(email.type)} small">${email.routing.destination}</span>
+                            ${email.attachments && email.attachments.length > 0 ? '<i class="fas fa-paperclip ms-1 text-muted"></i>' : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getBadgeColor(type) {
+            const colors = {
+                'order': 'primary',
+                'complaint': 'warning',
+                'supplier': 'info',
+                'inquiry': 'secondary'
+            };
+            return colors[type] || 'secondary';
+        }
+
+        function showEmailError(message) {
+            const container = document.getElementById('info-mailbox-emails');
+            if (container) {
+                container.innerHTML = `
+                    <div class="alert alert-danger text-center">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        ${message}
+                    </div>
+                `;
+            }
+        }
+
+        function refreshEmails() {
+            const container = document.getElementById('info-mailbox-emails');
+            if (container) {
+                container.innerHTML = `
+                    <div class="text-center text-muted p-3">
+                        <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+                        <div>Lade E-Mails...</div>
+                    </div>
+                `;
+            }
+            loadRecentEmails();
+        }
+
+        async function showEmailDetails(emailId) {
+            try {
+                const response = await fetch('/api/recent_emails?limit=100');
+                const data = await response.json();
+
+                if (data.success) {
+                    const email = data.emails.find(e => e.id === emailId);
+                    if (email) {
+                        displayEmailModal(email);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading email details:', error);
+            }
+        }
+
+        function displayEmailModal(email) {
+            const modalHtml = `
+                <div class="modal fade" id="emailModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">E-Mail Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <strong>Von:</strong> ${email.from}
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Betreff:</strong> ${email.subject}
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Zeit:</strong> ${email.time_ago}
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Kategorie:</strong>
+                                    <span class="badge bg-${getBadgeColor(email.type)}">${email.type}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Weitergeleitet an:</strong> ${email.routing.destination}
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Inhalt:</strong>
+                                    <div class="border p-3 bg-light" style="white-space: pre-line;">${email.content}</div>
+                                </div>
+                                ${email.attachments && email.attachments.length > 0 ? `
+                                    <div class="mb-3">
+                                        <strong>Anhänge:</strong>
+                                        <ul class="list-unstyled">
+                                            ${email.attachments.map(att => `
+                                                <li><i class="fas fa-paperclip me-2"></i>${att.name} (${att.size})</li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Remove existing modal if any
+            const existingModal = document.getElementById('emailModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            // Add modal to page
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('emailModal'));
+            modal.show();
+
+            // Clean up modal after hiding
+            document.getElementById('emailModal').addEventListener('hidden.bs.modal', function() {
+                this.remove();
+            });
+        }
+
         // Auto-refresh every 30 seconds
         setInterval(loadAgentData, 30000);
+        setInterval(loadRecentEmails, 60000); // Refresh emails every minute
 
         // Load initial data when page loads
-        document.addEventListener('DOMContentLoaded', loadAgentData);
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAgentData();
+            loadRecentEmails();
+        });
     </script>
 </body>
 </html>

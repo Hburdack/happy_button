@@ -48,7 +48,7 @@ python happy_buttons.py restart --service email_processor
 
 | Service | Port | Description | Health Check |
 |---------|------|-------------|--------------|
-| `dashboard` | 8080 | Web monitoring interface | `http://localhost:8080/health` |
+| `dashboard` | 80 | Web monitoring interface | `http://localhost/health` |
 | `email_processor` | 8081 | Email processing service | `http://localhost:8081/health` |
 | `swarm_coordinator` | 8082 | Claude Flow swarm | Internal monitoring |
 
@@ -56,9 +56,9 @@ python happy_buttons.py restart --service email_processor
 
 ### Access Points
 
-- **Main Dashboard**: http://localhost:8080
-- **Configuration**: http://localhost:8080/config
-- **Health Check**: http://localhost:8080/health
+- **Main Dashboard**: http://localhost
+- **Configuration**: http://localhost/config
+- **Health Check**: http://localhost/health
 
 ### Dashboard Features
 
@@ -67,6 +67,8 @@ python happy_buttons.py restart --service email_processor
 - **Service Status**: All services with health indicators
 - **Performance Charts**: Real-time system performance
 - **Email Statistics**: Processing rates and categories
+- **KPI Dashboard**: Business Intelligence with performance metrics and department KPIs
+- **Live Updates**: 30-second auto-refresh for KPI data
 
 #### 🤖 **Agent Management**
 - **Agent Status**: All 6 business unit agents
@@ -144,7 +146,7 @@ python happy_buttons.py start
 python happy_buttons.py status
 
 # Open dashboard
-open http://localhost:8080
+open http://localhost
 ```
 
 ### 2. **Development Monitoring**
@@ -160,14 +162,14 @@ tail -f logs/email_processor_stdout.log
 
 ### 3. **Email Testing**
 
-1. **Via Dashboard**: http://localhost:8080
+1. **Via Dashboard**: http://localhost
    - Use the Email Processing Tester
    - Select scenario (OEM, Regular, Complaint, Supplier)
    - View routing decision and template
 
 2. **Via API**:
 ```bash
-curl -X POST http://localhost:8080/api/test_email \
+curl -X POST http://localhost/api/test_email \
   -H "Content-Type: application/json" \
   -d '{
     "sender": "john@oem1.com",
@@ -226,7 +228,7 @@ curl http://localhost:8081/health
 tail -f logs/email_processor_stdout.log
 
 # Test with simple email
-curl -X POST http://localhost:8080/api/test_email \
+curl -X POST http://localhost/api/test_email \
   -H "Content-Type: application/json" \
   -d '{"sender":"test@test.com","subject":"Test","body":"Test"}'
 ```
@@ -300,7 +302,7 @@ curl -X POST http://localhost:8080/api/test_email \
 2. ✅ **Permissions**: `chmod +x happy_buttons.py`
 3. ✅ **Start System**: `python happy_buttons.py start`
 4. ✅ **Verify Status**: `python happy_buttons.py status`
-5. ✅ **Open Dashboard**: http://localhost:8080
+5. ✅ **Open Dashboard**: http://localhost
 6. ✅ **Test Email**: Use dashboard email tester
 7. ✅ **Monitor**: Watch real-time metrics
 
