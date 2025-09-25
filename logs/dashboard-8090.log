@@ -1,0 +1,15 @@
+INFO:utils.templates:Initialized 10 royal courtesy templates
+INFO:__main__:🌐 Starting Happy Buttons Dashboard on http://localhost:8090
+WARNING:werkzeug:Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+ * Serving Flask app 'app'
+ * Debug mode: off
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8090
+ * Running on http://192.168.2.112:8090
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+ERROR:real_email_connector:Error connecting to info@h-bu.de: 'host'
+ERROR:real_email_connector:Error connecting to sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error connecting to support@h-bu.de: 'host'
+ERROR:real_email_connector:Error connecting to finance@h-bu.de: 'host'
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 12:55:33] "GET / HTTP/1.1" 200 -

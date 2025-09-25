@@ -45,7 +45,7 @@ except ImportError:
     def create_business_agents():
         return {}
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='dashboard/templates')
 app.secret_key = 'happy_buttons_dashboard_secret'
 socketio = SocketIO(app, cors_allowed_origins="*")
 
@@ -673,6 +673,7 @@ def api_recent_emails():
 def config():
     """Configuration management page"""
     return render_template('config.html')
+
 
 @app.route('/teams')
 def teams():

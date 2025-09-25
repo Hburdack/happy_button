@@ -2342,3 +2342,31 @@
 2025-09-25 07:37:22,281 - INFO -   • ORD_1758778642_11: BMW Manufacturing GmbH - €19,022.50 (P1)
 2025-09-25 07:37:22,281 - INFO - ✅ Daily order generation completed successfully
 2025-09-25 07:37:22,281 - INFO - 🎯 SCRIPT EXECUTION COMPLETED
+2025-09-25 12:06:27,155 - INFO - 🚀 HAPPY BUTTONS DAILY SCRIPT STARTED
+2025-09-25 12:06:27,155 - INFO - ⏰ Execution Time: 2025-09-25 12:06:27
+2025-09-25 12:06:27,155 - INFO - 📊 SYSTEM STATISTICS
+2025-09-25 12:06:27,155 - INFO - ========================================
+2025-09-25 12:06:27,216 - INFO - Loaded 260 orders from storage
+2025-09-25 12:06:27,217 - INFO - 📈 Total Orders: 260
+2025-09-25 12:06:27,217 - INFO - 💰 Total Value: €2,721,492.45
+2025-09-25 12:06:27,217 - INFO - ⏰ Avg Processing Time: 367.10 hours
+2025-09-25 12:06:27,217 - INFO - 🚨 Overdue Orders: 15
+2025-09-25 12:06:27,217 - INFO - 
+📋 Orders by State:
+2025-09-25 12:06:27,218 - INFO -   • CREATED: 15
+2025-09-25 12:06:27,218 - INFO -   • SHIPPED: 36
+2025-09-25 12:06:27,218 - INFO -   • DELIVERED: 13
+2025-09-25 12:06:27,218 - INFO -   • CLOSED: 196
+2025-09-25 12:06:27,218 - INFO - 
+🏷️ Orders by Priority:
+2025-09-25 12:06:27,218 - INFO -   • Priority 1: 114
+2025-09-25 12:06:27,218 - INFO -   • Priority 2: 96
+2025-09-25 12:06:27,218 - INFO -   • Priority 3: 50
+2025-09-25 12:06:27,218 - INFO - 
+⚠️ OVERDUE ORDERS:
+2025-09-25 12:06:27,218 - INFO -   • ORD_1758778642_11: BMW Manufacturing GmbH - 4.5h overdue
+2025-09-25 12:06:27,218 - INFO -   • ORD_1758778642_3: ZF Friedrichshafen AG - 4.5h overdue
+2025-09-25 12:06:27,218 - INFO -   • ORD_1758778642_10: ZF Friedrichshafen AG - 4.5h overdue
+2025-09-25 12:06:27,218 - INFO -   • ORD_1758778642_4: ZF Friedrichshafen AG - 4.5h overdue
+2025-09-25 12:06:27,218 - INFO -   • ORD_1758777725_1: Demo Customer - 4.7h overdue
+2025-09-25 12:06:27,220 - INFO - 🎯 SCRIPT EXECUTION COMPLETED

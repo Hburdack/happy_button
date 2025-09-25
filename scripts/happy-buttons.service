@@ -1,0 +1,51 @@
+[Unit]
+Description=Happy Buttons Business Automation System
+Documentation=https://github.com/happy-buttons/system
+After=network.target network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=forking
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/happy_button
+Environment=PATH=/home/pi/happy_button/venv/bin:/usr/local/bin:/usr/bin:/bin
+Environment=PYTHONPATH=/home/pi/happy_button
+Environment=FLASK_ENV=production
+Environment=HAPPY_BUTTONS_HOME=/home/pi/happy_button
+
+# Start script
+ExecStart=/home/pi/happy_button/scripts/happy-buttons-start.sh
+ExecStop=/home/pi/happy_button/scripts/happy-buttons-stop.sh
+ExecReload=/bin/bash -c '/home/pi/happy_button/scripts/happy-buttons-stop.sh && sleep 5 && /home/pi/happy_button/scripts/happy-buttons-start.sh'
+
+# Process management
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStartSec=60
+TimeoutStopSec=30
+Restart=on-failure
+RestartSec=10
+
+# Security settings (relaxed for port 80 binding)
+NoNewPrivileges=no
+PrivateTmp=yes
+ProtectSystem=strict
+ReadWritePaths=/home/pi/happy_button
+ProtectHome=read-only
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=happy-buttons
+
+[Install]
+WantedBy=multi-user.target

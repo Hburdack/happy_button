@@ -1,0 +1,63 @@
+WARNING:__main__:Could not initialize all components: name 'RoyalCourtesyTemplates' is not defined
+INFO:__main__:🌐 Starting Happy Buttons Dashboard on http://localhost:80
+WARNING:werkzeug:Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+Warning: Could not import some modules: No module named 'utils'
+ * Serving Flask app 'app'
+ * Debug mode: off
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://192.168.2.112:80
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 12:55:23] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.9 - - [25/Sep/2025 12:55:38] "GET /api/kpi/refresh HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:40] "GET / HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:53] "GET /teams HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:54] "GET /agents HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:54] "GET /socket.io/?EIO=4&transport=polling&t=Pc0W_6W HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:54] "GET /api/agents HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:54] "GET /api/email/stats HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:54] "GET /api/recent_emails?limit=100 HTTP/1.0" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:54] "POST /socket.io/?EIO=4&transport=polling&t=Pc0W_6-&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+Invalid transport for session YJiBqmxumo90ISKfAAAA (further occurrences of this error will be logged with level INFO)
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:54] "GET /socket.io/?EIO=4&transport=polling&t=Pc0W_6_&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+ERROR:engineio.server:Invalid transport for session YJiBqmxumo90ISKfAAAA (further occurrences of this error will be logged with level INFO)
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:54] "[31m[1mGET /socket.io/?EIO=4&transport=websocket&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0[0m" 400 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:55:55] "GET /socket.io/?EIO=4&transport=polling&t=Pc0W_7J&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:01] "GET /socket.io/?EIO=4&transport=polling&t=Pc0W_8j&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:07] "GET /socket.io/?EIO=4&transport=polling&t=Pc0X0cY&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:13] "GET /socket.io/?EIO=4&transport=polling&t=Pc0X24N&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:19] "GET /socket.io/?EIO=4&transport=polling&t=Pc0X3YE&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:19] "GET /socket.io/?EIO=4&transport=polling&t=Pc0X504&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:19] "POST /socket.io/?EIO=4&transport=polling&t=Pc0X5DG&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:25] "GET /socket.io/?EIO=4&transport=polling&t=Pc0X5DG.0&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:25] "GET /api/agents HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:25] "GET /api/email/stats HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:31] "GET /socket.io/?EIO=4&transport=polling&t=Pc0X6Tu&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:37] "GET /socket.io/?EIO=4&transport=polling&t=Pc0X7xo&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.9 - - [25/Sep/2025 12:56:38] "GET /api/kpi/refresh HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:43] "GET /socket.io/?EIO=4&transport=polling&t=Pc0X9Pb&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:44] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XAtP&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:44] "POST /socket.io/?EIO=4&transport=polling&t=Pc0XBJz&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:49] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XBJz.0&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:55] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XCLD&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:55] "GET /api/agents HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:55] "GET /api/email/stats HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:56:55] "GET /api/recent_emails?limit=100 HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:01] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XDp0&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:07] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XFGr&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:09] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XGkf&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:09] "POST /socket.io/?EIO=4&transport=polling&t=Pc0XHQh&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:13] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XHQh.0&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:19] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XICT&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:25] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XJgP&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:25] "GET /api/agents HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:25] "GET /api/email/stats HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:31] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XL8C&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:34] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XMc2&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:34] "POST /socket.io/?EIO=4&transport=polling&t=Pc0XNXO&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:37] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XNXO.0&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.9 - - [25/Sep/2025 12:57:38] "GET /api/kpi/refresh HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:43] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XO3q&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
+INFO:werkzeug:192.168.2.11 - - [25/Sep/2025 12:57:49] "GET /socket.io/?EIO=4&transport=polling&t=Pc0XPXf&sid=YJiBqmxumo90ISKfAAAA HTTP/1.0" 200 -
