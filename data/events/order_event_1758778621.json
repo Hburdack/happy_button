@@ -1,0 +1,10 @@
+{
+  "type": "order_state_change",
+  "order_id": "ORD_1758778621_243",
+  "from_state": "INVOICED",
+  "to_state": "CLOSED",
+  "timestamp": 1758778621.12921,
+  "customer": "Audi AG Production",
+  "total_amount": 15311.0,
+  "priority": 1
+}

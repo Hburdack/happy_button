@@ -1,0 +1,33 @@
+{
+  "id": "ORD_1758726511_1",
+  "customer_email": "test@example.com",
+  "customer_name": "Test Customer",
+  "items": [
+    {
+      "sku": "BTN-001",
+      "name": "Test Button",
+      "quantity": 100,
+      "unit_price": 2.5,
+      "total_price": 250.0
+    }
+  ],
+  "total_amount": 250.0,
+  "priority": 2,
+  "sla_hours": 12,
+  "current_state": "CREATED",
+  "created_at": 1758726511.7096016,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758726511.7096045,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 250.0
+      }
+    }
+  ],
+  "metadata": {}
+}

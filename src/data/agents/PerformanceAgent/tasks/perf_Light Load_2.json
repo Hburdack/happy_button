@@ -1,0 +1,15 @@
+{
+  "id": "perf_Light Load_2",
+  "type": "process",
+  "priority": 2,
+  "data": {},
+  "created_at": 1758728804.097948,
+  "assigned_at": 1758728804.2553017,
+  "completed_at": 1758728804.3059456,
+  "result": {
+    "status": "processed",
+    "processing_time": 0.05
+  },
+  "error": null,
+  "processing_time": 0.0506439208984375
+}

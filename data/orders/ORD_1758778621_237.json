@@ -1,0 +1,175 @@
+{
+  "id": "ORD_1758778621_237",
+  "customer_email": "procurement@siemens.com",
+  "customer_name": "Siemens AG",
+  "items": [
+    {
+      "sku": "BTN-TECH-301",
+      "name": "Tech Series Smart Button",
+      "quantity": 126,
+      "unit_price": 15.5,
+      "total_price": 1953.0
+    },
+    {
+      "sku": "BTN-TECH-301",
+      "name": "Tech Series Smart Button",
+      "quantity": 190,
+      "unit_price": 15.5,
+      "total_price": 2945.0
+    }
+  ],
+  "total_amount": 4898.0,
+  "priority": 2,
+  "sla_hours": 12,
+  "current_state": "CLOSED",
+  "created_at": 1758706619.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778621.0731776,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 4898.0
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778621.073722,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758711799.338322,
+        "confirmation_method": "email_reply",
+        "delivery_address": "Regional Office",
+        "special_instructions": "Quality critical"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778621.0746584,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758750267.3173077,
+        "production_slot": "2025-01-23 12:00",
+        "assigned_line": "Special Line",
+        "estimated_duration": "46 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778621.07531,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758802365.0412664,
+        "batch_number": "BATCH_2025_815",
+        "quality_inspector": "Hans Weber",
+        "materials_reserved": true,
+        "production_notes": null
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778621.0759976,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758811288.101721,
+        "qa_inspector": "Andrea Wagner",
+        "quality_score": "A+",
+        "defect_rate": "0.012%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778621.0768743,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758820743.5001695,
+        "package_id": "PKG_2025_3140",
+        "weight_kg": 33.3,
+        "dimensions": "80x16x16cm",
+        "packaging_type": "Standard Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778621.0777578,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758832551.4040027,
+        "tracking_number": "DHL608535528",
+        "carrier": "DHL Express",
+        "shipping_cost": 18.44,
+        "estimated_delivery": "2025-01-15"
+      }
+    },
+    {
+      "from_state": "SHIPPED",
+      "to_state": "DELIVERED",
+      "timestamp": 1758778621.0785575,
+      "agent": "LogisticsAgent",
+      "reason": "Delivery confirmed by recipient",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758984331.8434126,
+        "delivery_timestamp": "2025-01-15 17:05",
+        "recipient": "Receiving Dept",
+        "signature": "M. Klein"
+      }
+    },
+    {
+      "from_state": "DELIVERED",
+      "to_state": "INVOICED",
+      "timestamp": 1758778621.079605,
+      "agent": "AccountsReceivable",
+      "reason": "Invoice generated and sent",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1759000199.7923102,
+        "invoice_number": "INV-2025-5911",
+        "payment_terms": "Immediate",
+        "discount_applied": 0
+      }
+    },
+    {
+      "from_state": "INVOICED",
+      "to_state": "CLOSED",
+      "timestamp": 1758778621.0805554,
+      "agent": "FinanceAgent",
+      "reason": "Payment received and processed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1760247241.5909228,
+        "payment_date": "2025-3-23",
+        "payment_method": "Bank Transfer",
+        "transaction_id": "TXN_688684"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "Enterprise",
+    "simulation_day": 30,
+    "historical_seed": true,
+    "original_timestamp": 1758706619.331747
+  }
+}

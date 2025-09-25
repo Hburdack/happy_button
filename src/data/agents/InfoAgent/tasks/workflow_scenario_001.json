@@ -1,0 +1,60 @@
+{
+  "id": "workflow_scenario_001",
+  "type": "process_email",
+  "priority": 2,
+  "data": {
+    "id": "email_vip_001",
+    "from": "procurement@royal-manufacturing.com",
+    "to": "info@h-bu.de",
+    "subject": "URGENT: Large Order Request - 50,000 Premium Buttons",
+    "body": "Dear Happy Buttons Team,\n\nWe are Royal Manufacturing Ltd, and we urgently require a quotation for the following:\n\n- 50,000 Premium Gold Buttons (BTN-PREMIUM-001)\n- 25,000 Standard Silver Buttons (BTN-STANDARD-002)\n- Delivery required within 3 weeks\n- This is for our new luxury product line\n\nPlease provide immediate quotation with pricing and delivery timeline.\n\nBest regards,\nSarah Henderson\nProcurement Manager\nRoyal Manufacturing Ltd",
+    "attachments": []
+  },
+  "created_at": 1758728800.7755606,
+  "assigned_at": 1758728800.7755694,
+  "completed_at": 1758728800.977189,
+  "result": {
+    "status": "processed",
+    "email_id": "email_vip_001",
+    "classification": {
+      "category": "order",
+      "priority": 1,
+      "is_vip": true,
+      "is_urgent": true,
+      "confidence": 0.85
+    },
+    "routing": {
+      "primary_agent": "SalesAgent",
+      "escalate_to": "MgmtAgent",
+      "sla_hours": 2,
+      "reason": "Order processing with priority 1"
+    },
+    "response": {
+      "template_used": "order_auto_reply",
+      "subject": "Re: URGENT: Large Order Request - 50,000 Premium Buttons",
+      "body": "Dear Procurement,\n\nThank you for your esteemed order inquiry. We have received your request and are delighted to assist with your button requirements.\n\nYour inquiry has been forwarded to our Sales department for immediate attention. You may expect a detailed quotation within 4 hours.\n\nWe remain at your distinguished service.\n\nMost respectfully,\nHappy Buttons GmbH Customer Relations",
+      "courtesy_score": 87,
+      "send_immediately": true
+    },
+    "order_data": {
+      "items": [
+        {
+          "sku": "BTN-PREMIUM-001",
+          "quantity": 50000,
+          "name": "Premium Gold Buttons"
+        },
+        {
+          "sku": "BTN-STANDARD-002",
+          "quantity": 25000,
+          "name": "Standard Silver Buttons"
+        }
+      ],
+      "estimated_value": 200000.0,
+      "customer_email": "procurement@royal-manufacturing.com",
+      "rush_order": true
+    },
+    "processing_time": 0.2
+  },
+  "error": null,
+  "processing_time": 0.20161962509155273
+}

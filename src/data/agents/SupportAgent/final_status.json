@@ -1,0 +1,19 @@
+{
+  "agent_id": "SupportAgent",
+  "status": "idle",
+  "capabilities": [
+    "technical_support",
+    "issue_resolution"
+  ],
+  "current_task": null,
+  "queue_size": 0,
+  "metrics": {
+    "tasks_processed": 1,
+    "tasks_successful": 1,
+    "tasks_failed": 0,
+    "success_rate": 100.0,
+    "avg_processing_time": 0.21110272407531738,
+    "uptime_hours": 0.00034042424625820586,
+    "last_activity": 1758729122.2074616
+  }
+}

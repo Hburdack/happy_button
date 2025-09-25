@@ -1,0 +1,147 @@
+{
+  "id": "ORD_1758778620_166",
+  "customer_email": "procurement@mercedes-benz.com",
+  "customer_name": "Mercedes-Benz Parts Division",
+  "items": [
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 754,
+      "unit_price": 3.5,
+      "total_price": 2639.0
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 1276,
+      "unit_price": 3.5,
+      "total_price": 4466.0
+    },
+    {
+      "sku": "BTN-PLAT-003",
+      "name": "Platinum Elite Button",
+      "quantity": 456,
+      "unit_price": 12.0,
+      "total_price": 5472.0
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 73,
+      "unit_price": 3.5,
+      "total_price": 255.5
+    }
+  ],
+  "total_amount": 12832.5,
+  "priority": 1,
+  "sla_hours": 4,
+  "current_state": "SHIPPED",
+  "created_at": 1757923619.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778620.4854302,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 12832.5
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778620.4857018,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757934831.239378,
+        "confirmation_method": "portal_confirmation",
+        "delivery_address": "Main Plant",
+        "special_instructions": "Prototype order"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778620.486262,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757964160.5731614,
+        "production_slot": "2025-01-10 16:00",
+        "assigned_line": "Line A",
+        "estimated_duration": "14 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778620.4868116,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758111649.024371,
+        "batch_number": "BATCH_2025_138",
+        "quality_inspector": "Maria Schmidt",
+        "materials_reserved": true,
+        "production_notes": null
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778620.4873803,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758123228.4606185,
+        "qa_inspector": "Andrea Wagner",
+        "quality_score": "A-",
+        "defect_rate": "0.055%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778620.4879608,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758135994.8154202,
+        "package_id": "PKG_2025_8907",
+        "weight_kg": 36.3,
+        "dimensions": "43x24x17cm",
+        "packaging_type": "Protective Foam"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778620.4887145,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758154068.218316,
+        "tracking_number": "DHL494311063",
+        "carrier": "DHL Standard",
+        "shipping_cost": 112.76,
+        "estimated_delivery": "2025-01-20"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "OEM",
+    "simulation_day": 21,
+    "historical_seed": true,
+    "original_timestamp": 1757923619.331747
+  }
+}

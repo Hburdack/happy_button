@@ -1,0 +1,181 @@
+{
+  "total_orders": 243,
+  "completed_orders": 194,
+  "total_value": 2620603.849999999,
+  "orders_by_customer": {
+    "Audi AG Production": 57,
+    "ZF Friedrichshafen AG": 9,
+    "Mercedes-Benz Parts Division": 23,
+    "Bosch GmbH": 30,
+    "Siemens AG": 13,
+    "Volkswagen Group Services": 28,
+    "BMW Manufacturing GmbH": 28,
+    "Schaeffler Group": 13,
+    "Continental Automotive": 18,
+    "MAHLE GmbH": 24
+  },
+  "orders_by_state": {
+    "CREATED": 0,
+    "CONFIRMED": 0,
+    "PLANNED": 0,
+    "IN_PRODUCTION": 0,
+    "PRODUCED": 0,
+    "PACKED": 0,
+    "SHIPPED": 36,
+    "DELIVERED": 13,
+    "INVOICED": 0,
+    "CLOSED": 194
+  },
+  "daily_stats": [
+    {
+      "date": "2025-08-26",
+      "orders_created": 5,
+      "total_value": 68883.8
+    },
+    {
+      "date": "2025-08-27",
+      "orders_created": 8,
+      "total_value": 86948.40000000001
+    },
+    {
+      "date": "2025-08-28",
+      "orders_created": 12,
+      "total_value": 131021.5
+    },
+    {
+      "date": "2025-08-29",
+      "orders_created": 9,
+      "total_value": 116099.5
+    },
+    {
+      "date": "2025-08-30",
+      "orders_created": 2,
+      "total_value": 49612.0
+    },
+    {
+      "date": "2025-08-31",
+      "orders_created": 1,
+      "total_value": 3951.6000000000004
+    },
+    {
+      "date": "2025-09-01",
+      "orders_created": 15,
+      "total_value": 159884.85000000003
+    },
+    {
+      "date": "2025-09-02",
+      "orders_created": 9,
+      "total_value": 112165.65000000001
+    },
+    {
+      "date": "2025-09-03",
+      "orders_created": 10,
+      "total_value": 101585.99999999999
+    },
+    {
+      "date": "2025-09-04",
+      "orders_created": 15,
+      "total_value": 119283.80000000002
+    },
+    {
+      "date": "2025-09-05",
+      "orders_created": 11,
+      "total_value": 135914.09999999998
+    },
+    {
+      "date": "2025-09-06",
+      "orders_created": 4,
+      "total_value": 53331.0
+    },
+    {
+      "date": "2025-09-07",
+      "orders_created": 1,
+      "total_value": 14532.0
+    },
+    {
+      "date": "2025-09-08",
+      "orders_created": 12,
+      "total_value": 101341.19999999998
+    },
+    {
+      "date": "2025-09-09",
+      "orders_created": 12,
+      "total_value": 116600.65
+    },
+    {
+      "date": "2025-09-10",
+      "orders_created": 14,
+      "total_value": 170197.5
+    },
+    {
+      "date": "2025-09-11",
+      "orders_created": 9,
+      "total_value": 89343.59999999999
+    },
+    {
+      "date": "2025-09-12",
+      "orders_created": 7,
+      "total_value": 76330.4
+    },
+    {
+      "date": "2025-09-13",
+      "orders_created": 2,
+      "total_value": 51607.0
+    },
+    {
+      "date": "2025-09-14",
+      "orders_created": 2,
+      "total_value": 20986.8
+    },
+    {
+      "date": "2025-09-15",
+      "orders_created": 15,
+      "total_value": 162152.49999999997
+    },
+    {
+      "date": "2025-09-16",
+      "orders_created": 6,
+      "total_value": 66045.4
+    },
+    {
+      "date": "2025-09-17",
+      "orders_created": 8,
+      "total_value": 74445.0
+    },
+    {
+      "date": "2025-09-18",
+      "orders_created": 5,
+      "total_value": 33981.2
+    },
+    {
+      "date": "2025-09-19",
+      "orders_created": 8,
+      "total_value": 114340.65
+    },
+    {
+      "date": "2025-09-20",
+      "orders_created": 1,
+      "total_value": 2821.75
+    },
+    {
+      "date": "2025-09-21",
+      "orders_created": 3,
+      "total_value": 13443.400000000001
+    },
+    {
+      "date": "2025-09-22",
+      "orders_created": 11,
+      "total_value": 118733.75
+    },
+    {
+      "date": "2025-09-23",
+      "orders_created": 11,
+      "total_value": 83358.90000000001
+    },
+    {
+      "date": "2025-09-24",
+      "orders_created": 15,
+      "total_value": 171659.94999999998
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "order_state_change",
+  "order_id": "ORD_1758778217_1",
+  "from_state": "INVOICED",
+  "to_state": "CLOSED",
+  "timestamp": 1758778217.0519369,
+  "customer": "BMW Manufacturing GmbH",
+  "total_amount": 7500.0,
+  "priority": 1
+}

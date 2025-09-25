@@ -1,0 +1,52 @@
+{
+  "timestamp": 1758728097.4696522,
+  "system_uptime": 3847.2,
+  "emails_processed": 127,
+  "orders_created": 34,
+  "orders_completed": 28,
+  "auto_handled_rate": 89.7,
+  "avg_processing_time": 142.3,
+  "active_agents": 4,
+  "agent_performance": {
+    "InfoAgent": {
+      "tasks_completed": 67,
+      "success_rate": 94.0,
+      "avg_time": 89.4
+    },
+    "SalesAgent": {
+      "tasks_completed": 34,
+      "success_rate": 91.2,
+      "avg_time": 267.8
+    },
+    "SupportAgent": {
+      "tasks_completed": 21,
+      "success_rate": 95.5,
+      "avg_time": 178.2
+    },
+    "FinanceAgent": {
+      "tasks_completed": 15,
+      "success_rate": 93.3,
+      "avg_time": 201.7
+    }
+  },
+  "sla_compliance": {
+    "critical": 98.2,
+    "oem": 94.7,
+    "standard": 91.8,
+    "expedite": 87.3
+  },
+  "order_analytics": {
+    "total_value": 247850.5,
+    "avg_order_value": 7289.72,
+    "largest_order": 24950.0,
+    "vip_customers": 8,
+    "repeat_customers": 23
+  },
+  "email_categories": {
+    "orders": 45,
+    "support": 32,
+    "billing": 18,
+    "complaints": 7,
+    "general": 25
+  }
+}

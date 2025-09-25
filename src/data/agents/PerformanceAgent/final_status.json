@@ -1,0 +1,20 @@
+{
+  "agent_id": "PerformanceAgent",
+  "status": "idle",
+  "capabilities": [
+    "bulk_processing",
+    "load_testing",
+    "performance_monitoring"
+  ],
+  "current_task": null,
+  "queue_size": 0,
+  "metrics": {
+    "tasks_processed": 160,
+    "tasks_successful": 160,
+    "tasks_failed": 0,
+    "success_rate": 100.0,
+    "avg_processing_time": 0.07882057577371597,
+    "uptime_hours": 0.0035228862365086874,
+    "last_activity": 1758728816.7797208
+  }
+}

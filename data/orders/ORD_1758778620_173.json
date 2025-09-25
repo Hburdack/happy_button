@@ -1,0 +1,175 @@
+{
+  "id": "ORD_1758778620_173",
+  "customer_email": "orders@bmw-manufacturing.com",
+  "customer_name": "BMW Manufacturing GmbH",
+  "items": [
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 334,
+      "unit_price": 3.5,
+      "total_price": 1169.0
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 1400,
+      "unit_price": 3.5,
+      "total_price": 4900.0
+    },
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 61,
+      "unit_price": 8.0,
+      "total_price": 488.0
+    },
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 222,
+      "unit_price": 8.0,
+      "total_price": 1776.0
+    },
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 321,
+      "unit_price": 8.0,
+      "total_price": 2568.0
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 186,
+      "unit_price": 3.5,
+      "total_price": 651.0
+    },
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 156,
+      "unit_price": 8.0,
+      "total_price": 1248.0
+    },
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 96,
+      "unit_price": 8.0,
+      "total_price": 768.0
+    }
+  ],
+  "total_amount": 13568.0,
+  "priority": 1,
+  "sla_hours": 4,
+  "current_state": "SHIPPED",
+  "created_at": 1757936219.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778620.5242395,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 13568.0
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778620.5245998,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757943855.2799923,
+        "confirmation_method": "phone_call",
+        "delivery_address": "Regional Office",
+        "special_instructions": "Quality critical"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778620.5252974,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757970244.3464446,
+        "production_slot": "2025-01-21 12:00",
+        "assigned_line": "Line B",
+        "estimated_duration": "13 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778620.525991,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758035148.6399498,
+        "batch_number": "BATCH_2025_269",
+        "quality_inspector": "Maria Schmidt",
+        "materials_reserved": true,
+        "production_notes": null
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778620.526584,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758040758.7981193,
+        "qa_inspector": "Thomas Klein",
+        "quality_score": "A-",
+        "defect_rate": "0.011%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778620.5272572,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758047586.3946242,
+        "package_id": "PKG_2025_9185",
+        "weight_kg": 36.0,
+        "dimensions": "48x37x19cm",
+        "packaging_type": "Standard Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778620.5279129,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758057586.367155,
+        "tracking_number": "DHL319083998",
+        "carrier": "DHL Express",
+        "shipping_cost": 104.46,
+        "estimated_delivery": "2025-01-20"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "OEM",
+    "simulation_day": 21,
+    "historical_seed": true,
+    "original_timestamp": 1757936219.331747
+  }
+}

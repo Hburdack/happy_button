@@ -1,0 +1,196 @@
+{
+  "id": "ORD_1758778619_80",
+  "customer_email": "procurement@siemens.com",
+  "customer_name": "Siemens AG",
+  "items": [
+    {
+      "sku": "BTN-IND-201",
+      "name": "Industrial Heavy Duty Button",
+      "quantity": 142,
+      "unit_price": 4.2,
+      "total_price": 596.4
+    },
+    {
+      "sku": "BTN-TECH-301",
+      "name": "Tech Series Smart Button",
+      "quantity": 291,
+      "unit_price": 15.5,
+      "total_price": 4510.5
+    },
+    {
+      "sku": "BTN-IND-201",
+      "name": "Industrial Heavy Duty Button",
+      "quantity": 968,
+      "unit_price": 4.2,
+      "total_price": 4065.6000000000004
+    },
+    {
+      "sku": "BTN-IND-201",
+      "name": "Industrial Heavy Duty Button",
+      "quantity": 126,
+      "unit_price": 4.2,
+      "total_price": 529.2
+    },
+    {
+      "sku": "BTN-IND-201",
+      "name": "Industrial Heavy Duty Button",
+      "quantity": 50,
+      "unit_price": 4.2,
+      "total_price": 210.0
+    }
+  ],
+  "total_amount": 9911.7,
+  "priority": 2,
+  "sla_hours": 12,
+  "current_state": "CLOSED",
+  "created_at": 1756978619.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778619.831637,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 9911.7
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778619.832224,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756984553.783996,
+        "confirmation_method": "phone_call",
+        "delivery_address": "Main Plant",
+        "special_instructions": "Quality critical"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778619.8330996,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757003294.0649078,
+        "production_slot": "2025-01-24 16:00",
+        "assigned_line": "Line B",
+        "estimated_duration": "25 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778619.8338256,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757168841.7538831,
+        "batch_number": "BATCH_2025_853",
+        "quality_inspector": "Hans Weber",
+        "materials_reserved": true,
+        "production_notes": "Extra QC required"
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778619.834588,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757183488.0920122,
+        "qa_inspector": "Thomas Klein",
+        "quality_score": "A-",
+        "defect_rate": "0.014%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778619.8355265,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757191648.1965356,
+        "package_id": "PKG_2025_4390",
+        "weight_kg": 17.5,
+        "dimensions": "63x17x26cm",
+        "packaging_type": "Standard Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778619.8364875,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757205729.7229395,
+        "tracking_number": "DHL223280941",
+        "carrier": "UPS",
+        "shipping_cost": 88.38,
+        "estimated_delivery": "2025-01-17"
+      }
+    },
+    {
+      "from_state": "SHIPPED",
+      "to_state": "DELIVERED",
+      "timestamp": 1758778619.837408,
+      "agent": "LogisticsAgent",
+      "reason": "Delivery confirmed by recipient",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757342979.7998958,
+        "delivery_timestamp": "2025-01-26 9:08",
+        "recipient": "Production Manager",
+        "signature": "J. Mueller"
+      }
+    },
+    {
+      "from_state": "DELIVERED",
+      "to_state": "INVOICED",
+      "timestamp": 1758778619.8384826,
+      "agent": "AccountsReceivable",
+      "reason": "Invoice generated and sent",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757367787.721913,
+        "invoice_number": "INV-2025-1358",
+        "payment_terms": "Net 7",
+        "discount_applied": 2
+      }
+    },
+    {
+      "from_state": "INVOICED",
+      "to_state": "CLOSED",
+      "timestamp": 1758778619.839556,
+      "agent": "FinanceAgent",
+      "reason": "Payment received and processed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1759091531.0785782,
+        "payment_date": "2025-2-17",
+        "payment_method": "Check",
+        "transaction_id": "TXN_678180"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "Enterprise",
+    "simulation_day": 10,
+    "historical_seed": true,
+    "original_timestamp": 1756978619.331747
+  }
+}

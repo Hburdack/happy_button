@@ -1,0 +1,44 @@
+{
+  "id": "workflow_scenario_002",
+  "type": "process_email",
+  "priority": 2,
+  "data": {
+    "id": "email_complaint_001",
+    "from": "quality@manufacturing-corp.de",
+    "to": "support@h-bu.de",
+    "subject": "Quality Issue - Defective Buttons in Order #12345",
+    "body": "Dear Support Team,\n\nWe have discovered quality issues with our recent order #12345:\n\n- 150 out of 10,000 buttons have color inconsistencies\n- Batch number: BTN-2024-0847\n- Delivery date: March 15, 2024\n\nThis is affecting our production schedule. We need immediate replacement and quality assurance.\n\nUrgent response required.\n\nThomas Mueller\nQuality Manager",
+    "attachments": []
+  },
+  "created_at": 1758728800.9777932,
+  "assigned_at": 1758728800.9778008,
+  "completed_at": 1758728801.1788855,
+  "result": {
+    "status": "processed",
+    "email_id": "email_complaint_001",
+    "classification": {
+      "category": "order",
+      "priority": 1,
+      "is_vip": false,
+      "is_urgent": true,
+      "confidence": 0.85
+    },
+    "routing": {
+      "primary_agent": "SalesAgent",
+      "escalate_to": "MgmtAgent",
+      "sla_hours": 2,
+      "reason": "Order processing with priority 1"
+    },
+    "response": {
+      "template_used": "order_auto_reply",
+      "subject": "Re: Quality Issue - Defective Buttons in Order #12345",
+      "body": "Dear Quality,\n\nThank you for your esteemed order inquiry. We have received your request and are delighted to assist with your button requirements.\n\nYour inquiry has been forwarded to our Sales department for immediate attention. You may expect a detailed quotation within 4 hours.\n\nWe remain at your distinguished service.\n\nMost respectfully,\nHappy Buttons GmbH Customer Relations",
+      "courtesy_score": 87,
+      "send_immediately": true
+    },
+    "order_data": null,
+    "processing_time": 0.2
+  },
+  "error": null,
+  "processing_time": 0.20108461380004883
+}

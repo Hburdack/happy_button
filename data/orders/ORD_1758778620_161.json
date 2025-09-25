@@ -1,0 +1,147 @@
+{
+  "id": "ORD_1758778620_161",
+  "customer_email": "parts@audi.de",
+  "customer_name": "Audi AG Production",
+  "items": [
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 281,
+      "unit_price": 8.0,
+      "total_price": 2248.0
+    },
+    {
+      "sku": "BTN-DIAM-004",
+      "name": "Diamond Accent Button",
+      "quantity": 660,
+      "unit_price": 25.0,
+      "total_price": 16500.0
+    },
+    {
+      "sku": "BTN-DIAM-004",
+      "name": "Diamond Accent Button",
+      "quantity": 151,
+      "unit_price": 25.0,
+      "total_price": 3775.0
+    },
+    {
+      "sku": "BTN-DIAM-004",
+      "name": "Diamond Accent Button",
+      "quantity": 103,
+      "unit_price": 25.0,
+      "total_price": 2575.0
+    }
+  ],
+  "total_amount": 25098.0,
+  "priority": 1,
+  "sla_hours": 4,
+  "current_state": "SHIPPED",
+  "created_at": 1757914619.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778620.4614406,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 25098.0
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778620.4617183,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757924168.0780678,
+        "confirmation_method": "email_reply",
+        "delivery_address": "Distribution Center",
+        "special_instructions": "Prototype order"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778620.4622808,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757962140.3533342,
+        "production_slot": "2025-01-27 11:00",
+        "assigned_line": "Special Line",
+        "estimated_duration": "70 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778620.4628332,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758053586.655396,
+        "batch_number": "BATCH_2025_334",
+        "quality_inspector": "Hans Weber",
+        "materials_reserved": true,
+        "production_notes": "Rush order"
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778620.4634063,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758071760.2555041,
+        "qa_inspector": "Thomas Klein",
+        "quality_score": "A-",
+        "defect_rate": "0.024%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778620.463989,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758085540.3297412,
+        "package_id": "PKG_2025_4968",
+        "weight_kg": 16.0,
+        "dimensions": "23x26x22cm",
+        "packaging_type": "Standard Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778620.4646041,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758093437.9184198,
+        "tracking_number": "DHL912885911",
+        "carrier": "UPS",
+        "shipping_cost": 20.05,
+        "estimated_delivery": "2025-01-26"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "OEM",
+    "simulation_day": 21,
+    "historical_seed": true,
+    "original_timestamp": 1757914619.331747
+  }
+}

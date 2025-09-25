@@ -1,0 +1,152 @@
+{
+  "id": "ORD_1758777771_1",
+  "customer_email": "orders@bmw-manufacturing.com",
+  "customer_name": "BMW Manufacturing GmbH",
+  "items": [
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 1000,
+      "unit_price": 3.5,
+      "total_price": 3500.0
+    },
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 500,
+      "unit_price": 8.0,
+      "total_price": 4000.0
+    }
+  ],
+  "total_amount": 7500.0,
+  "priority": 1,
+  "sla_hours": 2,
+  "current_state": "CLOSED",
+  "created_at": 1758777771.1758945,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758777771.1758976,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 7500.0
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758777771.1763067,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed via email",
+      "metadata": {
+        "confirmation_method": "email_reply",
+        "delivery_address": "BMW Plant Munich",
+        "requested_delivery": "2025-01-15"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758777771.1769724,
+      "agent": "ProductionAgent",
+      "reason": "Production scheduled",
+      "metadata": {
+        "production_slot": "2025-01-10 08:00",
+        "estimated_completion": "2025-01-12 16:00",
+        "assigned_line": "Line A"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758777771.1775753,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing started",
+      "metadata": {
+        "batch_number": "BATCH_2025_001",
+        "quality_inspector": "Hans Weber",
+        "materials_reserved": true
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758777771.178131,
+      "agent": "QualityAgent",
+      "reason": "Quality check passed",
+      "metadata": {
+        "qa_inspector": "Maria Schmidt",
+        "quality_score": "A+",
+        "defect_rate": "0.02%"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758777771.1786978,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed for shipping",
+      "metadata": {
+        "package_id": "PKG_2025_001",
+        "weight_kg": 12.5,
+        "dimensions": "40x30x15cm"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758777771.1795118,
+      "agent": "LogisticsAgent",
+      "reason": "Shipped via DHL",
+      "metadata": {
+        "tracking_number": "DHL123456789",
+        "carrier": "DHL",
+        "estimated_delivery": "2025-01-15"
+      }
+    },
+    {
+      "from_state": "SHIPPED",
+      "to_state": "DELIVERED",
+      "timestamp": 1758777771.1800876,
+      "agent": "LogisticsAgent",
+      "reason": "Delivery confirmed",
+      "metadata": {
+        "delivery_timestamp": "2025-01-15 14:30",
+        "recipient": "BMW Receiving Dept",
+        "signature": "J. Mueller"
+      }
+    },
+    {
+      "from_state": "DELIVERED",
+      "to_state": "INVOICED",
+      "timestamp": 1758777771.1806402,
+      "agent": "FinanceAgent",
+      "reason": "Invoice generated and sent",
+      "metadata": {
+        "invoice_number": "INV-2025-001",
+        "invoice_amount": 7500.0,
+        "payment_terms": "Net 30"
+      }
+    },
+    {
+      "from_state": "INVOICED",
+      "to_state": "CLOSED",
+      "timestamp": 1758777771.181246,
+      "agent": "FinanceAgent",
+      "reason": "Payment received",
+      "metadata": {
+        "payment_date": "2025-02-10",
+        "payment_method": "Bank Transfer",
+        "transaction_id": "TXN_BMW_001"
+      }
+    }
+  ],
+  "metadata": {
+    "source": "email_processing",
+    "original_email_id": "test_email_123",
+    "sales_rep": "Klaus Mueller"
+  }
+}

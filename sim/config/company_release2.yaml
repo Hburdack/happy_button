@@ -1,0 +1,68 @@
+# Happy Buttons Release 2 Configuration
+# Classic company simulation settings
+
+company:
+  name: "Happy Buttons GmbH"
+  domain: "h-bu.de"
+  headquarters: "Frankfurt, Germany"
+
+email:
+  domains:
+    info: "info@h-bu.de"
+    sales: "sales@h-bu.de"
+    support: "support@h-bu.de"
+    finance: "finance@h-bu.de"
+
+  servers:
+    imap:
+      server: "192.168.2.13"
+      port: 993
+      ssl: true
+      username: "info@h-bu.de"
+      password: "Adrian1234&"
+
+    smtp:
+      server: "192.168.2.13"
+      port: 587
+      tls: true
+      username: "info@h-bu.de"
+      password: "Adrian1234&"
+
+oem_customers:
+  - "oem1.com"
+  - "oem2.com"
+  - "bigcorp.com"
+  - "manufacturer.de"
+
+sla:
+  critical: 2  # hours
+  oem: 4
+  default: 12
+  expedite: 24
+
+agents:
+  info:
+    capabilities: ["email_triage", "order_extraction", "routing"]
+    max_concurrent: 5
+
+  sales:
+    capabilities: ["order_processing", "quotations", "approvals"]
+    max_concurrent: 3
+    auto_approve_limit: 1000  # Euro
+
+products:
+  BTN-001:
+    name: "Standard Button"
+    price: 2.50
+    category: "standard"
+
+  BTN-002:
+    name: "Premium Button"
+    price: 4.99
+    category: "premium"
+
+kpi_targets:
+  auto_handled_rate: 70  # %
+  response_time: 1  # hours
+  order_accuracy: 95  # %
+  customer_satisfaction: 85  # %

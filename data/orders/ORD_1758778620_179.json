@@ -1,0 +1,189 @@
+{
+  "id": "ORD_1758778620_179",
+  "customer_email": "parts@audi.de",
+  "customer_name": "Audi AG Production",
+  "items": [
+    {
+      "sku": "BTN-DIAM-004",
+      "name": "Diamond Accent Button",
+      "quantity": 114,
+      "unit_price": 25.0,
+      "total_price": 2850.0
+    },
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 998,
+      "unit_price": 8.0,
+      "total_price": 7984.0
+    },
+    {
+      "sku": "BTN-DIAM-004",
+      "name": "Diamond Accent Button",
+      "quantity": 244,
+      "unit_price": 25.0,
+      "total_price": 6100.0
+    },
+    {
+      "sku": "BTN-DIAM-004",
+      "name": "Diamond Accent Button",
+      "quantity": 71,
+      "unit_price": 25.0,
+      "total_price": 1775.0
+    }
+  ],
+  "total_amount": 18709.0,
+  "priority": 1,
+  "sla_hours": 4,
+  "current_state": "CLOSED",
+  "created_at": 1758006419.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778620.5583522,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 18709.0
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778620.5586224,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758014806.4504611,
+        "confirmation_method": "portal_confirmation",
+        "delivery_address": "Regional Office",
+        "special_instructions": "Urgent delivery"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778620.5591843,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758047244.0443864,
+        "production_slot": "2025-01-15 14:00",
+        "assigned_line": "Line A",
+        "estimated_duration": "26 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778620.559797,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758080600.5971143,
+        "batch_number": "BATCH_2025_143",
+        "quality_inspector": "Hans Weber",
+        "materials_reserved": true,
+        "production_notes": "Rush order"
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778620.5604193,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758105342.5407784,
+        "qa_inspector": "Andrea Wagner",
+        "quality_score": "A",
+        "defect_rate": "0.077%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778620.561022,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758113473.8054926,
+        "package_id": "PKG_2025_3538",
+        "weight_kg": 48.6,
+        "dimensions": "44x49x21cm",
+        "packaging_type": "Standard Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778620.561635,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758125353.9788206,
+        "tracking_number": "DHL765261983",
+        "carrier": "DHL Standard",
+        "shipping_cost": 72.47,
+        "estimated_delivery": "2025-01-26"
+      }
+    },
+    {
+      "from_state": "SHIPPED",
+      "to_state": "DELIVERED",
+      "timestamp": 1758778620.5622427,
+      "agent": "LogisticsAgent",
+      "reason": "Delivery confirmed by recipient",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758366908.9344633,
+        "delivery_timestamp": "2025-01-27 13:19",
+        "recipient": "Warehouse Manager",
+        "signature": "K. Weber"
+      }
+    },
+    {
+      "from_state": "DELIVERED",
+      "to_state": "INVOICED",
+      "timestamp": 1758778620.562984,
+      "agent": "AccountsReceivable",
+      "reason": "Invoice generated and sent",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758410627.6828964,
+        "invoice_number": "INV-2025-2946",
+        "payment_terms": "Net 30",
+        "discount_applied": 0
+      }
+    },
+    {
+      "from_state": "INVOICED",
+      "to_state": "CLOSED",
+      "timestamp": 1758778620.5636811,
+      "agent": "FinanceAgent",
+      "reason": "Payment received and processed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1760120111.325813,
+        "payment_date": "2025-2-03",
+        "payment_method": "Wire Transfer",
+        "transaction_id": "TXN_643918"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "OEM",
+    "simulation_day": 22,
+    "historical_seed": true,
+    "original_timestamp": 1758006419.331747
+  }
+}

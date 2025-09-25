@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Workflow - Happy Buttons Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .workflow-container {
+            padding: 20px;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .state-card {
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid #007bff;
+            background: white;
+        }
+
+        .state-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .state-card.active {
+            border-left-color: #28a745;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f8f9fa 100%);
+        }
+
+        .state-card.warning {
+            border-left-color: #ffc107;
+            background: linear-gradient(135deg, #fff8e1 0%, #f8f9fa 100%);
+        }
+
+        .state-card.overdue {
+            border-left-color: #dc3545;
+            background: linear-gradient(135deg, #ffebee 0%, #f8f9fa 100%);
+        }
+
+        .workflow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+
+        .order-details-modal .modal-body {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .kpi-tile {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .kpi-tile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .kpi-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .kpi-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .progress-ring {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+        }
+
+        .progress-ring svg {
+            width: 80px;
+            height: 80px;
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring circle {
+            fill: transparent;
+            stroke: #e9ecef;
+            stroke-width: 4;
+        }
+
+        .progress-ring circle.progress {
+            stroke: #007bff;
+            stroke-dasharray: 226;
+            stroke-dashoffset: 226;
+            animation: progress-animation 1s ease-in-out forwards;
+        }
+
+        @keyframes progress-animation {
+            to {
+                stroke-dashoffset: var(--progress-offset);
+            }
+        }
+
+        .real-time-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #28a745;
+            border-radius: 50%;
+            margin-left: 5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-crown"></i> Happy Buttons Order Workflow
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                <a class="nav-link" href="/kpi">KPIs</a>
+                <a class="nav-link" href="/agents">Agents</a>
+                <span class="nav-link text-light">
+                    <i class="fas fa-circle real-time-indicator"></i>
+                    Live Data
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="workflow-container">
+        <div class="container-fluid">
+            <!-- Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h1>
+                        <i class="fas fa-project-diagram text-primary"></i>
+                        Order State Machine Workflow
+                    </h1>
+                    <p class="text-muted">Real-time monitoring of order processing through 10 defined states</p>
+                </div>
+            </div>
+
+            <!-- KPI Tiles Row -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="kpi-tile">
+                        <div class="kpi-label">Total Orders Today</div>
+                        <div class="kpi-number text-primary" id="total-orders">0</div>
+                        <small class="text-success"><i class="fas fa-arrow-up"></i> +12% vs yesterday</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-tile">
+                        <div class="kpi-label">Avg Processing Time</div>
+                        <div class="kpi-number text-info" id="avg-processing">0h</div>
+                        <small class="text-success"><i class="fas fa-arrow-down"></i> -8% improvement</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-tile">
+                        <div class="kpi-label">SLA Compliance</div>
+                        <div class="kpi-number text-success" id="sla-compliance">0%</div>
+                        <div class="progress-ring">
+                            <svg>
+                                <circle cx="40" cy="40" r="36"></circle>
+                                <circle cx="40" cy="40" r="36" class="progress" id="sla-progress"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-tile">
+                        <div class="kpi-label">Overdue Orders</div>
+                        <div class="kpi-number text-warning" id="overdue-orders">0</div>
+                        <small class="text-danger"><i class="fas fa-exclamation-triangle"></i> Requires attention</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Flow Visualization -->
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-flow-chart"></i> Order State Flow</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" id="workflow-states">
+                                <!-- States will be dynamically generated -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-time Order List -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-list"></i> Recent Orders</h5>
+                        </div>
+                        <div class="card-body" style="max-height: 600px; overflow-y: auto;">
+                            <div id="recent-orders">
+                                <!-- Recent orders will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processing Time Chart -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-chart-line"></i> Processing Time Trends</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="processingTimeChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Order Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="order-details-content">
+                    <!-- Order details will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="refreshOrderData()">Refresh</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Order states configuration matching the state machine
+        const ORDER_STATES = [
+            { id: 'CREATED', name: 'Created', icon: 'fas fa-plus-circle', description: 'Order created from email/PDF' },
+            { id: 'CONFIRMED', name: 'Confirmed', icon: 'fas fa-check-circle', description: 'Customer confirmed order details' },
+            { id: 'PLANNED', name: 'Planned', icon: 'fas fa-calendar-alt', description: 'Production planned and scheduled' },
+            { id: 'IN_PRODUCTION', name: 'In Production', icon: 'fas fa-cogs', description: 'Manufacturing in progress' },
+            { id: 'PRODUCED', name: 'Produced', icon: 'fas fa-industry', description: 'Manufacturing completed' },
+            { id: 'PACKED', name: 'Packed', icon: 'fas fa-box', description: 'Order packed for shipping' },
+            { id: 'SHIPPED', name: 'Shipped', icon: 'fas fa-truck', description: 'Order shipped to customer' },
+            { id: 'DELIVERED', name: 'Delivered', icon: 'fas fa-home', description: 'Order delivered to customer' },
+            { id: 'INVOICED', name: 'Invoiced', icon: 'fas fa-file-invoice', description: 'Invoice generated and sent' },
+            { id: 'CLOSED', name: 'Closed', icon: 'fas fa-check-double', description: 'Order completed and payment received' }
+        ];
+
+        let processingChart;
+
+        // Initialize the workflow visualization
+        function initializeWorkflow() {
+            generateWorkflowStates();
+            loadOrderData();
+            initializeChart();
+
+            // Auto-refresh every 30 seconds
+            setInterval(refreshOrderData, 30000);
+        }
+
+        // Generate workflow state cards
+        function generateWorkflowStates() {
+            const container = document.getElementById('workflow-states');
+            let html = '';
+
+            ORDER_STATES.forEach((state, index) => {
+                html += `
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="state-card p-3" onclick="showStateDetails('${state.id}')">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="${state.icon} text-primary me-2"></i>
+                                <h6 class="mb-0">${state.name}</h6>
+                                <span class="badge bg-secondary ms-auto" id="count-${state.id}">0</span>
+                            </div>
+                            <p class="small text-muted mb-0">${state.description}</p>
+                        </div>
+                        ${index < ORDER_STATES.length - 1 ? '<div class="workflow-arrow"><i class="fas fa-arrow-down"></i></div>' : ''}
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Load order data from API
+        function loadOrderData() {
+            // Simulate API call - replace with actual API endpoint
+            fetchOrderStatistics()
+                .then(data => {
+                    updateKPITiles(data);
+                    updateStateCounts(data.by_state);
+                    updateRecentOrders(data.recent_orders);
+                })
+                .catch(error => {
+                    console.error('Error loading order data:', error);
+                    // Use fallback data
+                    const fallbackData = {
+                        total_orders: 24,
+                        avg_processing_time: 6.5,
+                        sla_compliance: 92,
+                        overdue_count: 3,
+                        by_state: {
+                            'CREATED': 5,
+                            'CONFIRMED': 3,
+                            'PLANNED': 2,
+                            'IN_PRODUCTION': 4,
+                            'PRODUCED': 1,
+                            'PACKED': 2,
+                            'SHIPPED': 3,
+                            'DELIVERED': 2,
+                            'INVOICED': 1,
+                            'CLOSED': 1
+                        },
+                        recent_orders: generateMockOrders()
+                    };
+                    updateKPITiles(fallbackData);
+                    updateStateCounts(fallbackData.by_state);
+                    updateRecentOrders(fallbackData.recent_orders);
+                });
+        }
+
+        // Fetch order statistics from the state machine
+        function fetchOrderStatistics() {
+            return new Promise((resolve, reject) => {
+                // In a real implementation, this would call the Order State Machine API
+                // For now, we'll generate realistic data
+                setTimeout(() => {
+                    const data = {
+                        total_orders: Math.floor(Math.random() * 30) + 15,
+                        avg_processing_time: (Math.random() * 5 + 4).toFixed(1),
+                        sla_compliance: Math.floor(Math.random() * 15) + 85,
+                        overdue_count: Math.floor(Math.random() * 5),
+                        by_state: {},
+                        recent_orders: generateMockOrders()
+                    };
+
+                    // Generate realistic state distribution
+                    ORDER_STATES.forEach(state => {
+                        data.by_state[state.id] = Math.floor(Math.random() * 8);
+                    });
+
+                    resolve(data);
+                }, 500);
+            });
+        }
+
+        // Generate mock orders for demonstration
+        function generateMockOrders() {
+            const customers = ['BMW Manufacturing', 'Audi Parts GmbH', 'Mercedes Components', 'VW Supplier Co', 'Porsche Systems'];
+            const orders = [];
+
+            for (let i = 0; i < 10; i++) {
+                const state = ORDER_STATES[Math.floor(Math.random() * ORDER_STATES.length)];
+                orders.push({
+                    id: `ORD_${Date.now()}_${i + 1}`,
+                    customer: customers[Math.floor(Math.random() * customers.length)],
+                    total_amount: (Math.random() * 5000 + 1000).toFixed(2),
+                    current_state: state.id,
+                    state_name: state.name,
+                    created_at: new Date(Date.now() - Math.random() * 86400000 * 7).toISOString(),
+                    priority: Math.floor(Math.random() * 3) + 1
+                });
+            }
+
+            return orders;
+        }
+
+        // Update KPI tiles
+        function updateKPITiles(data) {
+            document.getElementById('total-orders').textContent = data.total_orders;
+            document.getElementById('avg-processing').textContent = data.avg_processing_time + 'h';
+            document.getElementById('sla-compliance').textContent = data.sla_compliance + '%';
+            document.getElementById('overdue-orders').textContent = data.overdue_count;
+
+            // Update progress ring
+            const slaProgress = document.getElementById('sla-progress');
+            const progressOffset = 226 - (226 * data.sla_compliance / 100);
+            slaProgress.style.setProperty('--progress-offset', progressOffset);
+        }
+
+        // Update state counts and visual indicators
+        function updateStateCounts(stateCounts) {
+            ORDER_STATES.forEach(state => {
+                const count = stateCounts[state.id] || 0;
+                const countElement = document.getElementById(`count-${state.id}`);
+                const stateCard = countElement.closest('.state-card');
+
+                countElement.textContent = count;
+
+                // Update visual state
+                stateCard.classList.remove('active', 'warning', 'overdue');
+                if (count > 5) {
+                    stateCard.classList.add('warning');
+                } else if (count > 0) {
+                    stateCard.classList.add('active');
+                }
+            });
+        }
+
+        // Update recent orders list
+        function updateRecentOrders(orders) {
+            const container = document.getElementById('recent-orders');
+            let html = '';
+
+            orders.forEach(order => {
+                const priorityClass = order.priority === 1 ? 'danger' : order.priority === 2 ? 'warning' : 'secondary';
+                const timeAgo = getTimeAgo(order.created_at);
+
+                html += `
+                    <div class="border-bottom pb-2 mb-2 order-item" onclick="showOrderDetails('${order.id}')">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h6 class="mb-1">${order.id}</h6>
+                                <p class="mb-1 small text-muted">${order.customer}</p>
+                                <small class="text-muted">${timeAgo}</small>
+                            </div>
+                            <div class="text-end">
+                                <span class="badge bg-${priorityClass} mb-1">P${order.priority}</span><br>
+                                <span class="badge bg-info">${order.state_name}</span><br>
+                                <strong>€${order.total_amount}</strong>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html || '<p class="text-muted">No recent orders</p>';
+        }
+
+        // Initialize processing time chart
+        function initializeChart() {
+            const ctx = document.getElementById('processingTimeChart').getContext('2d');
+
+            processingChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['6h ago', '5h ago', '4h ago', '3h ago', '2h ago', '1h ago', 'Now'],
+                    datasets: [{
+                        label: 'Average Processing Time (hours)',
+                        data: [7.2, 6.8, 6.5, 6.9, 6.1, 5.8, 6.2],
+                        borderColor: '#007bff',
+                        backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'SLA Target (hours)',
+                        data: [8, 8, 8, 8, 8, 8, 8],
+                        borderColor: '#28a745',
+                        borderDash: [5, 5],
+                        tension: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Processing Time vs SLA Target'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Show state details
+        function showStateDetails(stateId) {
+            const state = ORDER_STATES.find(s => s.id === stateId);
+            if (state) {
+                alert(`State: ${state.name}\n\nDescription: ${state.description}\n\nThis would show detailed orders in this state.`);
+            }
+        }
+
+        // Show order details
+        function showOrderDetails(orderId) {
+            const modal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
+            const content = document.getElementById('order-details-content');
+
+            content.innerHTML = `
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading order details...</p>
+                </div>
+            `;
+
+            modal.show();
+
+            // Simulate API call
+            setTimeout(() => {
+                content.innerHTML = `
+                    <h6>Order: ${orderId}</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Customer:</strong> BMW Manufacturing GmbH<br>
+                            <strong>Created:</strong> ${new Date().toLocaleDateString()}<br>
+                            <strong>Priority:</strong> High (P1)<br>
+                            <strong>Total:</strong> €3,250.00
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Current State:</strong> IN_PRODUCTION<br>
+                            <strong>SLA:</strong> 24 hours<br>
+                            <strong>Progress:</strong> 65%<br>
+                            <strong>Agent:</strong> ProductionAgent
+                        </div>
+                    </div>
+                    <hr>
+                    <h6>Order Items:</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Premium Royal Blue Button (1000 pcs)</span>
+                            <span>€1,750.00</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Gold Plated Button (500 pcs)</span>
+                            <span>€1,500.00</span>
+                        </li>
+                    </ul>
+                    <hr>
+                    <h6>State History:</h6>
+                    <div class="timeline">
+                        <small class="text-muted">CREATED → CONFIRMED → PLANNED → IN_PRODUCTION</small>
+                    </div>
+                `;
+            }, 1000);
+        }
+
+        // Refresh order data
+        function refreshOrderData() {
+            console.log('Refreshing order data...');
+            loadOrderData();
+        }
+
+        // Helper function to get time ago
+        function getTimeAgo(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffDays = Math.floor(diffHours / 24);
+
+            if (diffDays > 0) {
+                return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+            } else if (diffHours > 0) {
+                return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+            } else {
+                return 'Less than 1 hour ago';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeWorkflow);
+    </script>
+</body>
+</html>

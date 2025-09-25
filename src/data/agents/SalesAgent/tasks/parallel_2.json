@@ -1,0 +1,17 @@
+{
+  "id": "parallel_2",
+  "type": "process_order",
+  "priority": 2,
+  "data": {},
+  "created_at": 1758728801.9871747,
+  "assigned_at": 1758728801.9872007,
+  "completed_at": 1758728802.2880194,
+  "result": {
+    "status": "order_processed",
+    "quotation_generated": true,
+    "estimated_value": 25000.0,
+    "delivery_time": "3_weeks"
+  },
+  "error": null,
+  "processing_time": 0.30081868171691895
+}

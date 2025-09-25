@@ -1,0 +1,182 @@
+{
+  "id": "ORD_1758778619_45",
+  "customer_email": "purchasing@zf.com",
+  "customer_name": "ZF Friedrichshafen AG",
+  "items": [
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 1051,
+      "unit_price": 1.5,
+      "total_price": 1576.5
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 453,
+      "unit_price": 1.8,
+      "total_price": 815.4
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 60,
+      "unit_price": 1.5,
+      "total_price": 90.0
+    }
+  ],
+  "total_amount": 2481.9,
+  "priority": 3,
+  "sla_hours": 24,
+  "current_state": "CLOSED",
+  "created_at": 1756717619.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778619.6052952,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 2481.9
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778619.6055982,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756719454.9321327,
+        "confirmation_method": "portal_confirmation",
+        "delivery_address": "Distribution Center",
+        "special_instructions": null
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778619.60621,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756751371.8899333,
+        "production_slot": "2025-01-23 16:00",
+        "assigned_line": "Special Line",
+        "estimated_duration": "56 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778619.6067924,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756886533.7426896,
+        "batch_number": "BATCH_2025_352",
+        "quality_inspector": "Maria Schmidt",
+        "materials_reserved": true,
+        "production_notes": null
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778619.6074915,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756908872.62807,
+        "qa_inspector": "Thomas Klein",
+        "quality_score": "B+",
+        "defect_rate": "0.042%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778619.6080742,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756920083.6946828,
+        "package_id": "PKG_2025_5398",
+        "weight_kg": 17.2,
+        "dimensions": "77x60x24cm",
+        "packaging_type": "Standard Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778619.608836,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756937905.1157484,
+        "tracking_number": "DHL388361158",
+        "carrier": "FedEx",
+        "shipping_cost": 146.08,
+        "estimated_delivery": "2025-01-19"
+      }
+    },
+    {
+      "from_state": "SHIPPED",
+      "to_state": "DELIVERED",
+      "timestamp": 1758778619.6098588,
+      "agent": "LogisticsAgent",
+      "reason": "Delivery confirmed by recipient",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757110897.5368283,
+        "delivery_timestamp": "2025-01-30 14:34",
+        "recipient": "Production Manager",
+        "signature": "M. Klein"
+      }
+    },
+    {
+      "from_state": "DELIVERED",
+      "to_state": "INVOICED",
+      "timestamp": 1758778619.6107757,
+      "agent": "AccountsReceivable",
+      "reason": "Invoice generated and sent",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757163282.3004262,
+        "invoice_number": "INV-2025-4000",
+        "payment_terms": "Net 7",
+        "discount_applied": 0
+      }
+    },
+    {
+      "from_state": "INVOICED",
+      "to_state": "CLOSED",
+      "timestamp": 1758778619.6115546,
+      "agent": "FinanceAgent",
+      "reason": "Payment received and processed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758031457.8028631,
+        "payment_date": "2025-3-16",
+        "payment_method": "Check",
+        "transaction_id": "TXN_328905"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "Enterprise",
+    "simulation_day": 7,
+    "historical_seed": true,
+    "original_timestamp": 1756717619.331747
+  }
+}

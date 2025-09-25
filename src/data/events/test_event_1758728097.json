@@ -1,0 +1,9 @@
+{
+  "type": "system_test",
+  "timestamp": 1758728097.4736018,
+  "data": {
+    "test": "integration",
+    "components": 5
+  },
+  "source": "CoreFeatureTest"
+}

@@ -1,0 +1,196 @@
+{
+  "id": "ORD_1758778620_127",
+  "customer_email": "procurement@mercedes-benz.com",
+  "customer_name": "Mercedes-Benz Parts Division",
+  "items": [
+    {
+      "sku": "BTN-PLAT-003",
+      "name": "Platinum Elite Button",
+      "quantity": 489,
+      "unit_price": 12.0,
+      "total_price": 5868.0
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 876,
+      "unit_price": 3.5,
+      "total_price": 3066.0
+    },
+    {
+      "sku": "BTN-PLAT-003",
+      "name": "Platinum Elite Button",
+      "quantity": 279,
+      "unit_price": 12.0,
+      "total_price": 3348.0
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 60,
+      "unit_price": 3.5,
+      "total_price": 210.0
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 52,
+      "unit_price": 3.5,
+      "total_price": 182.0
+    }
+  ],
+  "total_amount": 12674.0,
+  "priority": 1,
+  "sla_hours": 4,
+  "current_state": "CLOSED",
+  "created_at": 1757482619.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778620.2144833,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 12674.0
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778620.2149272,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757486904.6183717,
+        "confirmation_method": "email_reply",
+        "delivery_address": "Main Plant",
+        "special_instructions": "Quality critical"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778620.2158446,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757498321.6909251,
+        "production_slot": "2025-01-27 16:00",
+        "assigned_line": "Line C",
+        "estimated_duration": "61 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778620.2168224,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757642013.8166416,
+        "batch_number": "BATCH_2025_547",
+        "quality_inspector": "Hans Weber",
+        "materials_reserved": true,
+        "production_notes": null
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778620.217819,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757657120.1201043,
+        "qa_inspector": "Andrea Wagner",
+        "quality_score": "A",
+        "defect_rate": "0.038%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778620.2189322,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757671213.1972213,
+        "package_id": "PKG_2025_9523",
+        "weight_kg": 19.6,
+        "dimensions": "26x33x18cm",
+        "packaging_type": "Reinforced Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778620.2203233,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757675363.0435877,
+        "tracking_number": "DHL998428457",
+        "carrier": "UPS",
+        "shipping_cost": 105.42,
+        "estimated_delivery": "2025-01-30"
+      }
+    },
+    {
+      "from_state": "SHIPPED",
+      "to_state": "DELIVERED",
+      "timestamp": 1758778620.2215004,
+      "agent": "LogisticsAgent",
+      "reason": "Delivery confirmed by recipient",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757923349.9200237,
+        "delivery_timestamp": "2025-01-22 10:46",
+        "recipient": "Warehouse Manager",
+        "signature": "M. Klein"
+      }
+    },
+    {
+      "from_state": "DELIVERED",
+      "to_state": "INVOICED",
+      "timestamp": 1758778620.2228565,
+      "agent": "AccountsReceivable",
+      "reason": "Invoice generated and sent",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757949358.8119178,
+        "invoice_number": "INV-2025-8236",
+        "payment_terms": "Net 14",
+        "discount_applied": 0
+      }
+    },
+    {
+      "from_state": "INVOICED",
+      "to_state": "CLOSED",
+      "timestamp": 1758778620.2240927,
+      "agent": "FinanceAgent",
+      "reason": "Payment received and processed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1759504191.8721359,
+        "payment_date": "2025-2-10",
+        "payment_method": "Bank Transfer",
+        "transaction_id": "TXN_241683"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "OEM",
+    "simulation_day": 16,
+    "historical_seed": true,
+    "original_timestamp": 1757482619.331747
+  }
+}

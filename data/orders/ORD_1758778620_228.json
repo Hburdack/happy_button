@@ -1,0 +1,196 @@
+{
+  "id": "ORD_1758778620_228",
+  "customer_email": "orders@continental.com",
+  "customer_name": "Continental Automotive",
+  "items": [
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 1278,
+      "unit_price": 1.5,
+      "total_price": 1917.0
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 1426,
+      "unit_price": 1.8,
+      "total_price": 2566.8
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 626,
+      "unit_price": 1.5,
+      "total_price": 939.0
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 348,
+      "unit_price": 1.5,
+      "total_price": 522.0
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 50,
+      "unit_price": 1.8,
+      "total_price": 90.0
+    }
+  ],
+  "total_amount": 6034.8,
+  "priority": 2,
+  "sla_hours": 12,
+  "current_state": "CLOSED",
+  "created_at": 1758623819.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778620.9906955,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 6034.8
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778620.9911587,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758632841.9637265,
+        "confirmation_method": "phone_call",
+        "delivery_address": "Regional Office",
+        "special_instructions": "Urgent delivery"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778621.004182,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758675969.1105316,
+        "production_slot": "2025-01-20 15:00",
+        "assigned_line": "Line B",
+        "estimated_duration": "51 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778621.0048552,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758786739.266161,
+        "batch_number": "BATCH_2025_890",
+        "quality_inspector": "Hans Weber",
+        "materials_reserved": true,
+        "production_notes": "Extra QC required"
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778621.0056376,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758793526.3802257,
+        "qa_inspector": "Maria Schmidt",
+        "quality_score": "A",
+        "defect_rate": "0.052%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778621.0063145,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758801204.2342477,
+        "package_id": "PKG_2025_2632",
+        "weight_kg": 30.0,
+        "dimensions": "24x56x29cm",
+        "packaging_type": "Protective Foam"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778621.0070512,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758805311.0095456,
+        "tracking_number": "DHL905009842",
+        "carrier": "DHL Express",
+        "shipping_cost": 17.6,
+        "estimated_delivery": "2025-01-15"
+      }
+    },
+    {
+      "from_state": "SHIPPED",
+      "to_state": "DELIVERED",
+      "timestamp": 1758778621.007715,
+      "agent": "LogisticsAgent",
+      "reason": "Delivery confirmed by recipient",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1759000077.4248931,
+        "delivery_timestamp": "2025-01-30 17:48",
+        "recipient": "Production Manager",
+        "signature": "A. Schmidt"
+      }
+    },
+    {
+      "from_state": "DELIVERED",
+      "to_state": "INVOICED",
+      "timestamp": 1758778621.0083888,
+      "agent": "AccountsReceivable",
+      "reason": "Invoice generated and sent",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1759042385.4738653,
+        "invoice_number": "INV-2025-6662",
+        "payment_terms": "Net 14",
+        "discount_applied": 5
+      }
+    },
+    {
+      "from_state": "INVOICED",
+      "to_state": "CLOSED",
+      "timestamp": 1758778621.0090954,
+      "agent": "FinanceAgent",
+      "reason": "Payment received and processed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1760072658.249399,
+        "payment_date": "2025-2-27",
+        "payment_method": "Check",
+        "transaction_id": "TXN_445918"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "Supplier",
+    "simulation_day": 29,
+    "historical_seed": true,
+    "original_timestamp": 1758623819.331747
+  }
+}

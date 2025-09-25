@@ -1,0 +1,123 @@
+{
+  "start_time": 1758729122.5804915,
+  "events": [
+    {
+      "type": "email_received",
+      "timestamp": 1758729122.5804992,
+      "category": "support",
+      "priority": 3,
+      "from": "customer42@example.com"
+    },
+    {
+      "type": "response_sent",
+      "timestamp": 1758729122.580513,
+      "to": "customer42@example.com",
+      "courtesy_score": 95
+    },
+    {
+      "type": "email_received",
+      "timestamp": 1758729123.581916,
+      "category": "general",
+      "priority": 2,
+      "from": "customer29@example.com"
+    },
+    {
+      "type": "response_sent",
+      "timestamp": 1758729123.5819373,
+      "to": "customer29@example.com",
+      "courtesy_score": 90
+    },
+    {
+      "type": "email_received",
+      "timestamp": 1758729124.5838025,
+      "category": "billing",
+      "priority": 2,
+      "from": "customer53@example.com"
+    },
+    {
+      "type": "response_sent",
+      "timestamp": 1758729124.5838242,
+      "to": "customer53@example.com",
+      "courtesy_score": 86
+    },
+    {
+      "type": "email_received",
+      "timestamp": 1758729125.5850651,
+      "category": "billing",
+      "priority": 1,
+      "from": "customer58@example.com"
+    },
+    {
+      "type": "response_sent",
+      "timestamp": 1758729125.585095,
+      "to": "customer58@example.com",
+      "courtesy_score": 92
+    },
+    {
+      "type": "email_received",
+      "timestamp": 1758729126.5867326,
+      "category": "support",
+      "priority": 2,
+      "from": "customer65@example.com"
+    },
+    {
+      "type": "response_sent",
+      "timestamp": 1758729126.5867517,
+      "to": "customer65@example.com",
+      "courtesy_score": 98
+    },
+    {
+      "type": "email_received",
+      "timestamp": 1758729127.5883274,
+      "category": "billing",
+      "priority": 3,
+      "from": "customer90@example.com"
+    },
+    {
+      "type": "response_sent",
+      "timestamp": 1758729127.5883434,
+      "to": "customer90@example.com",
+      "courtesy_score": 96
+    },
+    {
+      "type": "email_received",
+      "timestamp": 1758729128.58957,
+      "category": "billing",
+      "priority": 2,
+      "from": "customer11@example.com"
+    },
+    {
+      "type": "response_sent",
+      "timestamp": 1758729128.5895867,
+      "to": "customer11@example.com",
+      "courtesy_score": 88
+    },
+    {
+      "type": "email_received",
+      "timestamp": 1758729129.5912533,
+      "category": "order",
+      "priority": 3,
+      "from": "customer65@example.com"
+    },
+    {
+      "type": "order_created",
+      "timestamp": 1758729129.5912724,
+      "order_id": "ORD_175872912980",
+      "value": 19137,
+      "source_email": "customer65@example.com"
+    },
+    {
+      "type": "response_sent",
+      "timestamp": 1758729129.5912807,
+      "to": "customer65@example.com",
+      "courtesy_score": 87
+    }
+  ],
+  "metrics": {
+    "emails_processed": 8,
+    "orders_created": 1,
+    "responses_sent": 8
+  },
+  "end_time": 1758729130.5925472,
+  "duration": 8.01205563545227
+}

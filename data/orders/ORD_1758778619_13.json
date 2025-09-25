@@ -1,0 +1,147 @@
+{
+  "id": "ORD_1758778619_13",
+  "customer_email": "purchasing@zf.com",
+  "customer_name": "ZF Friedrichshafen AG",
+  "items": [
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 187,
+      "unit_price": 1.8,
+      "total_price": 336.6
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 779,
+      "unit_price": 1.5,
+      "total_price": 1168.5
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 518,
+      "unit_price": 1.8,
+      "total_price": 932.4
+    },
+    {
+      "sku": "BTN-MECH-501",
+      "name": "Mechanical Switch Button",
+      "quantity": 169,
+      "unit_price": 9.2,
+      "total_price": 1554.8
+    }
+  ],
+  "total_amount": 3992.3,
+  "priority": 3,
+  "sla_hours": 24,
+  "current_state": "SHIPPED",
+  "created_at": 1756285619.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778619.4182768,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 3992.3
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778619.4185433,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756297251.3298848,
+        "confirmation_method": "email_reply",
+        "delivery_address": "Distribution Center",
+        "special_instructions": null
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778619.41908,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756331012.0798054,
+        "production_slot": "2025-01-17 12:00",
+        "assigned_line": "Line C",
+        "estimated_duration": "65 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778619.4196455,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756468238.7358148,
+        "batch_number": "BATCH_2025_535",
+        "quality_inspector": "Maria Schmidt",
+        "materials_reserved": true,
+        "production_notes": null
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778619.420298,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756490248.160399,
+        "qa_inspector": "Maria Schmidt",
+        "quality_score": "B+",
+        "defect_rate": "0.058%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778619.4208841,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756495344.1080933,
+        "package_id": "PKG_2025_3985",
+        "weight_kg": 33.6,
+        "dimensions": "30x52x11cm",
+        "packaging_type": "Protective Foam"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778619.4215298,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756501754.2239163,
+        "tracking_number": "DHL669367101",
+        "carrier": "UPS",
+        "shipping_cost": 111.85,
+        "estimated_delivery": "2025-01-25"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "Enterprise",
+    "simulation_day": 2,
+    "historical_seed": true,
+    "original_timestamp": 1756285619.331747
+  }
+}

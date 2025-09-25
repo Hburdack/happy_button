@@ -1,0 +1,147 @@
+{
+  "id": "ORD_1758778619_26",
+  "customer_email": "parts@audi.de",
+  "customer_name": "Audi AG Production",
+  "items": [
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 1564,
+      "unit_price": 8.0,
+      "total_price": 12512.0
+    },
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 1690,
+      "unit_price": 8.0,
+      "total_price": 13520.0
+    }
+  ],
+  "total_amount": 26032.0,
+  "priority": 1,
+  "sla_hours": 4,
+  "current_state": "DELIVERED",
+  "created_at": 1756445819.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778619.4925833,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 26032.0
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778619.4928691,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756455674.139231,
+        "confirmation_method": "phone_call",
+        "delivery_address": "Distribution Center",
+        "special_instructions": "Prototype order"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778619.4935384,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756483217.6401463,
+        "production_slot": "2025-01-16 8:00",
+        "assigned_line": "Special Line",
+        "estimated_duration": "38 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778619.4941394,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756632318.7397118,
+        "batch_number": "BATCH_2025_134",
+        "quality_inspector": "Klaus Mueller",
+        "materials_reserved": true,
+        "production_notes": null
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778619.494727,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756653177.5853288,
+        "qa_inspector": "Maria Schmidt",
+        "quality_score": "B+",
+        "defect_rate": "0.022%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778619.495435,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756665032.7011402,
+        "package_id": "PKG_2025_4445",
+        "weight_kg": 29.8,
+        "dimensions": "48x25x14cm",
+        "packaging_type": "Standard Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778619.4960299,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756680095.2582898,
+        "tracking_number": "DHL293662757",
+        "carrier": "DHL Express",
+        "shipping_cost": 25.39,
+        "estimated_delivery": "2025-01-20"
+      }
+    },
+    {
+      "from_state": "SHIPPED",
+      "to_state": "DELIVERED",
+      "timestamp": 1758778619.4966693,
+      "agent": "LogisticsAgent",
+      "reason": "Delivery confirmed by recipient",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756865754.9078767,
+        "delivery_timestamp": "2025-01-30 11:36",
+        "recipient": "Receiving Dept",
+        "signature": "J. Mueller"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "OEM",
+    "simulation_day": 4,
+    "historical_seed": true,
+    "original_timestamp": 1756445819.331747
+  }
+}

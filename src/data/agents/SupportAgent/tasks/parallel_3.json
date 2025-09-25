@@ -1,0 +1,16 @@
+{
+  "id": "parallel_3",
+  "type": "provide_support",
+  "priority": 2,
+  "data": {},
+  "created_at": 1758728801.987176,
+  "assigned_at": 1758728801.9872077,
+  "completed_at": 1758728802.1883135,
+  "result": {
+    "status": "support_provided",
+    "documentation_sent": true,
+    "follow_up_required": false
+  },
+  "error": null,
+  "processing_time": 0.20110583305358887
+}

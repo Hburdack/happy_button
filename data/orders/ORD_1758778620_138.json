@@ -1,0 +1,154 @@
+{
+  "id": "ORD_1758778620_138",
+  "customer_email": "orders@mahle.com",
+  "customer_name": "MAHLE GmbH",
+  "items": [
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 206,
+      "unit_price": 1.5,
+      "total_price": 309.0
+    },
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 1678,
+      "unit_price": 1.5,
+      "total_price": 2517.0
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 84,
+      "unit_price": 1.5,
+      "total_price": 126.0
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 177,
+      "unit_price": 1.5,
+      "total_price": 265.5
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 65,
+      "unit_price": 1.8,
+      "total_price": 117.0
+    }
+  ],
+  "total_amount": 3334.5,
+  "priority": 3,
+  "sla_hours": 24,
+  "current_state": "SHIPPED",
+  "created_at": 1757502419.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778620.3112328,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 3334.5
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778620.3115354,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757511058.4206266,
+        "confirmation_method": "portal_confirmation",
+        "delivery_address": "Distribution Center",
+        "special_instructions": "Urgent delivery"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778620.312124,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757538256.6684024,
+        "production_slot": "2025-01-20 15:00",
+        "assigned_line": "Line B",
+        "estimated_duration": "61 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778620.3126984,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757591147.9149437,
+        "batch_number": "BATCH_2025_271",
+        "quality_inspector": "Hans Weber",
+        "materials_reserved": true,
+        "production_notes": null
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778620.3134282,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757602573.7037256,
+        "qa_inspector": "Thomas Klein",
+        "quality_score": "A-",
+        "defect_rate": "0.009%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778620.31405,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757607246.0488598,
+        "package_id": "PKG_2025_5299",
+        "weight_kg": 29.3,
+        "dimensions": "21x54x16cm",
+        "packaging_type": "Standard Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778620.3146677,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757611222.9302828,
+        "tracking_number": "DHL629241785",
+        "carrier": "UPS",
+        "shipping_cost": 137.48,
+        "estimated_delivery": "2025-01-19"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "SME",
+    "simulation_day": 16,
+    "historical_seed": true,
+    "original_timestamp": 1757502419.331747
+  }
+}

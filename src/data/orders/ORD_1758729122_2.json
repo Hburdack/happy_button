@@ -1,0 +1,36 @@
+{
+  "id": "ORD_1758729122_2",
+  "customer_email": "orders@mfg-corp.de",
+  "customer_name": "Manufacturing Corp",
+  "items": [
+    {
+      "sku": "BTN-STANDARD-001",
+      "name": "Standard Button",
+      "quantity": 25000,
+      "unit_price": 2.49,
+      "total_price": 62250.0
+    }
+  ],
+  "total_amount": 62250.0,
+  "priority": 3,
+  "sla_hours": 4,
+  "current_state": "CREATED",
+  "created_at": 1758729122.5797007,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758729122.579702,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 62250.0
+      }
+    }
+  ],
+  "metadata": {
+    "scenario": "Standard Order",
+    "test": "integration"
+  }
+}

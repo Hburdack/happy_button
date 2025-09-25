@@ -1,0 +1,40 @@
+{
+  "id": "ORD_1758777687_1",
+  "customer_email": "customer@example.com",
+  "customer_name": "Demo Customer",
+  "items": [
+    {
+      "sku": "BTN-001",
+      "name": "Premium Red Button",
+      "quantity": 100,
+      "unit_price": 2.5,
+      "total_price": 250.0
+    },
+    {
+      "sku": "BTN-002",
+      "name": "Blue Royal Button",
+      "quantity": 50,
+      "unit_price": 5.0,
+      "total_price": 250.0
+    }
+  ],
+  "total_amount": 500.0,
+  "priority": 2,
+  "sla_hours": 12,
+  "current_state": "CREATED",
+  "created_at": 1758777687.055942,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758777687.0559447,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 500.0
+      }
+    }
+  ],
+  "metadata": {}
+}

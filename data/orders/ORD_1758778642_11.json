@@ -1,0 +1,50 @@
+{
+  "id": "ORD_1758778642_11",
+  "customer_email": "orders@bmw-manufacturing.com",
+  "customer_name": "BMW Manufacturing GmbH",
+  "items": [
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 1648,
+      "unit_price": 8.0,
+      "total_price": 13184.0
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 1515,
+      "unit_price": 3.5,
+      "total_price": 5302.5
+    },
+    {
+      "sku": "BTN-GOLD-002",
+      "name": "Gold Plated Button",
+      "quantity": 67,
+      "unit_price": 8.0,
+      "total_price": 536.0
+    }
+  ],
+  "total_amount": 19022.5,
+  "priority": 1,
+  "sla_hours": 4,
+  "current_state": "CREATED",
+  "created_at": 1758778642.2803547,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778642.280356,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 19022.5
+      }
+    }
+  ],
+  "metadata": {
+    "daily_generation": true,
+    "generation_date": "2025-09-25T07:37:22.258305"
+  }
+}

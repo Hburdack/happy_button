@@ -1,0 +1,196 @@
+{
+  "id": "ORD_1758778620_226",
+  "customer_email": "orders@mahle.com",
+  "customer_name": "MAHLE GmbH",
+  "items": [
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 982,
+      "unit_price": 1.5,
+      "total_price": 1473.0
+    },
+    {
+      "sku": "BTN-BASIC-001",
+      "name": "Basic Economy Button",
+      "quantity": 1638,
+      "unit_price": 0.95,
+      "total_price": 1556.1
+    },
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 105,
+      "unit_price": 1.5,
+      "total_price": 157.5
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 127,
+      "unit_price": 1.8,
+      "total_price": 228.6
+    },
+    {
+      "sku": "BTN-BASIC-001",
+      "name": "Basic Economy Button",
+      "quantity": 110,
+      "unit_price": 0.95,
+      "total_price": 104.5
+    }
+  ],
+  "total_amount": 3519.7,
+  "priority": 3,
+  "sla_hours": 24,
+  "current_state": "CLOSED",
+  "created_at": 1758620219.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778620.9737933,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 3519.7
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778620.9742424,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758632481.28027,
+        "confirmation_method": "email_reply",
+        "delivery_address": "Distribution Center",
+        "special_instructions": "Quality critical"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778620.9751077,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758667287.6947124,
+        "production_slot": "2025-01-24 10:00",
+        "assigned_line": "Line C",
+        "estimated_duration": "40 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778620.975985,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758817920.4163802,
+        "batch_number": "BATCH_2025_897",
+        "quality_inspector": "Maria Schmidt",
+        "materials_reserved": true,
+        "production_notes": "Extra QC required"
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778620.9769409,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758839153.7457807,
+        "qa_inspector": "Andrea Wagner",
+        "quality_score": "A-",
+        "defect_rate": "0.068%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778620.977858,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758842853.989092,
+        "package_id": "PKG_2025_9174",
+        "weight_kg": 8.3,
+        "dimensions": "80x38x26cm",
+        "packaging_type": "Protective Foam"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778620.9790206,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758861194.353734,
+        "tracking_number": "DHL691569234",
+        "carrier": "DHL Standard",
+        "shipping_cost": 131.72,
+        "estimated_delivery": "2025-01-29"
+      }
+    },
+    {
+      "from_state": "SHIPPED",
+      "to_state": "DELIVERED",
+      "timestamp": 1758778620.9800363,
+      "agent": "LogisticsAgent",
+      "reason": "Delivery confirmed by recipient",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1759005022.4165535,
+        "delivery_timestamp": "2025-01-17 16:39",
+        "recipient": "Receiving Dept",
+        "signature": "A. Schmidt"
+      }
+    },
+    {
+      "from_state": "DELIVERED",
+      "to_state": "INVOICED",
+      "timestamp": 1758778620.9811182,
+      "agent": "AccountsReceivable",
+      "reason": "Invoice generated and sent",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1759048652.3862343,
+        "invoice_number": "INV-2025-9958",
+        "payment_terms": "Immediate",
+        "discount_applied": 2
+      }
+    },
+    {
+      "from_state": "INVOICED",
+      "to_state": "CLOSED",
+      "timestamp": 1758778620.9822025,
+      "agent": "FinanceAgent",
+      "reason": "Payment received and processed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1761023192.0315683,
+        "payment_date": "2025-3-26",
+        "payment_method": "Credit Card",
+        "transaction_id": "TXN_316941"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "SME",
+    "simulation_day": 29,
+    "historical_seed": true,
+    "original_timestamp": 1758620219.331747
+  }
+}

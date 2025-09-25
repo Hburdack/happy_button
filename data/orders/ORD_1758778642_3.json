@@ -1,0 +1,50 @@
+{
+  "id": "ORD_1758778642_3",
+  "customer_email": "purchasing@zf.com",
+  "customer_name": "ZF Friedrichshafen AG",
+  "items": [
+    {
+      "sku": "BTN-MECH-501",
+      "name": "Mechanical Switch Button",
+      "quantity": 160,
+      "unit_price": 9.2,
+      "total_price": 1472.0
+    },
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 1365,
+      "unit_price": 1.5,
+      "total_price": 2047.5
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 60,
+      "unit_price": 1.5,
+      "total_price": 90.0
+    }
+  ],
+  "total_amount": 3609.5,
+  "priority": 3,
+  "sla_hours": 24,
+  "current_state": "CREATED",
+  "created_at": 1758778642.2779303,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778642.2779315,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 3609.5
+      }
+    }
+  ],
+  "metadata": {
+    "daily_generation": true,
+    "generation_date": "2025-09-25T07:37:22.258305"
+  }
+}

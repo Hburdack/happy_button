@@ -1,0 +1,17 @@
+{
+  "id": "parallel_1",
+  "type": "triage_email",
+  "priority": 2,
+  "data": {},
+  "created_at": 1758728801.9871705,
+  "assigned_at": 1758728801.987184,
+  "completed_at": 1758728802.0879636,
+  "result": {
+    "status": "triaged",
+    "route_to": "SalesAgent",
+    "priority": "high",
+    "classification": "order_request"
+  },
+  "error": null,
+  "processing_time": 0.10077953338623047
+}

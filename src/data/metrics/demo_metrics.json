@@ -1,0 +1,32 @@
+{
+  "timestamp": 1758726630.6298842,
+  "system_uptime": 3600.5,
+  "emails_processed": 47,
+  "orders_created": 12,
+  "orders_completed": 8,
+  "auto_handled_rate": 87.2,
+  "avg_processing_time": 145.6,
+  "active_agents": 3,
+  "agent_status": {
+    "InfoAgent": "processing",
+    "SalesAgent": "idle",
+    "QualityAgent": "idle"
+  },
+  "sla_compliance": {
+    "critical": 98.5,
+    "oem": 95.2,
+    "standard": 91.8
+  },
+  "top_customers": [
+    {
+      "email": "oem1@manufacturer.com",
+      "orders": 5,
+      "value": 15750.0
+    },
+    {
+      "email": "royal@vip.de",
+      "orders": 3,
+      "value": 22400.0
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "ORD_1758729122_1",
+  "customer_email": "procurement@royal-mfg.com",
+  "customer_name": "Royal Manufacturing Ltd",
+  "items": [
+    {
+      "sku": "BTN-PREMIUM-001",
+      "name": "Premium Gold Button",
+      "quantity": 10000,
+      "unit_price": 4.99,
+      "total_price": 49900.0
+    },
+    {
+      "sku": "BTN-LUXURY-002",
+      "name": "Luxury Silver Button",
+      "quantity": 5000,
+      "unit_price": 6.99,
+      "total_price": 34950.0
+    }
+  ],
+  "total_amount": 84850.0,
+  "priority": 1,
+  "sla_hours": 4,
+  "current_state": "CREATED",
+  "created_at": 1758729122.5794866,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758729122.579489,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 84850.0
+      }
+    }
+  ],
+  "metadata": {
+    "scenario": "VIP Rush Order",
+    "test": "integration"
+  }
+}

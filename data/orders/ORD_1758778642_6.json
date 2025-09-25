@@ -1,0 +1,57 @@
+{
+  "id": "ORD_1758778642_6",
+  "customer_email": "procurement@mercedes-benz.com",
+  "customer_name": "Mercedes-Benz Parts Division",
+  "items": [
+    {
+      "sku": "BTN-PLAT-003",
+      "name": "Platinum Elite Button",
+      "quantity": 939,
+      "unit_price": 12.0,
+      "total_price": 11268.0
+    },
+    {
+      "sku": "BTN-PLAT-003",
+      "name": "Platinum Elite Button",
+      "quantity": 104,
+      "unit_price": 12.0,
+      "total_price": 1248.0
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 56,
+      "unit_price": 3.5,
+      "total_price": 196.0
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 50,
+      "unit_price": 3.5,
+      "total_price": 175.0
+    }
+  ],
+  "total_amount": 12887.0,
+  "priority": 1,
+  "sla_hours": 4,
+  "current_state": "CREATED",
+  "created_at": 1758778642.2788737,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778642.2788749,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 12887.0
+      }
+    }
+  ],
+  "metadata": {
+    "daily_generation": true,
+    "generation_date": "2025-09-25T07:37:22.258305"
+  }
+}

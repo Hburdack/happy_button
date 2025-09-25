@@ -1,0 +1,140 @@
+{
+  "id": "ORD_1758778619_22",
+  "customer_email": "procurement@schaeffler.com",
+  "customer_name": "Schaeffler Group",
+  "items": [
+    {
+      "sku": "BTN-IND-201",
+      "name": "Industrial Heavy Duty Button",
+      "quantity": 751,
+      "unit_price": 4.2,
+      "total_price": 3154.2000000000003
+    },
+    {
+      "sku": "BTN-BEAR-601",
+      "name": "Bearing Integrated Button",
+      "quantity": 103,
+      "unit_price": 11.3,
+      "total_price": 1163.9
+    },
+    {
+      "sku": "BTN-IND-201",
+      "name": "Industrial Heavy Duty Button",
+      "quantity": 53,
+      "unit_price": 4.2,
+      "total_price": 222.60000000000002
+    }
+  ],
+  "total_amount": 4540.700000000001,
+  "priority": 3,
+  "sla_hours": 24,
+  "current_state": "SHIPPED",
+  "created_at": 1756373819.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778619.4693637,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 4540.700000000001
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778619.469676,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756379814.2386117,
+        "confirmation_method": "phone_call",
+        "delivery_address": "Main Plant",
+        "special_instructions": "Quality critical"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778619.470259,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756403284.0378714,
+        "production_slot": "2025-01-12 8:00",
+        "assigned_line": "Line A",
+        "estimated_duration": "51 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778619.4708066,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756523387.1965892,
+        "batch_number": "BATCH_2025_275",
+        "quality_inspector": "Maria Schmidt",
+        "materials_reserved": true,
+        "production_notes": "Rush order"
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778619.471459,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756551095.1242979,
+        "qa_inspector": "Thomas Klein",
+        "quality_score": "B+",
+        "defect_rate": "0.091%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778619.4720643,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756556743.2949848,
+        "package_id": "PKG_2025_5644",
+        "weight_kg": 5.3,
+        "dimensions": "75x42x14cm",
+        "packaging_type": "Standard Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778619.472666,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756567291.6985898,
+        "tracking_number": "DHL268391565",
+        "carrier": "DHL Express",
+        "shipping_cost": 113.27,
+        "estimated_delivery": "2025-01-21"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "Enterprise",
+    "simulation_day": 3,
+    "historical_seed": true,
+    "original_timestamp": 1756373819.331747
+  }
+}

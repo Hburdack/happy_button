@@ -1,0 +1,64 @@
+{
+  "id": "ORD_1758778642_8",
+  "customer_email": "purchasing@bosch.com",
+  "customer_name": "Bosch GmbH",
+  "items": [
+    {
+      "sku": "BTN-IND-201",
+      "name": "Industrial Heavy Duty Button",
+      "quantity": 829,
+      "unit_price": 4.2,
+      "total_price": 3481.8
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 580,
+      "unit_price": 1.8,
+      "total_price": 1044.0
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 253,
+      "unit_price": 1.8,
+      "total_price": 455.40000000000003
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 180,
+      "unit_price": 1.8,
+      "total_price": 324.0
+    },
+    {
+      "sku": "BTN-IND-201",
+      "name": "Industrial Heavy Duty Button",
+      "quantity": 52,
+      "unit_price": 4.2,
+      "total_price": 218.4
+    }
+  ],
+  "total_amount": 5523.599999999999,
+  "priority": 2,
+  "sla_hours": 12,
+  "current_state": "CREATED",
+  "created_at": 1758778642.2794838,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778642.2794857,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 5523.599999999999
+      }
+    }
+  ],
+  "metadata": {
+    "daily_generation": true,
+    "generation_date": "2025-09-25T07:37:22.258305"
+  }
+}

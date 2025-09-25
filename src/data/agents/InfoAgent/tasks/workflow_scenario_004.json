@@ -1,0 +1,44 @@
+{
+  "id": "workflow_scenario_004",
+  "type": "process_email",
+  "priority": 2,
+  "data": {
+    "id": "email_billing_001",
+    "from": "accounts@global-textiles.com",
+    "to": "finance@h-bu.de",
+    "subject": "Invoice Discrepancy - Order #INV-2024-0392",
+    "body": "Dear Finance Team,\n\nWe have a discrepancy with invoice INV-2024-0392:\n\n- Invoice amount: \u20ac15,750.00\n- Purchase order amount: \u20ac14,200.00\n- Difference: \u20ac1,550.00\n\nPlease review and provide corrected invoice or explanation.\n\nBest regards,\nMichael Johnson\nAccounts Payable",
+    "attachments": []
+  },
+  "created_at": 1758728801.380749,
+  "assigned_at": 1758728801.3807526,
+  "completed_at": 1758728801.5814683,
+  "result": {
+    "status": "processed",
+    "email_id": "email_billing_001",
+    "classification": {
+      "category": "order",
+      "priority": 3,
+      "is_vip": false,
+      "is_urgent": false,
+      "confidence": 0.85
+    },
+    "routing": {
+      "primary_agent": "SalesAgent",
+      "escalate_to": null,
+      "sla_hours": 12,
+      "reason": "Order processing with priority 3"
+    },
+    "response": {
+      "template_used": "order_auto_reply",
+      "subject": "Re: Invoice Discrepancy - Order #INV-2024-0392",
+      "body": "Dear Accounts,\n\nThank you for your esteemed order inquiry. We have received your request and are delighted to assist with your button requirements.\n\nYour inquiry has been forwarded to our Sales department for immediate attention. You may expect a detailed quotation within 4 hours.\n\nWe remain at your distinguished service.\n\nMost respectfully,\nHappy Buttons GmbH Customer Relations",
+      "courtesy_score": 87,
+      "send_immediately": false
+    },
+    "order_data": null,
+    "processing_time": 0.2
+  },
+  "error": null,
+  "processing_time": 0.2007157802581787
+}

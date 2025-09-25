@@ -1,0 +1,140 @@
+{
+  "id": "ORD_1758778620_216",
+  "customer_email": "procurement@schaeffler.com",
+  "customer_name": "Schaeffler Group",
+  "items": [
+    {
+      "sku": "BTN-IND-201",
+      "name": "Industrial Heavy Duty Button",
+      "quantity": 247,
+      "unit_price": 4.2,
+      "total_price": 1037.4
+    },
+    {
+      "sku": "BTN-BEAR-601",
+      "name": "Bearing Integrated Button",
+      "quantity": 103,
+      "unit_price": 11.3,
+      "total_price": 1163.9
+    },
+    {
+      "sku": "BTN-IND-201",
+      "name": "Industrial Heavy Duty Button",
+      "quantity": 442,
+      "unit_price": 4.2,
+      "total_price": 1856.4
+    }
+  ],
+  "total_amount": 4057.7000000000003,
+  "priority": 3,
+  "sla_hours": 24,
+  "current_state": "SHIPPED",
+  "created_at": 1758535619.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778620.8950818,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 4057.7000000000003
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778620.8955667,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758538821.0338213,
+        "confirmation_method": "phone_call",
+        "delivery_address": "Regional Office",
+        "special_instructions": null
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778620.896498,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758558116.0948725,
+        "production_slot": "2025-01-11 16:00",
+        "assigned_line": "Line A",
+        "estimated_duration": "41 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778620.8975725,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758573154.1992326,
+        "batch_number": "BATCH_2025_203",
+        "quality_inspector": "Hans Weber",
+        "materials_reserved": true,
+        "production_notes": "Extra QC required"
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778620.8984277,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758596210.7988021,
+        "qa_inspector": "Thomas Klein",
+        "quality_score": "A-",
+        "defect_rate": "0.058%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778620.8990948,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758605500.399394,
+        "package_id": "PKG_2025_3656",
+        "weight_kg": 46.4,
+        "dimensions": "32x20x15cm",
+        "packaging_type": "Reinforced Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778620.8997402,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758611942.7618015,
+        "tracking_number": "DHL321940854",
+        "carrier": "UPS",
+        "shipping_cost": 33.54,
+        "estimated_delivery": "2025-01-27"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "Enterprise",
+    "simulation_day": 28,
+    "historical_seed": true,
+    "original_timestamp": 1758535619.331747
+  }
+}

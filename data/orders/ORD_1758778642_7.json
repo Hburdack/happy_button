@@ -1,0 +1,57 @@
+{
+  "id": "ORD_1758778642_7",
+  "customer_email": "orders@vw-group.com",
+  "customer_name": "Volkswagen Group Services",
+  "items": [
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 1657,
+      "unit_price": 3.5,
+      "total_price": 5799.5
+    },
+    {
+      "sku": "BTN-PREM-001",
+      "name": "Premium Royal Blue Button",
+      "quantity": 100,
+      "unit_price": 3.5,
+      "total_price": 350.0
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 1163,
+      "unit_price": 1.8,
+      "total_price": 2093.4
+    },
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 111,
+      "unit_price": 1.5,
+      "total_price": 166.5
+    }
+  ],
+  "total_amount": 8409.4,
+  "priority": 2,
+  "sla_hours": 12,
+  "current_state": "CREATED",
+  "created_at": 1758778642.2791512,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778642.2791522,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 8409.4
+      }
+    }
+  ],
+  "metadata": {
+    "daily_generation": true,
+    "generation_date": "2025-09-25T07:37:22.258305"
+  }
+}

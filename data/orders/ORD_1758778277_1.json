@@ -1,0 +1,43 @@
+{
+  "id": "ORD_1758778277_1",
+  "customer_email": "orders@bmw.com",
+  "customer_name": "BMW Manufacturing",
+  "items": [
+    {
+      "sku": "BTN-DEMO-001",
+      "name": "Demo Royal Blue Button",
+      "quantity": 100,
+      "unit_price": 2.5,
+      "total_price": 250.0
+    },
+    {
+      "sku": "BTN-DEMO-002",
+      "name": "Demo Gold Plated Button",
+      "quantity": 50,
+      "unit_price": 5.0,
+      "total_price": 250.0
+    }
+  ],
+  "total_amount": 500.0,
+  "priority": 2,
+  "sla_hours": 12,
+  "current_state": "CREATED",
+  "created_at": 1758778277.6369023,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778277.636905,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 500.0
+      }
+    }
+  ],
+  "metadata": {
+    "source": "dashboard_demo",
+    "created_by": "dashboard_user"
+  }
+}

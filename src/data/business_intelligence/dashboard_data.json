@@ -1,0 +1,79 @@
+{
+  "performance_overview": {
+    "system_performance_score": 92.3,
+    "email_processing_efficiency": 96.1,
+    "order_fulfillment_rate": 94.4,
+    "customer_satisfaction": 94.3,
+    "agent_utilization": 92.6,
+    "revenue_growth": 18.7,
+    "sla_compliance": 96.7,
+    "cost_per_email": 0.47,
+    "automation_rate": 89.3
+  },
+  "recent_activity": {
+    "uptime_hours": 24.7,
+    "total_emails_processed": 342,
+    "total_orders_created": 89,
+    "total_revenue_generated": 1247850.5,
+    "customer_satisfaction_score": 94.3
+  },
+  "agent_status": {
+    "InfoAgent": {
+      "efficiency": 96.2,
+      "avg_response_time": 87.3,
+      "tasks_completed": 156
+    },
+    "SalesAgent": {
+      "efficiency": 91.8,
+      "avg_response_time": 247.6,
+      "orders_processed": 89
+    },
+    "SupportAgent": {
+      "efficiency": 94.5,
+      "avg_response_time": 156.8,
+      "issues_resolved": 67
+    },
+    "FinanceAgent": {
+      "efficiency": 88.9,
+      "avg_response_time": 198.4,
+      "invoices_processed": 45
+    }
+  },
+  "email_flow": {
+    "by_category": {
+      "orders": 89,
+      "support": 67,
+      "billing": 45,
+      "general": 141
+    },
+    "by_priority": {
+      "critical": 12,
+      "high": 67,
+      "normal": 198,
+      "low": 65
+    },
+    "avg_courtesy_score": 87.4,
+    "response_time_sla": 96.7
+  },
+  "order_pipeline": {
+    "by_value": {
+      "under_1k": 23,
+      "1k_10k": 45,
+      "10k_50k": 18,
+      "over_50k": 3
+    },
+    "by_customer_tier": {
+      "vip": 8,
+      "oem": 34,
+      "standard": 47
+    },
+    "avg_order_value": 14022.48,
+    "fulfillment_rate": 94.4
+  },
+  "alerts": [],
+  "trends": {
+    "email_volume": "increasing",
+    "order_value": "stable",
+    "response_time": "improving"
+  }
+}

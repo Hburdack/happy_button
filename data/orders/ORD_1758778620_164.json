@@ -1,0 +1,168 @@
+{
+  "id": "ORD_1758778620_164",
+  "customer_email": "purchasing@zf.com",
+  "customer_name": "ZF Friedrichshafen AG",
+  "items": [
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 584,
+      "unit_price": 1.5,
+      "total_price": 876.0
+    },
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 1202,
+      "unit_price": 1.5,
+      "total_price": 1803.0
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 278,
+      "unit_price": 1.5,
+      "total_price": 417.0
+    },
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 124,
+      "unit_price": 1.5,
+      "total_price": 186.0
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 57,
+      "unit_price": 1.5,
+      "total_price": 85.5
+    },
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 282,
+      "unit_price": 1.5,
+      "total_price": 423.0
+    },
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 147,
+      "unit_price": 1.5,
+      "total_price": 220.5
+    }
+  ],
+  "total_amount": 4011.0,
+  "priority": 3,
+  "sla_hours": 24,
+  "current_state": "SHIPPED",
+  "created_at": 1757920019.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778620.4773118,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 4011.0
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778620.4776096,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757931025.7988386,
+        "confirmation_method": "portal_confirmation",
+        "delivery_address": "Distribution Center",
+        "special_instructions": "Urgent delivery"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778620.478194,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757944423.7471163,
+        "production_slot": "2025-01-15 14:00",
+        "assigned_line": "Line A",
+        "estimated_duration": "9 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778620.478771,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757974031.0909452,
+        "batch_number": "BATCH_2025_349",
+        "quality_inspector": "Klaus Mueller",
+        "materials_reserved": true,
+        "production_notes": "Extra QC required"
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778620.4794092,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1757997376.560145,
+        "qa_inspector": "Andrea Wagner",
+        "quality_score": "A-",
+        "defect_rate": "0.067%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778620.4800518,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758006168.6470594,
+        "package_id": "PKG_2025_2861",
+        "weight_kg": 21.1,
+        "dimensions": "67x51x29cm",
+        "packaging_type": "Protective Foam"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778620.480672,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1758023018.7000055,
+        "tracking_number": "DHL214791406",
+        "carrier": "FedEx",
+        "shipping_cost": 80.24,
+        "estimated_delivery": "2025-01-30"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "Enterprise",
+    "simulation_day": 21,
+    "historical_seed": true,
+    "original_timestamp": 1757920019.331747
+  }
+}

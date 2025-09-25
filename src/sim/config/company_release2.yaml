@@ -1,0 +1,126 @@
+# Happy Buttons Release 2 Email Configuration
+# Real email server configuration based on working test results
+
+email:
+  domains:
+    # Core Business Departments (WORKING)
+    info: "info@h-bu.de"
+    sales: "sales@h-bu.de"
+    support: "support@h-bu.de"
+    finance: "finance@h-bu.de"
+
+    # Additional Working Mailboxes
+    hr: "hr@h-bu.de"
+    orders: "orders@h-bu.de"
+    management: "management@h-bu.de"
+
+    # Future Mailboxes (uncomment when available on server)
+    # marketing: "marketing@h-bu.de"
+    # procurement: "procurement@h-bu.de"
+    # logistics: "logistics@h-bu.de"
+    # quality: "quality@h-bu.de"
+    # it: "it@h-bu.de"
+    # admin: "admin@h-bu.de"
+    # returns: "returns@h-bu.de"
+    # partners: "partners@h-bu.de"
+    # legal: "legal@h-bu.de"
+    # compliance: "compliance@h-bu.de"
+
+  servers:
+    imap:
+      host: "192.168.2.13"
+      port: 993
+      use_ssl: true
+      username_template: "{mailbox}"
+      password: "Adrian1234&"
+
+    smtp:
+      host: "192.168.2.13"
+      port: 587
+      use_tls: true
+      username_template: "{mailbox}"
+      password: "Adrian1234&"
+
+# Business configuration
+company:
+  name: "Happy Buttons GmbH"
+  departments:
+    # Core Business (WORKING)
+    - info
+    - sales
+    - support
+    - finance
+    # Additional Working Departments
+    - hr
+    - orders
+    - management
+    # Future Departments (uncomment when mailboxes are available)
+    # - marketing
+    # - procurement
+    # - logistics
+    # - quality
+    # - it
+    # - admin
+    # - returns
+    # - partners
+    # - legal
+    # - compliance
+
+# Demo flow configuration
+demo:
+  flow_stages:
+    - received
+    - parsed
+    - classified
+    - routed
+    - assigned
+    - processing
+    - response_generated
+    - sent
+    - completed
+
+  update_interval: 10
+  max_emails_display: 20
+
+# Order State Machine Configuration (Release 2)
+order_states:
+  CREATED:
+    description: "Order created from email/PDF"
+    next_states: ["CONFIRMED"]
+    sla_hours: 2
+  CONFIRMED:
+    description: "Customer confirmed order details"
+    next_states: ["PLANNED"]
+    sla_hours: 4
+  PLANNED:
+    description: "Production planned and scheduled"
+    next_states: ["IN_PRODUCTION"]
+    sla_hours: 12
+  IN_PRODUCTION:
+    description: "Manufacturing in progress"
+    next_states: ["PRODUCED"]
+    sla_hours: 24
+  PRODUCED:
+    description: "Manufacturing completed, quality check"
+    next_states: ["PACKED"]
+    sla_hours: 2
+  PACKED:
+    description: "Order packed and ready for shipping"
+    next_states: ["SHIPPED"]
+    sla_hours: 4
+  SHIPPED:
+    description: "Order shipped to customer"
+    next_states: ["DELIVERED"]
+    sla_hours: 48
+  DELIVERED:
+    description: "Order delivered to customer"
+    next_states: ["INVOICED"]
+    sla_hours: 12
+  INVOICED:
+    description: "Invoice generated and sent"
+    next_states: ["CLOSED"]
+    sla_hours: 720  # 30 days payment terms
+  CLOSED:
+    description: "Order completed and payment received"
+    next_states: []
+    sla_hours: 0

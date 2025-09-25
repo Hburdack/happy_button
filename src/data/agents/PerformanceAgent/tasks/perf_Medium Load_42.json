@@ -1,0 +1,15 @@
+{
+  "id": "perf_Medium Load_42",
+  "type": "process",
+  "priority": 2,
+  "data": {},
+  "created_at": 1758728804.856768,
+  "assigned_at": 1758728807.9871025,
+  "completed_at": 1758728808.1744914,
+  "result": {
+    "status": "processed",
+    "processing_time": 0.0575
+  },
+  "error": null,
+  "processing_time": 0.18738889694213867
+}

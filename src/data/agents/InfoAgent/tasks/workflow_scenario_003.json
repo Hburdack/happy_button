@@ -1,0 +1,44 @@
+{
+  "id": "workflow_scenario_003",
+  "type": "process_email",
+  "priority": 2,
+  "data": {
+    "id": "email_support_001",
+    "from": "engineering@tech-solutions.com",
+    "to": "support@h-bu.de",
+    "subject": "Technical Specifications Request",
+    "body": "Hello Support Team,\n\nWe need detailed technical specifications for:\n\n- BTN-001: Material composition, dimensions, strength ratings\n- BTN-002: Color fastness, temperature resistance\n- Compatibility with automated assembly equipment\n\nThis is for our design team's technical review.\n\nThank you,\nLisa Chen\nDesign Engineer",
+    "attachments": []
+  },
+  "created_at": 1758728801.1793556,
+  "assigned_at": 1758728801.1793613,
+  "completed_at": 1758728801.3803933,
+  "result": {
+    "status": "processed",
+    "email_id": "email_support_001",
+    "classification": {
+      "category": "support",
+      "priority": 3,
+      "is_vip": false,
+      "is_urgent": false,
+      "confidence": 0.85
+    },
+    "routing": {
+      "primary_agent": "SupportAgent",
+      "escalate_to": null,
+      "sla_hours": 12,
+      "reason": "Support processing with priority 3"
+    },
+    "response": {
+      "template_used": "support_auto_reply",
+      "subject": "Re: Technical Specifications Request",
+      "body": "Dear Engineering,\n\nThank you for contacting Happy Buttons GmbH. We are honored by your inquiry and will ensure it receives our prompt attention.\n\nYour message will be processed according to our service standards and you will receive a response within 12 hours.\n\nWe remain at your distinguished service.\n\nYours faithfully,\nHappy Buttons GmbH Customer Relations",
+      "courtesy_score": 87,
+      "send_immediately": false
+    },
+    "order_data": null,
+    "processing_time": 0.2
+  },
+  "error": null,
+  "processing_time": 0.20103192329406738
+}

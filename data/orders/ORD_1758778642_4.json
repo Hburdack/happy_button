@@ -1,0 +1,43 @@
+{
+  "id": "ORD_1758778642_4",
+  "customer_email": "purchasing@zf.com",
+  "customer_name": "ZF Friedrichshafen AG",
+  "items": [
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 726,
+      "unit_price": 1.8,
+      "total_price": 1306.8
+    },
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 1057,
+      "unit_price": 1.8,
+      "total_price": 1902.6000000000001
+    }
+  ],
+  "total_amount": 3209.4,
+  "priority": 3,
+  "sla_hours": 24,
+  "current_state": "CREATED",
+  "created_at": 1758778642.278204,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778642.278205,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 3209.4
+      }
+    }
+  ],
+  "metadata": {
+    "daily_generation": true,
+    "generation_date": "2025-09-25T07:37:22.258305"
+  }
+}

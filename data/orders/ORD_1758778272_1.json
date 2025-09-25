@@ -1,0 +1,43 @@
+{
+  "id": "ORD_1758778272_1",
+  "customer_email": "test1@example.com",
+  "customer_name": "Test Customer 1",
+  "items": [
+    {
+      "sku": "BTN-DEMO-001",
+      "name": "Demo Royal Blue Button",
+      "quantity": 100,
+      "unit_price": 2.5,
+      "total_price": 250.0
+    },
+    {
+      "sku": "BTN-DEMO-002",
+      "name": "Demo Gold Plated Button",
+      "quantity": 50,
+      "unit_price": 5.0,
+      "total_price": 250.0
+    }
+  ],
+  "total_amount": 500.0,
+  "priority": 1,
+  "sla_hours": 2,
+  "current_state": "CREATED",
+  "created_at": 1758778272.1303804,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778272.1303828,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 500.0
+      }
+    }
+  ],
+  "metadata": {
+    "source": "dashboard_demo",
+    "created_by": "dashboard_user"
+  }
+}

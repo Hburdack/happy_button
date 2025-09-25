@@ -1,0 +1,62 @@
+{
+  "system_overview": {
+    "uptime_hours": 24.7,
+    "total_emails_processed": 342,
+    "total_orders_created": 89,
+    "total_revenue_generated": 1247850.5,
+    "customer_satisfaction_score": 94.3
+  },
+  "agent_performance": {
+    "InfoAgent": {
+      "efficiency": 96.2,
+      "avg_response_time": 87.3,
+      "tasks_completed": 156
+    },
+    "SalesAgent": {
+      "efficiency": 91.8,
+      "avg_response_time": 247.6,
+      "orders_processed": 89
+    },
+    "SupportAgent": {
+      "efficiency": 94.5,
+      "avg_response_time": 156.8,
+      "issues_resolved": 67
+    },
+    "FinanceAgent": {
+      "efficiency": 88.9,
+      "avg_response_time": 198.4,
+      "invoices_processed": 45
+    }
+  },
+  "email_analytics": {
+    "by_category": {
+      "orders": 89,
+      "support": 67,
+      "billing": 45,
+      "general": 141
+    },
+    "by_priority": {
+      "critical": 12,
+      "high": 67,
+      "normal": 198,
+      "low": 65
+    },
+    "avg_courtesy_score": 87.4,
+    "response_time_sla": 96.7
+  },
+  "order_analytics": {
+    "by_value": {
+      "under_1k": 23,
+      "1k_10k": 45,
+      "10k_50k": 18,
+      "over_50k": 3
+    },
+    "by_customer_tier": {
+      "vip": 8,
+      "oem": 34,
+      "standard": 47
+    },
+    "avg_order_value": 14022.48,
+    "fulfillment_rate": 94.4
+  }
+}

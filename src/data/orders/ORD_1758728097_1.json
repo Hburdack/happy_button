@@ -1,0 +1,44 @@
+{
+  "id": "ORD_1758728097_1",
+  "customer_email": "vip@royal-manufacturing.com",
+  "customer_name": "Royal Manufacturing Ltd",
+  "items": [
+    {
+      "sku": "BTN-PREMIUM-001",
+      "name": "Premium Royal Button - Gold Edition",
+      "quantity": 5000,
+      "unit_price": 4.99,
+      "total_price": 24950.0
+    },
+    {
+      "sku": "BTN-STANDARD-002",
+      "name": "Standard Button - Classic Silver",
+      "quantity": 10000,
+      "unit_price": 2.49,
+      "total_price": 24900.0
+    }
+  ],
+  "total_amount": 49850.0,
+  "priority": 1,
+  "sla_hours": 4,
+  "current_state": "CREATED",
+  "created_at": 1758728097.3630307,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758728097.3630328,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 49850.0
+      }
+    }
+  ],
+  "metadata": {
+    "customer_tier": "royal",
+    "rush_order": true,
+    "special_handling": "white_glove"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "id": "ORD_1758778619_52",
+  "customer_email": "orders@continental.com",
+  "customer_name": "Continental Automotive",
+  "items": [
+    {
+      "sku": "BTN-STD-103",
+      "name": "Standard Silver Button",
+      "quantity": 881,
+      "unit_price": 1.8,
+      "total_price": 1585.8
+    },
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 1573,
+      "unit_price": 1.5,
+      "total_price": 2359.5
+    },
+    {
+      "sku": "BTN-AUTO-401",
+      "name": "Automotive Grade Button",
+      "quantity": 225,
+      "unit_price": 6.8,
+      "total_price": 1530.0
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 134,
+      "unit_price": 1.5,
+      "total_price": 201.0
+    },
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 106,
+      "unit_price": 1.5,
+      "total_price": 159.0
+    },
+    {
+      "sku": "BTN-AUTO-401",
+      "name": "Automotive Grade Button",
+      "quantity": 98,
+      "unit_price": 6.8,
+      "total_price": 666.4
+    }
+  ],
+  "total_amount": 6501.7,
+  "priority": 2,
+  "sla_hours": 12,
+  "current_state": "SHIPPED",
+  "created_at": 1756730219.331747,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778619.649081,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 6501.7
+      }
+    },
+    {
+      "from_state": "CREATED",
+      "to_state": "CONFIRMED",
+      "timestamp": 1758778619.6494205,
+      "agent": "SalesAgent",
+      "reason": "Customer confirmed order via email",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756736703.7406092,
+        "confirmation_method": "phone_call",
+        "delivery_address": "Regional Office",
+        "special_instructions": "Urgent delivery"
+      }
+    },
+    {
+      "from_state": "CONFIRMED",
+      "to_state": "PLANNED",
+      "timestamp": 1758778619.6500018,
+      "agent": "ProductionPlanning",
+      "reason": "Production scheduled and materials reserved",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756778103.8365066,
+        "production_slot": "2025-01-17 11:00",
+        "assigned_line": "Line B",
+        "estimated_duration": "40 hours"
+      }
+    },
+    {
+      "from_state": "PLANNED",
+      "to_state": "IN_PRODUCTION",
+      "timestamp": 1758778619.6505172,
+      "agent": "ProductionAgent",
+      "reason": "Manufacturing commenced",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756947632.3578987,
+        "batch_number": "BATCH_2025_323",
+        "quality_inspector": "Klaus Mueller",
+        "materials_reserved": true,
+        "production_notes": null
+      }
+    },
+    {
+      "from_state": "IN_PRODUCTION",
+      "to_state": "PRODUCED",
+      "timestamp": 1758778619.651137,
+      "agent": "QualityInspector",
+      "reason": "Quality inspection passed",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756969788.6029801,
+        "qa_inspector": "Thomas Klein",
+        "quality_score": "A-",
+        "defect_rate": "0.018%",
+        "batch_test_results": "PASSED"
+      }
+    },
+    {
+      "from_state": "PRODUCED",
+      "to_state": "PACKED",
+      "timestamp": 1758778619.651747,
+      "agent": "LogisticsAgent",
+      "reason": "Order packed and labeled",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756973541.2690806,
+        "package_id": "PKG_2025_8659",
+        "weight_kg": 22.8,
+        "dimensions": "80x47x15cm",
+        "packaging_type": "Reinforced Box"
+      }
+    },
+    {
+      "from_state": "PACKED",
+      "to_state": "SHIPPED",
+      "timestamp": 1758778619.6523569,
+      "agent": "ShippingCoordinator",
+      "reason": "Shipped via DHL Express",
+      "metadata": {
+        "simulation_generated": true,
+        "timestamp": 1756978975.1939437,
+        "tracking_number": "DHL747580096",
+        "carrier": "DHL Express",
+        "shipping_cost": 146.58,
+        "estimated_delivery": "2025-01-21"
+      }
+    }
+  ],
+  "metadata": {
+    "customer_type": "Supplier",
+    "simulation_day": 7,
+    "historical_seed": true,
+    "original_timestamp": 1756730219.331747
+  }
+}

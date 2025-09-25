@@ -1,0 +1,10 @@
+{
+  "type": "order_state_change",
+  "order_id": "ORD_1758778620_227",
+  "from_state": "SHIPPED",
+  "to_state": "DELIVERED",
+  "timestamp": 1758778620.989902,
+  "customer": "BMW Manufacturing GmbH",
+  "total_amount": 11353.0,
+  "priority": 1
+}

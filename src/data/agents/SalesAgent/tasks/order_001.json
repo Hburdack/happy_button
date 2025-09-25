@@ -1,0 +1,24 @@
+{
+  "id": "order_001",
+  "type": "process_order",
+  "priority": 3,
+  "data": {
+    "triage_result": {
+      "status": "triaged",
+      "route_to": "SalesAgent",
+      "priority": "high",
+      "classification": "order_request"
+    }
+  },
+  "created_at": 1758728801.6855304,
+  "assigned_at": 1758728801.685538,
+  "completed_at": 1758728801.9867983,
+  "result": {
+    "status": "order_processed",
+    "quotation_generated": true,
+    "estimated_value": 25000.0,
+    "delivery_time": "3_weeks"
+  },
+  "error": null,
+  "processing_time": 0.30126023292541504
+}

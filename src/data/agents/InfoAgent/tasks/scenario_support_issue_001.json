@@ -1,0 +1,31 @@
+{
+  "id": "scenario_support_issue_001",
+  "type": "process_email",
+  "priority": 2,
+  "data": {
+    "id": "support_issue_001",
+    "from": "quality@manufacturing.de",
+    "subject": "Quality Concern - Button Durability",
+    "body": "We have discovered durability issues with recent button shipment. Need immediate investigation and resolution."
+  },
+  "created_at": 1758729121.7849,
+  "assigned_at": 1758729121.7849038,
+  "completed_at": 1758729121.9960203,
+  "result": {
+    "status": "processed",
+    "agent": "InfoAgent",
+    "task_type": "process_email",
+    "processing_time": 0.21000000000000002,
+    "classification": {
+      "category": "support",
+      "priority": 1
+    },
+    "actions_taken": [
+      "issue_investigation",
+      "solution_provision",
+      "follow_up"
+    ]
+  },
+  "error": null,
+  "processing_time": 0.21111655235290527
+}

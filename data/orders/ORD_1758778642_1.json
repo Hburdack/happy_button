@@ -1,0 +1,57 @@
+{
+  "id": "ORD_1758778642_1",
+  "customer_email": "orders@mahle.com",
+  "customer_name": "MAHLE GmbH",
+  "items": [
+    {
+      "sku": "BTN-STD-102",
+      "name": "Standard White Button",
+      "quantity": 1940,
+      "unit_price": 1.5,
+      "total_price": 2910.0
+    },
+    {
+      "sku": "BTN-BASIC-001",
+      "name": "Basic Economy Button",
+      "quantity": 94,
+      "unit_price": 0.95,
+      "total_price": 89.3
+    },
+    {
+      "sku": "BTN-STD-101",
+      "name": "Standard Black Button",
+      "quantity": 92,
+      "unit_price": 1.5,
+      "total_price": 138.0
+    },
+    {
+      "sku": "BTN-BASIC-001",
+      "name": "Basic Economy Button",
+      "quantity": 412,
+      "unit_price": 0.95,
+      "total_price": 391.4
+    }
+  ],
+  "total_amount": 3528.7000000000003,
+  "priority": 3,
+  "sla_hours": 24,
+  "current_state": "CREATED",
+  "created_at": 1758778642.277035,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758778642.2770374,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 3528.7000000000003
+      }
+    }
+  ],
+  "metadata": {
+    "daily_generation": true,
+    "generation_date": "2025-09-25T07:37:22.258305"
+  }
+}

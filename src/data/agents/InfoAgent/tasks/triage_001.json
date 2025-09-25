@@ -1,0 +1,20 @@
+{
+  "id": "triage_001",
+  "type": "triage_email",
+  "priority": 2,
+  "data": {
+    "from": "customer@vip.com",
+    "subject": "Large Order Request"
+  },
+  "created_at": 1758728801.5836265,
+  "assigned_at": 1758728801.583637,
+  "completed_at": 1758728801.6850924,
+  "result": {
+    "status": "triaged",
+    "route_to": "SalesAgent",
+    "priority": "high",
+    "classification": "order_request"
+  },
+  "error": null,
+  "processing_time": 0.1014554500579834
+}

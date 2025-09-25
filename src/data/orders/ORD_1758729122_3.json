@@ -1,0 +1,36 @@
+{
+  "id": "ORD_1758729122_3",
+  "customer_email": "procurement@oem1.com",
+  "customer_name": "OEM Solutions GmbH",
+  "items": [
+    {
+      "sku": "BTN-CUSTOM-001",
+      "name": "Custom OEM Button",
+      "quantity": 100000,
+      "unit_price": 1.99,
+      "total_price": 199000.0
+    }
+  ],
+  "total_amount": 199000.0,
+  "priority": 2,
+  "sla_hours": 4,
+  "current_state": "CREATED",
+  "created_at": 1758729122.5798218,
+  "history": [
+    {
+      "from_state": "CREATED",
+      "to_state": "CREATED",
+      "timestamp": 1758729122.5798228,
+      "agent": "OrderSystem",
+      "reason": "Order created from email/PDF",
+      "metadata": {
+        "source": "email_processing",
+        "total_amount": 199000.0
+      }
+    }
+  ],
+  "metadata": {
+    "scenario": "OEM Partnership Order",
+    "test": "integration"
+  }
+}

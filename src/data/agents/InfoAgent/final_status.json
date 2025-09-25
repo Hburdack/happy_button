@@ -1,0 +1,20 @@
+{
+  "agent_id": "InfoAgent",
+  "status": "idle",
+  "capabilities": [
+    "email_triage",
+    "routing",
+    "classification"
+  ],
+  "current_task": null,
+  "queue_size": 0,
+  "metrics": {
+    "tasks_processed": 3,
+    "tasks_successful": 3,
+    "tasks_failed": 0,
+    "success_rate": 100.0,
+    "avg_processing_time": 0.20369839668273926,
+    "uptime_hours": 0.0003403427865770128,
+    "last_activity": 1758729122.3909469
+  }
+}

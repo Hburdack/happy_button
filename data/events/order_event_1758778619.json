@@ -1,0 +1,10 @@
+{
+  "type": "order_state_change",
+  "order_id": "ORD_1758778619_99",
+  "from_state": "SHIPPED",
+  "to_state": "DELIVERED",
+  "timestamp": 1758778619.9921193,
+  "customer": "Audi AG Production",
+  "total_amount": 26185.0,
+  "priority": 1
+}

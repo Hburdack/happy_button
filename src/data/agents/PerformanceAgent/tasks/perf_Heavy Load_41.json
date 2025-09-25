@@ -1,0 +1,15 @@
+{
+  "id": "perf_Heavy Load_41",
+  "type": "process",
+  "priority": 2,
+  "data": {},
+  "created_at": 1758728808.6451397,
+  "assigned_at": 1758728811.7330468,
+  "completed_at": 1758728811.9012706,
+  "result": {
+    "status": "processed",
+    "processing_time": 0.0815
+  },
+  "error": null,
+  "processing_time": 0.16822385787963867
+}

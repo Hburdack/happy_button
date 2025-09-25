@@ -1,0 +1,31 @@
+{
+  "id": "specialized_finance_query_001",
+  "type": "process_order",
+  "priority": 2,
+  "data": {
+    "id": "finance_query_001",
+    "from": "accounts@global-corp.com",
+    "subject": "Payment Processing Question",
+    "body": "Please clarify payment terms for our recent order #12345. Need invoice adjustment."
+  },
+  "created_at": 1758729122.391236,
+  "assigned_at": 1758729122.3912404,
+  "completed_at": 1758729122.5744607,
+  "result": {
+    "status": "processed",
+    "agent": "SalesAgent",
+    "task_type": "process_order",
+    "processing_time": 0.182,
+    "classification": {
+      "category": "order",
+      "priority": 2
+    },
+    "actions_taken": [
+      "quotation_generation",
+      "order_creation",
+      "customer_notification"
+    ]
+  },
+  "error": null,
+  "processing_time": 0.18322038650512695
+}

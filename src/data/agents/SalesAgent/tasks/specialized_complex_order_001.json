@@ -1,0 +1,31 @@
+{
+  "id": "specialized_complex_order_001",
+  "type": "process_order",
+  "priority": 2,
+  "data": {
+    "id": "complex_order_001",
+    "from": "procurement@luxury-brands.com",
+    "subject": "Large Order Request - Premium Button Collection",
+    "body": "We require 25,000 premium buttons for our luxury handbag collection. Please provide quotation and delivery timeline."
+  },
+  "created_at": 1758729121.5674124,
+  "assigned_at": 1758729121.5674174,
+  "completed_at": 1758729121.784618,
+  "result": {
+    "status": "processed",
+    "agent": "SalesAgent",
+    "task_type": "process_order",
+    "processing_time": 0.21600000000000003,
+    "classification": {
+      "category": "order",
+      "priority": 2
+    },
+    "actions_taken": [
+      "quotation_generation",
+      "order_creation",
+      "customer_notification"
+    ]
+  },
+  "error": null,
+  "processing_time": 0.21720051765441895
+}
