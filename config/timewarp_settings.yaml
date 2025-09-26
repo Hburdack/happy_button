@@ -1,0 +1,583 @@
+# TimeWarp Configuration - Release 2.1
+# Happy Buttons TimeWarp Professional Settings
+# Configurable agent behavior and workflow simulation
+
+# TimeWarp Global Settings
+timewarp:
+  default_speed_level: 1  # 1-5 (1=real time, 5=1008x speed)
+  enable_acceleration: true
+  auto_restart_week: true
+  business_hours_start: 8
+  business_hours_end: 18
+
+# Email Server Configuration
+email_server:
+  host: "mail.h-bu.de"
+  port: 993
+  use_ssl: true
+  username: "system@h-bu.de"
+  # password: configured separately for security
+
+# Mailbox Management
+mailboxes:
+  info:
+    email: "info@h-bu.de"
+    display_name: "General Information"
+    auto_process: true
+    assigned_agents: ["info_agent"]
+    priority_handling: "standard"
+
+  orders:
+    email: "orders@h-bu.de"
+    display_name: "Order Processing"
+    auto_process: true
+    assigned_agents: ["sales_agent", "order_processor"]
+    priority_handling: "high"
+
+  oem:
+    email: "oem@h-bu.de"
+    display_name: "OEM Partners"
+    auto_process: true
+    assigned_agents: ["oem_specialist", "sales_agent"]
+    priority_handling: "urgent"
+
+  quality:
+    email: "quality@h-bu.de"
+    display_name: "Quality Control"
+    auto_process: true
+    assigned_agents: ["quality_agent"]
+    priority_handling: "urgent"
+
+  logistics:
+    email: "logistics@h-bu.de"
+    display_name: "Logistics & Shipping"
+    auto_process: true
+    assigned_agents: ["logistics_agent"]
+    priority_handling: "high"
+
+  finance:
+    email: "finance@h-bu.de"
+    display_name: "Finance & Billing"
+    auto_process: true
+    assigned_agents: ["finance_agent"]
+    priority_handling: "standard"
+
+  support:
+    email: "support@h-bu.de"
+    display_name: "Technical Support"
+    auto_process: true
+    assigned_agents: ["support_agent"]
+    priority_handling: "high"
+
+  management:
+    email: "management@h-bu.de"
+    display_name: "Management & Escalations"
+    auto_process: false  # Manual review required
+    assigned_agents: ["management_agent"]
+    priority_handling: "urgent"
+
+# Agent Configurations
+agents:
+  info_agent:
+    name: "Customer Information Specialist"
+    email_types: ["customer_inquiry", "general_inquiry", "product_info"]
+    response_time_minutes: 30
+    success_rate: 0.95
+    timewarp_scaling: true
+    auto_responses: true
+    processing_speed_multiplier: 1.0
+
+    # Workflow issue simulation
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.05  # 5% failure rate for testing
+      delay_probability: 0.1  # 10% chance of delays
+      max_delay_multiplier: 2.0  # Up to 2x normal processing time
+
+    escalation_rules:
+      complexity_threshold: 0.7  # 0-1 scale
+      priority_escalation: ["urgent"]
+      auto_escalate_failures: true
+
+  sales_agent:
+    name: "Sales & Order Specialist"
+    email_types: ["customer_order", "oem_order", "pricing_inquiry", "quote_request"]
+    response_time_minutes: 15
+    success_rate: 0.98
+    timewarp_scaling: true
+    auto_responses: true
+    processing_speed_multiplier: 0.8  # 20% faster than baseline
+
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.02  # 2% failure rate
+      delay_probability: 0.05
+      max_delay_multiplier: 1.5
+
+    escalation_rules:
+      complexity_threshold: 0.8
+      priority_escalation: ["urgent", "high"]
+      auto_escalate_failures: true
+
+  oem_specialist:
+    name: "OEM Account Manager"
+    email_types: ["oem_order", "oem_inquiry", "strategic_partnership"]
+    response_time_minutes: 10  # Fastest response for OEM customers
+    success_rate: 0.99
+    timewarp_scaling: true
+    auto_responses: true
+    processing_speed_multiplier: 0.6  # 40% faster than baseline
+
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.01  # 1% failure rate
+      delay_probability: 0.02
+      max_delay_multiplier: 1.2
+
+    escalation_rules:
+      complexity_threshold: 0.9
+      priority_escalation: ["urgent"]
+      auto_escalate_failures: false  # OEM specialist handles all cases
+
+  quality_agent:
+    name: "Quality Control Specialist"
+    email_types: ["quality_complaint", "quality_inquiry", "defect_report", "certification"]
+    response_time_minutes: 45
+    success_rate: 0.97
+    timewarp_scaling: true
+    auto_responses: true
+    processing_speed_multiplier: 1.5  # Thorough quality review takes longer
+
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.03  # 3% failure rate
+      delay_probability: 0.15  # Higher chance of investigation delays
+      max_delay_multiplier: 3.0
+
+    escalation_rules:
+      complexity_threshold: 0.6
+      priority_escalation: ["urgent", "high"]
+      auto_escalate_failures: true
+
+  logistics_agent:
+    name: "Logistics Coordinator"
+    email_types: ["shipping_inquiry", "delivery_update", "logistics_coordination"]
+    response_time_minutes: 25
+    success_rate: 0.94
+    timewarp_scaling: true
+    auto_responses: true
+    processing_speed_multiplier: 1.2
+
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.06  # 6% failure rate (external dependencies)
+      delay_probability: 0.2  # Logistics can have delays
+      max_delay_multiplier: 2.5
+
+    escalation_rules:
+      complexity_threshold: 0.7
+      priority_escalation: ["urgent"]
+      auto_escalate_failures: true
+
+  finance_agent:
+    name: "Finance & Billing Specialist"
+    email_types: ["invoice_inquiry", "payment_issue", "pricing_question", "contract"]
+    response_time_minutes: 60
+    success_rate: 0.96
+    timewarp_scaling: true
+    auto_responses: true
+    processing_speed_multiplier: 1.8  # Financial processes require careful review
+
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.04  # 4% failure rate
+      delay_probability: 0.25  # Finance often requires approvals
+      max_delay_multiplier: 4.0
+
+    escalation_rules:
+      complexity_threshold: 0.8
+      priority_escalation: ["urgent"]
+      auto_escalate_failures: true
+
+  support_agent:
+    name: "Technical Support Specialist"
+    email_types: ["technical_support", "troubleshooting", "documentation_request"]
+    response_time_minutes: 20
+    success_rate: 0.93
+    timewarp_scaling: true
+    auto_responses: true
+    processing_speed_multiplier: 1.1
+
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.07  # 7% failure rate (technical complexity)
+      delay_probability: 0.15
+      max_delay_multiplier: 2.0
+
+    escalation_rules:
+      complexity_threshold: 0.75
+      priority_escalation: ["urgent", "high"]
+      auto_escalate_failures: true
+
+  management_agent:
+    name: "Management Team"
+    email_types: ["escalation", "strategic_decision", "partnership", "complaint_escalation"]
+    response_time_minutes: 120  # Management requires longer consideration
+    success_rate: 0.99
+    timewarp_scaling: false  # Management time doesn't scale with TimeWarp
+    auto_responses: false   # Management reviews manually
+    processing_speed_multiplier: 2.5
+
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.01  # 1% failure rate
+      delay_probability: 0.4  # Management often requires meetings
+      max_delay_multiplier: 5.0
+
+    escalation_rules:
+      complexity_threshold: 1.0  # Management handles all escalations
+      priority_escalation: []
+      auto_escalate_failures: false
+
+  order_processor:
+    name: "Order Processing System"
+    email_types: ["order_confirmation", "order_status", "delivery_scheduling"]
+    response_time_minutes: 5   # Automated system processing
+    success_rate: 0.99
+    timewarp_scaling: true
+    auto_responses: true
+    processing_speed_multiplier: 0.3  # Fastest automated processing
+
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.01  # 1% system failure rate
+      delay_probability: 0.05
+      max_delay_multiplier: 1.1
+
+    escalation_rules:
+      complexity_threshold: 0.9
+      priority_escalation: ["urgent"]
+      auto_escalate_failures: true
+
+# Weekly Email Generation Patterns
+# Controls how many emails of each type are generated throughout the week
+email_patterns:
+  monday:
+    morning:
+      customer_inquiry: 5             # Customer inquiries Monday morning
+      internal_coordination: 3        # Internal team coordination
+      supplier_update: 2              # Supplier status updates
+    afternoon:
+      quality_complaint: 2            # Quality issues reported
+      logistics_coordination: 3       # Logistics planning
+
+  tuesday:
+    morning:
+      customer_inquiry: 4
+      oem_order: 3                    # BMW/Audi orders
+      supplier_update: 2
+    afternoon:
+      quality_review: 2               # Quality reviews
+      production_planning: 2          # Production planning
+
+  wednesday:
+    morning:
+      supplier_coordination: 3        # Supplier coordination
+      internal_status: 2              # Status updates
+    afternoon:
+      quality_complaint: 1            # Quality issues
+      customer_follow_up: 2           # Customer follow-ups
+
+  thursday:
+    morning:
+      logistics_update: 2             # Logistics updates
+      oem_order: 2                    # Premium orders
+    afternoon:
+      management_report: 1            # Management reporting
+      customer_inquiry: 3
+
+  friday:
+    morning:
+      week_summary: 2                 # Weekly summaries
+      quality_complaint: 2
+    afternoon:
+      logistics_planning: 2           # Next week logistics
+      internal_planning: 3            # Team planning
+
+# Agent Configuration for TimeWarp Processing
+agents:
+  # Customer Service Agents
+  customer_service:
+    name: "Customer Service Team"
+    email_types: ["customer_inquiry", "customer_follow_up"]
+    processing_speed_multiplier: 1.0   # Base processing speed
+    timewarp_scaling: true             # Scale with TimeWarp speed
+    response_time_minutes:
+      base: 30                         # 30 minutes base response time
+      priority_multiplier:
+        low: 1.0
+        medium: 0.7
+        high: 0.3
+    auto_responses: true               # Enable automatic responses
+    escalation_rules:
+      complexity_threshold: 0.8        # Escalate complex issues
+      volume_threshold: 10             # Escalate if >10 emails/hour
+    failure_simulation:
+      enabled: false                   # Enable random failures for testing
+      failure_rate: 0.05              # 5% failure rate
+      failure_types: ["delayed", "missed", "incomplete"]
+
+  # OEM Account Management
+  oem_management:
+    name: "OEM Account Management"
+    email_types: ["oem_order", "premium_customer"]
+    processing_speed_multiplier: 0.5   # Faster processing for premium customers
+    timewarp_scaling: true
+    response_time_minutes:
+      base: 15                         # 15 minutes for OEM customers
+      priority_multiplier:
+        low: 0.8
+        medium: 0.5
+        high: 0.2                     # Immediate response for high priority
+    auto_responses: true
+    escalation_rules:
+      complexity_threshold: 0.6        # Lower threshold for OEM
+      volume_threshold: 5
+    sla_targets:
+      response_time: 10                # 10 minute SLA
+      resolution_time: 60              # 1 hour resolution
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.02              # Lower failure rate for OEM
+
+  # Quality Control Team
+  quality_control:
+    name: "Quality Control Department"
+    email_types: ["quality_complaint", "quality_review"]
+    processing_speed_multiplier: 0.8   # Thorough processing
+    timewarp_scaling: true
+    response_time_minutes:
+      base: 45                         # Detailed investigation time
+      priority_multiplier:
+        low: 1.2
+        medium: 1.0
+        high: 0.4                     # Urgent quality issues
+    auto_responses: false              # Manual quality review required
+    escalation_rules:
+      complexity_threshold: 0.7
+      volume_threshold: 8
+      auto_escalate_urgent: true       # Auto-escalate urgent quality issues
+    investigation_time:
+      standard: 2                      # 2 hours standard investigation
+      complex: 8                       # 8 hours complex investigation
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.03
+
+  # Production Planning
+  production_planning:
+    name: "Production Planning Team"
+    email_types: ["production_planning", "internal_coordination"]
+    processing_speed_multiplier: 1.2   # Collaborative planning takes time
+    timewarp_scaling: true
+    response_time_minutes:
+      base: 60                         # 1 hour planning time
+      priority_multiplier:
+        low: 1.5
+        medium: 1.0
+        high: 0.6
+    auto_responses: false              # Planning requires human input
+    collaboration_required: true       # Requires cross-team input
+    planning_cycles:
+      daily: "14:00"                  # Daily planning at 2 PM
+      weekly: "friday_16:00"          # Weekly planning Friday 4 PM
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.04
+
+  # Logistics Coordination
+  logistics:
+    name: "Logistics Team"
+    email_types: ["logistics_coordination", "logistics_planning", "logistics_update"]
+    processing_speed_multiplier: 1.1
+    timewarp_scaling: true
+    response_time_minutes:
+      base: 25                         # 25 minutes logistics coordination
+      priority_multiplier:
+        low: 1.2
+        medium: 0.9
+        high: 0.4
+    auto_responses: true
+    tracking_integration: true         # Integrate with tracking systems
+    delivery_scheduling: true         # Handle delivery scheduling
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.03
+
+  # Supplier Relations
+  supplier_relations:
+    name: "Supplier Relations Team"
+    email_types: ["supplier_update", "supplier_coordination"]
+    processing_speed_multiplier: 0.9
+    timewarp_scaling: true
+    response_time_minutes:
+      base: 35                         # 35 minutes supplier coordination
+      priority_multiplier:
+        low: 1.1
+        medium: 0.8
+        high: 0.5
+    auto_responses: true
+    vendor_escalation: true            # Escalate to vendors when needed
+    contract_compliance: true         # Check contract compliance
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.03
+
+  # Management Reporting
+  management:
+    name: "Management Team"
+    email_types: ["management_report", "week_summary"]
+    processing_speed_multiplier: 2.0   # Comprehensive analysis takes time
+    timewarp_scaling: false            # Management reviews not rushed by TimeWarp
+    response_time_minutes:
+      base: 120                        # 2 hours for management review
+      priority_multiplier:
+        low: 1.5
+        medium: 1.0
+        high: 0.7
+    auto_responses: false              # Management requires human oversight
+    reporting_schedule:
+      daily_summary: "17:00"           # Daily summaries at 5 PM
+      weekly_report: "friday_17:00"    # Weekly reports Friday 5 PM
+      monthly_review: "last_friday"    # Monthly reviews last Friday
+    failure_simulation:
+      enabled: false
+      failure_rate: 0.01              # Very low failure rate
+
+# Mailbox Configuration
+mailboxes:
+  info:
+    address: "info@h-bu.de"
+    display_name: "Happy Buttons Info"
+    assigned_agents: ["customer_service"]
+    auto_routing: true                 # Auto-route based on content
+    response_templates: true          # Use response templates
+    timewarp_priority: "medium"
+    max_emails_per_hour: 50           # Throttle email processing
+
+  orders:
+    address: "orders@h-bu.de"
+    display_name: "Happy Buttons Orders"
+    assigned_agents: ["oem_management", "customer_service"]
+    auto_routing: true
+    priority_routing:                  # Route based on sender priority
+      bmw_group.com: "oem_management"
+      audi.de: "oem_management"
+      mercedes-benz.com: "oem_management"
+      porsche.com: "oem_management"
+    response_templates: true
+    timewarp_priority: "high"
+    max_emails_per_hour: 100
+
+  quality:
+    address: "quality@h-bu.de"
+    display_name: "Happy Buttons Quality"
+    assigned_agents: ["quality_control"]
+    auto_routing: false               # Manual routing for quality issues
+    escalation_required: true        # Escalation always required
+    response_templates: false        # Custom responses only
+    timewarp_priority: "urgent"
+    max_emails_per_hour: 20
+
+  logistics:
+    address: "logistics@h-bu.de"
+    display_name: "Happy Buttons Logistics"
+    assigned_agents: ["logistics"]
+    auto_routing: true
+    integration_systems: ["tracking", "warehouse", "shipping"]
+    response_templates: true
+    timewarp_priority: "medium"
+    max_emails_per_hour: 30
+
+  oem:
+    address: "oem@h-bu.de"
+    display_name: "Happy Buttons OEM"
+    assigned_agents: ["oem_management"]
+    auto_routing: true
+    vip_handling: true               # VIP treatment for OEM customers
+    response_templates: true
+    sla_monitoring: true             # Monitor SLA compliance
+    timewarp_priority: "high"
+    max_emails_per_hour: 25
+
+  management:
+    address: "management@h-bu.de"
+    display_name: "Happy Buttons Management"
+    assigned_agents: ["management"]
+    auto_routing: false              # Manual routing for management
+    confidential_handling: true     # Handle confidential information
+    response_templates: false       # Custom management responses
+    timewarp_priority: "low"         # Management not time-critical in TimeWarp
+    max_emails_per_hour: 10
+
+# TimeWarp Performance Settings
+performance:
+  email_processing:
+    concurrent_agents: 8             # Max concurrent agent processing
+    queue_size: 1000                # Max email queue size
+    batch_size: 10                  # Emails processed per batch
+    retry_attempts: 3               # Retry failed processing
+
+  memory_management:
+    max_email_history: 10000        # Max emails in memory
+    cleanup_interval: 3600          # Cleanup interval in seconds
+    archive_after_days: 30          # Archive emails after 30 days
+
+  logging:
+    level: "INFO"                   # Logging level
+    max_log_size: "100MB"          # Max log file size
+    backup_count: 5                # Number of backup log files
+    detailed_timing: false         # Enable detailed timing logs
+
+# Business Rules
+business_rules:
+  working_hours:
+    start: "08:00"                  # Business day start
+    end: "18:00"                    # Business day end
+    timezone: "Europe/Berlin"       # Business timezone
+
+  weekend_handling:
+    process_emails: false           # Process emails on weekends
+    emergency_only: true           # Only emergency emails on weekends
+    auto_responses: true           # Send auto-responses on weekends
+
+  holiday_handling:
+    auto_detect: true              # Auto-detect German holidays
+    out_of_office: true            # Send out-of-office replies
+    emergency_contact: "emergency@h-bu.de"
+
+  escalation_matrix:
+    level_1: ["team_lead"]          # First level escalation
+    level_2: ["department_manager"] # Second level escalation
+    level_3: ["management"]         # Final level escalation
+    timeout_minutes: [60, 240, 480] # Timeout for each level
+
+# Simulation & Testing
+simulation:
+  failure_scenarios:
+    enabled: false                  # Enable failure simulation
+    scenarios:
+      agent_overload: 0.1          # 10% chance agent overload
+      system_delay: 0.05           # 5% chance system delay
+      network_issue: 0.02          # 2% chance network issues
+      email_corruption: 0.01       # 1% chance email corruption
+
+  load_testing:
+    max_emails_per_second: 100      # Maximum email generation rate
+    stress_test_duration: 3600      # 1 hour stress test
+    ramp_up_time: 300              # 5 minute ramp up
+
+  reporting:
+    generate_reports: true          # Generate simulation reports
+    report_interval: 3600          # Report every hour
+    metrics_retention: 2592000     # Keep metrics for 30 days

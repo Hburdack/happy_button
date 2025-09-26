@@ -1,0 +1,147 @@
+{
+  "start_time": "2025-09-26 07:36:17.704502",
+  "tests_passed": 22,
+  "tests_failed": 6,
+  "test_details": {
+    "availability_timewarp_status": {
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-09-26T07:36:17.707840"
+    },
+    "availability_agent_status": {
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-09-26T07:36:17.710829"
+    },
+    "availability_mailbox_config": {
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-09-26T07:36:17.713721"
+    },
+    "availability_configuration": {
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-09-26T07:36:17.716495"
+    },
+    "availability_statistics": {
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2025-09-26T07:36:17.720831"
+    },
+    "config_retrieval": {
+      "success": true,
+      "details": "Config sections: ['agents', 'business_rules', 'email_patterns', 'mailboxes', 'performance', 'timewarp']",
+      "timestamp": "2025-09-26T07:36:17.723830"
+    },
+    "config_section_timewarp": {
+      "success": true,
+      "details": "Section present: True",
+      "timestamp": "2025-09-26T07:36:17.723845"
+    },
+    "config_section_agents": {
+      "success": true,
+      "details": "Section present: True",
+      "timestamp": "2025-09-26T07:36:17.723852"
+    },
+    "config_section_mailboxes": {
+      "success": true,
+      "details": "Section present: True",
+      "timestamp": "2025-09-26T07:36:17.723856"
+    },
+    "config_section_email_patterns": {
+      "success": true,
+      "details": "Section present: True",
+      "timestamp": "2025-09-26T07:36:17.723859"
+    },
+    "speed_level_1_set": {
+      "success": false,
+      "details": "Multiplier: unknown",
+      "timestamp": "2025-09-26T07:36:17.726737"
+    },
+    "speed_level_2_set": {
+      "success": false,
+      "details": "Multiplier: unknown",
+      "timestamp": "2025-09-26T07:36:17.729465"
+    },
+    "speed_level_3_set": {
+      "success": false,
+      "details": "Multiplier: unknown",
+      "timestamp": "2025-09-26T07:36:17.732018"
+    },
+    "speed_level_4_set": {
+      "success": false,
+      "details": "Multiplier: unknown",
+      "timestamp": "2025-09-26T07:36:17.734637"
+    },
+    "speed_level_5_set": {
+      "success": false,
+      "details": "Multiplier: unknown",
+      "timestamp": "2025-09-26T07:36:17.737335"
+    },
+    "weekly_cycle_progress": {
+      "success": true,
+      "details": "Progress: 0.0% -> 1.7%",
+      "timestamp": "2025-09-26T07:36:28.040140"
+    },
+    "weekly_cycle_day_tracking": {
+      "success": true,
+      "details": "Day: Friday",
+      "timestamp": "2025-09-26T07:36:28.040152"
+    },
+    "agent_status_retrieval": {
+      "success": true,
+      "details": "Agents found: 7",
+      "timestamp": "2025-09-26T07:36:28.046086"
+    },
+    "agent_customer_service_config": {
+      "success": true,
+      "details": "Active: True, Config: True",
+      "timestamp": "2025-09-26T07:36:28.046107"
+    },
+    "agent_logistics_config": {
+      "success": true,
+      "details": "Active: True, Config: True",
+      "timestamp": "2025-09-26T07:36:28.046112"
+    },
+    "agent_management_config": {
+      "success": true,
+      "details": "Active: True, Config: True",
+      "timestamp": "2025-09-26T07:36:28.046115"
+    },
+    "agent_oem_management_config": {
+      "success": true,
+      "details": "Active: True, Config: True",
+      "timestamp": "2025-09-26T07:36:28.046118"
+    },
+    "agent_production_planning_config": {
+      "success": true,
+      "details": "Active: True, Config: True",
+      "timestamp": "2025-09-26T07:36:28.046121"
+    },
+    "agent_quality_control_config": {
+      "success": true,
+      "details": "Active: True, Config: True",
+      "timestamp": "2025-09-26T07:36:28.046125"
+    },
+    "agent_supplier_relations_config": {
+      "success": true,
+      "details": "Active: True, Config: True",
+      "timestamp": "2025-09-26T07:36:28.046127"
+    },
+    "email_generation": {
+      "success": false,
+      "details": "Emails: 0 -> 0",
+      "timestamp": "2025-09-26T07:36:43.146174"
+    },
+    "email_patterns": {
+      "success": true,
+      "details": "Speed level: 3",
+      "timestamp": "2025-09-26T07:36:43.146188"
+    },
+    "performance_benchmarks": {
+      "success": true,
+      "details": "Successful tests: 3/3",
+      "timestamp": "2025-09-26T07:36:58.186504"
+    }
+  }
+}

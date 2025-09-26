@@ -1,0 +1,1042 @@
+Traceback (most recent call last):
+  File "<string>", line 4, in <module>
+  File "/home/pi/happy_button/src/real_email_connector.py", line 10, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+2025-09-25 16:45:18,937 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-25 16:45:18,937 - __main__ - INFO - ============================================================
+2025-09-25 16:45:18,937 - __main__ - INFO - Initializing email connector...
+2025-09-25 16:45:18,941 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-25 16:45:18,941 - __main__ - INFO - Testing email server connectivity...
+2025-09-25 16:45:18,941 - __main__ - ERROR - ❌ Failed to start email processor: 'RealEmailConnector' object has no attribute 'test_connection'
+2025-09-25 16:45:18,941 - __main__ - ERROR - 💥 Email processor crashed: 'RealEmailConnector' object has no attribute 'test_connection'
+2025-09-25 16:45:37,571 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-25 16:45:37,571 - __main__ - INFO - ============================================================
+2025-09-25 16:45:37,571 - __main__ - INFO - Initializing email connector...
+2025-09-25 16:45:37,575 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-25 16:45:37,575 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-25 16:45:37,575 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:45:37,575 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:45:37,575 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:45:37,575 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:46:07,576 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:46:07,576 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:46:07,576 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:46:07,576 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:46:37,576 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:46:37,576 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:46:37,576 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:46:37,576 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:47:07,578 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:47:07,578 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:47:07,578 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:47:07,578 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:47:37,578 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:47:37,579 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:47:37,579 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:47:37,579 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:48:07,579 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:48:07,579 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:48:07,579 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:48:07,579 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:48:37,579 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:48:37,580 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:48:37,580 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:48:37,580 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:49:07,580 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:49:07,580 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:49:07,580 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:49:07,580 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:49:37,581 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:49:37,581 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:49:37,581 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:49:37,581 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:50:07,581 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:50:07,582 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:50:07,582 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:50:07,582 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:50:37,582 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:50:37,582 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:50:37,582 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:50:37,582 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:51:07,583 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:51:07,583 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:51:07,583 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:51:07,583 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:51:37,583 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:51:37,583 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:51:37,583 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:51:37,583 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:52:07,584 - src.real_email_connector - ERROR - Error connecting to info@h-bu.de: 'host'
+2025-09-25 16:52:07,584 - src.real_email_connector - ERROR - Error connecting to sales@h-bu.de: 'host'
+2025-09-25 16:52:07,584 - src.real_email_connector - ERROR - Error connecting to support@h-bu.de: 'host'
+2025-09-25 16:52:07,584 - src.real_email_connector - ERROR - Error connecting to finance@h-bu.de: 'host'
+2025-09-25 16:52:27,996 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-25 16:52:37,585 - __main__ - INFO - 🏁 Email processor daemon stopped
+2025-09-25 16:53:36,271 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-25 16:53:36,272 - __main__ - INFO - ============================================================
+2025-09-25 16:53:36,272 - __main__ - INFO - Initializing email connector...
+2025-09-25 16:53:36,275 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-25 16:53:36,276 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-25 16:53:36,382 - __main__ - INFO - 📧 Processed 20 new emails (total: 20)
+2025-09-25 16:53:36,382 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:53:36,382 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:53:36,382 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:54:06,447 - __main__ - INFO - 📧 Processed 20 new emails (total: 40)
+2025-09-25 16:54:06,447 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:54:06,447 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:54:06,447 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:54:36,523 - __main__ - INFO - 📧 Processed 20 new emails (total: 60)
+2025-09-25 16:54:36,523 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:54:36,523 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:54:36,523 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:55:06,588 - __main__ - INFO - 📧 Processed 20 new emails (total: 80)
+2025-09-25 16:55:06,589 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:55:06,589 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:55:06,589 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:55:36,653 - __main__ - INFO - 📧 Processed 20 new emails (total: 100)
+2025-09-25 16:55:36,653 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:55:36,653 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:55:36,653 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:56:06,732 - __main__ - INFO - 📧 Processed 20 new emails (total: 120)
+2025-09-25 16:56:06,733 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:56:06,733 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:56:06,733 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:56:36,794 - __main__ - INFO - 📧 Processed 20 new emails (total: 140)
+2025-09-25 16:56:36,794 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:56:36,794 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:56:36,794 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:57:06,860 - __main__ - INFO - 📧 Processed 20 new emails (total: 160)
+2025-09-25 16:57:06,861 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:57:06,861 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:57:06,861 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:57:36,926 - __main__ - INFO - 📧 Processed 20 new emails (total: 180)
+2025-09-25 16:57:36,926 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:57:36,926 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:57:36,926 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:58:06,991 - __main__ - INFO - 📧 Processed 20 new emails (total: 200)
+2025-09-25 16:58:06,991 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:58:06,991 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:58:06,991 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:58:37,064 - __main__ - INFO - 📧 Processed 20 new emails (total: 220)
+2025-09-25 16:58:37,064 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:58:37,064 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:58:37,064 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:58:57,550 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-25 16:59:07,065 - __main__ - INFO - 🏁 Email processor daemon stopped
+2025-09-25 16:59:20,470 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-25 16:59:20,471 - __main__ - INFO - ============================================================
+2025-09-25 16:59:20,471 - __main__ - INFO - Initializing email connector...
+2025-09-25 16:59:20,474 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-25 16:59:20,475 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-25 16:59:50,605 - __main__ - INFO - 📧 Processed 5 new emails (total: 5)
+2025-09-25 16:59:50,605 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:59:50,605 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:59:50,605 - __main__ - INFO -   • From: info@h-bu.de - Test Email - 2025-09-24 23:08:49
+2025-09-25 17:00:20,696 - __main__ - INFO - 📧 Processed 5 new emails (total: 10)
+2025-09-25 17:00:20,696 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 17:00:20,696 - __main__ - INFO -   • From: info@h-bu.de - Test Email - 2025-09-24 22:29:53
+2025-09-25 17:00:20,696 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 17:00:50,775 - __main__ - INFO - 📧 Processed 5 new emails (total: 15)
+2025-09-25 17:00:50,775 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 17:00:50,775 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 17:00:50,775 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 17:01:20,832 - __main__ - INFO - 📧 Processed 1 new emails (total: 16)
+2025-09-25 17:01:20,832 - __main__ - INFO -   • From: "Heiko Burdack" <heiko@zetify.ai> - Welcome at h-bu
+2025-09-25 17:05:22,159 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-25 17:05:22,159 - __main__ - INFO - ============================================================
+2025-09-25 17:05:22,159 - __main__ - INFO - Initializing email connector...
+2025-09-25 17:05:22,162 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-25 17:05:22,163 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-25 17:06:21,350 - __main__ - INFO - 📧 Processed 1 new emails (total: 17)
+2025-09-25 17:06:21,350 - __main__ - INFO -   • From: test@example.com - =?utf-8?q?=F0=9F=8E=AF_PRODUCTION_MODE_Test_-_17=3A06=3A05?=
+2025-09-25 17:08:01,060 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-25 17:08:31,506 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-25 17:08:31,506 - __main__ - INFO - ============================================================
+2025-09-25 17:08:31,506 - __main__ - INFO - Initializing email connector...
+2025-09-25 17:08:31,510 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-25 17:08:31,510 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-26 07:54:48,212 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-26 07:54:48,212 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-26 07:54:55,426 - __main__ - INFO - 🏁 Email processor daemon stopped
+2025-09-26 07:55:02,305 - __main__ - INFO - 🏁 Email processor daemon stopped
+2025-09-26 08:39:57,067 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-26 08:39:57,068 - __main__ - INFO - ============================================================
+2025-09-26 08:39:57,068 - __main__ - INFO - Initializing email connector...
+2025-09-26 08:39:57,072 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-26 08:39:57,072 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-26 09:05:33,266 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-26 09:05:49,513 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-26 09:05:49,513 - __main__ - INFO - ============================================================
+2025-09-26 09:05:49,513 - __main__ - INFO - Initializing email connector...
+2025-09-26 09:05:49,517 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-26 09:05:49,517 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-26 09:07:19,741 - __main__ - INFO - 📧 Processed 5 new emails (total: 5)
+2025-09-26 09:07:19,741 - __main__ - INFO -   • From: test@example.com - =?utf-8?q?=F0=9F=8E=AF_PRODUCTION_MODE_Test_-_17=3A06=3A05?=
+2025-09-26 09:07:19,742 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-26 09:07:19,742 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-26 09:19:43,255 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-26 09:19:51,061 - __main__ - INFO - 🏁 Email processor daemon stopped
+2025-09-26 09:19:56,501 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-26 09:19:56,501 - __main__ - INFO - ============================================================
+2025-09-26 09:19:56,501 - __main__ - INFO - Initializing email connector...
+2025-09-26 09:19:56,504 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-26 09:19:56,504 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-26 12:27:28,584 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-26 12:27:44,825 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-26 12:27:44,825 - __main__ - INFO - ============================================================
+2025-09-26 12:27:44,825 - __main__ - INFO - Initializing email connector...
+2025-09-26 12:27:44,829 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-26 12:27:44,829 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-26 13:01:19,988 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-26 13:01:36,221 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-26 13:01:36,221 - __main__ - INFO - ============================================================
+2025-09-26 13:01:36,222 - __main__ - INFO - Initializing email connector...
+2025-09-26 13:01:36,225 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-26 13:01:36,226 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-26 13:07:22,762 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-26 13:07:23,073 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-26 13:07:23,074 - __main__ - INFO - ============================================================
+2025-09-26 13:07:23,074 - __main__ - INFO - Initializing email connector...
+2025-09-26 13:07:23,078 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-26 13:07:23,078 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-26 13:07:36,881 - __main__ - INFO - 🏁 Email processor daemon stopped
+2025-09-26 13:18:21,567 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-26 13:18:21,567 - __main__ - INFO - ============================================================
+2025-09-26 13:18:21,567 - __main__ - INFO - Initializing email connector...
+2025-09-26 13:18:21,571 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-26 13:18:21,571 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-26 13:22:22,024 - __main__ - INFO - 📧 Processed 5 new emails (total: 5)
+2025-09-26 13:22:22,024 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:22:22,024 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:22:22,025 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:22:52,098 - __main__ - INFO - 📧 Processed 5 new emails (total: 10)
+2025-09-26 13:22:52,098 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:22:52,098 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:22:52,098 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 13:23:22,169 - __main__ - INFO - 📧 Processed 5 new emails (total: 15)
+2025-09-26 13:23:22,169 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:23:22,169 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:23:22,169 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:24:22,307 - __main__ - INFO - 📧 Processed 5 new emails (total: 20)
+2025-09-26 13:24:22,307 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:24:22,307 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:24:22,307 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 13:24:52,379 - __main__ - INFO - 📧 Processed 5 new emails (total: 25)
+2025-09-26 13:24:52,380 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 13:24:52,380 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:24:52,380 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:25:22,450 - __main__ - INFO - 📧 Processed 4 new emails (total: 29)
+2025-09-26 13:25:22,450 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:25:22,450 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 13:25:22,450 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:25:52,535 - __main__ - INFO - 📧 Processed 5 new emails (total: 34)
+2025-09-26 13:25:52,535 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:25:52,535 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:25:52,535 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:26:22,599 - __main__ - INFO - 📧 Processed 3 new emails (total: 37)
+2025-09-26 13:26:22,600 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:26:22,600 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:26:22,600 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 13:26:52,687 - __main__ - INFO - 📧 Processed 5 new emails (total: 42)
+2025-09-26 13:26:52,687 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:26:52,687 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:26:52,687 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:27:22,749 - __main__ - INFO - 📧 Processed 3 new emails (total: 45)
+2025-09-26 13:27:22,749 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:27:22,749 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:27:22,749 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 13:27:52,822 - __main__ - INFO - 📧 Processed 5 new emails (total: 50)
+2025-09-26 13:27:52,822 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:27:52,822 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:27:52,822 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:28:22,910 - __main__ - INFO - 📧 Processed 5 new emails (total: 55)
+2025-09-26 13:28:22,911 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:28:22,911 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:28:22,911 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:28:52,993 - __main__ - INFO - 📧 Processed 5 new emails (total: 60)
+2025-09-26 13:28:52,993 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:28:52,993 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 13:28:52,993 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:29:23,072 - __main__ - INFO - 📧 Processed 5 new emails (total: 65)
+2025-09-26 13:29:23,072 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:29:23,072 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:29:23,072 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:29:53,146 - __main__ - INFO - 📧 Processed 5 new emails (total: 70)
+2025-09-26 13:29:53,146 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:29:53,146 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:29:53,146 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:30:23,234 - __main__ - INFO - 📧 Processed 5 new emails (total: 75)
+2025-09-26 13:30:23,235 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 13:30:23,235 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:30:23,235 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:30:53,313 - __main__ - INFO - 📧 Processed 5 new emails (total: 80)
+2025-09-26 13:30:53,314 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:30:53,314 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:30:53,314 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:31:23,392 - __main__ - INFO - 📧 Processed 5 new emails (total: 85)
+2025-09-26 13:31:23,393 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:31:23,393 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:31:23,393 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:31:53,482 - __main__ - INFO - 📧 Processed 5 new emails (total: 90)
+2025-09-26 13:31:53,482 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:31:53,483 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:31:53,483 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:32:23,563 - __main__ - INFO - 📧 Processed 5 new emails (total: 95)
+2025-09-26 13:32:23,563 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:32:23,563 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 13:32:23,563 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:32:53,645 - __main__ - INFO - 📧 Processed 5 new emails (total: 100)
+2025-09-26 13:32:53,645 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:32:53,645 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 13:32:53,646 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 13:33:23,722 - __main__ - INFO - 📧 Processed 5 new emails (total: 105)
+2025-09-26 13:33:23,722 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:33:23,722 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:33:23,722 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:33:53,810 - __main__ - INFO - 📧 Processed 5 new emails (total: 110)
+2025-09-26 13:33:53,811 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:33:53,811 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 13:33:53,811 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:34:23,889 - __main__ - INFO - 📧 Processed 5 new emails (total: 115)
+2025-09-26 13:34:23,890 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 13:34:23,890 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:34:23,890 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:34:53,971 - __main__ - INFO - 📧 Processed 5 new emails (total: 120)
+2025-09-26 13:34:53,971 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:34:53,971 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:34:53,971 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:35:24,055 - __main__ - INFO - 📧 Processed 5 new emails (total: 125)
+2025-09-26 13:35:24,055 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:35:24,055 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:35:24,055 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:35:54,132 - __main__ - INFO - 📧 Processed 5 new emails (total: 130)
+2025-09-26 13:35:54,133 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:35:54,133 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:35:54,133 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 13:36:24,201 - __main__ - INFO - 📧 Processed 4 new emails (total: 134)
+2025-09-26 13:36:24,201 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:36:24,201 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:36:24,201 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 13:36:54,297 - __main__ - INFO - 📧 Processed 5 new emails (total: 139)
+2025-09-26 13:36:54,297 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 13:36:54,297 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:36:54,297 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:37:24,367 - __main__ - INFO - 📧 Processed 5 new emails (total: 144)
+2025-09-26 13:37:24,368 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:37:24,368 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:37:24,368 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 13:37:54,443 - __main__ - INFO - 📧 Processed 5 new emails (total: 149)
+2025-09-26 13:37:54,443 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 13:37:54,443 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:37:54,443 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:38:24,522 - __main__ - INFO - 📧 Processed 5 new emails (total: 154)
+2025-09-26 13:38:24,522 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:38:24,522 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:38:24,522 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:38:54,600 - __main__ - INFO - 📧 Processed 5 new emails (total: 159)
+2025-09-26 13:38:54,600 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:38:54,600 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:38:54,600 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:39:24,685 - __main__ - INFO - 📧 Processed 5 new emails (total: 164)
+2025-09-26 13:39:24,685 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 13:39:24,685 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:39:24,686 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 13:39:54,767 - __main__ - INFO - 📧 Processed 5 new emails (total: 169)
+2025-09-26 13:39:54,768 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B2785 - Immediate Action Required
+2025-09-26 13:39:54,768 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B2282 - Immediate Action Required
+2025-09-26 13:39:54,768 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B9093 - Immediate Action Required
+2025-09-26 13:40:24,849 - __main__ - INFO - 📧 Processed 5 new emails (total: 174)
+2025-09-26 13:40:24,849 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B3927 - Immediate Action Required
+2025-09-26 13:40:24,849 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B3277 - Immediate Action Required
+2025-09-26 13:40:24,849 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 13:40:54,939 - __main__ - INFO - 📧 Processed 5 new emails (total: 179)
+2025-09-26 13:40:54,939 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B1025 - Immediate Action Required
+2025-09-26 13:40:54,939 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B6140 - Immediate Action Required
+2025-09-26 13:40:54,939 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B1278 - Immediate Action Required
+2025-09-26 13:41:25,019 - __main__ - INFO - 📧 Processed 5 new emails (total: 184)
+2025-09-26 13:41:25,019 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B8480 - Immediate Action Required
+2025-09-26 13:41:25,019 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B1961 - Immediate Action Required
+2025-09-26 13:41:25,019 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B7772 - Immediate Action Required
+2025-09-26 13:41:55,101 - __main__ - INFO - 📧 Processed 5 new emails (total: 189)
+2025-09-26 13:41:55,101 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B9054 - Immediate Action Required
+2025-09-26 13:41:55,101 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B1509 - Immediate Action Required
+2025-09-26 13:41:55,101 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B7926 - Immediate Action Required
+2025-09-26 13:42:25,151 - __main__ - INFO - 📧 Processed 1 new emails (total: 190)
+2025-09-26 13:42:25,151 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B7482 - Immediate Action Required
+2025-09-26 14:09:27,917 - __main__ - INFO - 📧 Processed 5 new emails (total: 195)
+2025-09-26 14:09:27,917 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:09:27,917 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 14:09:27,917 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:09:57,990 - __main__ - INFO - 📧 Processed 5 new emails (total: 200)
+2025-09-26 14:09:57,991 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:09:57,991 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:09:57,991 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:10:28,065 - __main__ - INFO - 📧 Processed 5 new emails (total: 205)
+2025-09-26 14:10:28,065 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:10:28,065 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 14:10:28,065 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:10:58,138 - __main__ - INFO - 📧 Processed 5 new emails (total: 210)
+2025-09-26 14:10:58,138 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:10:58,138 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:10:58,138 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:11:28,207 - __main__ - INFO - 📧 Processed 2 new emails (total: 212)
+2025-09-26 14:11:28,208 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:11:28,208 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:24:29,648 - __main__ - INFO - 📧 Processed 5 new emails (total: 217)
+2025-09-26 14:24:29,649 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 14:24:29,649 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:24:29,649 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:24:59,732 - __main__ - INFO - 📧 Processed 5 new emails (total: 222)
+2025-09-26 14:24:59,733 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 14:24:59,733 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:24:59,733 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:25:29,813 - __main__ - INFO - 📧 Processed 5 new emails (total: 227)
+2025-09-26 14:25:29,813 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:25:29,813 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:25:29,813 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:25:59,915 - __main__ - INFO - 📧 Processed 5 new emails (total: 232)
+2025-09-26 14:25:59,915 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:25:59,916 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:25:59,916 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:26:29,983 - __main__ - INFO - 📧 Processed 5 new emails (total: 237)
+2025-09-26 14:26:29,983 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:26:29,983 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:26:29,984 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:27:00,056 - __main__ - INFO - 📧 Processed 5 new emails (total: 242)
+2025-09-26 14:27:00,056 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 14:27:00,056 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:27:00,056 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 14:27:30,135 - __main__ - INFO - 📧 Processed 5 new emails (total: 247)
+2025-09-26 14:27:30,135 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:27:30,135 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:27:30,136 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:28:00,203 - __main__ - INFO - 📧 Processed 5 new emails (total: 252)
+2025-09-26 14:28:00,203 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:28:00,203 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:28:00,203 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:28:30,276 - __main__ - INFO - 📧 Processed 5 new emails (total: 257)
+2025-09-26 14:28:30,276 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:28:30,276 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:28:30,276 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:29:00,352 - __main__ - INFO - 📧 Processed 5 new emails (total: 262)
+2025-09-26 14:29:00,352 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:29:00,353 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:29:00,353 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:29:30,433 - __main__ - INFO - 📧 Processed 5 new emails (total: 267)
+2025-09-26 14:29:30,433 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:29:30,433 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:29:30,433 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:30:00,500 - __main__ - INFO - 📧 Processed 5 new emails (total: 272)
+2025-09-26 14:30:00,500 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:30:00,500 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:30:00,500 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:30:30,584 - __main__ - INFO - 📧 Processed 5 new emails (total: 277)
+2025-09-26 14:30:30,585 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:30:30,585 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:30:30,585 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 14:31:00,654 - __main__ - INFO - 📧 Processed 5 new emails (total: 282)
+2025-09-26 14:31:00,655 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:31:00,655 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:31:00,655 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:31:30,730 - __main__ - INFO - 📧 Processed 5 new emails (total: 287)
+2025-09-26 14:31:30,730 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:31:30,730 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:31:30,730 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:32:00,799 - __main__ - INFO - 📧 Processed 5 new emails (total: 292)
+2025-09-26 14:32:00,799 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:32:00,799 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:32:00,799 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:32:30,871 - __main__ - INFO - 📧 Processed 5 new emails (total: 297)
+2025-09-26 14:32:30,871 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:32:30,871 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:32:30,871 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:33:00,942 - __main__ - INFO - 📧 Processed 5 new emails (total: 302)
+2025-09-26 14:33:00,942 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:33:00,942 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:33:00,942 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:33:31,016 - __main__ - INFO - 📧 Processed 5 new emails (total: 307)
+2025-09-26 14:33:31,016 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B9093 - Immediate Action Required
+2025-09-26 14:33:31,016 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B8847 - Immediate Action Required
+2025-09-26 14:33:31,016 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B3711 - Immediate Action Required
+2025-09-26 14:34:01,095 - __main__ - INFO - 📧 Processed 5 new emails (total: 312)
+2025-09-26 14:34:01,095 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B4956 - Immediate Action Required
+2025-09-26 14:34:01,095 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:34:01,095 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:34:31,171 - __main__ - INFO - 📧 Processed 5 new emails (total: 317)
+2025-09-26 14:34:31,171 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B3987 - Immediate Action Required
+2025-09-26 14:34:31,171 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B5527 - Immediate Action Required
+2025-09-26 14:34:31,171 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B4024 - Immediate Action Required
+2025-09-26 14:35:01,250 - __main__ - INFO - 📧 Processed 5 new emails (total: 322)
+2025-09-26 14:35:01,250 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B7345 - Immediate Action Required
+2025-09-26 14:35:01,250 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B2170 - Immediate Action Required
+2025-09-26 14:35:01,250 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B9741 - Immediate Action Required
+2025-09-26 14:35:31,347 - __main__ - INFO - 📧 Processed 5 new emails (total: 327)
+2025-09-26 14:35:31,347 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B1800 - Immediate Action Required
+2025-09-26 14:35:31,347 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B9516 - Immediate Action Required
+2025-09-26 14:35:31,347 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B6011 - Immediate Action Required
+2025-09-26 14:36:01,443 - __main__ - INFO - 📧 Processed 5 new emails (total: 332)
+2025-09-26 14:36:01,444 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B2861 - Immediate Action Required
+2025-09-26 14:36:01,444 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B1341 - Immediate Action Required
+2025-09-26 14:36:01,444 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B3377 - Immediate Action Required
+2025-09-26 14:36:31,524 - __main__ - INFO - 📧 Processed 5 new emails (total: 337)
+2025-09-26 14:36:31,524 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B4199 - Immediate Action Required
+2025-09-26 14:36:31,525 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B3165 - Immediate Action Required
+2025-09-26 14:36:31,525 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B2449 - Immediate Action Required
+2025-09-26 14:37:01,592 - __main__ - INFO - 📧 Processed 5 new emails (total: 342)
+2025-09-26 14:37:01,592 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B2142 - Immediate Action Required
+2025-09-26 14:37:01,592 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B6878 - Immediate Action Required
+2025-09-26 14:37:01,592 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B6018 - Immediate Action Required
+2025-09-26 14:37:31,662 - __main__ - INFO - 📧 Processed 5 new emails (total: 347)
+2025-09-26 14:37:31,662 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:37:31,662 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:37:31,662 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:38:01,754 - __main__ - INFO - 📧 Processed 5 new emails (total: 352)
+2025-09-26 14:38:01,754 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 14:38:01,754 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:38:01,754 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:38:31,832 - __main__ - INFO - 📧 Processed 5 new emails (total: 357)
+2025-09-26 14:38:31,832 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:38:31,832 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:38:31,832 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:39:01,940 - __main__ - INFO - 📧 Processed 5 new emails (total: 362)
+2025-09-26 14:39:01,940 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:39:01,940 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 14:39:01,940 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:39:32,018 - __main__ - INFO - 📧 Processed 5 new emails (total: 367)
+2025-09-26 14:39:32,018 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:39:32,018 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:39:32,018 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 14:40:02,086 - __main__ - INFO - 📧 Processed 4 new emails (total: 371)
+2025-09-26 14:40:02,086 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:40:02,086 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:40:02,086 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:40:32,163 - __main__ - INFO - 📧 Processed 5 new emails (total: 376)
+2025-09-26 14:40:32,163 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:40:32,163 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 14:40:32,163 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:41:02,236 - __main__ - INFO - 📧 Processed 5 new emails (total: 381)
+2025-09-26 14:41:02,236 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:41:02,236 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:41:02,236 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:41:32,306 - __main__ - INFO - 📧 Processed 5 new emails (total: 386)
+2025-09-26 14:41:32,307 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 14:41:32,307 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 14:41:32,307 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 14:42:02,361 - __main__ - INFO - 📧 Processed 1 new emails (total: 387)
+2025-09-26 14:42:02,361 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:09:35,224 - __main__ - INFO - 📧 Processed 5 new emails (total: 392)
+2025-09-26 15:09:35,224 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 15:09:35,224 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:09:35,224 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:10:05,290 - __main__ - INFO - 📧 Processed 4 new emails (total: 396)
+2025-09-26 15:10:05,290 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:10:05,290 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:10:05,290 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:10:35,365 - __main__ - INFO - 📧 Processed 5 new emails (total: 401)
+2025-09-26 15:10:35,365 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:10:35,365 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:10:35,365 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:11:05,442 - __main__ - INFO - 📧 Processed 5 new emails (total: 406)
+2025-09-26 15:11:05,442 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 15:11:05,442 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:11:05,442 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:11:35,514 - __main__ - INFO - 📧 Processed 3 new emails (total: 409)
+2025-09-26 15:11:35,514 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:11:35,514 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 15:11:35,514 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:24:06,846 - __main__ - INFO - 📧 Processed 5 new emails (total: 414)
+2025-09-26 15:24:06,846 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:24:06,846 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:24:06,846 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:24:36,928 - __main__ - INFO - 📧 Processed 5 new emails (total: 419)
+2025-09-26 15:24:36,928 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:24:36,928 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:24:36,928 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:25:07,004 - __main__ - INFO - 📧 Processed 3 new emails (total: 422)
+2025-09-26 15:25:07,004 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:25:07,004 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:25:07,004 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:25:37,079 - __main__ - INFO - 📧 Processed 5 new emails (total: 427)
+2025-09-26 15:25:37,079 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:25:37,079 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:25:37,079 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:26:07,209 - __main__ - INFO - 📧 Processed 2 new emails (total: 429)
+2025-09-26 15:26:07,210 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:26:07,210 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:26:37,284 - __main__ - INFO - 📧 Processed 5 new emails (total: 434)
+2025-09-26 15:26:37,284 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:26:37,284 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:26:37,284 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 15:27:07,357 - __main__ - INFO - 📧 Processed 5 new emails (total: 439)
+2025-09-26 15:27:07,357 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:27:07,357 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 15:27:07,357 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:27:37,432 - __main__ - INFO - 📧 Processed 5 new emails (total: 444)
+2025-09-26 15:27:37,433 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:27:37,433 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:27:37,433 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:28:07,507 - __main__ - INFO - 📧 Processed 5 new emails (total: 449)
+2025-09-26 15:28:07,507 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:28:07,507 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:28:07,507 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:28:37,580 - __main__ - INFO - 📧 Processed 5 new emails (total: 454)
+2025-09-26 15:28:37,580 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:28:37,580 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 15:28:37,580 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:29:07,648 - __main__ - INFO - 📧 Processed 5 new emails (total: 459)
+2025-09-26 15:29:07,648 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:29:07,648 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:29:07,648 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:29:37,737 - __main__ - INFO - 📧 Processed 5 new emails (total: 464)
+2025-09-26 15:29:37,738 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:29:37,738 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:29:37,738 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:30:07,845 - __main__ - INFO - 📧 Processed 5 new emails (total: 469)
+2025-09-26 15:30:07,845 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:30:07,845 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:30:07,845 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 15:30:37,921 - __main__ - INFO - 📧 Processed 5 new emails (total: 474)
+2025-09-26 15:30:37,921 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 15:30:37,921 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:30:37,921 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:31:07,998 - __main__ - INFO - 📧 Processed 5 new emails (total: 479)
+2025-09-26 15:31:07,999 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:31:07,999 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:31:07,999 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:31:38,070 - __main__ - INFO - 📧 Processed 5 new emails (total: 484)
+2025-09-26 15:31:38,070 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:31:38,071 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:31:38,071 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:32:08,178 - __main__ - INFO - 📧 Processed 5 new emails (total: 489)
+2025-09-26 15:32:08,178 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:32:08,178 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:32:08,178 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:32:38,253 - __main__ - INFO - 📧 Processed 5 new emails (total: 494)
+2025-09-26 15:32:38,253 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:32:38,253 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:32:38,253 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:33:08,326 - __main__ - INFO - 📧 Processed 5 new emails (total: 499)
+2025-09-26 15:33:08,326 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:33:08,326 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:33:08,326 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:33:38,399 - __main__ - INFO - 📧 Processed 5 new emails (total: 504)
+2025-09-26 15:33:38,399 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:33:38,399 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:33:38,399 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:34:08,468 - __main__ - INFO - 📧 Processed 5 new emails (total: 509)
+2025-09-26 15:34:08,468 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:34:08,468 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:34:08,468 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:34:38,544 - __main__ - INFO - 📧 Processed 5 new emails (total: 514)
+2025-09-26 15:34:38,544 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:34:38,544 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:34:38,544 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:35:08,616 - __main__ - INFO - 📧 Processed 5 new emails (total: 519)
+2025-09-26 15:35:08,616 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:35:08,616 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:35:08,616 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:35:38,685 - __main__ - INFO - 📧 Processed 5 new emails (total: 524)
+2025-09-26 15:35:38,685 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:35:38,685 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:35:38,685 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:36:08,756 - __main__ - INFO - 📧 Processed 5 new emails (total: 529)
+2025-09-26 15:36:08,757 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:36:08,757 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 15:36:08,757 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:36:38,834 - __main__ - INFO - 📧 Processed 5 new emails (total: 534)
+2025-09-26 15:36:38,834 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B4923 - Immediate Action Required
+2025-09-26 15:36:38,834 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B6413 - Immediate Action Required
+2025-09-26 15:36:38,834 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B8611 - Immediate Action Required
+2025-09-26 15:37:08,905 - __main__ - INFO - 📧 Processed 5 new emails (total: 539)
+2025-09-26 15:37:08,905 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B7942 - Immediate Action Required
+2025-09-26 15:37:08,905 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:37:08,905 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:37:38,978 - __main__ - INFO - 📧 Processed 5 new emails (total: 544)
+2025-09-26 15:37:38,978 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B6685 - Immediate Action Required
+2025-09-26 15:37:38,978 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B1717 - Immediate Action Required
+2025-09-26 15:37:38,978 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B3022 - Immediate Action Required
+2025-09-26 15:38:09,049 - __main__ - INFO - 📧 Processed 5 new emails (total: 549)
+2025-09-26 15:38:09,050 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B1999 - Immediate Action Required
+2025-09-26 15:38:09,050 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B3551 - Immediate Action Required
+2025-09-26 15:38:09,050 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B4872 - Immediate Action Required
+2025-09-26 15:38:39,124 - __main__ - INFO - 📧 Processed 5 new emails (total: 554)
+2025-09-26 15:38:39,124 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B5895 - Immediate Action Required
+2025-09-26 15:38:39,124 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B5810 - Immediate Action Required
+2025-09-26 15:38:39,124 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B4854 - Immediate Action Required
+2025-09-26 15:39:09,197 - __main__ - INFO - 📧 Processed 5 new emails (total: 559)
+2025-09-26 15:39:09,197 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:39:09,197 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B1125 - Immediate Action Required
+2025-09-26 15:39:09,197 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B7958 - Immediate Action Required
+2025-09-26 15:39:39,269 - __main__ - INFO - 📧 Processed 5 new emails (total: 564)
+2025-09-26 15:39:39,269 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:39:39,269 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:39:39,269 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 15:40:09,343 - __main__ - INFO - 📧 Processed 5 new emails (total: 569)
+2025-09-26 15:40:09,343 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:40:09,343 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 15:40:09,343 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:40:39,424 - __main__ - INFO - 📧 Processed 5 new emails (total: 574)
+2025-09-26 15:40:39,424 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:40:39,424 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 15:40:39,424 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:41:09,507 - __main__ - INFO - 📧 Processed 5 new emails (total: 579)
+2025-09-26 15:41:09,508 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:41:09,508 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:41:09,508 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:41:39,584 - __main__ - INFO - 📧 Processed 5 new emails (total: 584)
+2025-09-26 15:41:39,584 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 15:41:39,584 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 15:41:39,584 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:09:12,467 - __main__ - INFO - 📧 Processed 5 new emails (total: 589)
+2025-09-26 16:09:12,468 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:09:12,468 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:09:12,468 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:09:42,541 - __main__ - INFO - 📧 Processed 5 new emails (total: 594)
+2025-09-26 16:09:42,541 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:09:42,541 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:09:42,541 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:10:12,617 - __main__ - INFO - 📧 Processed 5 new emails (total: 599)
+2025-09-26 16:10:12,617 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:10:12,617 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:10:12,617 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:10:42,707 - __main__ - INFO - 📧 Processed 5 new emails (total: 604)
+2025-09-26 16:10:42,707 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:10:42,707 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 16:10:42,707 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:11:12,777 - __main__ - INFO - 📧 Processed 3 new emails (total: 607)
+2025-09-26 16:11:12,778 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:11:12,778 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:11:12,778 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:24:14,183 - __main__ - INFO - 📧 Processed 4 new emails (total: 611)
+2025-09-26 16:24:14,184 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:24:14,184 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:24:14,184 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:24:44,260 - __main__ - INFO - 📧 Processed 5 new emails (total: 616)
+2025-09-26 16:24:44,260 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:24:44,260 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:24:44,260 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:25:14,325 - __main__ - INFO - 📧 Processed 3 new emails (total: 619)
+2025-09-26 16:25:14,325 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:25:14,325 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:25:14,325 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:25:44,400 - __main__ - INFO - 📧 Processed 5 new emails (total: 624)
+2025-09-26 16:25:44,400 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:25:44,400 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 16:25:44,400 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:26:14,463 - __main__ - INFO - 📧 Processed 3 new emails (total: 627)
+2025-09-26 16:26:14,463 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:26:14,463 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:26:14,463 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:26:44,552 - __main__ - INFO - 📧 Processed 5 new emails (total: 632)
+2025-09-26 16:26:44,552 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:26:44,552 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:26:44,552 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:27:14,634 - __main__ - INFO - 📧 Processed 5 new emails (total: 637)
+2025-09-26 16:27:14,634 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:27:14,634 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:27:14,634 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:27:44,722 - __main__ - INFO - 📧 Processed 5 new emails (total: 642)
+2025-09-26 16:27:44,722 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:27:44,722 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:27:44,722 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:28:14,803 - __main__ - INFO - 📧 Processed 5 new emails (total: 647)
+2025-09-26 16:28:14,803 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:28:14,803 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:28:14,803 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:28:44,889 - __main__ - INFO - 📧 Processed 5 new emails (total: 652)
+2025-09-26 16:28:44,889 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:28:44,889 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:28:44,889 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 16:29:14,967 - __main__ - INFO - 📧 Processed 5 new emails (total: 657)
+2025-09-26 16:29:14,967 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:29:14,967 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 16:29:14,967 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:29:45,043 - __main__ - INFO - 📧 Processed 5 new emails (total: 662)
+2025-09-26 16:29:45,043 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:29:45,043 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:29:45,043 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:30:15,147 - __main__ - INFO - 📧 Processed 5 new emails (total: 667)
+2025-09-26 16:30:15,148 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:30:15,148 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:30:15,148 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:30:45,221 - __main__ - INFO - 📧 Processed 5 new emails (total: 672)
+2025-09-26 16:30:45,221 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:30:45,221 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:30:45,221 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:31:15,291 - __main__ - INFO - 📧 Processed 5 new emails (total: 677)
+2025-09-26 16:31:15,291 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:31:15,291 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:31:15,291 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:31:45,369 - __main__ - INFO - 📧 Processed 5 new emails (total: 682)
+2025-09-26 16:31:45,369 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 16:31:45,369 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:31:45,370 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:32:15,439 - __main__ - INFO - 📧 Processed 5 new emails (total: 687)
+2025-09-26 16:32:15,439 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:32:15,439 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:32:15,440 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:32:45,513 - __main__ - INFO - 📧 Processed 5 new emails (total: 692)
+2025-09-26 16:32:45,514 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:32:45,514 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:32:45,514 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:33:15,581 - __main__ - INFO - 📧 Processed 5 new emails (total: 697)
+2025-09-26 16:33:15,581 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 16:33:15,581 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:33:15,581 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:33:45,658 - __main__ - INFO - 📧 Processed 5 new emails (total: 702)
+2025-09-26 16:33:45,658 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:33:45,658 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:33:45,658 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:34:15,733 - __main__ - INFO - 📧 Processed 5 new emails (total: 707)
+2025-09-26 16:34:15,733 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:34:15,733 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:34:15,733 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:34:45,807 - __main__ - INFO - 📧 Processed 5 new emails (total: 712)
+2025-09-26 16:34:45,808 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:34:45,808 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:34:45,808 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:35:15,881 - __main__ - INFO - 📧 Processed 5 new emails (total: 717)
+2025-09-26 16:35:15,881 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:35:15,881 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:35:15,881 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:35:45,956 - __main__ - INFO - 📧 Processed 5 new emails (total: 722)
+2025-09-26 16:35:45,956 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:35:45,956 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:35:45,956 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:36:16,026 - __main__ - INFO - 📧 Processed 5 new emails (total: 727)
+2025-09-26 16:36:16,026 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:36:16,026 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:36:16,026 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:36:46,097 - __main__ - INFO - 📧 Processed 5 new emails (total: 732)
+2025-09-26 16:36:46,097 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:36:46,097 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:36:46,097 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:37:16,170 - __main__ - INFO - 📧 Processed 5 new emails (total: 737)
+2025-09-26 16:37:16,171 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:37:16,171 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:37:16,171 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 16:37:46,242 - __main__ - INFO - 📧 Processed 5 new emails (total: 742)
+2025-09-26 16:37:46,242 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:37:46,242 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 16:37:46,242 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:38:16,316 - __main__ - INFO - 📧 Processed 5 new emails (total: 747)
+2025-09-26 16:38:16,316 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:38:16,316 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:38:16,316 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 16:38:46,393 - __main__ - INFO - 📧 Processed 5 new emails (total: 752)
+2025-09-26 16:38:46,393 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:38:46,393 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:38:46,393 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:39:16,470 - __main__ - INFO - 📧 Processed 5 new emails (total: 757)
+2025-09-26 16:39:16,470 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:39:16,470 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 16:39:16,470 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:39:46,543 - __main__ - INFO - 📧 Processed 5 new emails (total: 762)
+2025-09-26 16:39:46,544 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:39:46,544 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:39:46,544 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:40:16,621 - __main__ - INFO - 📧 Processed 5 new emails (total: 767)
+2025-09-26 16:40:16,621 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:40:16,621 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:40:16,621 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:40:46,716 - __main__ - INFO - 📧 Processed 5 new emails (total: 772)
+2025-09-26 16:40:46,716 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:40:46,716 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 16:40:46,716 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 16:41:16,792 - __main__ - INFO - 📧 Processed 5 new emails (total: 777)
+2025-09-26 16:41:16,792 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 16:41:16,793 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 16:41:16,793 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:41:46,862 - __main__ - INFO - 📧 Processed 5 new emails (total: 782)
+2025-09-26 16:41:46,862 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:41:46,862 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 16:41:46,862 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:09:19,747 - __main__ - INFO - 📧 Processed 5 new emails (total: 787)
+2025-09-26 17:09:19,747 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:09:19,747 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:09:19,747 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:09:49,823 - __main__ - INFO - 📧 Processed 5 new emails (total: 792)
+2025-09-26 17:09:49,823 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:09:49,823 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:09:49,823 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:10:19,904 - __main__ - INFO - 📧 Processed 5 new emails (total: 797)
+2025-09-26 17:10:19,904 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:10:19,904 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:10:19,904 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:10:49,984 - __main__ - INFO - 📧 Processed 5 new emails (total: 802)
+2025-09-26 17:10:49,984 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:10:49,984 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 17:10:49,984 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 17:11:20,053 - __main__ - INFO - 📧 Processed 3 new emails (total: 805)
+2025-09-26 17:11:20,053 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:11:20,053 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:11:20,053 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:24:52,069 - __main__ - INFO - 📧 Processed 5 new emails (total: 810)
+2025-09-26 17:24:52,069 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:24:52,069 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:24:52,069 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:25:22,145 - __main__ - INFO - 📧 Processed 5 new emails (total: 815)
+2025-09-26 17:25:22,145 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:25:22,145 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:25:22,145 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:25:52,221 - __main__ - INFO - 📧 Processed 5 new emails (total: 820)
+2025-09-26 17:25:52,221 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:25:52,221 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:25:52,221 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:26:22,296 - __main__ - INFO - 📧 Processed 5 new emails (total: 825)
+2025-09-26 17:26:22,296 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:26:22,296 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:26:22,296 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:26:52,384 - __main__ - INFO - 📧 Processed 5 new emails (total: 830)
+2025-09-26 17:26:52,384 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:26:52,384 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:26:52,384 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:27:22,454 - __main__ - INFO - 📧 Processed 5 new emails (total: 835)
+2025-09-26 17:27:22,454 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:27:22,454 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:27:22,454 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:27:52,524 - __main__ - INFO - 📧 Processed 5 new emails (total: 840)
+2025-09-26 17:27:52,525 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:27:52,525 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:27:52,525 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:28:22,600 - __main__ - INFO - 📧 Processed 5 new emails (total: 845)
+2025-09-26 17:28:22,600 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:28:22,600 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:28:22,600 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:28:52,683 - __main__ - INFO - 📧 Processed 5 new emails (total: 850)
+2025-09-26 17:28:52,683 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:28:52,683 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:28:52,683 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:29:22,757 - __main__ - INFO - 📧 Processed 5 new emails (total: 855)
+2025-09-26 17:29:22,758 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:29:22,758 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 17:29:22,758 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:29:52,857 - __main__ - INFO - 📧 Processed 5 new emails (total: 860)
+2025-09-26 17:29:52,858 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:29:52,858 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:29:52,858 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:30:22,968 - __main__ - INFO - 📧 Processed 5 new emails (total: 865)
+2025-09-26 17:30:22,968 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:30:22,968 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:30:22,968 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:30:53,051 - __main__ - INFO - 📧 Processed 5 new emails (total: 870)
+2025-09-26 17:30:53,051 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:30:53,051 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:30:53,051 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:31:23,149 - __main__ - INFO - 📧 Processed 5 new emails (total: 875)
+2025-09-26 17:31:23,149 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:31:23,149 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:31:23,149 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:31:53,230 - __main__ - INFO - 📧 Processed 5 new emails (total: 880)
+2025-09-26 17:31:53,231 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:31:53,231 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:31:53,231 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:32:23,306 - __main__ - INFO - 📧 Processed 5 new emails (total: 885)
+2025-09-26 17:32:23,306 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 17:32:23,306 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:32:23,306 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:32:53,393 - __main__ - INFO - 📧 Processed 5 new emails (total: 890)
+2025-09-26 17:32:53,393 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:32:53,394 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:32:53,394 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 17:33:23,471 - __main__ - INFO - 📧 Processed 5 new emails (total: 895)
+2025-09-26 17:33:23,471 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:33:23,471 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:33:23,472 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:33:53,564 - __main__ - INFO - 📧 Processed 5 new emails (total: 900)
+2025-09-26 17:33:53,564 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:33:53,564 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:33:53,564 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:34:23,639 - __main__ - INFO - 📧 Processed 5 new emails (total: 905)
+2025-09-26 17:34:23,639 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:34:23,639 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:34:23,639 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:34:53,710 - __main__ - INFO - 📧 Processed 5 new emails (total: 910)
+2025-09-26 17:34:53,710 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:34:53,710 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:34:53,710 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:35:23,781 - __main__ - INFO - 📧 Processed 5 new emails (total: 915)
+2025-09-26 17:35:23,781 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:35:23,781 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 17:35:23,781 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:35:53,879 - __main__ - INFO - 📧 Processed 5 new emails (total: 920)
+2025-09-26 17:35:53,879 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:35:53,879 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:35:53,879 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:36:23,950 - __main__ - INFO - 📧 Processed 5 new emails (total: 925)
+2025-09-26 17:36:23,950 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:36:23,950 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 17:36:23,950 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:36:54,037 - __main__ - INFO - 📧 Processed 5 new emails (total: 930)
+2025-09-26 17:36:54,037 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:36:54,037 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:36:54,037 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:37:24,108 - __main__ - INFO - 📧 Processed 5 new emails (total: 935)
+2025-09-26 17:37:24,108 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:37:24,108 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:37:24,108 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:37:54,179 - __main__ - INFO - 📧 Processed 5 new emails (total: 940)
+2025-09-26 17:37:54,180 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:37:54,180 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 17:37:54,180 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:38:24,249 - __main__ - INFO - 📧 Processed 5 new emails (total: 945)
+2025-09-26 17:38:24,249 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:38:24,249 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:38:24,250 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:38:54,341 - __main__ - INFO - 📧 Processed 5 new emails (total: 950)
+2025-09-26 17:38:54,341 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:38:54,341 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:38:54,341 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:39:24,429 - __main__ - INFO - 📧 Processed 5 new emails (total: 955)
+2025-09-26 17:39:24,429 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B4237 - Immediate Action Required
+2025-09-26 17:39:24,429 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:39:24,429 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 17:39:54,508 - __main__ - INFO - 📧 Processed 5 new emails (total: 960)
+2025-09-26 17:39:54,508 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B7498 - Immediate Action Required
+2025-09-26 17:39:54,508 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B2106 - Immediate Action Required
+2025-09-26 17:39:54,508 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B3373 - Immediate Action Required
+2025-09-26 17:40:24,597 - __main__ - INFO - 📧 Processed 5 new emails (total: 965)
+2025-09-26 17:40:24,597 - __main__ - INFO -   • From: quality@retail-chain.com - URGENT: Quality Issue - Batch #B4096 - Immediate Action Required
+2025-09-26 17:40:24,597 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B1485 - Immediate Action Required
+2025-09-26 17:40:24,597 - __main__ - INFO -   • From: complaints@customer-service.com - URGENT: Quality Issue - Batch #B4662 - Immediate Action Required
+2025-09-26 17:40:54,681 - __main__ - INFO - 📧 Processed 5 new emails (total: 970)
+2025-09-26 17:40:54,681 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:40:54,681 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:40:54,681 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:41:24,760 - __main__ - INFO - 📧 Processed 5 new emails (total: 975)
+2025-09-26 17:41:24,760 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Audi Project Button Order - Priority
+2025-09-26 17:41:24,760 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 17:41:24,760 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 17:41:54,842 - __main__ - INFO - 📧 Processed 5 new emails (total: 980)
+2025-09-26 17:41:54,842 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 17:41:54,843 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 17:41:54,843 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 17:52:58,680 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-26 17:53:14,928 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-26 17:53:14,928 - __main__ - INFO - ============================================================
+2025-09-26 17:53:14,928 - __main__ - INFO - Initializing email connector...
+2025-09-26 17:53:14,931 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-26 17:53:14,932 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-26 17:56:52,881 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-26 17:57:30,636 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-26 17:57:30,636 - __main__ - INFO - ============================================================
+2025-09-26 17:57:30,636 - __main__ - INFO - Initializing email connector...
+2025-09-26 17:57:30,640 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-26 17:57:30,640 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-26 18:09:33,817 - __main__ - INFO - 📧 Processed 5 new emails (total: 5)
+2025-09-26 18:09:33,817 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 18:09:33,817 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: BMW Project Button Order - Priority
+2025-09-26 18:09:33,817 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 18:10:03,897 - __main__ - INFO - 📧 Processed 5 new emails (total: 10)
+2025-09-26 18:10:03,897 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 18:10:03,897 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: BMW Project Button Order - Priority
+2025-09-26 18:10:03,897 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Mercedes Project Button Order - Priority
+2025-09-26 18:10:33,985 - __main__ - INFO - 📧 Processed 5 new emails (total: 15)
+2025-09-26 18:10:33,985 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 18:10:33,985 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: VW Project Button Order - Priority
+2025-09-26 18:10:33,985 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: VW Project Button Order - Priority
+2025-09-26 18:11:04,058 - __main__ - INFO - 📧 Processed 5 new emails (total: 20)
+2025-09-26 18:11:04,058 - __main__ - INFO -   • From: orders@manufacturing-corp.com - URGENT: Porsche Project Button Order - Priority
+2025-09-26 18:11:04,058 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority
+2025-09-26 18:11:04,058 - __main__ - INFO -   • From: weekend-orders@system.internal - URGENT: Audi Project Button Order - Priority

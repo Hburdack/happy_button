@@ -3,7 +3,11 @@ PDF Parser for Happy Buttons Release 2
 Parses order and invoice PDFs to JSON schema
 """
 
-import pdfplumber
+try:
+    import pdfplumber  # type: ignore
+except ImportError:  # pragma: no cover - optional dependency in some envs
+    pdfplumber = None
+
 import PyPDF2
 import re
 import json
@@ -115,19 +119,22 @@ class PDFParser:
         """Extract text from PDF using pdfplumber (primary) and PyPDF2 (fallback)"""
         text = ""
 
-        # Try pdfplumber first (better for tables)
-        try:
-            with pdfplumber.open(pdf_path) as pdf:
-                for page in pdf.pages:
-                    page_text = page.extract_text()
-                    if page_text:
-                        text += page_text + "\n"
+        # Try pdfplumber first (better for tables) when available
+        if pdfplumber is not None:
+            try:
+                with pdfplumber.open(pdf_path) as pdf:
+                    for page in pdf.pages:
+                        page_text = page.extract_text()
+                        if page_text:
+                            text += page_text + "\n"
 
-            if text.strip():
-                return text
+                if text.strip():
+                    return text
 
-        except Exception as e:
-            self.logger.warning(f"pdfplumber failed for {pdf_path}: {e}")
+            except Exception as e:
+                self.logger.warning(f"pdfplumber failed for {pdf_path}: {e}")
+        else:
+            self.logger.debug("pdfplumber not installed; falling back to PyPDF2")
 
         # Fallback to PyPDF2
         try:

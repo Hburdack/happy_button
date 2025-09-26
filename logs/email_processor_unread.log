@@ -1,0 +1,23 @@
+2025-09-25 16:59:20,470 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-25 16:59:20,471 - __main__ - INFO - ============================================================
+2025-09-25 16:59:20,471 - __main__ - INFO - Initializing email connector...
+2025-09-25 16:59:20,474 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-25 16:59:20,475 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-25 16:59:50,605 - __main__ - INFO - 📧 Processed 5 new emails (total: 5)
+2025-09-25 16:59:50,605 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:59:50,605 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:59:50,605 - __main__ - INFO -   • From: info@h-bu.de - Test Email - 2025-09-24 23:08:49
+2025-09-25 17:00:20,696 - __main__ - INFO - 📧 Processed 5 new emails (total: 10)
+2025-09-25 17:00:20,696 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 17:00:20,696 - __main__ - INFO -   • From: info@h-bu.de - Test Email - 2025-09-24 22:29:53
+2025-09-25 17:00:20,696 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 17:00:50,775 - __main__ - INFO - 📧 Processed 5 new emails (total: 15)
+2025-09-25 17:00:50,775 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 17:00:50,775 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 17:00:50,775 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 17:01:20,832 - __main__ - INFO - 📧 Processed 1 new emails (total: 16)
+2025-09-25 17:01:20,832 - __main__ - INFO -   • From: "Heiko Burdack" <heiko@zetify.ai> - Welcome at h-bu
+2025-09-25 17:06:21,350 - __main__ - INFO - 📧 Processed 1 new emails (total: 17)
+2025-09-25 17:06:21,350 - __main__ - INFO -   • From: test@example.com - =?utf-8?q?=F0=9F=8E=AF_PRODUCTION_MODE_Test_-_17=3A06=3A05?=
+2025-09-26 07:54:48,212 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-26 07:54:55,426 - __main__ - INFO - 🏁 Email processor daemon stopped

@@ -1,25 +1,25 @@
 # E-Mail-Server Konfiguration für echte Integration
 
 # BETRIEBSMODUS
-mode: "simulation"  # Optionen: "simulation" | "production"
+mode: "production"  # Optionen: "simulation" | "production"
 
 # PRODUCTION E-MAIL-SERVER (wenn mode: "production")
 production_email:
   # IMAP-Einstellungen (Eingehende E-Mails)
   imap:
-    host: "imap.ihr-provider.de"
+    host: "mail.h-bu.de"
     port: 993
     use_ssl: true
     username: "info@h-bu.de"
-    password: "${EMAIL_PASSWORD}"  # Umgebungsvariable
+    password: "Adrian1234&"
 
   # SMTP-Einstellungen (Ausgehende E-Mails)
   smtp:
-    host: "smtp.ihr-provider.de"
+    host: "mail.h-bu.de"
     port: 587
     use_starttls: true
     username: "info@h-bu.de"
-    password: "${EMAIL_PASSWORD}"
+    password: "Adrian1234&"
 
   # Mailbox-Zuordnungen
   mailboxes:

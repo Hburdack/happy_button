@@ -1,0 +1,20 @@
+{
+  "agent_id": "TestBusinessAgent",
+  "status": "idle",
+  "capabilities": [
+    "email_processing",
+    "order_creation",
+    "customer_classification"
+  ],
+  "current_task": null,
+  "queue_size": 0,
+  "metrics": {
+    "tasks_processed": 1,
+    "tasks_successful": 1,
+    "tasks_failed": 0,
+    "success_rate": 100.0,
+    "avg_processing_time": 0.10029959678649902,
+    "uptime_hours": 2.8330948617723254e-05,
+    "last_activity": 1758800818.9508445
+  }
+}

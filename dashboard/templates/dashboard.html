@@ -66,6 +66,143 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
         }
+
+        /* TimeWarp Styles */
+        .timewarp-widget {
+            margin-left: 20px;
+        }
+
+        .timewarp-control-compact {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .time-display-compact {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.8rem;
+            line-height: 1.2;
+        }
+
+        .real-time-compact {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .sim-time-compact {
+            color: #ffc107;
+            font-weight: 600;
+        }
+
+        .speed-controls-compact {
+            display: flex;
+            gap: 4px;
+        }
+
+        .speed-btn-compact {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 4px 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
+        }
+
+        .speed-btn-compact:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .speed-btn-compact.active {
+            background: #ffc107;
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .speed-indicator {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .timewarp-dashboard {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .timewarp-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .speed-selector {
+            display: flex;
+            gap: 8px;
+        }
+
+        .speed-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .speed-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .speed-btn.active {
+            background: #ffc107;
+            color: #000;
+            border-color: #ffc107;
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+        }
+
+        .progress-week {
+            background: rgba(255, 255, 255, 0.2);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-week-fill {
+            background: #ffc107;
+            height: 100%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .timewarp-status {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -83,27 +220,134 @@
                 <a class="nav-link active" href="/dashboard">
                     <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                 </a>
-                <a class="nav-link" href="http://localhost:8090/demo-flow" target="_blank">
-                    <i class="fas fa-play-circle me-1"></i>Demo Flow
+                <a class="nav-link" href="/shop">
+                    <i class="fas fa-shopping-bag me-1"></i>Shop
                 </a>
                 <a class="nav-link" href="/agents">
-                    <i class="fas fa-users me-1"></i>Agents
+                    <i class="fas fa-robot me-1"></i>Agents
                 </a>
                 <a class="nav-link" href="/teams">
                     <i class="fas fa-people-group me-1"></i>Teams
                 </a>
-                <a class="nav-link" href="/config">
-                    <i class="fas fa-cog me-1"></i>Config
+                <a class="nav-link" href="/kpi">
+                    <i class="fas fa-chart-line me-1"></i>KPIs
                 </a>
-                <span class="navbar-text">
-                    <i class="fas fa-clock me-1"></i>
-                    <span id="current-time"></span>
-                </span>
+                <a class="nav-link" href="/config">
+                    <i class="fas fa-cogs me-1"></i>Config
+                </a>
+                <!-- TimeWarp Control Widget -->
+                <div class="navbar-text timewarp-widget">
+                    <div class="timewarp-control-compact">
+                        <div class="time-display-compact">
+                            <div class="real-time-compact">
+                                <i class="fas fa-clock me-1"></i><span id="current-time"></span>
+                            </div>
+                            <div class="sim-time-compact" id="sim-time-display">
+                                <i class="fas fa-magic me-1"></i>Sim: <span id="sim-time">Mo 09:15</span>
+                            </div>
+                        </div>
+                        <div class="speed-controls-compact">
+                            <button class="speed-btn-compact active" data-level="1" title="Real Time (1x)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="2" title="Fast Forward (60x)">
+                                <i class="fas fa-fast-forward"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="3" title="Rapid Pace (168x)">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="4" title="Ultra Speed (504x)">
+                                <i class="fas fa-rocket"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="5" title="Time Warp (1008x)">
+                                <i class="fas fa-magic"></i>
+                            </button>
+                        </div>
+                        <div class="speed-indicator" id="speed-indicator">1x</div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
     <div class="container-fluid mt-4">
+        <!-- TimeWarp Dashboard -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="timewarp-dashboard">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="mb-2">
+                                <i class="fas fa-magic me-2"></i>
+                                TimeWarp Control Center
+                                <span class="badge bg-light text-dark ms-2">Release 2.1</span>
+                            </h4>
+                            <div class="d-flex gap-4">
+                                <div>
+                                    <small>Real Time:</small><br>
+                                    <strong id="real-time-display">14:23:45</strong>
+                                </div>
+                                <div>
+                                    <small>Simulation Time:</small><br>
+                                    <strong id="sim-time-display-full" style="color: #ffc107;">Monday 09:15</strong>
+                                </div>
+                                <div>
+                                    <small>Speed Level:</small><br>
+                                    <strong id="speed-level-display">1x - Real Time</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="mb-2">
+                                <small>Week Progress:</small>
+                            </div>
+                            <div class="progress-week" style="width: 200px;">
+                                <div class="progress-week-fill" id="week-progress" style="width: 23%;"></div>
+                            </div>
+                            <div class="timewarp-status">
+                                <small>Week 1, Day 2</small>
+                                <small id="emails-generated">47 emails generated</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timewarp-controls">
+                        <div class="speed-selector">
+                            <button class="speed-btn active" data-level="1">
+                                <i class="fas fa-play me-1"></i>Real Time
+                                <small class="d-block">1x</small>
+                            </button>
+                            <button class="speed-btn" data-level="2">
+                                <i class="fas fa-fast-forward me-1"></i>Fast Forward
+                                <small class="d-block">60x</small>
+                            </button>
+                            <button class="speed-btn" data-level="3">
+                                <i class="fas fa-forward me-1"></i>Rapid Pace
+                                <small class="d-block">168x</small>
+                            </button>
+                            <button class="speed-btn" data-level="4">
+                                <i class="fas fa-rocket me-1"></i>Ultra Speed
+                                <small class="d-block">504x</small>
+                            </button>
+                            <button class="speed-btn" data-level="5">
+                                <i class="fas fa-magic me-1"></i>Time Warp
+                                <small class="d-block">1008x</small>
+                            </button>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-light btn-sm" id="pause-btn">
+                                <i class="fas fa-pause me-1"></i>Pause
+                            </button>
+                            <button class="btn btn-outline-light btn-sm" id="reset-btn">
+                                <i class="fas fa-redo me-1"></i>Reset Week
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- System Overview -->
         <div class="row mb-4">
             <div class="col-md-3">
@@ -285,18 +529,213 @@
             swarm: {}
         };
 
+        // TimeWarp Engine
+        class TimeWarpEngine {
+            constructor() {
+                this.speedLevels = {
+                    1: { multiplier: 1, name: "Real Time", icon: "fa-play", color: "#28a745" },
+                    2: { multiplier: 60, name: "Fast Forward", icon: "fa-fast-forward", color: "#ffc107" },
+                    3: { multiplier: 168, name: "Rapid Pace", icon: "fa-forward", color: "#fd7e14" },
+                    4: { multiplier: 504, name: "Ultra Speed", icon: "fa-rocket", color: "#e83e8c" },
+                    5: { multiplier: 1008, name: "Time Warp", icon: "fa-magic", color: "#6f42c1" }
+                };
+
+                this.currentLevel = 1;
+                this.simulationStartTime = Date.now();
+                this.isPaused = false;
+                this.weekStartTime = Date.now();
+                this.emailsGenerated = 0;
+            }
+
+            setSpeed(level) {
+                this.currentLevel = level;
+                this.updateSpeedDisplay();
+                this.updateAllSystems();
+            }
+
+            getSimulatedTime() {
+                if (this.isPaused) return this.pausedTime;
+
+                const realElapsed = Date.now() - this.simulationStartTime;
+                const multiplier = this.speedLevels[this.currentLevel].multiplier;
+                return new Date(this.simulationStartTime + (realElapsed * multiplier));
+            }
+
+            getWeekProgress() {
+                const simTime = this.getSimulatedTime();
+                const weekMs = 7 * 24 * 60 * 60 * 1000; // 1 week in milliseconds
+                const elapsed = (simTime.getTime() - this.weekStartTime) % weekMs;
+                return (elapsed / weekMs) * 100;
+            }
+
+            getCurrentWeekDay() {
+                const simTime = this.getSimulatedTime();
+                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                return days[simTime.getDay()];
+            }
+
+            pause() {
+                this.isPaused = true;
+                this.pausedTime = this.getSimulatedTime();
+            }
+
+            resume() {
+                if (this.isPaused) {
+                    const pauseDuration = Date.now() - this.pausedTime.getTime();
+                    this.simulationStartTime += pauseDuration;
+                    this.isPaused = false;
+                }
+            }
+
+            resetWeek() {
+                this.weekStartTime = Date.now();
+                this.simulationStartTime = Date.now();
+                this.emailsGenerated = 0;
+                this.updateAllSystems();
+            }
+
+            updateSpeedDisplay() {
+                const level = this.speedLevels[this.currentLevel];
+
+                // Update compact controls
+                document.querySelectorAll('.speed-btn-compact').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.level == this.currentLevel);
+                });
+
+                // Update full controls
+                document.querySelectorAll('.speed-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.level == this.currentLevel);
+                });
+
+                // Update indicators
+                const indicator = document.getElementById('speed-indicator');
+                if (indicator) {
+                    indicator.textContent = level.multiplier + 'x';
+                    indicator.style.background = level.color;
+                }
+
+                const levelDisplay = document.getElementById('speed-level-display');
+                if (levelDisplay) {
+                    levelDisplay.textContent = `${level.multiplier}x - ${level.name}`;
+                }
+            }
+
+            updateAllSystems() {
+                // Update time displays
+                this.updateTimeDisplays();
+
+                // Update progress
+                this.updateProgress();
+
+                // Simulate email generation rate
+                this.simulateEmailGeneration();
+            }
+
+            updateTimeDisplays() {
+                const now = new Date();
+                const simTime = this.getSimulatedTime();
+
+                // Real time displays
+                const timeStr = now.toLocaleTimeString();
+                document.getElementById('current-time').textContent = timeStr;
+                const realTimeDisplay = document.getElementById('real-time-display');
+                if (realTimeDisplay) realTimeDisplay.textContent = timeStr;
+
+                // Simulation time displays
+                const simTimeStr = simTime.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                document.getElementById('sim-time').textContent = simTimeStr;
+                const simTimeDisplayFull = document.getElementById('sim-time-display-full');
+                if (simTimeDisplayFull) simTimeDisplayFull.textContent = simTimeStr;
+            }
+
+            updateProgress() {
+                const progress = this.getWeekProgress();
+                const progressBar = document.getElementById('week-progress');
+                if (progressBar) {
+                    progressBar.style.width = progress + '%';
+                }
+
+                const weekDay = Math.floor(progress / (100/7)) + 1;
+                const dayName = this.getCurrentWeekDay();
+
+                // Update status displays
+                const statusElements = document.querySelectorAll('.timewarp-status small:first-child');
+                statusElements.forEach(el => {
+                    el.textContent = `Week 1, Day ${weekDay} - ${dayName}`;
+                });
+            }
+
+            simulateEmailGeneration() {
+                // Simulate email generation based on speed and time
+                const baseRate = 0.5; // emails per second at 1x speed
+                const currentRate = baseRate * this.speedLevels[this.currentLevel].multiplier;
+
+                if (Math.random() < currentRate / 60) { // Convert to per-frame rate
+                    this.emailsGenerated++;
+                    const emailsDisplay = document.getElementById('emails-generated');
+                    if (emailsDisplay) {
+                        emailsDisplay.textContent = `${this.emailsGenerated} emails generated`;
+                    }
+                }
+            }
+        }
+
+        // Global TimeWarp instance
+        let timeWarp = new TimeWarpEngine();
+
         // Initialize dashboard
         document.addEventListener('DOMContentLoaded', function() {
             initializeCharts();
             loadInitialData();
             setupEventListeners();
+            setupTimeWarpControls();
             updateTime();
             setInterval(updateTime, 1000);
+            setInterval(() => timeWarp.updateAllSystems(), 100); // High frequency updates for smooth TimeWarp
         });
 
+        function setupTimeWarpControls() {
+            // Speed control buttons
+            document.querySelectorAll('.speed-btn, .speed-btn-compact').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const level = parseInt(btn.dataset.level);
+                    timeWarp.setSpeed(level);
+                });
+            });
+
+            // Pause/Resume button
+            const pauseBtn = document.getElementById('pause-btn');
+            if (pauseBtn) {
+                pauseBtn.addEventListener('click', () => {
+                    if (timeWarp.isPaused) {
+                        timeWarp.resume();
+                        pauseBtn.innerHTML = '<i class="fas fa-pause me-1"></i>Pause';
+                    } else {
+                        timeWarp.pause();
+                        pauseBtn.innerHTML = '<i class="fas fa-play me-1"></i>Resume';
+                    }
+                });
+            }
+
+            // Reset button
+            const resetBtn = document.getElementById('reset-btn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    if (confirm('Reset simulation week? This will restart the weekly cycle.')) {
+                        timeWarp.resetWeek();
+                    }
+                });
+            }
+        }
+
         function updateTime() {
-            const now = new Date();
-            document.getElementById('current-time').textContent = now.toLocaleTimeString();
+            // TimeWarp handles time updates now
+            timeWarp.updateTimeDisplays();
         }
 
         function initializeCharts() {

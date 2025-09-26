@@ -112,6 +112,101 @@
             padding: 20px;
             border-radius: 15px 15px 0 0;
         }
+
+        /* TimeWarp Styles for Agents Page */
+        .timewarp-widget {
+            margin-left: 15px;
+        }
+
+        .timewarp-control-compact {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .time-display-compact {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .real-time-compact {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .sim-time-compact {
+            color: #ffc107;
+            font-weight: 600;
+        }
+
+        .speed-controls-compact {
+            display: flex;
+            gap: 3px;
+        }
+
+        .speed-btn-compact {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 3px 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.7rem;
+        }
+
+        .speed-btn-compact:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .speed-btn-compact.active {
+            background: #ffc107;
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+        }
+
+        .speed-indicator {
+            background: #28a745;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .agent-card .timewarp-info {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            border-left: 3px solid #667eea;
+        }
+
+        .timewarp-speed-display {
+            display: inline-block;
+            background: #ffc107;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .agent-processing-rate {
+            font-size: 0.8rem;
+            color: #667eea;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -124,12 +219,43 @@
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Home</a>
                 <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
-                <a class="nav-link" href="http://localhost:8090/demo-flow" target="_blank"><i class="fas fa-play-circle me-1"></i> Demo Flow</a>
+                <a class="nav-link" href="/shop"><i class="fas fa-shopping-bag me-1"></i> Shop</a>
                 <a class="nav-link active" href="/agents"><i class="fas fa-robot me-1"></i> Agents</a>
                 <a class="nav-link" href="/teams"><i class="fas fa-people-group me-1"></i> Teams</a>
-                <a class="nav-link" href="/config"><i class="fas fa-cog me-1"></i> Config</a>
-            </div>
-                <span class="navbar-text">
+                <a class="nav-link" href="/kpi"><i class="fas fa-chart-line me-1"></i> KPIs</a>
+                <a class="nav-link" href="/config"><i class="fas fa-cogs me-1"></i> Config</a>
+                <!-- TimeWarp Control Widget -->
+                <div class="navbar-text timewarp-widget">
+                    <div class="timewarp-control-compact">
+                        <div class="time-display-compact">
+                            <div class="real-time-compact">
+                                <i class="fas fa-clock me-1"></i><span id="current-time"></span>
+                            </div>
+                            <div class="sim-time-compact" id="sim-time-display">
+                                <i class="fas fa-magic me-1"></i>Sim: <span id="sim-time">Mo 09:15</span>
+                            </div>
+                        </div>
+                        <div class="speed-controls-compact">
+                            <button class="speed-btn-compact active" data-level="1" title="Real Time (1x)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="2" title="Fast Forward (60x)">
+                                <i class="fas fa-fast-forward"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="3" title="Rapid Pace (168x)">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="4" title="Ultra Speed (504x)">
+                                <i class="fas fa-rocket"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="5" title="Time Warp (1008x)">
+                                <i class="fas fa-magic"></i>
+                            </button>
+                        </div>
+                        <div class="speed-indicator" id="speed-indicator">1x</div>
+                    </div>
+                </div>
+                <span class="navbar-text ms-3">
                     <i id="refresh-indicator" class="fas fa-sync-alt me-1"></i>
                     Live Updates
                 </span>
@@ -138,6 +264,40 @@
     </nav>
 
     <div class="container-fluid mt-4">
+        <!-- TimeWarp Status Panel -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <div class="card-body py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-1">
+                                    <i class="fas fa-magic me-2"></i>
+                                    TimeWarp Agent Monitoring
+                                    <span class="badge bg-light text-dark ms-2">v2.1</span>
+                                </h5>
+                                <small class="opacity-75">Real-time agent performance with time acceleration</small>
+                            </div>
+                            <div class="d-flex align-items-center gap-4">
+                                <div class="text-center">
+                                    <div class="small opacity-75">Current Speed</div>
+                                    <div class="fw-bold" id="timewarp-speed-display">1x - Real Time</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="small opacity-75">Simulation Time</div>
+                                    <div class="fw-bold" id="sim-time-agents">Monday 09:15</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="small opacity-75">Processing Rate</div>
+                                    <div class="fw-bold" id="total-processing-rate">Normal Speed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Info Mailbox Panel -->
         <div class="row mb-4">
             <div class="col-12">
@@ -210,6 +370,12 @@
                             </div>
                         </div>
                         <h6>Letzte Aktivitäten:</h6>
+                        <div class="timewarp-info">
+                            <div class="small">
+                                <i class="fas fa-tachometer-alt me-1"></i>
+                                Processing Rate: <span class="timewarp-speed-display" id="info-processing-rate">Normal</span>
+                            </div>
+                        </div>
                         <div id="info-activities">
                             <div class="email-item">
                                 <small class="email-from">supplier@materials.com</small>
@@ -259,6 +425,12 @@
                             </div>
                         </div>
                         <h6>Letzte E-Mails:</h6>
+                        <div class="timewarp-info">
+                            <div class="small">
+                                <i class="fas fa-tachometer-alt me-1"></i>
+                                Processing Rate: <span class="timewarp-speed-display" id="orders-processing-rate">Normal</span>
+                            </div>
+                        </div>
                         <div id="orders-activities">
                             <div class="email-item">
                                 <small class="email-from">john@oem1.com</small>
@@ -308,6 +480,12 @@
                             </div>
                         </div>
                         <h6>Premium Kunden:</h6>
+                        <div class="timewarp-info">
+                            <div class="small">
+                                <i class="fas fa-tachometer-alt me-1"></i>
+                                Processing Rate: <span class="timewarp-speed-display" id="oem-processing-rate">Normal</span>
+                            </div>
+                        </div>
                         <div id="oem-activities">
                             <div class="email-item">
                                 <small class="email-from">premium@oem1.com</small>
@@ -357,6 +535,12 @@
                             </div>
                         </div>
                         <h6>Aktuelle Fälle:</h6>
+                        <div class="timewarp-info">
+                            <div class="small">
+                                <i class="fas fa-tachometer-alt me-1"></i>
+                                Processing Rate: <span class="timewarp-speed-display" id="quality-processing-rate">Normal</span>
+                            </div>
+                        </div>
                         <div id="quality-activities">
                             <div class="email-item">
                                 <small class="email-from">customer@company.com</small>
@@ -406,6 +590,12 @@
                             </div>
                         </div>
                         <h6>Lieferanten-Updates:</h6>
+                        <div class="timewarp-info">
+                            <div class="small">
+                                <i class="fas fa-tachometer-alt me-1"></i>
+                                Processing Rate: <span class="timewarp-speed-display" id="supplier-processing-rate">Normal</span>
+                            </div>
+                        </div>
                         <div id="supplier-activities">
                             <div class="email-item">
                                 <small class="email-from">materials@supplier.com</small>
@@ -455,6 +645,12 @@
                             </div>
                         </div>
                         <h6>Management Fälle:</h6>
+                        <div class="timewarp-info">
+                            <div class="small">
+                                <i class="fas fa-tachometer-alt me-1"></i>
+                                Processing Rate: <span class="timewarp-speed-display" id="management-processing-rate">Normal</span>
+                            </div>
+                        </div>
                         <div id="management-activities">
                             <div class="email-item">
                                 <small class="email-from">System Escalation</small>
@@ -493,6 +689,107 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // TimeWarp Engine for Agents Page
+        class TimeWarpEngineAgents {
+            constructor() {
+                this.speedLevels = {
+                    1: { multiplier: 1, name: "Real Time", color: "#28a745" },
+                    2: { multiplier: 60, name: "Fast Forward", color: "#ffc107" },
+                    3: { multiplier: 168, name: "Rapid Pace", color: "#fd7e14" },
+                    4: { multiplier: 504, name: "Ultra Speed", color: "#e83e8c" },
+                    5: { multiplier: 1008, name: "Time Warp", color: "#6f42c1" }
+                };
+
+                this.currentLevel = 1;
+                this.simulationStartTime = Date.now();
+                this.isPaused = false;
+            }
+
+            setSpeed(level) {
+                this.currentLevel = level;
+                this.updateSpeedDisplay();
+                this.updateProcessingRates();
+            }
+
+            getSimulatedTime() {
+                if (this.isPaused) return this.pausedTime;
+
+                const realElapsed = Date.now() - this.simulationStartTime;
+                const multiplier = this.speedLevels[this.currentLevel].multiplier;
+                return new Date(this.simulationStartTime + (realElapsed * multiplier));
+            }
+
+            updateSpeedDisplay() {
+                const level = this.speedLevels[this.currentLevel];
+
+                // Update compact controls
+                document.querySelectorAll('.speed-btn-compact').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.level == this.currentLevel);
+                });
+
+                // Update indicators
+                const indicator = document.getElementById('speed-indicator');
+                if (indicator) {
+                    indicator.textContent = level.multiplier + 'x';
+                    indicator.style.background = level.color;
+                }
+
+                const speedDisplay = document.getElementById('timewarp-speed-display');
+                if (speedDisplay) {
+                    speedDisplay.textContent = `${level.multiplier}x - ${level.name}`;
+                }
+            }
+
+            updateProcessingRates() {
+                const level = this.speedLevels[this.currentLevel];
+                const rates = {
+                    1: "Normal",
+                    2: "Fast (60x)",
+                    3: "Rapid (168x)",
+                    4: "Ultra (504x)",
+                    5: "Warp (1008x)"
+                };
+
+                const rateText = rates[this.currentLevel] || "Normal";
+
+                // Update all agent processing rates
+                ['info', 'orders', 'oem', 'quality', 'supplier', 'management'].forEach(agent => {
+                    const rateElement = document.getElementById(`${agent}-processing-rate`);
+                    if (rateElement) {
+                        rateElement.textContent = rateText;
+                    }
+                });
+
+                const totalRate = document.getElementById('total-processing-rate');
+                if (totalRate) {
+                    totalRate.textContent = rateText;
+                }
+            }
+
+            updateTimeDisplays() {
+                const now = new Date();
+                const simTime = this.getSimulatedTime();
+
+                // Real time displays
+                const timeStr = now.toLocaleTimeString();
+                document.getElementById('current-time').textContent = timeStr;
+
+                // Simulation time displays
+                const simTimeStr = simTime.toLocaleDateString('de-DE', {
+                    weekday: 'long',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                document.getElementById('sim-time').textContent = simTimeStr;
+                const simTimeAgents = document.getElementById('sim-time-agents');
+                if (simTimeAgents) simTimeAgents.textContent = simTimeStr;
+            }
+        }
+
+        // Global TimeWarp instance for agents page
+        let timeWarpAgents = new TimeWarpEngineAgents();
+
         // Socket.io connection
         const socket = io();
 
@@ -868,14 +1165,40 @@
             });
         }
 
-        // Auto-refresh every 30 seconds
-        setInterval(loadAgentData, 30000);
-        setInterval(loadRecentEmails, 60000); // Refresh emails every minute
+        // Setup TimeWarp controls for agents page
+        function setupTimeWarpControlsAgents() {
+            // Speed control buttons
+            document.querySelectorAll('.speed-btn-compact').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const level = parseInt(btn.dataset.level);
+                    timeWarpAgents.setSpeed(level);
+                });
+            });
+        }
+
+        // Auto-refresh with TimeWarp consideration
+        setInterval(() => {
+            loadAgentData();
+            // Refresh rate scales with TimeWarp speed
+            const refreshRate = Math.max(1000, 30000 / timeWarpAgents.speedLevels[timeWarpAgents.currentLevel].multiplier);
+        }, 30000);
+
+        setInterval(() => {
+            loadRecentEmails();
+            // Email refresh rate also scales
+        }, 60000);
+
+        // High frequency TimeWarp updates
+        setInterval(() => {
+            timeWarpAgents.updateTimeDisplays();
+        }, 100);
 
         // Load initial data when page loads
         document.addEventListener('DOMContentLoaded', function() {
             loadAgentData();
             loadRecentEmails();
+            setupTimeWarpControlsAgents();
+            timeWarpAgents.updateProcessingRates();
         });
     </script>
 </body>

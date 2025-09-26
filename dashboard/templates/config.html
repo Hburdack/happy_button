@@ -3,29 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Buttons Configuration</title>
+    <title>System Configuration - Happy Buttons</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
     <style>
         body {
             background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .navbar {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .card {
+        .config-card {
             border: none;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            margin-bottom: 20px;
         }
-        .config-section {
+        .config-card:hover {
+            transform: translateY(-2px);
+        }
+        .config-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 1rem;
-            border-radius: 10px 10px 0 0;
+            border-radius: 15px 15px 0 0;
+            padding: 20px;
         }
-        .status-badge {
-            font-size: 0.8rem;
+        .timewarp-config {
+            background: linear-gradient(135deg, #ffc107 0%, #ff8c00 100%);
+        }
+        .email-config {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+        .agent-config {
+            background: linear-gradient(135deg, #dc3545 0%, #e83e8c 100%);
+        }
+        .system-config {
+            background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);
+        }
+
+        /* TimeWarp Styles */
+        .timewarp-widget {
+            margin-left: 15px;
+        }
+        .timewarp-control-compact {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .time-display-compact {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.75rem;
+            line-height: 1.2;
+        }
+        .real-time-compact {
+            color: #fff;
+            font-weight: 500;
+        }
+        .sim-time-compact {
+            color: #ffc107;
+            font-weight: 600;
+        }
+        .speed-controls-compact {
+            display: flex;
+            gap: 3px;
+        }
+        .speed-btn-compact {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 3px 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.7rem;
+        }
+        .speed-btn-compact:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+        .speed-btn-compact.active {
+            background: #ffc107;
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+        }
+        .speed-indicator {
+            background: #28a745;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .setting-group {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        .setting-label {
+            font-weight: 500;
+            color: #495057;
+        }
+        .setting-description {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .form-switch .form-check-input {
+            width: 3rem;
+            height: 1.5rem;
+        }
+        .save-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
         }
     </style>
 </head>
@@ -33,73 +147,145 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="/">
-                <i class="fas fa-crown me-2"></i>
-                Happy Buttons Configuration
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-cogs me-2"></i>Happy Buttons - Configuration
             </a>
-            <div class="navbar-nav">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-tachometer-alt me-1"></i>
-                    Dashboard
-                </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Home</a>
+                <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
+                <a class="nav-link" href="/shop"><i class="fas fa-shopping-bag me-1"></i> Shop</a>
+                <a class="nav-link" href="/agents"><i class="fas fa-robot me-1"></i> Agents</a>
+                <a class="nav-link" href="/teams"><i class="fas fa-people-group me-1"></i> Teams</a>
+                <a class="nav-link" href="/kpi"><i class="fas fa-chart-line me-1"></i> KPIs</a>
+                <a class="nav-link active" href="/config"><i class="fas fa-cogs me-1"></i> Config</a>
+                <!-- TimeWarp Control Widget -->
+                <div class="navbar-text timewarp-widget">
+                    <div class="timewarp-control-compact">
+                        <div class="time-display-compact">
+                            <div class="real-time-compact">
+                                <i class="fas fa-clock me-1"></i><span id="current-time"></span>
+                            </div>
+                            <div class="sim-time-compact">
+                                <i class="fas fa-magic me-1"></i>Sim: <span id="sim-time">Mo 09:15</span>
+                            </div>
+                        </div>
+                        <div class="speed-controls-compact">
+                            <button class="speed-btn-compact active" data-level="1" title="Real Time (1x)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="2" title="Fast Forward (60x)">
+                                <i class="fas fa-fast-forward"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="3" title="Rapid Pace (168x)">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="4" title="Ultra Speed (504x)">
+                                <i class="fas fa-rocket"></i>
+                            </button>
+                            <button class="speed-btn-compact" data-level="5" title="Time Warp (1008x)">
+                                <i class="fas fa-magic"></i>
+                            </button>
+                        </div>
+                        <div class="speed-indicator" id="speed-indicator">1x</div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
     <div class="container-fluid mt-4">
-        <!-- Configuration Overview -->
+        <!-- Save Status Alert -->
+        <div class="save-status" id="save-status" style="display: none;"></div>
+
+        <!-- TimeWarp Configuration -->
         <div class="row mb-4">
             <div class="col-12">
-                <div class="card">
-                    <div class="config-section">
-                        <h5 class="mb-0">
-                            <i class="fas fa-cog me-2"></i>
-                            System Configuration
-                        </h5>
+                <div class="config-card">
+                    <div class="config-header timewarp-config">
+                        <h4><i class="fas fa-magic me-2"></i>TimeWarp Configuration</h4>
+                        <p class="mb-0">Business simulation time acceleration settings</p>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Business Rules</h6>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <span>Auto-process threshold</span>
-                                        <span class="badge bg-primary">$5,000</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <span>Approval required over</span>
-                                        <span class="badge bg-warning">$25,000</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <span>OEM priority SLA</span>
-                                        <span class="badge bg-success">4 hours</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <span>Default SLA</span>
-                                        <span class="badge bg-info">12 hours</span>
-                                    </li>
-                                </ul>
+                        <div class="setting-group">
+                            <h6 class="mb-3">General TimeWarp Settings</h6>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Default Speed Level</div>
+                                    <div class="setting-description">Starting TimeWarp speed when system loads</div>
+                                </div>
+                                <select class="form-select" style="width: 200px;" id="default-speed-level">
+                                    <option value="1">Level 1 - Real Time (1x)</option>
+                                    <option value="2">Level 2 - Fast Forward (60x)</option>
+                                    <option value="3">Level 3 - Rapid Pace (168x)</option>
+                                    <option value="4">Level 4 - Ultra Speed (504x)</option>
+                                    <option value="5">Level 5 - Time Warp (1008x)</option>
+                                </select>
                             </div>
-                            <div class="col-md-6">
-                                <h6>Routing Destinations</h6>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <i class="fas fa-envelope me-2"></i>
-                                        info@h-bu.de (Main entry)
-                                    </li>
-                                    <li class="list-group-item">
-                                        <i class="fas fa-shopping-cart me-2"></i>
-                                        orders@h-bu.de (Orders)
-                                    </li>
-                                    <li class="list-group-item">
-                                        <i class="fas fa-star me-2"></i>
-                                        oem1@h-bu.de (OEM customers)
-                                    </li>
-                                    <li class="list-group-item">
-                                        <i class="fas fa-life-ring me-2"></i>
-                                        support@h-bu.de (Support)
-                                    </li>
-                                </ul>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Auto-Acceleration</div>
+                                    <div class="setting-description">Automatically increase speed during low activity periods</div>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="auto-acceleration">
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Maximum Speed Level</div>
+                                    <div class="setting-description">Highest TimeWarp level allowed</div>
+                                </div>
+                                <select class="form-select" style="width: 200px;" id="max-speed-level">
+                                    <option value="3">Up to Level 3 (168x)</option>
+                                    <option value="4">Up to Level 4 (504x)</option>
+                                    <option value="5" selected>Up to Level 5 (1008x)</option>
+                                </select>
+                            </div>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Performance Monitoring</div>
+                                    <div class="setting-description">Track system performance at high speeds</div>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="performance-monitoring" checked>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <h6 class="mb-3">Weekly Simulation Cycle</h6>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Auto-Restart Weekly Cycle</div>
+                                    <div class="setting-description">Automatically restart simulation after 7 days</div>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="auto-restart-cycle" checked>
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Email Generation Rate</div>
+                                    <div class="setting-description">Base emails per day in simulation</div>
+                                </div>
+                                <input type="range" class="form-range" min="20" max="200" step="10" value="80" id="email-generation-rate">
+                                <small class="text-muted">Current: <span id="email-rate-display">80</span> emails/day</small>
+                            </div>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Weekend Activity</div>
+                                    <div class="setting-description">Reduced email activity on weekends</div>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="weekend-activity" checked>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -107,19 +293,69 @@
             </div>
         </div>
 
-        <!-- Templates Configuration -->
+        <!-- Email Configuration -->
         <div class="row mb-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="config-section">
-                        <h5 class="mb-0">
-                            <i class="fas fa-file-alt me-2"></i>
-                            Royal Courtesy Templates
-                        </h5>
+            <div class="col-lg-6">
+                <div class="config-card">
+                    <div class="config-header email-config">
+                        <h4><i class="fas fa-envelope me-2"></i>Email Server Settings</h4>
+                        <p class="mb-0">Production email server configuration</p>
                     </div>
                     <div class="card-body">
-                        <div id="templates-list">
-                            <!-- Templates will be loaded here -->
+                        <div class="setting-group">
+                            <h6 class="mb-3">Server Configuration</h6>
+
+                            <div class="mb-3">
+                                <label class="form-label">IMAP Server</label>
+                                <input type="text" class="form-control" id="imap-host" value="mail.h-bu.de">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">IMAP Port</label>
+                                <input type="number" class="form-control" id="imap-port" value="993">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">SMTP Server</label>
+                                <input type="text" class="form-control" id="smtp-host" value="mail.h-bu.de">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">SMTP Port</label>
+                                <input type="number" class="form-control" id="smtp-port" value="587">
+                            </div>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Use SSL/TLS</div>
+                                    <div class="setting-description">Secure email connections</div>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="use-ssl" checked>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="config-card">
+                    <div class="config-header email-config">
+                        <h4><i class="fas fa-inbox me-2"></i>Mailbox Management</h4>
+                        <p class="mb-0">Configure email routing and processing</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="setting-group">
+                            <h6 class="mb-3">Active Mailboxes</h6>
+
+                            <div class="list-group" id="mailboxes-list">
+                                <!-- Mailboxes will be populated by JavaScript -->
+                            </div>
+
+                            <button class="btn btn-outline-primary btn-sm mt-3" onclick="addMailbox()">
+                                <i class="fas fa-plus me-1"></i>Add Mailbox
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -129,80 +365,125 @@
         <!-- Agent Configuration -->
         <div class="row mb-4">
             <div class="col-12">
-                <div class="card">
-                    <div class="config-section">
-                        <h5 class="mb-0">
-                            <i class="fas fa-robot me-2"></i>
-                            Agent Configuration
-                        </h5>
+                <div class="config-card">
+                    <div class="config-header agent-config">
+                        <h4><i class="fas fa-robot me-2"></i>Agent Configuration</h4>
+                        <p class="mb-0">Configure AI agents and their behaviors</p>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Agent</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                        <th>Capabilities</th>
-                                        <th>Configuration</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="agents-table">
-                                    <!-- Agent rows will be populated here -->
-                                </tbody>
-                            </table>
+                        <div class="row" id="agents-config">
+                            <!-- Agent configurations will be populated by JavaScript -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- System Commands -->
+        <!-- System Configuration -->
         <div class="row mb-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="config-section">
-                        <h5 class="mb-0">
-                            <i class="fas fa-terminal me-2"></i>
-                            System Commands
-                        </h5>
+            <div class="col-lg-6">
+                <div class="config-card">
+                    <div class="config-header system-config">
+                        <h4><i class="fas fa-cog me-2"></i>System Settings</h4>
+                        <p class="mb-0">Global system preferences</p>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Service Management</h6>
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-success" onclick="executeCommand('start')">
-                                        <i class="fas fa-play me-2"></i>Start System
-                                    </button>
-                                    <button class="btn btn-warning" onclick="executeCommand('restart')">
-                                        <i class="fas fa-redo me-2"></i>Restart System
-                                    </button>
-                                    <button class="btn btn-danger" onclick="executeCommand('stop')">
-                                        <i class="fas fa-stop me-2"></i>Stop System
-                                    </button>
+                        <div class="setting-group">
+                            <h6 class="mb-3">Interface Settings</h6>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Dark Mode</div>
+                                    <div class="setting-description">Use dark theme interface</div>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="dark-mode">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <h6>Maintenance</h6>
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-info" onclick="executeCommand('status')">
-                                        <i class="fas fa-info-circle me-2"></i>Check Status
-                                    </button>
-                                    <button class="btn btn-secondary" onclick="executeCommand('logs')">
-                                        <i class="fas fa-file-text me-2"></i>View Logs
-                                    </button>
-                                    <button class="btn btn-primary" onclick="executeCommand('init-swarm')">
-                                        <i class="fas fa-network-wired me-2"></i>Initialize Swarm
-                                    </button>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Auto-Refresh</div>
+                                    <div class="setting-description">Automatically refresh data</div>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="auto-refresh" checked>
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Refresh Interval</div>
+                                    <div class="setting-description">Seconds between updates</div>
+                                </div>
+                                <select class="form-select" style="width: 150px;" id="refresh-interval">
+                                    <option value="5">5 seconds</option>
+                                    <option value="10">10 seconds</option>
+                                    <option value="30" selected>30 seconds</option>
+                                    <option value="60">60 seconds</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <h6 class="mb-3">Performance</h6>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">High Performance Mode</div>
+                                    <div class="setting-description">Optimize for speed over battery life</div>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="high-performance">
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <div>
+                                    <div class="setting-label">Debug Logging</div>
+                                    <div class="setting-description">Enable detailed system logs</div>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="debug-logging">
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <h6>Command Output</h6>
-                            <div id="command-output" class="border rounded p-3" style="background-color: #f8f9fa; min-height: 200px; font-family: monospace;">
-                                Ready for commands...
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="config-card">
+                    <div class="config-header system-config">
+                        <h4><i class="fas fa-save me-2"></i>Configuration Actions</h4>
+                        <p class="mb-0">Save, load, and reset configurations</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-lg" onclick="saveConfiguration()">
+                                <i class="fas fa-save me-2"></i>Save All Settings
+                            </button>
+
+                            <button class="btn btn-outline-secondary" onclick="loadConfiguration()">
+                                <i class="fas fa-download me-2"></i>Reload Settings
+                            </button>
+
+                            <button class="btn btn-outline-warning" onclick="exportConfiguration()">
+                                <i class="fas fa-file-export me-2"></i>Export Config
+                            </button>
+
+                            <button class="btn btn-outline-danger" onclick="resetConfiguration()">
+                                <i class="fas fa-undo me-2"></i>Reset to Defaults
+                            </button>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="alert alert-info">
+                            <h6 class="alert-heading"><i class="fas fa-info-circle me-2"></i>Configuration Status</h6>
+                            <div id="config-status">
+                                <small class="text-muted">Last saved: <span id="last-saved">Never</span></small><br>
+                                <small class="text-muted">Configuration version: <span id="config-version">2.1.0</span></small>
                             </div>
                         </div>
                     </div>
@@ -213,111 +494,359 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Load configuration data
-        document.addEventListener('DOMContentLoaded', function() {
-            loadTemplatesConfig();
-            loadAgentsConfig();
-        });
-
-        function loadTemplatesConfig() {
-            fetch('/api/templates')
-                .then(response => response.json())
-                .then(data => {
-                    const container = document.getElementById('templates-list');
-
-                    if (data.available_templates) {
-                        let html = '<div class="row">';
-
-                        data.available_templates.forEach((template, index) => {
-                            const validation = data.validation_results[template] || { score: 0, is_valid: false };
-                            const badgeClass = validation.is_valid ? 'bg-success' : 'bg-warning';
-
-                            html += `
-                                <div class="col-md-6 mb-3">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h6 class="card-title">
-                                                ${template.replace(/_/g, ' ').toUpperCase()}
-                                                <span class="badge ${badgeClass} ms-2">${validation.score}/100</span>
-                                            </h6>
-                                            <p class="card-text small text-muted">
-                                                Royal courtesy template for ${template.replace(/_/g, ' ')} scenarios
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                        });
-
-                        html += '</div>';
-                        container.innerHTML = html;
-                    } else {
-                        container.innerHTML = '<div class="alert alert-warning">Templates not available</div>';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error loading templates:', error);
-                    document.getElementById('templates-list').innerHTML =
-                        '<div class="alert alert-danger">Error loading templates</div>';
-                });
-        }
-
-        function loadAgentsConfig() {
-            fetch('/api/agents')
-                .then(response => response.json())
-                .then(data => {
-                    const tbody = document.getElementById('agents-table');
-                    tbody.innerHTML = '';
-
-                    Object.entries(data).forEach(([agentName, agent]) => {
-                        const statusBadge = agent.active ?
-                            '<span class="badge bg-success">Active</span>' :
-                            '<span class="badge bg-secondary">Inactive</span>';
-
-                        const capabilities = Object.keys(agent.capabilities || {}).slice(0, 3).join(', ');
-
-                        const row = `
-                            <tr>
-                                <td><strong>${agentName}</strong></td>
-                                <td>${agent.name}</td>
-                                <td>${statusBadge}</td>
-                                <td><small>${capabilities}${Object.keys(agent.capabilities || {}).length > 3 ? '...' : ''}</small></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary" onclick="viewAgentConfig('${agentName}')">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        `;
-                        tbody.innerHTML += row;
-                    });
-                })
-                .catch(error => {
-                    console.error('Error loading agents:', error);
-                });
-        }
-
-        function executeCommand(command) {
-            const output = document.getElementById('command-output');
-            output.innerHTML = `Executing: ${command}...\n`;
-
-            // Simulate command execution
-            setTimeout(() => {
-                const responses = {
-                    'start': 'System starting...\n✅ All services started successfully!',
-                    'stop': 'System stopping...\n✅ All services stopped.',
-                    'restart': 'System restarting...\n✅ System restarted successfully!',
-                    'status': 'Checking system status...\n✅ System is running normally.',
-                    'logs': 'Fetching logs...\n[2025-09-20 15:40:00] INFO: Email processed successfully\n[2025-09-20 15:40:05] INFO: Agent coordination active',
-                    'init-swarm': 'Initializing Claude Flow swarm...\n✅ Swarm initialized with hierarchical topology'
+        // TimeWarp Engine for Config Page
+        class TimeWarpEngineConfig {
+            constructor() {
+                this.speedLevels = {
+                    1: { multiplier: 1, name: "Real Time", color: "#28a745" },
+                    2: { multiplier: 60, name: "Fast Forward", color: "#ffc107" },
+                    3: { multiplier: 168, name: "Rapid Pace", color: "#fd7e14" },
+                    4: { multiplier: 504, name: "Ultra Speed", color: "#e83e8c" },
+                    5: { multiplier: 1008, name: "Time Warp", color: "#6f42c1" }
                 };
 
-                output.innerHTML += '\n' + (responses[command] || 'Command completed.');
-            }, 1000);
+                this.currentLevel = 1;
+                this.simulationStartTime = Date.now();
+                this.isPaused = false;
+            }
+
+            setSpeed(level) {
+                this.currentLevel = level;
+                this.updateSpeedDisplay();
+            }
+
+            getSimulatedTime() {
+                if (this.isPaused) return this.pausedTime;
+
+                const realElapsed = Date.now() - this.simulationStartTime;
+                const multiplier = this.speedLevels[this.currentLevel].multiplier;
+                return new Date(this.simulationStartTime + (realElapsed * multiplier));
+            }
+
+            updateSpeedDisplay() {
+                const level = this.speedLevels[this.currentLevel];
+
+                // Update compact controls
+                document.querySelectorAll('.speed-btn-compact').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.level == this.currentLevel);
+                });
+
+                // Update indicator
+                const indicator = document.getElementById('speed-indicator');
+                if (indicator) {
+                    indicator.textContent = level.multiplier + 'x';
+                    indicator.style.background = level.color;
+                }
+            }
+
+            updateTimeDisplays() {
+                const now = new Date();
+                const simTime = this.getSimulatedTime();
+
+                // Real time display
+                document.getElementById('current-time').textContent = now.toLocaleTimeString();
+
+                // Simulation time display
+                const simTimeStr = simTime.toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                document.getElementById('sim-time').textContent = simTimeStr;
+            }
         }
 
-        function viewAgentConfig(agentName) {
-            alert(`Viewing configuration for ${agentName} agent.\n\nThis would open a detailed configuration dialog in a full implementation.`);
+        // Global TimeWarp instance
+        let timeWarpConfig = new TimeWarpEngineConfig();
+
+        // Configuration data
+        let configData = {
+            timewarp: {
+                defaultSpeedLevel: 1,
+                autoAcceleration: false,
+                maxSpeedLevel: 5,
+                performanceMonitoring: true,
+                autoRestartCycle: true,
+                emailGenerationRate: 80,
+                weekendActivity: true
+            },
+            email: {
+                imapHost: "mail.h-bu.de",
+                imapPort: 993,
+                smtpHost: "mail.h-bu.de",
+                smtpPort: 587,
+                useSsl: true
+            },
+            agents: {
+                info_agent: { responseTime: 5, capacity: 100, timewarpScaling: true },
+                orders_agent: { responseTime: 3, capacity: 80, timewarpScaling: true },
+                oem_agent: { responseTime: 1, capacity: 50, timewarpScaling: true },
+                quality_agent: { responseTime: 15, capacity: 60, timewarpScaling: true },
+                logistics_agent: { responseTime: 10, capacity: 70, timewarpScaling: true },
+                finance_agent: { responseTime: 30, capacity: 40, timewarpScaling: true },
+                support_agent: { responseTime: 20, capacity: 90, timewarpScaling: true },
+                management_agent: { responseTime: 60, capacity: 20, timewarpScaling: true }
+            },
+            system: {
+                darkMode: false,
+                autoRefresh: true,
+                refreshInterval: 30,
+                highPerformance: false,
+                debugLogging: false
+            }
+        };
+
+        // Initialize configuration page
+        document.addEventListener('DOMContentLoaded', function() {
+            setupTimeWarpControls();
+            loadCurrentConfiguration();
+            populateMailboxes();
+            populateAgents();
+            setupEventListeners();
+
+            // Start time updates
+            setInterval(() => timeWarpConfig.updateTimeDisplays(), 100);
+        });
+
+        function setupTimeWarpControls() {
+            document.querySelectorAll('.speed-btn-compact').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const level = parseInt(btn.dataset.level);
+                    timeWarpConfig.setSpeed(level);
+                });
+            });
+        }
+
+        function loadCurrentConfiguration() {
+            // Load TimeWarp settings
+            document.getElementById('default-speed-level').value = configData.timewarp.defaultSpeedLevel;
+            document.getElementById('auto-acceleration').checked = configData.timewarp.autoAcceleration;
+            document.getElementById('max-speed-level').value = configData.timewarp.maxSpeedLevel;
+            document.getElementById('performance-monitoring').checked = configData.timewarp.performanceMonitoring;
+            document.getElementById('auto-restart-cycle').checked = configData.timewarp.autoRestartCycle;
+            document.getElementById('email-generation-rate').value = configData.timewarp.emailGenerationRate;
+            document.getElementById('weekend-activity').checked = configData.timewarp.weekendActivity;
+
+            // Load email settings
+            document.getElementById('imap-host').value = configData.email.imapHost;
+            document.getElementById('imap-port').value = configData.email.imapPort;
+            document.getElementById('smtp-host').value = configData.email.smtpHost;
+            document.getElementById('smtp-port').value = configData.email.smtpPort;
+            document.getElementById('use-ssl').checked = configData.email.useSsl;
+
+            // Load system settings
+            document.getElementById('dark-mode').checked = configData.system.darkMode;
+            document.getElementById('auto-refresh').checked = configData.system.autoRefresh;
+            document.getElementById('refresh-interval').value = configData.system.refreshInterval;
+            document.getElementById('high-performance').checked = configData.system.highPerformance;
+            document.getElementById('debug-logging').checked = configData.system.debugLogging;
+
+            updateEmailRateDisplay();
+        }
+
+        function populateMailboxes() {
+            const mailboxes = [
+                { address: "info@h-bu.de", agent: "info_agent", active: true },
+                { address: "orders@h-bu.de", agent: "orders_agent", active: true },
+                { address: "oem@h-bu.de", agent: "oem_agent", active: true },
+                { address: "quality@h-bu.de", agent: "quality_agent", active: true },
+                { address: "logistics@h-bu.de", agent: "logistics_agent", active: true },
+                { address: "finance@h-bu.de", agent: "finance_agent", active: true },
+                { address: "support@h-bu.de", agent: "support_agent", active: true },
+                { address: "management@h-bu.de", agent: "management_agent", active: true }
+            ];
+
+            const container = document.getElementById('mailboxes-list');
+            container.innerHTML = mailboxes.map(mailbox => `
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>${mailbox.address}</strong>
+                        <small class="text-muted d-block">→ ${mailbox.agent}</small>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" ${mailbox.active ? 'checked' : ''}>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function populateAgents() {
+            const container = document.getElementById('agents-config');
+            const agents = Object.entries(configData.agents);
+
+            container.innerHTML = agents.map(([agentId, config]) => `
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0">
+                                <i class="fas fa-robot me-2"></i>
+                                ${agentId.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Response Time (minutes)</label>
+                                <input type="number" class="form-control" value="${config.responseTime}"
+                                       onchange="updateAgentConfig('${agentId}', 'responseTime', this.value)">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Processing Capacity (%)</label>
+                                <input type="range" class="form-range" min="20" max="100" step="10" value="${config.capacity}"
+                                       onchange="updateAgentConfig('${agentId}', 'capacity', this.value)">
+                                <small class="text-muted">Current: <span id="${agentId}-capacity-display">${config.capacity}</span>%</small>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" ${config.timewarpScaling ? 'checked' : ''}
+                                       onchange="updateAgentConfig('${agentId}', 'timewarpScaling', this.checked)">
+                                <label class="form-check-label">TimeWarp Scaling</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setupEventListeners() {
+            // Email generation rate slider
+            document.getElementById('email-generation-rate').addEventListener('input', updateEmailRateDisplay);
+
+            // Auto-save on changes
+            document.querySelectorAll('input, select').forEach(element => {
+                element.addEventListener('change', () => {
+                    setTimeout(autoSave, 1000); // Auto-save after 1 second
+                });
+            });
+        }
+
+        function updateEmailRateDisplay() {
+            const rate = document.getElementById('email-generation-rate').value;
+            document.getElementById('email-rate-display').textContent = rate;
+        }
+
+        function updateAgentConfig(agentId, property, value) {
+            configData.agents[agentId][property] = property === 'timewarpScaling' ? value :
+                                                   property === 'responseTime' ? parseInt(value) :
+                                                   parseInt(value);
+
+            if (property === 'capacity') {
+                document.getElementById(`${agentId}-capacity-display`).textContent = value;
+            }
+
+            autoSave();
+        }
+
+        function saveConfiguration() {
+            // Gather all configuration data
+            configData.timewarp.defaultSpeedLevel = parseInt(document.getElementById('default-speed-level').value);
+            configData.timewarp.autoAcceleration = document.getElementById('auto-acceleration').checked;
+            configData.timewarp.maxSpeedLevel = parseInt(document.getElementById('max-speed-level').value);
+            configData.timewarp.performanceMonitoring = document.getElementById('performance-monitoring').checked;
+            configData.timewarp.autoRestartCycle = document.getElementById('auto-restart-cycle').checked;
+            configData.timewarp.emailGenerationRate = parseInt(document.getElementById('email-generation-rate').value);
+            configData.timewarp.weekendActivity = document.getElementById('weekend-activity').checked;
+
+            configData.email.imapHost = document.getElementById('imap-host').value;
+            configData.email.imapPort = parseInt(document.getElementById('imap-port').value);
+            configData.email.smtpHost = document.getElementById('smtp-host').value;
+            configData.email.smtpPort = parseInt(document.getElementById('smtp-port').value);
+            configData.email.useSsl = document.getElementById('use-ssl').checked;
+
+            configData.system.darkMode = document.getElementById('dark-mode').checked;
+            configData.system.autoRefresh = document.getElementById('auto-refresh').checked;
+            configData.system.refreshInterval = parseInt(document.getElementById('refresh-interval').value);
+            configData.system.highPerformance = document.getElementById('high-performance').checked;
+            configData.system.debugLogging = document.getElementById('debug-logging').checked;
+
+            // Send to server
+            fetch('/api/config/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(configData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                showSaveStatus('Configuration saved successfully!', 'success');
+                document.getElementById('last-saved').textContent = new Date().toLocaleString();
+            })
+            .catch(error => {
+                showSaveStatus('Error saving configuration', 'danger');
+                console.error('Save error:', error);
+            });
+        }
+
+        function autoSave() {
+            saveConfiguration();
+        }
+
+        function loadConfiguration() {
+            fetch('/api/config/load')
+                .then(response => response.json())
+                .then(data => {
+                    configData = { ...configData, ...data };
+                    loadCurrentConfiguration();
+                    populateAgents();
+                    showSaveStatus('Configuration reloaded', 'info');
+                })
+                .catch(error => {
+                    showSaveStatus('Error loading configuration', 'danger');
+                    console.error('Load error:', error);
+                });
+        }
+
+        function exportConfiguration() {
+            const dataStr = JSON.stringify(configData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+
+            const exportFileDefaultName = `happy-buttons-config-${new Date().toISOString().split('T')[0]}.json`;
+
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+
+            showSaveStatus('Configuration exported', 'success');
+        }
+
+        function resetConfiguration() {
+            if (confirm('Reset all settings to defaults? This cannot be undone.')) {
+                fetch('/api/config/reset', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        location.reload();
+                    })
+                    .catch(error => {
+                        showSaveStatus('Error resetting configuration', 'danger');
+                        console.error('Reset error:', error);
+                    });
+            }
+        }
+
+        function addMailbox() {
+            const address = prompt('Enter new mailbox address:');
+            if (address && address.includes('@')) {
+                // Add mailbox logic here
+                showSaveStatus('Mailbox added (restart required)', 'warning');
+            }
+        }
+
+        function showSaveStatus(message, type) {
+            const alertClass = `alert-${type}`;
+            const statusDiv = document.getElementById('save-status');
+
+            statusDiv.innerHTML = `
+                <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            statusDiv.style.display = 'block';
+
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 3000);
         }
     </script>
 </body>

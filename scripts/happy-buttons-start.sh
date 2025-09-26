@@ -79,26 +79,15 @@ if [ -d "venv" ]; then
     source venv/bin/activate
 fi
 
-# Try to start main application on port 80, fallback to 8080 if permission denied
-echo -e "${YELLOW}Attempting to start main application on port 80...${NC}"
+# Start main application on port 80 only
+echo -e "${YELLOW}Starting main application on port 80...${NC}"
 if start_service "main-app" "PORT=80 python app.py" "80" "$HAPPY_BUTTONS_DIR"; then
     MAIN_PORT=80
 else
-    echo -e "${YELLOW}Port 80 failed, trying port 8080...${NC}"
-    rm -f "$PID_DIR/main-app.pid" 2>/dev/null
-    if start_service "main-app" "PORT=8080 python app.py" "8080" "$HAPPY_BUTTONS_DIR"; then
-        MAIN_PORT=8080
-    else
-        echo -e "${RED}Failed to start main application on both ports${NC}"
-        exit 1
-    fi
+    echo -e "${RED}Failed to start main application on port 80${NC}"
+    echo -e "${YELLOW}Make sure port 80 capabilities are set: sudo ./scripts/enable-port80.sh${NC}"
+    exit 1
 fi
-
-# Start dashboard on port 8085
-start_service "dashboard-8085" "PORT=8085 python dashboard/app.py" "8085" "$HAPPY_BUTTONS_DIR"
-
-# Start dashboard on port 8090
-start_service "dashboard-8090" "PORT=8090 python dashboard/app.py" "8090" "$HAPPY_BUTTONS_DIR"
 
 # Start email processor if it exists
 if [ -f "email_processor.py" ]; then
@@ -114,9 +103,7 @@ echo "========================================="
 echo -e "${GREEN}Happy Buttons System startup complete!${NC}"
 echo ""
 echo "Services running:"
-echo "- Main Application: http://localhost:${MAIN_PORT:-8080}"
-echo "- Dashboard 8085: http://localhost:8085"
-echo "- Dashboard 8090: http://localhost:8090"
+echo "- Main Application: http://localhost:${MAIN_PORT:-80}"
 echo ""
 echo "Log files: $LOG_DIR/"
 echo "PID files: $PID_DIR/"

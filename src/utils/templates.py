@@ -89,7 +89,7 @@ class RoyalCourtesyTemplates:
     def _initialize_default_templates(self) -> None:
         """Initialize default Royal Courtesy templates"""
         self.templates = {
-            'order_received': """Dear Esteemed Customer,
+            'order_received': """Dear {{ customer_name | default('Esteemed Customer') }},
 
 We are most delighted to confirm receipt of your gracious order and extend our heartfelt gratitude for choosing Happy Buttons GmbH as your trusted partner.
 
@@ -101,7 +101,7 @@ We remain at your distinguished service and look forward to exceeding your expec
 
 {{ signature }}""",
 
-            'generic_ack': """Dear Valued Correspondent,
+            'generic_ack': """Dear {{ customer_name | default('Valued Correspondent') }},
 
 Kindly note that we have received your esteemed communication and are most grateful for the trust you have placed in Happy Buttons GmbH.
 
@@ -121,7 +121,7 @@ Should any clarification be required, our finance team shall reach out to you di
 
 {{ signature }}""",
 
-            'expedite_ack': """Dear Distinguished Customer,
+            'expedite_ack': """Dear {{ customer_name | default('Distinguished Customer') }},
 
 We are honoured that you have selected Happy Buttons GmbH for your urgent requirements and deeply appreciate the confidence you have placed in our capabilities.
 
@@ -133,7 +133,7 @@ We shall keep you informed of our progress and notify you immediately upon compl
 
 {{ signature }}""",
 
-            'oem_priority_ack': """Dear Esteemed OEM Partner,
+            'oem_priority_ack': """Dear {{ customer_name | default('Esteemed OEM Partner') }},
 
 We are honoured to receive your communication and deeply value our prestigious partnership with your distinguished organization.
 

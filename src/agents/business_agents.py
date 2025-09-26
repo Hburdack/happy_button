@@ -10,8 +10,13 @@ from typing import Dict, List, Any, Optional
 import re
 
 from .base_agent import BaseAgent, AgentResponse, AgentTask
-from ..email_processing.parser import ParsedEmail
-from ..email_processing.router import RoutingDecision
+
+try:
+    from email_processing.parser import ParsedEmail
+    from email_processing.router import RoutingDecision
+except ImportError:  # pragma: no cover - support package-relative imports
+    from ..email_processing.parser import ParsedEmail
+    from ..email_processing.router import RoutingDecision
 
 logger = logging.getLogger(__name__)
 

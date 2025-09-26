@@ -1,0 +1,51 @@
+2025-09-25 16:53:36,271 - __main__ - INFO - 🚀 Starting Happy Buttons Email Processor Daemon
+2025-09-25 16:53:36,272 - __main__ - INFO - ============================================================
+2025-09-25 16:53:36,272 - __main__ - INFO - Initializing email connector...
+2025-09-25 16:53:36,275 - __main__ - INFO - ✅ Email connector initialized successfully
+2025-09-25 16:53:36,276 - __main__ - INFO - 🔄 Starting email processing loop (30-second intervals)
+2025-09-25 16:53:36,382 - __main__ - INFO - 📧 Processed 20 new emails (total: 20)
+2025-09-25 16:53:36,382 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:53:36,382 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:53:36,382 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:54:06,447 - __main__ - INFO - 📧 Processed 20 new emails (total: 40)
+2025-09-25 16:54:06,447 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:54:06,447 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:54:06,447 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:54:36,523 - __main__ - INFO - 📧 Processed 20 new emails (total: 60)
+2025-09-25 16:54:36,523 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:54:36,523 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:54:36,523 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:55:06,588 - __main__ - INFO - 📧 Processed 20 new emails (total: 80)
+2025-09-25 16:55:06,589 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:55:06,589 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:55:06,589 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:55:36,653 - __main__ - INFO - 📧 Processed 20 new emails (total: 100)
+2025-09-25 16:55:36,653 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:55:36,653 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:55:36,653 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:56:06,732 - __main__ - INFO - 📧 Processed 20 new emails (total: 120)
+2025-09-25 16:56:06,733 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:56:06,733 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:56:06,733 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:56:36,794 - __main__ - INFO - 📧 Processed 20 new emails (total: 140)
+2025-09-25 16:56:36,794 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:56:36,794 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:56:36,794 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:57:06,860 - __main__ - INFO - 📧 Processed 20 new emails (total: 160)
+2025-09-25 16:57:06,861 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:57:06,861 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:57:06,861 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:57:36,926 - __main__ - INFO - 📧 Processed 20 new emails (total: 180)
+2025-09-25 16:57:36,926 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:57:36,926 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:57:36,926 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:58:06,991 - __main__ - INFO - 📧 Processed 20 new emails (total: 200)
+2025-09-25 16:58:06,991 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:58:06,991 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:58:06,991 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:58:37,064 - __main__ - INFO - 📧 Processed 20 new emails (total: 220)
+2025-09-25 16:58:37,064 - __main__ - INFO -   • From: info@h-bu.de - Cross-Mailbox Test - Happy Buttons Release 2
+2025-09-25 16:58:37,064 - __main__ - INFO -   • From: support@h-bu.de - Mailbox Test from support@h-bu.de
+2025-09-25 16:58:37,064 - __main__ - INFO -   • From: info@h-bu.de - Mailbox Test from info@h-bu.de
+2025-09-25 16:58:57,550 - __main__ - INFO - Received signal 15, shutting down gracefully...
+2025-09-25 16:59:07,065 - __main__ - INFO - 🏁 Email processor daemon stopped

@@ -7,7 +7,11 @@ import asyncio
 import time
 from typing import Dict, List, Any, Optional
 from ..business.base_agent_v2 import BaseAgent, AgentTask, TaskPriority
-from ...services.order.state_machine import OrderState, OrderStateMachine
+
+try:
+    from services.order.state_machine import OrderState, OrderStateMachine
+except ImportError:  # pragma: no cover - allows package-relative imports
+    from ...services.order.state_machine import OrderState, OrderStateMachine
 
 class SalesAgent(BaseAgent):
     """

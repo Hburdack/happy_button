@@ -358,14 +358,23 @@
             <a class="navbar-brand" href="/">
                 <i class="fas fa-crown me-2"></i>
                 Happy Buttons GmbH
+                <span class="badge bg-primary ms-2">v2.1 TimeWarp</span>
             </a>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link active" href="/"><i class="fas fa-home me-1"></i> Home</a>
                 <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt me-1"></i> Dashboard</a>
-                <a class="nav-link" href="http://localhost:8090/demo-flow" target="_blank"><i class="fas fa-play-circle me-1"></i> Demo Flow</a>
+                <a class="nav-link" href="/shop"><i class="fas fa-shopping-bag me-1"></i> Shop</a>
                 <a class="nav-link" href="/agents"><i class="fas fa-robot me-1"></i> Agents</a>
                 <a class="nav-link" href="/teams"><i class="fas fa-people-group me-1"></i> Teams</a>
+                <a class="nav-link" href="/kpi"><i class="fas fa-chart-line me-1"></i> KPIs</a>
                 <a class="nav-link" href="/config"><i class="fas fa-cogs me-1"></i> Config</a>
+            </div>
+            <!-- TimeWarp Mini Control -->
+            <div class="navbar-text ms-3">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-clock text-warning me-2"></i>
+                    <span class="text-light" id="nav-timewarp-status">TimeWarp: Real Time</span>
+                </div>
             </div>
         </div>
     </nav>
@@ -376,9 +385,13 @@
             <div class="royal-crown">
                 <i class="fas fa-crown"></i>
             </div>
-            <h1 class="display-3 fw-bold mb-4">Happy Buttons GmbH - TEMPLATE UPDATED</h1>
+            <h1 class="display-3 fw-bold mb-4">Happy Buttons GmbH - Release 2.1</h1>
             <p class="lead fs-4 mb-4">Royal Quality Button Manufacturing Since 1847</p>
-            <p class="fs-5 mb-5">Trusted by premium manufacturers worldwide • ISO Certified Excellence</p>
+            <p class="fs-5 mb-4">Trusted by premium manufacturers worldwide • ISO Certified Excellence</p>
+            <div class="alert alert-info d-inline-block">
+                <i class="fas fa-rocket me-2"></i>
+                <strong>NEW:</strong> TimeWarp Business Simulation - Experience a full week in 10 minutes!
+            </div>
 
             <!-- Company Stats -->
             <div class="row company-stats">
@@ -584,13 +597,48 @@
         </div>
     </div>
 
+    <!-- TimeWarp Control Panel -->
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div id="timewarp-widget-container"></div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>
+                            TimeWarp Business Simulation
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-2">Accelerate the entire business simulation to observe a full week of operations:</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-play text-success me-2"></i> <strong>Level 1:</strong> Real Time (1x)</li>
+                            <li><i class="fas fa-fast-forward text-warning me-2"></i> <strong>Level 2:</strong> 1 hour per minute (60x)</li>
+                            <li><i class="fas fa-forward text-orange me-2"></i> <strong>Level 3:</strong> 1 day per minute (168x)</li>
+                            <li><i class="fas fa-rocket text-danger me-2"></i> <strong>Level 4:</strong> 3 days per minute (504x)</li>
+                            <li><i class="fas fa-magic text-purple me-2"></i> <strong>Level 5:</strong> 1 full week in 10 minutes (1008x)</li>
+                        </ul>
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Try it:</strong> Set TimeWarp to Level 5 and watch a complete business week unfold!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Recent Emails from info@h-bu.de -->
     <div class="container">
         <div class="email-feed">
             <h2 class="mb-4">
                 <i class="fas fa-inbox me-2 text-primary"></i>
-                Recent Emails - info@h-bu.de
-                <span class="badge bg-primary ms-2">Live Feed</span>
+                Recent Emails - h-bu.de Mailboxes
+                <span class="badge bg-success ms-2">🎯 PRODUCTION MODE</span>
+                <span class="badge bg-warning ms-2">📧 Real Email Server</span>
+                <span class="badge bg-info ms-2" id="timewarp-email-indicator">⚡ TimeWarp Ready</span>
             </h2>
             <div id="email-list">
                 {% for email in recent_emails %}
@@ -649,6 +697,415 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+
+    <!-- TimeWarp System Integration -->
+    <script>
+        // Initialize TimeWarp UI
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load TimeWarp widget
+            fetch('/api/timewarp/status')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        initializeTimeWarpWidget(data.status, data.speed_levels);
+                        updateNavbarTimeWarpStatus(data.status);
+                    }
+                })
+                .catch(error => {
+                    console.log('TimeWarp not available:', error);
+                    document.getElementById('timewarp-widget-container').innerHTML =
+                        '<div class="alert alert-warning"><i class="fas fa-exclamation-triangle me-2"></i>TimeWarp system not available</div>';
+                });
+        });
+
+        function initializeTimeWarpWidget(status, speedLevels) {
+            const container = document.getElementById('timewarp-widget-container');
+
+            let speedButtons = '';
+            for (let level = 1; level <= 5; level++) {
+                const config = speedLevels[level];
+                const active = level === status.speed_level ? 'active' : '';
+                speedButtons += `
+                    <button class="speed-btn ${active}" data-level="${level}"
+                            style="border-color: ${config.color}; color: ${config.color};"
+                            title="${config.description}">
+                        <i class="fas ${config.icon}"></i>
+                        <span class="speed-label">${config.multiplier}x</span>
+                    </button>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="timewarp-control-widget">
+                    <div class="timewarp-header">
+                        <i class="fas fa-clock text-primary"></i>
+                        <span class="fw-bold">TimeWarp Control</span>
+                    </div>
+
+                    <div class="time-displays">
+                        <div class="time-display real-time">
+                            <label>Real Time</label>
+                            <span id="real-time-display">${new Date().toLocaleTimeString()}</span>
+                        </div>
+                        <div class="time-display sim-time">
+                            <label>Simulation Time</label>
+                            <span id="sim-time-display">${status.day_of_week} ${new Date(status.simulation_time).toLocaleString().substring(0, 16)}</span>
+                        </div>
+                    </div>
+
+                    <div class="speed-controls">
+                        ${speedButtons}
+                    </div>
+
+                    <div class="control-buttons">
+                        <button class="btn btn-sm btn-success" id="timewarp-start" ${status.is_running ? 'disabled' : ''}>
+                            <i class="fas fa-play"></i> Start
+                        </button>
+                        <button class="btn btn-sm btn-warning" id="timewarp-pause" ${!status.is_running ? 'disabled' : ''}>
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button class="btn btn-sm btn-info" id="timewarp-reset">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+
+                    <div class="progress-section">
+                        <div class="progress-labels">
+                            <span>Week Progress</span>
+                            <span id="week-day">${status.day_of_week}</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-primary" id="week-progress-bar"
+                                 style="width: ${status.week_progress}%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <small class="text-muted" id="progress-text">
+                                Day ${status.day_number} of 7
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="status-section">
+                        <div class="status-indicator">
+                            <span class="status-dot ${status.is_running ? 'running' : 'stopped'}"></span>
+                            <span id="status-text">${status.is_running ? 'Running' : 'Stopped'}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Add event listeners
+            setupTimeWarpEventListeners();
+
+            // Start UI updates
+            startTimeWarpUIUpdates();
+        }
+
+        function setupTimeWarpEventListeners() {
+            // Speed buttons
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const level = parseInt(this.dataset.level);
+                    setTimeWarpSpeed(level);
+                });
+            });
+
+            // Control buttons
+            document.getElementById('timewarp-start')?.addEventListener('click', () => {
+                fetch('/api/timewarp/start', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showTimeWarpMessage('TimeWarp started');
+                        }
+                    });
+            });
+
+            document.getElementById('timewarp-pause')?.addEventListener('click', () => {
+                fetch('/api/timewarp/pause', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showTimeWarpMessage('TimeWarp paused');
+                        }
+                    });
+            });
+
+            document.getElementById('timewarp-reset')?.addEventListener('click', () => {
+                if (confirm('Reset TimeWarp simulation?')) {
+                    fetch('/api/timewarp/reset', { method: 'POST' })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                showTimeWarpMessage('TimeWarp reset');
+                            }
+                        });
+                }
+            });
+        }
+
+        function setTimeWarpSpeed(level) {
+            fetch('/api/timewarp/set-speed', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ level: level })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update speed buttons
+                    document.querySelectorAll('.speed-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    document.querySelector(`[data-level="${level}"]`).classList.add('active');
+
+                    // Update navbar status
+                    updateNavbarTimeWarpStatus(data.status);
+
+                    showTimeWarpMessage(`Speed set to Level ${level}`);
+                }
+            })
+            .catch(error => {
+                showTimeWarpMessage('Error setting speed: ' + error.message, 'error');
+            });
+        }
+
+        function updateNavbarTimeWarpStatus(status) {
+            const navStatus = document.getElementById('nav-timewarp-status');
+            if (navStatus) {
+                navStatus.textContent = `TimeWarp: ${status.speed_name} (${status.multiplier}x)`;
+            }
+        }
+
+        function startTimeWarpUIUpdates() {
+            // Update real time display every second
+            setInterval(() => {
+                const realTimeElement = document.getElementById('real-time-display');
+                if (realTimeElement) {
+                    realTimeElement.textContent = new Date().toLocaleTimeString();
+                }
+            }, 1000);
+
+            // Update simulation time every 5 seconds
+            setInterval(() => {
+                fetch('/api/timewarp/status')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            updateTimeWarpDisplays(data.status);
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Error updating TimeWarp status:', error);
+                    });
+            }, 5000);
+        }
+
+        function updateTimeWarpDisplays(status) {
+            // Update simulation time
+            const simTime = new Date(status.simulation_time);
+            const simTimeElement = document.getElementById('sim-time-display');
+            if (simTimeElement) {
+                simTimeElement.textContent = status.day_of_week + ' ' + simTime.toLocaleString().substring(0, 16);
+            }
+
+            // Update progress
+            const progressBar = document.getElementById('week-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = status.week_progress + '%';
+            }
+
+            const weekDay = document.getElementById('week-day');
+            if (weekDay) {
+                weekDay.textContent = status.day_of_week;
+            }
+
+            const progressText = document.getElementById('progress-text');
+            if (progressText) {
+                progressText.textContent = `Day ${status.day_number} of 7`;
+            }
+
+            // Update status
+            const statusDot = document.querySelector('.status-dot');
+            const statusText = document.getElementById('status-text');
+            if (statusDot && statusText) {
+                statusDot.className = `status-dot ${status.is_running ? 'running' : 'stopped'}`;
+                statusText.textContent = status.is_running ? 'Running' : 'Stopped';
+            }
+
+            // Update navbar
+            updateNavbarTimeWarpStatus(status);
+        }
+
+        function showTimeWarpMessage(message, type = 'success') {
+            const alertClass = type === 'error' ? 'alert-danger' : 'alert-success';
+            const toast = document.createElement('div');
+            toast.className = `alert ${alertClass} alert-dismissible fade show position-fixed`;
+            toast.style.top = '20px';
+            toast.style.right = '20px';
+            toast.style.zIndex = '9999';
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'error' ? 'exclamation-triangle' : 'check-circle'} me-2"></i>
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+
+    <!-- TimeWarp CSS -->
+    <style>
+        .timewarp-control-widget {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 300px;
+        }
+
+        .timewarp-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .time-displays {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .time-display {
+            text-align: center;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .time-display label {
+            display: block;
+            font-size: 0.75rem;
+            color: #6c757d;
+            margin-bottom: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .time-display span {
+            display: block;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+
+        .speed-controls {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+            margin-bottom: 16px;
+        }
+
+        .speed-btn {
+            padding: 8px 4px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .speed-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-1px);
+        }
+
+        .speed-btn.active {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, var(--bs-secondary) 100%);
+            color: white !important;
+            border-color: var(--bs-primary) !important;
+            box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+        }
+
+        .speed-btn i {
+            font-size: 1.2rem;
+        }
+
+        .speed-label {
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .control-buttons .btn {
+            flex: 1;
+        }
+
+        .progress-section {
+            margin-bottom: 16px;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+
+        .progress-text {
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        .status-section {
+            text-align: center;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #dc3545;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.running {
+            background: #28a745;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
     <script>
         // Task Flow Animation System
         function createTaskFlow() {

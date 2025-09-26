@@ -13,14 +13,14 @@ from pathlib import Path
 import sys
 sys.path.append(str(Path(__file__).parent.parent / 'src'))
 
-from src.email.parser import EmailParser, ParsedEmail, create_test_email
-from src.email.router import EmailRouter, RoutingDecision
-from src.agents.base_agent import BaseAgent, AgentResponse, AgentTask
-from src.agents.business_agents import (
+from email_processing.parser import EmailParser, ParsedEmail, create_test_email
+from email_processing.router import EmailRouter, RoutingDecision
+from agents.base_agent import BaseAgent, AgentResponse, AgentTask
+from agents.business_agents import (
     InfoAgent, OrdersAgent, OEMAgent, SupplierAgent,
     QualityAgent, ManagementAgent, create_business_agents
 )
-from src.utils.templates import RoyalCourtesyTemplates, create_template_context
+from utils.templates import RoyalCourtesyTemplates, create_template_context
 
 
 class TestEmailParser:
@@ -314,7 +314,6 @@ class TestBusinessAgents:
             body='We need 1000 buttons for $2000'
         )
 
-        from email.router import RoutingDecision
         from datetime import datetime
 
         routing_decision = RoutingDecision(

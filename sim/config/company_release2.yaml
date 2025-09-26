@@ -15,14 +15,14 @@ email:
 
   servers:
     imap:
-      server: "192.168.2.13"
+      server: "mail.h-bu.de"
       port: 993
       ssl: true
       username: "info@h-bu.de"
       password: "Adrian1234&"
 
     smtp:
-      server: "192.168.2.13"
+      server: "mail.h-bu.de"
       port: 587
       tls: true
       username: "info@h-bu.de"

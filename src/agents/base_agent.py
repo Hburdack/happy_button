@@ -14,8 +14,12 @@ from pathlib import Path
 import json
 import uuid
 
-from email.parser import ParsedEmail
-from email.router import RoutingDecision
+try:
+    from email_processing.parser import ParsedEmail
+    from email_processing.router import RoutingDecision
+except ImportError:  # pragma: no cover - supports package-style imports
+    from src.email_processing.parser import ParsedEmail
+    from src.email_processing.router import RoutingDecision
 
 logger = logging.getLogger(__name__)
 

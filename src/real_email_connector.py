@@ -25,14 +25,14 @@ class RealEmailConnector:
         self.email_domains = self.config['email']['domains']
         self.imap_config = self.config['email']['servers']['imap']
 
-    def get_real_emails(self, limit=50) -> List[Dict[str, Any]]:
+    def get_real_emails(self, limit=50, include_read=False) -> List[Dict[str, Any]]:
         """Get actual emails from all mailboxes on the real server"""
         all_emails = []
 
         # Check each mailbox
         for department, email_address in self.email_domains.items():
             try:
-                emails = self._fetch_emails_from_mailbox(email_address, limit=limit//4)
+                emails = self._fetch_emails_from_mailbox(email_address, limit=limit//4, include_read=include_read)
                 for email_data in emails:
                     email_data['mailbox'] = department
                     email_data['to_address'] = email_address
@@ -46,13 +46,13 @@ class RealEmailConnector:
 
         return all_emails[:limit]
 
-    def _fetch_emails_from_mailbox(self, email_address: str, limit: int = 10) -> List[Dict[str, Any]]:
+    def _fetch_emails_from_mailbox(self, email_address: str, limit: int = 10, include_read: bool = False) -> List[Dict[str, Any]]:
         """Fetch emails from a specific mailbox"""
         emails = []
 
         try:
             # Connect to IMAP server
-            mail = imaplib.IMAP4_SSL(self.imap_config['host'], self.imap_config['port'])
+            mail = imaplib.IMAP4_SSL(self.imap_config['server'], self.imap_config['port'])
 
             # Use the specific email address for login
             username = email_address
@@ -61,8 +61,11 @@ class RealEmailConnector:
             mail.login(username, password)
             mail.select('INBOX')
 
-            # Search for all emails
-            status, messages = mail.search(None, 'ALL')
+            # Search for unread emails only (for processing), or all emails (for display)
+            if include_read:
+                status, messages = mail.search(None, 'ALL')
+            else:
+                status, messages = mail.search(None, 'UNSEEN')
 
             if status == 'OK':
                 # Get message IDs (limit to most recent)

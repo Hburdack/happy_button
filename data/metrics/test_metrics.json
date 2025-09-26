@@ -1,0 +1,9 @@
+{
+  "timestamp": 1758800820.0228872,
+  "emails_processed": 5,
+  "orders_created": 2,
+  "orders_completed": 1,
+  "auto_handled_rate": 80.0,
+  "system_uptime": 120.5,
+  "test_run": true
+}

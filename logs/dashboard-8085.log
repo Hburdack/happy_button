@@ -1,4 +1,10 @@
 INFO:utils.templates:Initialized 10 royal courtesy templates
+INFO:agents.base_agent:Initialized info_agent agent: info-001
+INFO:agents.base_agent:Initialized orders_agent agent: orders-001
+INFO:agents.base_agent:Initialized oem_agent agent: oem-001
+INFO:agents.base_agent:Initialized supplier_agent agent: supplier-001
+INFO:agents.base_agent:Initialized quality_agent agent: quality-001
+INFO:agents.base_agent:Initialized management_agent agent: management-001
 INFO:__main__:🌐 Starting Happy Buttons Dashboard on http://localhost:8085
 WARNING:werkzeug:Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
  * Serving Flask app 'app'
@@ -8,87 +14,329 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
  * Running on http://127.0.0.1:8085
  * Running on http://192.168.2.112:8085
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
-ERROR:real_email_connector:Error connecting to info@h-bu.de: 'host'
-ERROR:real_email_connector:Error connecting to sales@h-bu.de: 'host'
-ERROR:real_email_connector:Error connecting to support@h-bu.de: 'host'
-ERROR:real_email_connector:Error connecting to finance@h-bu.de: 'host'
-INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 12:55:28] "GET / HTTP/1.1" 200 -
-ERROR:real_email_connector:Error connecting to info@h-bu.de: 'host'
-ERROR:real_email_connector:Error connecting to sales@h-bu.de: 'host'
-ERROR:real_email_connector:Error connecting to support@h-bu.de: 'host'
-ERROR:real_email_connector:Error connecting to finance@h-bu.de: 'host'
-ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
-ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
-ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
-ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:55:37] "GET /demo-flow HTTP/1.1" 200 -
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:55:37] "GET /socket.io/?EIO=4&transport=polling&t=Pc0Wwty HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:08:26] "GET /socket.io/?EIO=4&transport=polling&t=Pc1Qo51 HTTP/1.1" 200 -
 INFO:__main__:Client connected to dashboard
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:55:37] "POST /socket.io/?EIO=4&transport=polling&t=Pc0Wwuo&sid=aWDFML_LpEDlyt73AAAA HTTP/1.1" 200 -
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:55:37] "GET /socket.io/?EIO=4&transport=polling&t=Pc0Wwup&sid=aWDFML_LpEDlyt73AAAA HTTP/1.1" 200 -
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:55:37] "GET /socket.io/?EIO=4&transport=polling&t=Pc0Wwvz&sid=aWDFML_LpEDlyt73AAAA HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:08:26] "POST /socket.io/?EIO=4&transport=polling&t=Pc1Qo5I&sid=d_JiqpzAixD-hfpNAAAA HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:08:26] "GET /socket.io/?EIO=4&transport=polling&t=Pc1Qo5J&sid=d_JiqpzAixD-hfpNAAAA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:08:26] "GET / HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:55:48] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:08:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:55:58] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:09:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:56:07] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:10:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:56:17] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:11:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:56:27] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:12:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:56:37] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:13:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:56:47] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:14:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:56:58] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:15:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:57:08] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:16:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:57:18] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:17:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:57:28] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:18:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:57:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:19:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
 ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
 ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
-INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 12:57:48] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:20:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:21:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:22:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:23:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:24:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:25:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:26:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:27:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:28:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:29:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:30:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:31:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:32:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:33:38] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:29] "GET /api/demo/flow-stats HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:31] "GET /demo-flow HTTP/1.1" 200 -
+INFO:__main__:Client disconnected from dashboard
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:31] "GET /socket.io/?EIO=4&transport=websocket&sid=d_JiqpzAixD-hfpNAAAA HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:31] "GET /socket.io/?EIO=4&transport=polling&t=Pc1WmGY HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:31] "POST /socket.io/?EIO=4&transport=polling&t=Pc1WmHk&sid=w8a6t630RfSs9JgPAAAC HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:31] "GET /socket.io/?EIO=4&transport=polling&t=Pc1WmHl&sid=w8a6t630RfSs9JgPAAAC HTTP/1.1" 200 -
+INFO:__main__:Client disconnected from dashboard
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:40] "GET /socket.io/?EIO=4&transport=websocket&sid=w8a6t630RfSs9JgPAAAC HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:40] "GET /demo-flow HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:40] "GET /socket.io/?EIO=4&transport=polling&t=Pc1WoNs HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:40] "POST /socket.io/?EIO=4&transport=polling&t=Pc1WoOE&sid=aSlOOTR8VNOrNS5WAAAE HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:40] "GET /socket.io/?EIO=4&transport=polling&t=Pc1WoOE.0&sid=aSlOOTR8VNOrNS5WAAAE HTTP/1.1" 200 -
+INFO:__main__:Client disconnected from dashboard
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:43] "GET /socket.io/?EIO=4&transport=websocket&sid=aSlOOTR8VNOrNS5WAAAE HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:43] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:59] "GET /dashboard HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:59] "GET /socket.io/?EIO=4&transport=polling&t=Pc1Wt3D HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:59] "GET /api/swarm HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:59] "GET /api/agents HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:59] "GET /api/services HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:59] "POST /socket.io/?EIO=4&transport=polling&t=Pc1Wt3g&sid=nzKfoN8St7Kl86RgAAAG HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:59] "GET /socket.io/?EIO=4&transport=polling&t=Pc1Wt3h&sid=nzKfoN8St7Kl86RgAAAG HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:34:59] "GET /api/email/stats HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 17:35:00] "GET /api/metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:35:16] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:35:27] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:35:39] "[33mGET /api/system/status HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:10] "GET /agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:10] "GET /socket.io/?EIO=4&transport=polling&t=Pc1XNCE HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:11] "GET /api/agents HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+INFO:__main__:Client connected to dashboard
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:11] "GET /socket.io/?EIO=4&transport=polling&t=Pc1XNCT.0&sid=iPW8ZftQkk2lmiOBAAAI HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:11] "POST /socket.io/?EIO=4&transport=polling&t=Pc1XNCT&sid=iPW8ZftQkk2lmiOBAAAI HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:11] "GET /api/email/stats HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:11] "GET /api/recent_emails?limit=100 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:24] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:55] "GET /dashboard HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:55] "GET /socket.io/?EIO=4&transport=polling&t=Pc1XYC5 HTTP/1.1" 200 -
+INFO:__main__:Client disconnected from dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:56] "GET /api/swarm HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:56] "POST /socket.io/?EIO=4&transport=polling&t=Pc1XYCa&sid=gp0Tv1kOcAw-RiqWAAAK HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:56] "GET /api/agents HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:56] "GET /api/email/stats HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:56] "GET /api/services HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:56] "GET /socket.io/?EIO=4&transport=polling&t=Pc1XYCb&sid=gp0Tv1kOcAw-RiqWAAAK HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:37:57] "GET /api/metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:24] "GET /dashboard HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:24] "GET /socket.io/?EIO=4&transport=polling&t=Pc1cSrg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:25] "GET /api/services HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:25] "GET /api/agents HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:25] "GET /api/email/stats HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:25] "GET /api/swarm HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:25] "POST /socket.io/?EIO=4&transport=polling&t=Pc1cSsW&sid=Hqdjy7JTcjcZdg8OAAAM HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:25] "GET /socket.io/?EIO=4&transport=polling&t=Pc1cSsW.0&sid=Hqdjy7JTcjcZdg8OAAAM HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:25] "GET /api/metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:31] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:33] "GET /config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:33] "GET /api/templates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:34] "GET /api/agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:53] "GET /socket.io/?EIO=4&transport=polling&t=Pc1cZgn HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:53] "POST /socket.io/?EIO=4&transport=polling&t=Pc1cZmJ&sid=cGeEKhn53e9omhbZAAAO HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:53] "GET /socket.io/?EIO=4&transport=polling&t=Pc1cZmK&sid=cGeEKhn53e9omhbZAAAO HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 17:59:53] "GET /socket.io/?EIO=4&transport=polling&t=Pc1cZqc&sid=cGeEKhn53e9omhbZAAAO HTTP/1.1" 200 -
+INFO:__main__:Client disconnected from dashboard
+INFO:__main__:Client disconnected from dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:20] "GET /agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:20] "GET /socket.io/?EIO=4&transport=polling&t=Pc1cgUH HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:20] "GET /api/agents HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:20] "GET /api/email/stats HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:20] "GET /api/recent_emails?limit=100 HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:21] "POST /socket.io/?EIO=4&transport=polling&t=Pc1cgYe&sid=Pk8-jxCaJsoRo-1CAAAQ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:21] "GET /socket.io/?EIO=4&transport=polling&t=Pc1cgYf&sid=Pk8-jxCaJsoRo-1CAAAQ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:35] "GET /dashboard HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:35] "GET /socket.io/?EIO=4&transport=polling&t=Pc1ckCi HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:36] "GET /api/email/stats HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:36] "GET /api/agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:36] "GET /api/swarm HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:36] "GET /api/services HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:36] "POST /socket.io/?EIO=4&transport=polling&t=Pc1ckD_&sid=qI0inyqwCwZC8_EkAAAS HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:36] "GET /socket.io/?EIO=4&transport=polling&t=Pc1ckE0&sid=qI0inyqwCwZC8_EkAAAS HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:37] "GET /api/metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:42] "GET /config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:42] "GET /api/templates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:43] "GET /api/agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:50] "GET /socket.io/?EIO=4&transport=polling&t=Pc1cnpi HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:50] "POST /socket.io/?EIO=4&transport=polling&t=Pc1cnpt&sid=LNPnNG58DNAnANCpAAAU HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:50] "GET /socket.io/?EIO=4&transport=polling&t=Pc1cnpt.0&sid=LNPnNG58DNAnANCpAAAU HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:51] "GET /socket.io/?EIO=4&transport=polling&t=Pc1cnvI&sid=LNPnNG58DNAnANCpAAAU HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:00:51] "GET / HTTP/1.1" 200 -
+INFO:__main__:Client disconnected from dashboard
+INFO:__main__:Client disconnected from dashboard
+INFO:__main__:Client disconnected from dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:23:57] "GET /dashboard HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:23:57] "GET /socket.io/?EIO=4&transport=polling&t=Pc1i4QM HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:23:57] "GET /api/agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:23:57] "GET /api/swarm HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:23:57] "GET /api/email/stats HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:23:57] "GET /api/services HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:23:57] "POST /socket.io/?EIO=4&transport=polling&t=Pc1i4RG&sid=RQE6xvZko6YdJqlcAAAW HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:23:58] "GET /socket.io/?EIO=4&transport=polling&t=Pc1i4RG.0&sid=RQE6xvZko6YdJqlcAAAW HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:23:58] "GET /api/metrics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:12] "GET /teams HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:14] "GET /teams HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:15] "GET /agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:15] "GET /socket.io/?EIO=4&transport=polling&t=Pc1i8oK HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:15] "GET /api/agents HTTP/1.1" 200 -
+ERROR:real_email_connector:Error counting emails in info@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in sales@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in support@h-bu.de: 'host'
+ERROR:real_email_connector:Error counting emails in finance@h-bu.de: 'host'
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:15] "GET /api/email/stats HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:15] "GET /api/recent_emails?limit=100 HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:16] "POST /socket.io/?EIO=4&transport=polling&t=Pc1i8tA&sid=Aa06UJ91WfoEgdBmAAAY HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:16] "GET /socket.io/?EIO=4&transport=polling&t=Pc1i8tA.0&sid=Aa06UJ91WfoEgdBmAAAY HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:16] "GET /socket.io/?EIO=4&transport=polling&t=Pc1i8z6&sid=Aa06UJ91WfoEgdBmAAAY HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:19] "GET /config HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:19] "GET /api/templates HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:19] "GET /api/agents HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:24:21] "GET / HTTP/1.1" 200 -
+INFO:__main__:Client disconnected from dashboard
+INFO:__main__:Client disconnected from dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:32:56] "GET /socket.io/?EIO=4&transport=websocket&sid=iPW8ZftQkk2lmiOBAAAI HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:32:56] "GET /socket.io/?EIO=4&transport=websocket&sid=Hqdjy7JTcjcZdg8OAAAM HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:32:56] "GET /socket.io/?EIO=4&transport=websocket&sid=Pk8-jxCaJsoRo-1CAAAQ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:32:56] "GET /socket.io/?EIO=4&transport=websocket&sid=gp0Tv1kOcAw-RiqWAAAK HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:32:56] "GET /socket.io/?EIO=4&transport=websocket&sid=qI0inyqwCwZC8_EkAAAS HTTP/1.1" 200 -
+INFO:__main__:Client disconnected from dashboard
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:32:56] "GET /socket.io/?EIO=4&transport=websocket&sid=LNPnNG58DNAnANCpAAAU HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:32:56] "GET /socket.io/?EIO=4&transport=websocket&sid=Aa06UJ91WfoEgdBmAAAY HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:32:56] "GET /socket.io/?EIO=4&transport=websocket&sid=cGeEKhn53e9omhbZAAAO HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Sep/2025 18:32:56] "GET /socket.io/?EIO=4&transport=websocket&sid=RQE6xvZko6YdJqlcAAAW HTTP/1.1" 200 -
+INFO:__main__:Client disconnected from dashboard
+INFO:werkzeug:192.168.2.24 - - [25/Sep/2025 18:33:05] "GET /socket.io/?EIO=4&transport=websocket&sid=nzKfoN8St7Kl86RgAAAG HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [26/Sep/2025 07:16:51] "GET /socket.io/?EIO=4&transport=polling&t=Pc4S-2f HTTP/1.1" 200 -
+INFO:__main__:Client connected to dashboard
+INFO:werkzeug:192.168.2.24 - - [26/Sep/2025 07:16:51] "POST /socket.io/?EIO=4&transport=polling&t=Pc4S-4c&sid=Y0oWjJAU-KJk-zOhAAAa HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [26/Sep/2025 07:16:52] "GET /socket.io/?EIO=4&transport=polling&t=Pc4S-4d&sid=Y0oWjJAU-KJk-zOhAAAa HTTP/1.1" 200 -
+INFO:werkzeug:192.168.2.24 - - [26/Sep/2025 07:16:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -

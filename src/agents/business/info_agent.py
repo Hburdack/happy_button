@@ -7,8 +7,13 @@ import asyncio
 import re
 from typing import Dict, List, Any, Optional
 from ..business.base_agent_v2 import BaseAgent, AgentTask, TaskPriority
-from ...services.order.state_machine import OrderItem, OrderStateMachine
-from ...parsers.pdf.pdf_parser import PDFParser
+
+try:
+    from services.order.state_machine import OrderItem, OrderStateMachine
+    from parsers.pdf.pdf_parser import PDFParser
+except ImportError:  # pragma: no cover - allows package-relative imports
+    from ...services.order.state_machine import OrderItem, OrderStateMachine
+    from ...parsers.pdf.pdf_parser import PDFParser
 
 class InfoAgent(BaseAgent):
     """

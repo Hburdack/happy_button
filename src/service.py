@@ -232,7 +232,8 @@ def metrics():
 
 def run_flask_app():
     """Run Flask app in a separate thread"""
-    app.run(host='0.0.0.0', port=8081, debug=False, use_reloader=False)
+    port = int(os.environ.get('PORT', 80))
+    app.run(host='0.0.0.0', port=port, debug=False, use_reloader=False)
 
 async def main():
     """Main service entry point"""
