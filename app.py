@@ -62,6 +62,16 @@ except ImportError:
     def create_business_agents():
         return {}
 
+# Import Release 3.0 scenario system
+try:
+    from scenarios import get_scenario_manager
+    scenario_system_available = True
+    print("Release 3.0 Scenario system imported successfully")
+except ImportError as e:
+    print(f"Scenario system not available: {e}")
+    scenario_system_available = False
+    get_scenario_manager = lambda: None
+
 app = Flask(__name__, template_folder='dashboard/templates')
 app.secret_key = 'happy_buttons_dashboard_secret'
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -85,6 +95,13 @@ class SystemMonitor:
             self.parser = EmailParser()
             self.agents = create_business_agents()
 
+            # Initialize Release 3.0 scenario system
+            if scenario_system_available:
+                self.scenario_manager = get_scenario_manager()
+                logger.info("Scenario system initialized successfully")
+            else:
+                self.scenario_manager = None
+
             # Start agents asynchronously
             self._start_agents()
         except Exception as e:
@@ -93,6 +110,7 @@ class SystemMonitor:
             self.router = None
             self.parser = None
             self.agents = {}
+            self.scenario_manager = None
 
     def _start_agents(self):
         """Start all agents asynchronously"""
@@ -562,6 +580,20 @@ def dashboard():
     """System dashboard"""
     return render_template('dashboard.html')
 
+@app.route('/scenarios')
+def scenarios():
+    """Release 3.0 - Weakness Injection Scenarios Dashboard"""
+    return render_template('scenarios.html')
+
+@app.route('/mailbox/<mailbox_name>')
+def mailbox_view(mailbox_name):
+    """Mailbox view for specific department"""
+    # Validate mailbox name
+    valid_mailboxes = ['info', 'orders', 'quality', 'supplier', 'oem', 'management', 'logistics', 'finance', 'support']
+    if mailbox_name not in valid_mailboxes:
+        return redirect('/')
+
+    return render_template('mailbox.html', mailbox_name=mailbox_name)
 
 @app.route('/health')
 def health():
@@ -1322,50 +1354,157 @@ def download_attachment(email_id, filename):
 
 @app.route('/api/agents/mailbox/<mailbox_name>')
 def mailbox_details(mailbox_name):
-    """Get detailed mailbox information"""
+    """Get detailed mailbox information with real emails"""
     try:
-        # Mock mailbox data
-        mailbox_data = {
-            'info': {
-                'address': 'info@h-bu.de',
-                'total_emails': 245,
-                'today_emails': 38,
-                'recent_emails': [
-                    {
-                        'from': 'john@oem1.com',
-                        'subject': 'Urgent Order Request - 5000 Blue Buttons',
-                        'time': 'vor 2 Minuten',
-                        'routed_to': 'orders@h-bu.de',
-                        'status': 'routed'
-                    },
-                    {
-                        'from': 'customer@example.com',
-                        'subject': 'Product Quality Issue',
-                        'time': 'vor 5 Minuten',
-                        'routed_to': 'quality@h-bu.de',
-                        'status': 'escalated'
-                    },
-                    {
-                        'from': 'supplier@materials.com',
-                        'subject': 'Delivery Confirmation',
-                        'time': 'vor 8 Minuten',
-                        'routed_to': 'supplier@h-bu.de',
-                        'status': 'processed'
-                    }
-                ]
-            }
-        }
+        # Get all emails from combined endpoint
+        all_emails = []
+        limit = 100  # Get more emails for filtering
 
-        return jsonify(mailbox_data.get(mailbox_name, {
+        # 1. Get real mailbox emails
+        try:
+            real_emails = get_recent_emails(limit=limit//3)
+            for email in real_emails:
+                email['source'] = 'real_mailbox'
+                email['email_type'] = email.get('type', 'order')
+                all_emails.append(email)
+        except Exception as e:
+            logger.warning(f"Error loading real emails: {e}")
+
+        # 2. Get TimeWarp simulation emails
+        try:
+            import requests
+            response = requests.get(f'http://localhost:{request.environ.get("SERVER_PORT", "80")}/api/emails/recent?limit={limit//3}')
+            if response.status_code == 200:
+                sim_data = response.json()
+                if sim_data.get('emails'):
+                    for email in sim_data['emails'][:limit//3]:
+                        email['source'] = 'timewarp_simulation'
+                        email['email_type'] = email.get('category', 'order')
+                        if 'timestamp' in email:
+                            email['timestamp'] = email['timestamp'].replace('T', ' ')
+                        all_emails.append(email)
+        except Exception as e:
+            logger.warning(f"Error loading TimeWarp emails: {e}")
+
+        # 3. Get enhanced business simulation emails
+        if enhanced_simulation_available:
+            try:
+                enhanced_emails = enhanced_sim.get_generated_emails(limit//3)
+                for email in enhanced_emails:
+                    converted_email = {
+                        'id': f'enhanced_{hash(str(email))}',
+                        'from': email.get('from', 'business@simulation.com'),
+                        'subject': email.get('subject', 'Business Simulation Email'),
+                        'content': email.get('body', 'Enhanced business simulation email'),
+                        'timestamp': email.get('timestamp', datetime.now()).strftime('%Y-%m-%d %H:%M:%S'),
+                        'time_ago': 'simulation',
+                        'priority': email.get('priority', 'medium'),
+                        'type': 'simulation',
+                        'email_type': 'business',
+                        'source': 'enhanced_simulation'
+                    }
+                    all_emails.append(converted_email)
+            except Exception as e:
+                logger.warning(f"Error loading enhanced simulation emails: {e}")
+
+        # 4. Get scenario emails
+        try:
+            from src.scenarios.email_generator import scenario_email_generator
+            scenario_emails = scenario_email_generator.get_scenario_emails(limit=limit//4)
+            for email in scenario_emails:
+                converted_email = {
+                    'id': email.get('id', f'scenario_{hash(str(email))}'),
+                    'from': email.get('from', 'scenario@simulation.com'),
+                    'subject': email.get('subject', 'Scenario Email'),
+                    'content': email.get('body', 'Scenario simulation email'),
+                    'timestamp': email.get('timestamp', datetime.now().isoformat()).replace('T', ' '),
+                    'time_ago': 'scenario',
+                    'priority': email.get('urgency', 'medium'),
+                    'type': email.get('email_type', 'scenario'),
+                    'email_type': email.get('scenario_type', 'business'),
+                    'source': 'scenario_emails',
+                    'scenario_info': email.get('scenario_info', {})
+                }
+                all_emails.append(converted_email)
+        except Exception as e:
+            logger.warning(f"Error loading scenario emails: {e}")
+
+        # Filter emails by mailbox type
+        filtered_emails = []
+        for email in all_emails:
+            email_type = email.get('email_type', '').lower()
+            routing_category = email.get('routing', {}).get('category', '').lower() if isinstance(email.get('routing'), dict) else ''
+
+            # Route emails to appropriate mailboxes
+            if mailbox_name == 'orders' and (
+                email_type in ['order', 'expedite_request'] or
+                'order' in email.get('subject', '').lower() or
+                'expedite' in email.get('subject', '').lower() or
+                routing_category in ['order', 'expedite']
+            ):
+                filtered_emails.append(email)
+            elif mailbox_name == 'quality' and (
+                email_type in ['quality', 'complaint'] or
+                'quality' in email.get('subject', '').lower() or
+                routing_category == 'quality'
+            ):
+                filtered_emails.append(email)
+            elif mailbox_name == 'supplier' and (
+                email_type == 'supplier' or
+                'supplier' in email.get('subject', '').lower() or
+                routing_category == 'supplier'
+            ):
+                filtered_emails.append(email)
+            elif mailbox_name == 'oem' and (
+                email_type == 'oem' or
+                'oem' in email.get('subject', '').lower() or
+                routing_category == 'oem'
+            ):
+                filtered_emails.append(email)
+            elif mailbox_name == 'management' and (
+                email_type == 'management' or
+                email.get('priority') == 'critical' or
+                routing_category == 'management'
+            ):
+                filtered_emails.append(email)
+            elif mailbox_name == 'info':
+                # Info gets all emails for now
+                filtered_emails.append(email)
+
+        # Sort by timestamp
+        filtered_emails.sort(key=lambda x: str(x.get('timestamp', '')), reverse=True)
+
+        # Format recent emails for display
+        recent_emails = []
+        for email in filtered_emails[:10]:  # Show last 10 emails
+            recent_emails.append({
+                'id': email.get('id'),
+                'from': email.get('from', 'Unknown'),
+                'subject': email.get('subject', 'No Subject'),
+                'time': email.get('time_ago', 'Unknown'),
+                'timestamp': email.get('timestamp'),
+                'routed_to': f'{mailbox_name}@h-bu.de',
+                'status': email.get('status', 'processed'),
+                'priority': email.get('priority', 'medium'),
+                'source': email.get('source', 'unknown'),
+                'content': email.get('content', '')[:200] + '...' if len(email.get('content', '')) > 200 else email.get('content', '')
+            })
+
+        return jsonify({
+            'address': f'{mailbox_name}@h-bu.de',
+            'total_emails': len(filtered_emails),
+            'today_emails': len([e for e in filtered_emails if 'today' in str(e.get('timestamp', '')) or 'vor' in str(e.get('time_ago', ''))]),
+            'recent_emails': recent_emails
+        })
+    except Exception as e:
+        logger.error(f"Error in mailbox endpoint: {e}")
+        return jsonify({
+            'status': 'error',
+            'message': str(e),
             'address': f'{mailbox_name}@h-bu.de',
             'total_emails': 0,
             'today_emails': 0,
             'recent_emails': []
-        }))
-    except Exception as e:
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
         }), 500
 
 
@@ -2145,6 +2284,227 @@ except Exception as e:
     enhanced_simulation_available = False
 
 # Combined Email Feed Endpoint for Landing Page
+# Release 3.0 Scenario API Endpoints
+if scenario_system_available:
+    @app.route('/api/v3/scenarios', methods=['GET'])
+    def get_scenarios():
+        """Get all available scenarios"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            scenarios = scenario_manager.get_available_scenarios()
+            return jsonify({
+                'success': True,
+                'scenarios': scenarios,
+                'total': len(scenarios)
+            })
+        except Exception as e:
+            logger.error(f"Error getting scenarios: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    @app.route('/api/v3/scenarios/emails', methods=['GET'])
+    def get_scenario_emails():
+        """Get scenario-generated emails"""
+        try:
+            # Import the scenario email generator
+            from src.scenarios.email_generator import scenario_email_generator
+
+            scenario_type = request.args.get('scenario_type')
+            limit = int(request.args.get('limit', 50))
+
+            emails = scenario_email_generator.get_scenario_emails(scenario_type, limit)
+
+            return jsonify({
+                'success': True,
+                'emails': emails,
+                'count': len(emails)
+            })
+        except Exception as e:
+            logger.error(f"Error getting scenario emails: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    @app.route('/api/v3/scenarios/<scenario_id>', methods=['GET'])
+    def get_scenario_details(scenario_id):
+        """Get detailed information about a specific scenario"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            details = scenario_manager.get_scenario_details(scenario_id)
+            if not details:
+                return jsonify({'success': False, 'error': f'Scenario not found: {scenario_id}'}), 404
+
+            return jsonify({
+                'success': True,
+                'scenario': details
+            })
+        except Exception as e:
+            logger.error(f"Error getting scenario details: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    @app.route('/api/v3/scenarios/<scenario_id>/start', methods=['POST'])
+    def start_scenario(scenario_id):
+        """Start a specific scenario"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            data = request.get_json() or {}
+            duration_seconds = data.get('duration_seconds')
+
+            result = asyncio.run(scenario_manager.start_scenario(scenario_id, duration_seconds))
+            return jsonify(result)
+        except Exception as e:
+            logger.error(f"Error starting scenario: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    @app.route('/api/v3/scenarios/<scenario_id>/stop', methods=['POST'])
+    def stop_scenario(scenario_id):
+        """Stop a running scenario"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            result = asyncio.run(scenario_manager.stop_scenario(scenario_id))
+            return jsonify(result)
+        except Exception as e:
+            logger.error(f"Error stopping scenario: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    @app.route('/api/v3/scenarios/<scenario_id>/enable', methods=['POST'])
+    def enable_scenario(scenario_id):
+        """Enable a scenario"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            result = scenario_manager.enable_scenario(scenario_id)
+            return jsonify(result)
+        except Exception as e:
+            logger.error(f"Error enabling scenario: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    @app.route('/api/v3/scenarios/<scenario_id>/disable', methods=['POST'])
+    def disable_scenario(scenario_id):
+        """Disable a scenario"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            result = scenario_manager.disable_scenario(scenario_id)
+            return jsonify(result)
+        except Exception as e:
+            logger.error(f"Error disabling scenario: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    @app.route('/api/v3/scenarios/status', methods=['GET'])
+    def get_scenarios_status():
+        """Get status of all scenarios"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            system_status = scenario_manager.get_system_status()
+            return jsonify({
+                'success': True,
+                'status': system_status
+            })
+        except Exception as e:
+            logger.error(f"Error getting scenario status: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    @app.route('/api/v3/scenarios/metrics', methods=['GET'])
+    def get_scenarios_metrics():
+        """Get metrics for all scenarios"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            scenario_id = request.args.get('scenario_id')
+            metrics = scenario_manager.get_scenario_metrics(scenario_id)
+
+            return jsonify({
+                'success': True,
+                'metrics': metrics
+            })
+        except Exception as e:
+            logger.error(f"Error getting scenario metrics: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    # KPI Tracking API Endpoints
+    @app.route('/api/v3/kpi/current', methods=['GET'])
+    def get_current_kpi_metrics():
+        """Get current real-time KPI metrics"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            kpi_metrics = scenario_manager.get_real_time_kpi_metrics()
+            return jsonify({
+                'success': True,
+                'kpi_metrics': kpi_metrics
+            })
+        except Exception as e:
+            logger.error(f"Error getting current KPI metrics: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    @app.route('/api/v3/kpi/history/<kpi_type>', methods=['GET'])
+    def get_kpi_history(kpi_type):
+        """Get KPI history for visualization"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            hours = request.args.get('hours', 1, type=int)
+            history = scenario_manager.get_kpi_history(kpi_type, hours)
+
+            return jsonify({
+                'success': True,
+                'kpi_type': kpi_type,
+                'hours': hours,
+                'history': history
+            })
+        except Exception as e:
+            logger.error(f"Error getting KPI history for {kpi_type}: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    @app.route('/api/v3/kpi/alerts', methods=['GET'])
+    def get_kpi_alerts():
+        """Get KPI alert summary"""
+        try:
+            scenario_manager = monitor.scenario_manager
+            if not scenario_manager:
+                return jsonify({'success': False, 'error': 'Scenario system not available'}), 503
+
+            hours = request.args.get('hours', 1, type=int)
+            kpi_metrics = scenario_manager.get_real_time_kpi_metrics()
+            alert_summary = kpi_metrics.get('alert_summary', {})
+
+            return jsonify({
+                'success': True,
+                'hours': hours,
+                'alert_summary': alert_summary
+            })
+        except Exception as e:
+            logger.error(f"Error getting KPI alerts: {e}")
+            return jsonify({'success': False, 'error': str(e)}), 500
+
+    logger.info("✅ Release 3.0 Scenario API endpoints registered successfully")
+
+else:
+    logger.warning("⚠️ Scenario system not available - API endpoints not registered")
+
 @app.route('/api/emails/combined')
 def get_combined_emails():
     """Get combined emails from all sources for landing page display"""
@@ -2208,6 +2568,40 @@ def get_combined_emails():
             except Exception as e:
                 logger.warning(f"Error loading enhanced simulation emails: {e}")
 
+        # 4. Get scenario emails from weakness injection scenarios
+        try:
+            from src.scenarios.email_generator import scenario_email_generator
+            scenario_emails = scenario_email_generator.get_scenario_emails(limit=limit//4)
+            for email in scenario_emails:
+                # Convert scenario email format to display format
+                converted_email = {
+                    'id': email.get('id', f'scenario_{hash(str(email))}'),
+                    'from': email.get('from', 'scenario@simulation.com'),
+                    'subject': email.get('subject', 'Scenario Email'),
+                    'content': email.get('body', 'Scenario simulation email'),
+                    'timestamp': email.get('timestamp', datetime.now().isoformat()).replace('T', ' '),
+                    'time_ago': 'scenario',
+                    'priority': email.get('urgency', 'medium'),
+                    'type': email.get('email_type', 'scenario'),
+                    'email_type': email.get('scenario_type', 'business'),
+                    'source': 'scenario_emails',
+                    'routing': {
+                        'category': email.get('scenario_type', 'business'),
+                        'confidence': 0.98,
+                        'destination': 'business_agent'
+                    },
+                    'attachments': [],
+                    'scenario_info': {
+                        'scenario_type': email.get('scenario_type'),
+                        'business_impact': email.get('business_impact', {}),
+                        'sla_violation': email.get('sla_violation', False),
+                        'customer_info': email.get('customer_info', {})
+                    }
+                }
+                all_emails.append(converted_email)
+        except Exception as e:
+            logger.warning(f"Error loading scenario emails: {e}")
+
         # Sort all emails by timestamp (most recent first)
         # Convert timestamps to string format for consistent sorting
         for email in all_emails:
@@ -2226,7 +2620,8 @@ def get_combined_emails():
             'sources': {
                 'real_mailbox': len([e for e in final_emails if e.get('source') == 'real_mailbox']),
                 'timewarp_simulation': len([e for e in final_emails if e.get('source') == 'timewarp_simulation']),
-                'enhanced_simulation': len([e for e in final_emails if e.get('source') == 'enhanced_simulation'])
+                'enhanced_simulation': len([e for e in final_emails if e.get('source') == 'enhanced_simulation']),
+                'scenario_emails': len([e for e in final_emails if e.get('source') == 'scenario_emails'])
             }
         })
 
@@ -2245,5 +2640,5 @@ if __name__ == '__main__':
     # Run the dashboard
     port = int(os.environ.get('FLASK_PORT', os.environ.get('PORT', 80)))
     logger.info(f"🌐 Starting Happy Buttons Dashboard on http://localhost:{port}")
-    logger.info(f"🚀 Happy Buttons Release 2.1 - TimeWarp Edition")
+    logger.info(f"🚀 Happy Buttons Release 2.2 - Enhanced Business Simulation")
     socketio.run(app, host='0.0.0.0', port=port, debug=False, allow_unsafe_werkzeug=True)

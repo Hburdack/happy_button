@@ -232,6 +232,9 @@
                 <a class="nav-link" href="/kpi">
                     <i class="fas fa-chart-line me-1"></i>KPIs
                 </a>
+                <a class="nav-link" href="/scenarios">
+                    <i class="fas fa-exclamation-triangle me-1"></i>Scenarios
+                </a>
                 <a class="nav-link" href="/config">
                     <i class="fas fa-cogs me-1"></i>Config
                 </a>
@@ -939,16 +942,36 @@
             }
         }
 
-        function updateAgents(agents) {
+        async function updateAgents(agents) {
             const container = document.getElementById('agents-container');
             container.innerHTML = '';
 
             let activeCount = 0;
+
+            // Fetch detailed stats for each agent
+            const agentDetails = {};
+            for (const agentName of Object.keys(agents)) {
+                try {
+                    const response = await fetch(`/api/agents/${agentName}/details`);
+                    if (response.ok) {
+                        agentDetails[agentName] = await response.json();
+                    }
+                } catch (error) {
+                    console.warn(`Failed to fetch details for ${agentName}:`, error);
+                }
+            }
+
             Object.entries(agents).forEach(([agentName, agent]) => {
                 if (agent.active) activeCount++;
 
                 const statusClass = agent.active ? 'status-online' : 'status-offline';
                 const statusIcon = agent.active ? 'fa-check-circle' : 'fa-times-circle';
+                const details = agentDetails[agentName] || {};
+
+                // Use processed_emails from details if available, fallback to processed_tasks
+                const processedCount = details.processed_emails || agent.processed_tasks || 0;
+                const queueSize = details.queue_size || agent.queue_size || 0;
+                const errorCount = details.error_count || agent.error_count || 0;
 
                 const agentHTML = `
                     <div class="card">
@@ -958,9 +981,9 @@
                                 <h6 class="mb-0">${agent.name}</h6>
                             </div>
                             <small class="text-muted">
-                                Tasks: ${agent.processed_tasks || 0} |
-                                Errors: ${agent.error_count || 0} |
-                                Queue: ${agent.queue_size || 0}
+                                Emails: ${processedCount} |
+                                Errors: ${errorCount} |
+                                Queue: ${queueSize}
                             </small>
                         </div>
                     </div>

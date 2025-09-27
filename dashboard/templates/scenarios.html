@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Release 3.0 - Weakness Injection | Happy Buttons System Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .scenario-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            margin-bottom: 20px;
+        }
+        .scenario-card.active {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .scenario-card.critical {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        .metrics-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+        }
+        .status-inactive { background-color: #6c757d; }
+        .status-activating { background-color: #ffc107; }
+        .status-active { background-color: #28a745; }
+        .status-error { background-color: #dc3545; }
+
+        .kpi-gauge {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .impact-level-low { color: #28a745; }
+        .impact-level-medium { color: #ffc107; }
+        .impact-level-high { color: #fd7e14; }
+        .impact-level-critical { color: #dc3545; }
+
+        .scenario-controls {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .alert-banner {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .real-time-indicator {
+            width: 12px;
+            height: 12px;
+            background-color: #28a745;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-crown me-2"></i>
+                Happy Buttons GmbH
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-home me-1"></i>Home
+                </a>
+                <a class="nav-link" href="/dashboard">
+                    <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                </a>
+                <a class="nav-link" href="/shop">
+                    <i class="fas fa-shopping-bag me-1"></i>Shop
+                </a>
+                <a class="nav-link" href="/agents">
+                    <i class="fas fa-robot me-1"></i>Agents
+                </a>
+                <a class="nav-link" href="/teams">
+                    <i class="fas fa-people-group me-1"></i>Teams
+                </a>
+                <a class="nav-link" href="/kpi">
+                    <i class="fas fa-chart-line me-1"></i>KPIs
+                </a>
+                <a class="nav-link active" href="/scenarios">
+                    <i class="fas fa-exclamation-triangle me-1"></i>Scenarios
+                </a>
+                <a class="nav-link" href="/config">
+                    <i class="fas fa-cogs me-1"></i>Config
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card alert-banner">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-exclamation-triangle fa-3x"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h2 class="mb-2">Release 3.0 - Weakness Injection System</h2>
+                            <p class="mb-0">
+                                Demonstrate organizational failure modes and their business impact through realistic scenario simulation
+                                <span class="d-inline-flex align-items-center ms-3">
+                                    <span class="real-time-indicator me-2"></span>
+                                    <small>Real-time monitoring active</small>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold">System Status</div>
+                            <span id="system-status" class="status-badge status-inactive">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scenario Control Grid -->
+        <div class="row" id="scenarios-grid">
+            <!-- Scenarios will be loaded here -->
+        </div>
+
+        <!-- Real-time Metrics Dashboard -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-line me-2"></i>
+                            Real-time KPI Degradation
+                        </h5>
+                        <div class="d-flex align-items-center">
+                            <span class="real-time-indicator me-2"></span>
+                            <small class="text-muted">Updated every 30 seconds</small>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="metrics-grid" id="kpi-metrics">
+                            <!-- KPI metrics will be loaded here -->
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="impactChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-time KPI Monitoring -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-line me-2"></i>
+                            Real-time KPI Monitoring
+                        </h5>
+                        <div class="d-flex align-items-center">
+                            <span id="kpi-monitoring-status" class="badge bg-secondary me-2">
+                                <i class="fas fa-circle fa-sm me-1"></i>Connecting...
+                            </span>
+                            <button class="btn btn-sm btn-outline-primary" onclick="scenariosManager.refreshKPIs()">
+                                <i class="fas fa-refresh"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="kpi-metrics-grid">
+                            <!-- KPI metrics will be populated here -->
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="chart-container">
+                                    <canvas id="kpiTrendsChart" height="100"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Alerts -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            KPI Alerts & Degradation
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="kpi-alerts-container">
+                            <div class="text-center text-muted py-3">
+                                <i class="fas fa-shield-alt fa-2x mb-2"></i>
+                                <p>All KPIs operating within normal thresholds</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Scenarios Monitor -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-eye me-2"></i>
+                            Active Scenario Monitor
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="active-scenarios-monitor">
+                            <div class="text-center text-muted py-4">
+                                <i class="fas fa-play-circle fa-3x mb-3"></i>
+                                <p>No active scenarios. Start a scenario above to see real-time impact data.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scenario Generated Emails -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-envelope me-2"></i>
+                            Scenario Generated Emails
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="scenario-emails-container">
+                            <div class="text-center text-muted py-3">
+                                <i class="fas fa-envelope-open fa-2x mb-2"></i>
+                                <p>No scenario emails generated yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        class ScenariosManager {
+            constructor() {
+                this.scenarios = {};
+                this.activeScenarios = new Set();
+                this.updateInterval = null;
+                this.impactChart = null;
+                this.kpiChart = null;
+                this.kpiData = {};
+                this.init();
+            }
+
+            async init() {
+                await this.loadScenarios();
+                this.renderScenarios();
+                this.initializeChart();
+                this.initializeKPIChart();
+                await this.loadKPIMetrics();
+                await this.loadScenarioEmails();
+                this.startRealTimeUpdates();
+            }
+
+            async loadScenarios() {
+                try {
+                    const response = await fetch('/api/v3/scenarios');
+                    const data = await response.json();
+                    if (data.success) {
+                        this.scenarios = data.scenarios;
+                    }
+                } catch (error) {
+                    console.error('Failed to load scenarios:', error);
+                }
+            }
+
+            renderScenarios() {
+                const grid = document.getElementById('scenarios-grid');
+                grid.innerHTML = '';
+
+                Object.values(this.scenarios).forEach(scenario => {
+                    const card = this.createScenarioCard(scenario);
+                    grid.appendChild(card);
+                });
+            }
+
+            createScenarioCard(scenario) {
+                const col = document.createElement('div');
+                col.className = 'col-lg-6 col-xl-3 mb-4';
+
+                const priorityClass = scenario.priority === 'critical' ? 'critical' : '';
+                const statusClass = scenario.status === 'active' ? 'active' : '';
+
+                col.innerHTML = `
+                    <div class="card scenario-card ${priorityClass} ${statusClass}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h6 class="card-title fw-bold">${scenario.name}</h6>
+                                    <small class="opacity-75">${scenario.category}</small>
+                                </div>
+                                <span class="status-badge status-${scenario.status}">${scenario.status}</span>
+                            </div>
+
+                            <p class="card-text small mb-3">${scenario.description}</p>
+
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <span class="small">Priority: ${scenario.priority.toUpperCase()}</span>
+                                <span class="small">
+                                    <i class="fas fa-toggle-${scenario.enabled ? 'on' : 'off'} me-1"></i>
+                                    ${scenario.enabled ? 'Enabled' : 'Disabled'}
+                                </span>
+                            </div>
+
+                            <div class="scenario-controls">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-light btn-sm"
+                                            onclick="scenariosManager.toggleScenario('${scenario.id}')"
+                                            ${!scenario.enabled ? 'disabled' : ''}>
+                                        <i class="fas fa-${scenario.status === 'active' ? 'stop' : 'play'} me-1"></i>
+                                        ${scenario.status === 'active' ? 'Stop' : 'Start'}
+                                    </button>
+                                    <button class="btn btn-outline-light btn-sm"
+                                            onclick="scenariosManager.enableScenario('${scenario.id}', ${!scenario.enabled})">
+                                        <i class="fas fa-power-off me-1"></i>
+                                        ${scenario.enabled ? 'Disable' : 'Enable'}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                return col;
+            }
+
+            async toggleScenario(scenarioId) {
+                const scenario = this.scenarios[scenarioId];
+                if (!scenario || !scenario.enabled) return;
+
+                try {
+                    const action = scenario.status === 'active' ? 'stop' : 'start';
+                    const url = `/api/v3/scenarios/${scenarioId}/${action}`;
+
+                    const options = {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' }
+                    };
+
+                    if (action === 'start') {
+                        options.body = JSON.stringify({ duration_seconds: 300 }); // 5 minutes default
+                    }
+
+                    const response = await fetch(url, options);
+                    const data = await response.json();
+
+                    if (data.success) {
+                        await this.loadScenarios();
+                        this.renderScenarios();
+                        this.showAlert(`Scenario ${action}ed successfully: ${scenario.name}`, 'success');
+                    } else {
+                        this.showAlert(`Failed to ${action} scenario: ${data.error}`, 'danger');
+                    }
+                } catch (error) {
+                    console.error(`Failed to ${action} scenario:`, error);
+                    this.showAlert(`Error: ${error.message}`, 'danger');
+                }
+            }
+
+            async enableScenario(scenarioId, enable) {
+                try {
+                    const action = enable ? 'enable' : 'disable';
+                    const response = await fetch(`/api/v3/scenarios/${scenarioId}/${action}`, {
+                        method: 'POST'
+                    });
+                    const data = await response.json();
+
+                    if (data.success) {
+                        await this.loadScenarios();
+                        this.renderScenarios();
+                        this.showAlert(`Scenario ${action}d successfully`, 'success');
+                    } else {
+                        this.showAlert(`Failed to ${action} scenario: ${data.error}`, 'danger');
+                    }
+                } catch (error) {
+                    console.error(`Failed to ${action} scenario:`, error);
+                    this.showAlert(`Error: ${error.message}`, 'danger');
+                }
+            }
+
+            async updateMetrics() {
+                try {
+                    // Update system status
+                    const statusResponse = await fetch('/api/v3/scenarios/status');
+                    const statusData = await statusResponse.json();
+
+                    if (statusData.success) {
+                        this.updateSystemStatus(statusData.status);
+                    }
+
+                    // Update metrics
+                    const metricsResponse = await fetch('/api/v3/scenarios/metrics');
+                    const metricsData = await metricsResponse.json();
+
+                    if (metricsData.success) {
+                        this.updateKPIMetrics(metricsData.metrics);
+                        this.updateActiveScenarios(metricsData.metrics);
+                    }
+
+                    // Refresh scenario status
+                    await this.loadScenarios();
+                    this.renderScenarios();
+
+                } catch (error) {
+                    console.error('Failed to update metrics:', error);
+                }
+            }
+
+            updateSystemStatus(status) {
+                const statusElement = document.getElementById('system-status');
+                const activeCount = status.active_scenarios_count || 0;
+
+                if (activeCount > 0) {
+                    statusElement.className = 'status-badge status-active';
+                    statusElement.textContent = `${activeCount} Active`;
+                } else {
+                    statusElement.className = 'status-badge status-inactive';
+                    statusElement.textContent = 'Inactive';
+                }
+            }
+
+            updateKPIMetrics(metrics) {
+                const container = document.getElementById('kpi-metrics');
+                if (!metrics || Object.keys(metrics).length === 0) {
+                    container.innerHTML = '<div class="text-center text-muted py-4">No active scenarios generating metrics</div>';
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                Object.entries(metrics).forEach(([scenarioId, data]) => {
+                    const metricCard = document.createElement('div');
+                    metricCard.className = 'card metrics-card';
+                    metricCard.innerHTML = `
+                        <div class="card-body text-center">
+                            <h6 class="card-title">${this.scenarios[scenarioId]?.name || scenarioId}</h6>
+                            <div class="metric-value h4">${data.events_triggered || 0}</div>
+                            <small>Events Triggered</small>
+                            <hr class="my-2 opacity-50">
+                            <div class="small">
+                                Impact Score: ${(data.impact_score || 0).toFixed(1)}
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(metricCard);
+                });
+            }
+
+            updateActiveScenarios(metrics) {
+                const container = document.getElementById('active-scenarios-monitor');
+
+                if (!metrics || Object.keys(metrics).length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center text-muted py-4">
+                            <i class="fas fa-play-circle fa-3x mb-3"></i>
+                            <p>No active scenarios. Start a scenario above to see real-time impact data.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                Object.entries(metrics).forEach(([scenarioId, data]) => {
+                    const scenario = this.scenarios[scenarioId];
+                    if (!scenario) return;
+
+                    const monitor = document.createElement('div');
+                    monitor.className = 'card mb-3';
+                    monitor.innerHTML = `
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">${scenario.name}</h6>
+                                    <small class="text-muted">Started: ${new Date(data.start_time).toLocaleTimeString()}</small>
+                                </div>
+                                <div class="text-end">
+                                    <div class="h5 mb-0">${data.events_triggered || 0}</div>
+                                    <small>Events</small>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <div class="row text-center">
+                                    <div class="col">
+                                        <div class="fw-bold">${data.affected_orders || 0}</div>
+                                        <small class="text-muted">Affected Orders</small>
+                                    </div>
+                                    <div class="col">
+                                        <div class="fw-bold">${(data.impact_score || 0).toFixed(1)}</div>
+                                        <small class="text-muted">Impact Score</small>
+                                    </div>
+                                    <div class="col">
+                                        <div class="fw-bold">€${(data.revenue_impact || 0).toLocaleString()}</div>
+                                        <small class="text-muted">Revenue Impact</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(monitor);
+                });
+            }
+
+            initializeChart() {
+                const ctx = document.getElementById('impactChart').getContext('2d');
+                this.impactChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Overall Impact Score',
+                            data: [],
+                            borderColor: '#667eea',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: 'Impact Score'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Time'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true
+                            },
+                            title: {
+                                display: true,
+                                text: 'Real-time Business Impact Monitoring'
+                            }
+                        }
+                    }
+                });
+            }
+
+            startRealTimeUpdates() {
+                // Update every 30 seconds
+                this.updateInterval = setInterval(() => {
+                    this.updateMetrics();
+                    this.loadKPIMetrics();
+                    this.loadScenarioEmails();
+                }, 30000);
+
+                // Initial update
+                this.updateMetrics();
+            }
+
+            showAlert(message, type) {
+                // Create and show a Bootstrap alert
+                const alertDiv = document.createElement('div');
+                alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+                alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; width: 300px;';
+                alertDiv.innerHTML = `
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                document.body.appendChild(alertDiv);
+
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.parentNode.removeChild(alertDiv);
+                    }
+                }, 5000);
+            }
+
+            // KPI Monitoring Methods
+            async loadKPIMetrics() {
+                try {
+                    const response = await fetch('/api/v3/kpi/current');
+                    const data = await response.json();
+                    if (data.success) {
+                        this.kpiData = data.kpi_metrics;
+                        this.updateKPIDisplay();
+                        this.updateKPIStatus(data.kpi_metrics.monitoring_status);
+                    }
+                } catch (error) {
+                    console.error('Failed to load KPI metrics:', error);
+                    this.updateKPIStatus(false);
+                }
+            }
+
+            async loadScenarioEmails() {
+                try {
+                    const response = await fetch('/api/v3/scenarios/emails?limit=10');
+                    const data = await response.json();
+                    if (data.success) {
+                        this.displayScenarioEmails(data.emails);
+                    }
+                } catch (error) {
+                    console.error('Failed to load scenario emails:', error);
+                }
+            }
+
+            displayScenarioEmails(emails) {
+                const container = document.getElementById('scenario-emails-container');
+
+                if (!emails || emails.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center text-muted py-3">
+                            <i class="fas fa-envelope-open fa-2x mb-2"></i>
+                            <p>No scenario emails generated yet</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = emails.map(email => `
+                    <div class="border rounded p-3 mb-3">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">
+                                    <span class="badge bg-${this.getEmailTypeColor(email.email_type)} me-2">
+                                        ${email.email_type.replace('_', ' ').toUpperCase()}
+                                    </span>
+                                    <span class="badge bg-${this.getUrgencyColor(email.urgency)} me-2">
+                                        ${email.urgency.toUpperCase()}
+                                    </span>
+                                    ${email.subject}
+                                </h6>
+                                <p class="text-muted mb-2 small">
+                                    <i class="fas fa-user me-1"></i>From: ${email.from}
+                                    <span class="ms-3">
+                                        <i class="fas fa-clock me-1"></i>
+                                        ${new Date(email.timestamp).toLocaleString()}
+                                    </span>
+                                    ${email.sla_violation ? '<span class="badge bg-danger ms-2">SLA VIOLATION</span>' : ''}
+                                </p>
+                                <div class="email-body small" style="max-height: 150px; overflow-y: auto;">
+                                    ${email.body.replace(/\n/g, '<br>')}
+                                </div>
+                                ${email.business_impact ? `
+                                    <div class="mt-2">
+                                        <small class="text-muted">
+                                            Business Impact:
+                                            Customer Satisfaction: -${email.business_impact.customer_satisfaction_loss.toFixed(1)}%
+                                            ${email.business_impact.potential_revenue_loss > 0 ?
+                                                `, Revenue Risk: €${email.business_impact.potential_revenue_loss.toFixed(0)}` : ''}
+                                        </small>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            getEmailTypeColor(type) {
+                const colors = {
+                    'complaint': 'danger',
+                    'customer_inquiry': 'warning',
+                    'expedite_request': 'success',
+                    'vip_request': 'primary'
+                };
+                return colors[type] || 'secondary';
+            }
+
+            getUrgencyColor(urgency) {
+                const colors = {
+                    'critical': 'danger',
+                    'high': 'warning',
+                    'medium': 'info',
+                    'low': 'secondary'
+                };
+                return colors[urgency] || 'secondary';
+            }
+
+            initializeKPIChart() {
+                const ctx = document.getElementById('kpiTrendsChart').getContext('2d');
+                this.kpiChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [
+                            {
+                                label: 'Response Time',
+                                data: [],
+                                borderColor: '#e74c3c',
+                                backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Customer Satisfaction',
+                                data: [],
+                                borderColor: '#3498db',
+                                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'SLA Compliance',
+                                data: [],
+                                borderColor: '#2ecc71',
+                                backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'KPI Values'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Time'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true
+                            },
+                            title: {
+                                display: true,
+                                text: 'Real-time KPI Trends'
+                            }
+                        }
+                    }
+                });
+            }
+
+            updateKPIDisplay() {
+                const grid = document.getElementById('kpi-metrics-grid');
+                grid.innerHTML = '';
+
+                if (!this.kpiData.current_kpis) return;
+
+                Object.entries(this.kpiData.current_kpis).forEach(([kpiType, data]) => {
+                    const col = document.createElement('div');
+                    col.className = 'col-lg-3 col-md-6 mb-3';
+
+                    const alertClass = this.getAlertClass(data.alert_level);
+                    const degradationColor = data.degradation_percentage > 10 ? 'text-danger' :
+                                           data.degradation_percentage > 5 ? 'text-warning' : 'text-success';
+
+                    col.innerHTML = `
+                        <div class="card h-100 ${alertClass}">
+                            <div class="card-body text-center">
+                                <div class="h5 mb-1">${this.formatKPIValue(data.value, data.unit)}</div>
+                                <div class="text-muted small mb-2">${this.formatKPIName(kpiType)}</div>
+                                <div class="${degradationColor} fw-bold">
+                                    ${data.degradation_percentage.toFixed(1)}% degradation
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge bg-${this.getAlertBadgeColor(data.alert_level)} small">
+                                        ${data.alert_level.toUpperCase()}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(col);
+                });
+
+                // Update alerts display
+                this.updateKPIAlerts();
+            }
+
+            updateKPIAlerts() {
+                if (!this.kpiData.alert_summary) return;
+
+                const container = document.getElementById('kpi-alerts-container');
+                const alerts = this.kpiData.alert_summary.recent_alerts || [];
+
+                if (alerts.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center text-muted py-3">
+                            <i class="fas fa-shield-alt fa-2x mb-2"></i>
+                            <p>All KPIs operating within normal thresholds</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = '';
+                alerts.slice(0, 5).forEach(alert => {
+                    const alertEl = document.createElement('div');
+                    alertEl.className = `alert alert-${this.getAlertClass(alert.alert_level)} d-flex justify-content-between align-items-center`;
+                    alertEl.innerHTML = `
+                        <div>
+                            <strong>${this.formatKPIName(alert.kpi_type)}</strong>
+                            <span class="mx-2">•</span>
+                            <span>${alert.degradation_percentage.toFixed(1)}% degradation</span>
+                            <div class="small text-muted">
+                                ${new Date(alert.timestamp).toLocaleTimeString()}
+                                ${alert.scenario_id ? ` • Scenario: ${alert.scenario_id}` : ''}
+                            </div>
+                        </div>
+                        <span class="badge bg-${this.getAlertBadgeColor(alert.alert_level)}">
+                            ${alert.alert_level.toUpperCase()}
+                        </span>
+                    `;
+                    container.appendChild(alertEl);
+                });
+            }
+
+            updateKPIStatus(isMonitoring) {
+                const statusEl = document.getElementById('kpi-monitoring-status');
+                if (isMonitoring) {
+                    statusEl.className = 'badge bg-success me-2';
+                    statusEl.innerHTML = '<i class="fas fa-circle fa-sm me-1"></i>Active';
+                } else {
+                    statusEl.className = 'badge bg-danger me-2';
+                    statusEl.innerHTML = '<i class="fas fa-circle fa-sm me-1"></i>Offline';
+                }
+            }
+
+            getAlertClass(alertLevel) {
+                switch(alertLevel) {
+                    case 'critical': return 'border-danger';
+                    case 'warning': return 'border-warning';
+                    case 'emergency': return 'border-danger bg-danger bg-opacity-10';
+                    default: return '';
+                }
+            }
+
+            getAlertBadgeColor(alertLevel) {
+                switch(alertLevel) {
+                    case 'critical': return 'danger';
+                    case 'warning': return 'warning';
+                    case 'emergency': return 'danger';
+                    default: return 'secondary';
+                }
+            }
+
+            formatKPIName(kpiType) {
+                return kpiType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            }
+
+            formatKPIValue(value, unit) {
+                if (unit === '%') return `${value.toFixed(1)}%`;
+                if (unit === 'seconds') return `${value.toFixed(2)}s`;
+                if (unit === '$') return `$${value.toFixed(0)}`;
+                if (unit === 'stars') return `${value.toFixed(1)}⭐`;
+                return `${value.toFixed(1)}${unit}`;
+            }
+
+            async refreshKPIs() {
+                await this.loadKPIMetrics();
+                this.showAlert('KPI metrics refreshed', 'success');
+            }
+
+            destroy() {
+                if (this.updateInterval) {
+                    clearInterval(this.updateInterval);
+                }
+                if (this.impactChart) {
+                    this.impactChart.destroy();
+                }
+                if (this.kpiChart) {
+                    this.kpiChart.destroy();
+                }
+            }
+        }
+
+        // Initialize the scenarios manager when page loads
+        let scenariosManager;
+        document.addEventListener('DOMContentLoaded', function() {
+            scenariosManager = new ScenariosManager();
+        });
+
+        // Cleanup when page unloads
+        window.addEventListener('beforeunload', function() {
+            if (scenariosManager) {
+                scenariosManager.destroy();
+            }
+        });
+    </script>
+</body>
+</html>

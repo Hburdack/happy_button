@@ -1,0 +1,31 @@
+{
+  "id": "64adab89-18aa-45fd-bd7c-74ce114b5dff",
+  "scenario_type": "late_triage",
+  "email_type": "customer_inquiry",
+  "timestamp": "2025-09-27T08:33:23.181858",
+  "delayed_timestamp": "2025-09-27T06:45:23.181862",
+  "from": "Marco Rossi <marco.rossi@italiandesignhousede>",
+  "to": "support@happybuttons.de",
+  "subject": "ASAP: Customer Service Response Required",
+  "body": "URGENT: I need immediate assistance with order #HB-566865. It's been 1.8 hours since my first email. This delay is costing my business money.\n\nExpecting immediate response,\nMarco Rossi",
+  "delay_info": {
+    "delay_minutes": 108,
+    "sla_minutes": 60,
+    "customer_impact": "low",
+    "escalation_triggered": false,
+    "scenario_id": "email_1758954803_9116"
+  },
+  "customer_info": {
+    "name": "Marco Rossi",
+    "company": "Italian Design House",
+    "phone": "+39-02-33445566"
+  },
+  "urgency": "medium",
+  "business_impact": {
+    "customer_satisfaction_loss": 21.6,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 10.8,
+    "escalation_risk": 32.4
+  },
+  "sla_violation": true
+}

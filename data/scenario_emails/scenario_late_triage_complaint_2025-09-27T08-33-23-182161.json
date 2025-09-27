@@ -1,0 +1,31 @@
+{
+  "id": "2a60cc09-70e3-4005-ac1c-b112535b4690",
+  "scenario_type": "late_triage",
+  "email_type": "complaint",
+  "timestamp": "2025-09-27T08:33:23.182161",
+  "delayed_timestamp": "2025-09-27T06:11:23.182164",
+  "from": "James Wilson <james.wilson@industrialsolutionsagde>",
+  "to": "support@happybuttons.de",
+  "subject": "Unacceptable Service - 2.4 Hours Without Reply",
+  "body": "To Management,\n\nThis is a formal complaint about your company's poor response times. I have been waiting 2.4 hours for a simple response.\n\nI expect immediate action and an explanation for this delay.\n\nJames Wilson\nPurchasing Manager\nIndustrial Solutions AG",
+  "delay_info": {
+    "delay_minutes": 142,
+    "sla_minutes": 60,
+    "customer_impact": "moderate",
+    "escalation_triggered": true,
+    "scenario_id": "email_1758954803_4420"
+  },
+  "customer_info": {
+    "name": "James Wilson",
+    "company": "Industrial Solutions AG",
+    "phone": "+41-44-7766554"
+  },
+  "urgency": "medium",
+  "business_impact": {
+    "customer_satisfaction_loss": 28.400000000000002,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 28.400000000000002,
+    "escalation_risk": 63.900000000000006
+  },
+  "sla_violation": true
+}

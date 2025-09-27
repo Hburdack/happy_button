@@ -1,0 +1,31 @@
+{
+  "id": "9194783b-c606-4b6f-8ab1-681114f61452",
+  "scenario_type": "late_triage",
+  "email_type": "complaint",
+  "timestamp": "2025-09-27T08:33:23.182467",
+  "delayed_timestamp": "2025-09-27T05:24:23.182471",
+  "from": "Sarah Mitchell <sarah.mitchell@techflowmanufacturingde>",
+  "to": "support@happybuttons.de",
+  "subject": "Formal Complaint: Poor Customer Service Response",
+  "body": "To Management,\n\nThis is a formal complaint about your company's poor response times. I have been waiting 3.1 hours for a simple response.\n\nI expect immediate action and an explanation for this delay.\n\nSarah Mitchell\nPurchasing Manager\nTechFlow Manufacturing",
+  "delay_info": {
+    "delay_minutes": 189,
+    "sla_minutes": 60,
+    "customer_impact": "moderate",
+    "escalation_triggered": true,
+    "scenario_id": "email_1758954803_3325"
+  },
+  "customer_info": {
+    "name": "Sarah Mitchell",
+    "company": "TechFlow Manufacturing",
+    "phone": "+49-30-12345678"
+  },
+  "urgency": "high",
+  "business_impact": {
+    "customer_satisfaction_loss": 37.800000000000004,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 37.800000000000004,
+    "escalation_risk": 85.05
+  },
+  "sla_violation": true
+}

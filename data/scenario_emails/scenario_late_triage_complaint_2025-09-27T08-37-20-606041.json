@@ -1,0 +1,31 @@
+{
+  "id": "1e9be15f-3bab-4eca-bc99-5d261d065d3e",
+  "scenario_type": "late_triage",
+  "email_type": "complaint",
+  "timestamp": "2025-09-27T08:37:20.606041",
+  "delayed_timestamp": "2025-09-27T05:58:20.606044",
+  "from": "Lisa Andersson <lisa.andersson@nordicindustriesabde>",
+  "to": "support@happybuttons.de",
+  "subject": "Formal Complaint: Poor Customer Service Response",
+  "body": "To Management,\n\nThis is a formal complaint about your company's poor response times. I have been waiting 2.6 hours for a simple response.\n\nI expect immediate action and an explanation for this delay.\n\nLisa Andersson\nPurchasing Manager\nNordic Industries AB",
+  "delay_info": {
+    "delay_minutes": 159,
+    "sla_minutes": 15,
+    "customer_impact": "high",
+    "escalation_triggered": true,
+    "scenario_id": "email_1758955040_4508_followup_0"
+  },
+  "customer_info": {
+    "name": "Lisa Andersson",
+    "company": "Nordic Industries AB",
+    "phone": "+46-8-44556677"
+  },
+  "urgency": "medium",
+  "business_impact": {
+    "customer_satisfaction_loss": 31.8,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 31.8,
+    "escalation_risk": 71.55
+  },
+  "sla_violation": true
+}

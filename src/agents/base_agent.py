@@ -15,6 +15,11 @@ import json
 import uuid
 
 try:
+    from .agent_email_dispatcher import AgentEmailDispatcher, AgentTask as EmailTask, TaskTypes
+except ImportError:
+    from agent_email_dispatcher import AgentEmailDispatcher, AgentTask as EmailTask, TaskTypes
+
+try:
     from email_processing.parser import ParsedEmail
     from email_processing.router import RoutingDecision
 except ImportError:  # pragma: no cover - supports package-style imports
@@ -94,6 +99,9 @@ class BaseAgent(ABC):
             'success_rate': 1.0,
             'last_activity': datetime.now()
         }
+
+        # Email dispatcher for inter-agent communication
+        self.email_dispatcher = AgentEmailDispatcher()
 
         logger.info(f"Initialized {self.agent_type} agent: {self.agent_id}")
 
@@ -373,23 +381,46 @@ class BaseAgent(ABC):
 
     async def coordinate_with_agent(self, other_agent_id: str,
                                    message: str, data: Optional[Dict] = None) -> None:
-        """Send coordination message to another agent"""
+        """Send coordination message to another agent via real email"""
         try:
-            coordination_data = {
-                'from_agent': self.agent_id,
-                'to_agent': other_agent_id,
-                'message': message,
-                'timestamp': datetime.now().isoformat(),
-                'data': data or {}
-            }
+            # Create coordination task
+            task = self.email_dispatcher.create_coordination_task(
+                from_agent=self.agent_type,
+                to_agent=other_agent_id,
+                task_type=TaskTypes.COORDINATION_UPDATE,
+                content=message,
+                priority="medium",
+                data=data or {},
+                due_hours=4
+            )
 
-            await self._store_in_memory(f"coordination/{other_agent_id}", coordination_data)
+            # Send via email
+            success = self.email_dispatcher.send_task_email(task)
 
-            # Use Claude Flow for agent coordination
-            await self._run_claude_flow_hook('notify', {
-                'message': f"Coordination from {self.agent_id} to {other_agent_id}: {message}",
-                'target_agent': other_agent_id
-            })
+            if success:
+                # Store in memory for tracking
+                coordination_data = {
+                    'task_id': task.task_id,
+                    'from_agent': self.agent_id,
+                    'to_agent': other_agent_id,
+                    'message': message,
+                    'timestamp': datetime.now().isoformat(),
+                    'data': data or {},
+                    'email_sent': True
+                }
+
+                await self._store_in_memory(f"coordination/{other_agent_id}", coordination_data)
+
+                # Use Claude Flow for additional coordination
+                await self._run_claude_flow_hook('notify', {
+                    'message': f"Email task sent from {self.agent_id} to {other_agent_id}: {message}",
+                    'target_agent': other_agent_id,
+                    'task_id': task.task_id
+                })
+
+                logger.info(f"Coordination email sent: {task.task_id}")
+            else:
+                logger.error(f"Failed to send coordination email to {other_agent_id}")
 
         except Exception as e:
             logger.error(f"Agent coordination failed: {str(e)}")
@@ -408,15 +439,93 @@ class BaseAgent(ABC):
         self.task_queue = remaining_tasks
         return completed_count
 
+    async def send_task_email(self, to_agent: str, task_type: str, content: str,
+                             priority: str = "medium", data: Optional[Dict] = None,
+                             due_hours: Optional[int] = None) -> bool:
+        """Send a task email to another agent"""
+        try:
+            task = self.email_dispatcher.create_coordination_task(
+                from_agent=self.agent_type,
+                to_agent=to_agent,
+                task_type=task_type,
+                content=content,
+                priority=priority,
+                data=data or {},
+                due_hours=due_hours
+            )
+
+            success = self.email_dispatcher.send_task_email(task)
+
+            if success:
+                logger.info(f"Task email sent from {self.agent_type} to {to_agent}: {task_type}")
+                return True
+            else:
+                logger.error(f"Failed to send task email to {to_agent}")
+                return False
+
+        except Exception as e:
+            logger.error(f"Error sending task email: {str(e)}")
+            return False
+
+    async def check_email_tasks(self, limit: int = 10) -> List[EmailTask]:
+        """Check for incoming email tasks for this agent"""
+        try:
+            tasks = self.email_dispatcher.check_for_agent_tasks(self.agent_type, limit)
+            logger.info(f"Found {len(tasks)} email tasks for {self.agent_type}")
+            return tasks
+        except Exception as e:
+            logger.error(f"Error checking email tasks: {str(e)}")
+            return []
+
+    async def respond_to_task_email(self, original_task: EmailTask,
+                                   response_data: Dict[str, Any],
+                                   status: str = "completed") -> bool:
+        """Respond to a task email"""
+        try:
+            success = self.email_dispatcher.send_task_response(
+                original_task, response_data, status
+            )
+
+            if success:
+                logger.info(f"Response sent for task {original_task.task_id}")
+                return True
+            else:
+                logger.error(f"Failed to send response for task {original_task.task_id}")
+                return False
+
+        except Exception as e:
+            logger.error(f"Error responding to task email: {str(e)}")
+            return False
+
+    def get_email_task_stats(self) -> Dict[str, Any]:
+        """Get email task statistics for this agent"""
+        try:
+            stats = self.email_dispatcher.get_agent_task_stats(self.agent_type)
+            return stats
+        except Exception as e:
+            logger.error(f"Error getting email task stats: {str(e)}")
+            return {
+                'total_tasks': 0,
+                'pending_tasks': 0,
+                'high_priority_tasks': 0,
+                'overdue_tasks': 0,
+                'task_types': [],
+                'last_checked': datetime.now().isoformat(),
+                'error': str(e)
+            }
+
     async def health_check(self) -> Dict[str, Any]:
         """Perform agent health check"""
+        email_stats = self.get_email_task_stats()
+
         return {
             'agent_id': self.agent_id,
             'healthy': self.is_active and self.error_count < 10,
             'error_rate': self.error_count / max(self.processed_tasks, 1),
             'last_activity': self.metrics['last_activity'].isoformat(),
             'queue_health': len(self.task_queue) < 100,  # Queue not overwhelmed
-            'memory_health': len(self.memory.memories) < 1000  # Memory not bloated
+            'memory_health': len(self.memory.memories) < 1000,  # Memory not bloated
+            'email_tasks': email_stats
         }
 
 

@@ -1,0 +1,31 @@
+{
+  "id": "91c81e07-48c4-4d5b-a817-f491292fa391",
+  "scenario_type": "late_triage",
+  "email_type": "complaint",
+  "timestamp": "2025-09-27T18:35:42.705984",
+  "delayed_timestamp": "2025-09-27T15:46:42.705989",
+  "from": "Maria Rodriguez <maria.rodriguez@precisioncomponentsltdde>",
+  "to": "support@happybuttons.de",
+  "subject": "COMPLAINT: 2.8 Hour Delay in Response Time",
+  "body": "I am extremely disappointed with Happy Buttons' customer service. 2.8 hours without any acknowledgment is completely unacceptable in today's business environment.\n\nI'm considering switching suppliers if this continues.\n\nMaria Rodriguez",
+  "delay_info": {
+    "delay_minutes": 169,
+    "sla_minutes": 120,
+    "customer_impact": "low",
+    "escalation_triggered": true,
+    "scenario_id": "email_1758990942_4216"
+  },
+  "customer_info": {
+    "name": "Maria Rodriguez",
+    "company": "Precision Components Ltd",
+    "phone": "+33-1-55443322"
+  },
+  "urgency": "medium",
+  "business_impact": {
+    "customer_satisfaction_loss": 33.800000000000004,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 33.800000000000004,
+    "escalation_risk": 76.05
+  },
+  "sla_violation": true
+}

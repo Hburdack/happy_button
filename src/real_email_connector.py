@@ -103,9 +103,22 @@ class RealEmailConnector:
 
         # Get basic fields
         from_addr = email_message.get('From', 'Unknown')
-        subject = email_message.get('Subject', 'No Subject')
+        subject_raw = email_message.get('Subject', 'No Subject')
         date_str = email_message.get('Date', '')
         to_addr = email_message.get('To', '')
+
+        # Decode the subject line properly
+        try:
+            from email.header import decode_header
+            decoded_subject = decode_header(subject_raw)
+            subject = ''
+            for part, encoding in decoded_subject:
+                if isinstance(part, bytes):
+                    subject += part.decode(encoding or 'utf-8', errors='ignore')
+                else:
+                    subject += part
+        except:
+            subject = subject_raw
 
         # Parse date
         try:
@@ -216,7 +229,7 @@ class RealEmailConnector:
         for department, email_address in self.email_domains.items():
             try:
                 # Connect to IMAP server
-                mail = imaplib.IMAP4_SSL(self.imap_config['host'], self.imap_config['port'])
+                mail = imaplib.IMAP4_SSL(self.imap_config['server'], self.imap_config['port'])
                 mail.login(email_address, self.imap_config['password'])
                 mail.select('INBOX')
 

@@ -1,0 +1,31 @@
+{
+  "id": "5347d08b-0da0-48d0-b4fb-528d3da8a9b9",
+  "scenario_type": "late_triage",
+  "email_type": "complaint",
+  "timestamp": "2025-09-27T08:33:23.181382",
+  "delayed_timestamp": "2025-09-27T05:30:23.181387",
+  "from": "James Wilson <james.wilson@industrialsolutionsagde>",
+  "to": "support@happybuttons.de",
+  "subject": "Formal Complaint: Poor Customer Service Response",
+  "body": "I am extremely disappointed with Happy Buttons' customer service. 3.0 hours without any acknowledgment is completely unacceptable in today's business environment.\n\nI'm considering switching suppliers if this continues.\n\nJames Wilson",
+  "delay_info": {
+    "delay_minutes": 183,
+    "sla_minutes": 30,
+    "customer_impact": "severe",
+    "escalation_triggered": true,
+    "scenario_id": "email_1758954803_7395"
+  },
+  "customer_info": {
+    "name": "James Wilson",
+    "company": "Industrial Solutions AG",
+    "phone": "+41-44-7766554"
+  },
+  "urgency": "high",
+  "business_impact": {
+    "customer_satisfaction_loss": 36.6,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 36.6,
+    "escalation_risk": 82.35
+  },
+  "sla_violation": true
+}

@@ -367,6 +367,7 @@
                 <a class="nav-link" href="/agents"><i class="fas fa-robot me-1"></i> Agents</a>
                 <a class="nav-link" href="/teams"><i class="fas fa-people-group me-1"></i> Teams</a>
                 <a class="nav-link" href="/kpi"><i class="fas fa-chart-line me-1"></i> KPIs</a>
+                <a class="nav-link" href="/scenarios"><i class="fas fa-exclamation-triangle me-1"></i> Scenarios</a>
                 <a class="nav-link" href="/config"><i class="fas fa-cogs me-1"></i> Config</a>
             </div>
             <!-- TimeWarp Mini Control -->
@@ -1212,7 +1213,15 @@
                 box.addEventListener('click', function() {
                     const dept = this.dataset.dept;
                     console.log(`Accessing ${dept} department...`);
-                    // Could route to specific department dashboards
+
+                    // Route to mailbox for internal departments
+                    const internalDepts = ['info', 'orders', 'quality', 'oem', 'management', 'logistics', 'finance', 'support'];
+                    if (internalDepts.includes(dept)) {
+                        window.location.href = `/mailbox/${dept}`;
+                    } else {
+                        // External departments - could show info or redirect elsewhere
+                        console.log(`External department: ${dept}`);
+                    }
                 });
             });
 

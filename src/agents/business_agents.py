@@ -10,6 +10,7 @@ from typing import Dict, List, Any, Optional
 import re
 
 from .base_agent import BaseAgent, AgentResponse, AgentTask
+from .agent_email_dispatcher import TaskTypes
 
 try:
     from email_processing.parser import ParsedEmail
@@ -120,18 +121,48 @@ class OrdersAgent(BaseAgent):
             'requires_approval': order_info['value'] > self.config['requires_approval_over']
         }
 
-        # Coordinate with other agents if needed
+        # Coordinate with other agents if needed via email
         coordination_notes = []
 
         if order_info['requires_inventory_check']:
-            await self.coordinate_with_agent('logistics-001',
-                                           f"Inventory check needed for order {order_info['id']}")
-            coordination_notes.append("Coordinated with logistics for inventory check")
+            success = await self.send_task_email(
+                to_agent='logistics_agent',
+                task_type=TaskTypes.INVENTORY_CHECK,
+                content=f"Inventory check needed for order {order_info['id']}. Customer: {order_info['customer']}, Quantity: {order_info['quantity']} units",
+                priority="high" if order_info['value'] > 10000 else "medium",
+                data={
+                    'order_id': order_info['id'],
+                    'product_needed': 'BTN-001',  # Default product
+                    'quantity': order_info['quantity'],
+                    'customer': order_info['customer'],
+                    'order_value': order_info['value']
+                },
+                due_hours=2
+            )
+            if success:
+                coordination_notes.append("Sent inventory check email to logistics")
+            else:
+                coordination_notes.append("Failed to send inventory check email")
 
         if response_data['requires_approval']:
-            await self.coordinate_with_agent('management-001',
-                                           f"High-value order requires approval: {order_info['value']}")
-            coordination_notes.append("Escalated to management for approval")
+            success = await self.send_task_email(
+                to_agent='management_agent',
+                task_type=TaskTypes.APPROVAL_REQUEST,
+                content=f"High-value order requires management approval.\nOrder ID: {order_info['id']}\nValue: €{order_info['value']:,.2f}\nCustomer: {order_info['customer']}\nQuantity: {order_info['quantity']} units",
+                priority="high",
+                data={
+                    'order_id': order_info['id'],
+                    'order_value': order_info['value'],
+                    'customer': order_info['customer'],
+                    'approval_type': 'high_value_order',
+                    'requires_signature': order_info['value'] > 50000
+                },
+                due_hours=4
+            )
+            if success:
+                coordination_notes.append("Sent approval request email to management")
+            else:
+                coordination_notes.append("Failed to send approval email")
 
         # Determine auto-reply
         auto_reply = 'order_received'
@@ -242,18 +273,47 @@ class OEMAgent(BaseAgent):
             'sla_deadline': (datetime.now() + timedelta(hours=self.config['priority_sla_hours'])).isoformat()
         }
 
-        # Coordinate with relevant departments
+        # Coordinate with relevant departments via email
         coordination_notes = []
 
         if oem_analysis['needs_custom_quote']:
-            await self.coordinate_with_agent('finance-001',
-                                           f"Custom quote needed for OEM customer: {parsed_email.sender.domain}")
-            coordination_notes.append("Coordinated with finance for custom pricing")
+            success = await self.send_task_email(
+                to_agent='finance_agent',
+                task_type=TaskTypes.PRICING_REQUEST,
+                content=f"Custom pricing quote needed for OEM customer: {parsed_email.sender.domain}\n\nCustomer Tier: {oem_analysis['tier']}\nEstimated Value: €{oem_analysis['value']:,.2f}\nVolume Discount Required: {oem_analysis['large_volume']}\n\nPlease prepare custom quotation within SLA timeframe.",
+                priority="high",
+                data={
+                    'customer_domain': parsed_email.sender.domain,
+                    'customer_tier': oem_analysis['tier'],
+                    'estimated_value': oem_analysis['value'],
+                    'large_volume': oem_analysis['large_volume'],
+                    'quote_type': 'oem_custom'
+                },
+                due_hours=2
+            )
+            if success:
+                coordination_notes.append("Sent custom pricing request to finance")
+            else:
+                coordination_notes.append("Failed to send pricing request")
 
         if oem_analysis['large_volume']:
-            await self.coordinate_with_agent('logistics-001',
-                                           f"Large volume OEM order - capacity planning needed")
-            coordination_notes.append("Alerted logistics for capacity planning")
+            success = await self.send_task_email(
+                to_agent='logistics_agent',
+                task_type=TaskTypes.CAPACITY_PLANNING,
+                content=f"Large volume OEM order capacity planning required.\n\nCustomer: {parsed_email.sender.domain}\nEstimated Volume: Large (>{self.config['volume_discount_threshold']} units)\nUrgency: {oem_analysis['urgency_level']}\n\nPlease assess production capacity and delivery timeline.",
+                priority="high",
+                data={
+                    'customer_domain': parsed_email.sender.domain,
+                    'volume_category': 'large',
+                    'urgency': oem_analysis['urgency_level'],
+                    'planning_type': 'oem_capacity'
+                },
+                due_hours=4
+            )
+            if success:
+                coordination_notes.append("Sent capacity planning request to logistics")
+            else:
+                coordination_notes.append("Failed to send capacity planning request")
 
         return AgentResponse(
             task_id=task.id,
@@ -421,9 +481,43 @@ class QualityAgent(BaseAgent):
         coordination_notes = []
 
         if quality_analysis['severity'] == 'critical':
-            await self.coordinate_with_agent('management-001',
-                                           f"Critical quality issue: {quality_analysis['issue_id']}")
-            coordination_notes.append("Escalated critical issue to management")
+            success = await self.send_task_email(
+                to_agent='management_agent',
+                task_type=TaskTypes.ESCALATION,
+                content=f"CRITICAL QUALITY ISSUE REQUIRES IMMEDIATE ATTENTION\n\nIssue ID: {quality_analysis['issue_id']}\nSeverity: {quality_analysis['severity']}\nCustomer: {quality_analysis['customer']}\nReported: {quality_analysis['reported_at']}\n\nThis issue may affect product safety or require immediate customer response.",
+                priority="critical",
+                data={
+                    'issue_id': quality_analysis['issue_id'],
+                    'severity': quality_analysis['severity'],
+                    'customer': quality_analysis['customer'],
+                    'escalation_type': 'critical_quality_issue',
+                    'requires_immediate_action': True,
+                    'safety_concern': True
+                },
+                due_hours=1
+            )
+            if success:
+                coordination_notes.append("Sent critical escalation email to management")
+            else:
+                coordination_notes.append("Failed to send escalation email")
+
+        elif quality_analysis['severity'] == 'high':
+            success = await self.send_task_email(
+                to_agent='quality_agent',  # Self-notification for tracking
+                task_type=TaskTypes.QUALITY_INVESTIGATION,
+                content=f"Quality investigation required for issue {quality_analysis['issue_id']}. Schedule investigation and customer response within 4 hours.",
+                priority="high",
+                data={
+                    'issue_id': quality_analysis['issue_id'],
+                    'investigation_type': 'product_defect',
+                    'customer': quality_analysis['customer']
+                },
+                due_hours=4
+            )
+            if success:
+                coordination_notes.append("Scheduled quality investigation")
+            else:
+                coordination_notes.append("Failed to schedule investigation")
 
         return AgentResponse(
             task_id=task.id,

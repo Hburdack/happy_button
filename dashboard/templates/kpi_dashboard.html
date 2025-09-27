@@ -194,7 +194,7 @@
         <!-- Performance Summary -->
         <div class="row mb-4">
             <div class="col-md-3">
-                <div class="kpi-card success">
+                <div class="kpi-card success" data-metric="overall-performance">
                     <div class="kpi-label">Overall Performance Score</div>
                     <div class="kpi-value">{{ performance_summary.overall_score }}%</div>
                     <div class="kpi-trend up">
@@ -203,7 +203,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="kpi-card warning">
+                <div class="kpi-card warning" data-metric="auto-handled-share">
                     <div class="kpi-label">Auto-handled Share</div>
                     <div class="kpi-value">{{ performance_summary.auto_handled_share }}%</div>
                     <div class="kpi-trend down">
@@ -212,7 +212,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="kpi-card success">
+                <div class="kpi-card success" data-metric="customer-satisfaction">
                     <div class="kpi-label">Customer Satisfaction</div>
                     <div class="kpi-value">{{ performance_summary.customer_satisfaction }}%</div>
                     <div class="kpi-trend up">
@@ -221,7 +221,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="kpi-card success">
+                <div class="kpi-card success" data-metric="revenue-growth">
                     <div class="kpi-label">Revenue Growth</div>
                     <div class="kpi-value">{{ performance_summary.revenue_growth }}%</div>
                     <div class="kpi-trend up">
@@ -242,7 +242,7 @@
             <div class="row">
                 {% for kpi in info_center_kpis %}
                 <div class="col-lg-4 col-md-6">
-                    <div class="kpi-card {% if kpi.status == 'good' %}success{% elif kpi.status == 'warning' %}warning{% else %}danger{% endif %}">
+                    <div class="kpi-card {% if kpi.status == 'good' %}success{% elif kpi.status == 'warning' %}warning{% else %}danger{% endif %}" data-metric="{{ kpi.metric_name }}">
                         <div class="kpi-label">{{ kpi.name }}</div>
                         <div class="kpi-value">{{ kpi.current_value }}{{ kpi.unit }}</div>
                         <div class="kpi-trend {% if kpi.trend == 'up' %}up{% elif kpi.trend == 'down' %}down{% else %}stable{% endif %}">
@@ -268,7 +268,7 @@
             <div class="row">
                 {% for kpi in kpis %}
                 <div class="col-lg-4 col-md-6">
-                    <div class="kpi-card {% if kpi.status == 'good' %}success{% elif kpi.status == 'warning' %}warning{% else %}danger{% endif %}">
+                    <div class="kpi-card {% if kpi.status == 'good' %}success{% elif kpi.status == 'warning' %}warning{% else %}danger{% endif %}" data-metric="{{ kpi.metric_name }}">
                         <div class="kpi-label">{{ kpi.name }}</div>
                         <div class="kpi-value">{{ kpi.current_value }}{{ kpi.unit }}</div>
                         <div class="kpi-trend {% if kpi.trend == 'up' %}up{% elif kpi.trend == 'down' %}down{% else %}stable{% endif %}">
@@ -418,16 +418,81 @@
             }
         });
 
+        // Function to update KPI display
+        function updateKPIDisplay(data) {
+            // Update Info Center KPIs
+            if (data.info_center_kpis && data.info_center_kpis.length > 0) {
+                data.info_center_kpis.forEach(kpi => {
+                    const metricElement = document.querySelector(`[data-metric="${kpi.metric_name}"]`);
+                    if (metricElement) {
+                        const valueElement = metricElement.querySelector('.kpi-value');
+                        if (valueElement) {
+                            valueElement.textContent = kpi.value;
+                        }
+                    }
+                });
+            }
+
+            // Update department KPIs
+            if (data.kpis_by_department) {
+                Object.entries(data.kpis_by_department).forEach(([department, kpis]) => {
+                    kpis.forEach(kpi => {
+                        const metricElement = document.querySelector(`[data-metric="${kpi.metric_name}"]`);
+                        if (metricElement) {
+                            const valueElement = metricElement.querySelector('.kpi-value');
+                            if (valueElement) {
+                                valueElement.textContent = kpi.value;
+                            }
+                        }
+                    });
+                });
+            }
+
+            // Update performance summary if available
+            if (data.performance_summary) {
+                const avgPerfElement = document.querySelector('[data-metric="overall-performance"]');
+                if (avgPerfElement) {
+                    const valueElement = avgPerfElement.querySelector('.kpi-value');
+                    if (valueElement) {
+                        valueElement.textContent = Math.round(data.performance_summary.avg_performance) + '%';
+                    }
+                }
+            }
+
+            console.log('KPI display updated successfully');
+        }
+
         // Auto-refresh KPIs every 30 seconds
         setInterval(() => {
             fetch('/api/kpi/refresh')
                 .then(response => response.json())
                 .then(data => {
                     console.log('KPI data refreshed:', data);
-                    // Update specific KPI values without full page reload
+                    updateKPIDisplay(data);
                 })
                 .catch(error => console.log('KPI refresh error:', error));
         }, 30000);
+
+        // Also try to get real-time v3 KPI data
+        setInterval(() => {
+            fetch('/api/v3/kpi/current')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.kpi_metrics && data.kpi_metrics.current_kpis) {
+                        // Update v3 KPI metrics
+                        const kpiMetrics = data.kpi_metrics.current_kpis;
+                        Object.entries(kpiMetrics).forEach(([kpiName, kpiData]) => {
+                            const elementId = `kpi-${kpiName.replace('_', '-')}`;
+                            const element = document.getElementById(elementId);
+                            if (element) {
+                                element.textContent = kpiData.value + (kpiData.unit || '');
+                            }
+                        });
+                        console.log('v3 KPI metrics updated');
+                    }
+                })
+                .catch(error => console.log('v3 KPI error:', error));
+        }, 15000);
 
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {

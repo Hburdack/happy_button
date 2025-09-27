@@ -1,0 +1,38 @@
+{
+  "id": "36be3582-4e81-4e95-bbb0-a17255ab85f8",
+  "scenario_type": "missed_expedite",
+  "email_type": "expedite_request",
+  "timestamp": "2025-09-27T08:37:46.411014",
+  "delayed_timestamp": "2025-09-27T08:28:46.411019",
+  "from": "James Wilson <james.wilson@industrialsolutionsagde>",
+  "to": "support@happybuttons.de",
+  "subject": "EXPEDITE REQUEST: Willing to Pay 200% Premium for Rush Delivery",
+  "body": "URGENT EXPEDITE REQUEST\n\nWe need 50,000 units rushed for production line emergency. Willing to pay 200% premium for 48-hour delivery.\n\nOrder value: €25,000 + €50,000 expedite fee = €75,000 total\n\nPlease confirm immediately.\n\nJames Wilson\nProduction Manager\nIndustrial Solutions AG",
+  "delay_info": {
+    "delay_minutes": 9,
+    "sla_minutes": 30,
+    "opportunity_value": 21276.654893623683,
+    "profit_multiplier": 10,
+    "keywords_detected": [
+      "urgent",
+      "expedite",
+      "rush"
+    ],
+    "missed": false,
+    "competitor_switch": false,
+    "scenario_id": "expedite_1758955066_2741"
+  },
+  "customer_info": {
+    "name": "James Wilson",
+    "company": "Industrial Solutions AG",
+    "phone": "+41-44-7766554"
+  },
+  "urgency": "low",
+  "business_impact": {
+    "customer_satisfaction_loss": 1.8,
+    "potential_revenue_loss": 4937.775,
+    "reputation_damage": 0.9,
+    "escalation_risk": 2.6999999999999997
+  },
+  "sla_violation": false
+}

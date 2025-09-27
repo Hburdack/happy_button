@@ -1,0 +1,31 @@
+{
+  "id": "2cfcf387-75bd-4864-a4b5-7f1f5149e750",
+  "scenario_type": "late_triage",
+  "email_type": "complaint",
+  "timestamp": "2025-09-27T18:35:42.706552",
+  "delayed_timestamp": "2025-09-27T15:11:42.706558",
+  "from": "David Thompson <david.thompson@premiumelectronicsde>",
+  "to": "support@happybuttons.de",
+  "subject": "Formal Complaint: Poor Customer Service Response",
+  "body": "ESCALATION NOTICE:\n\nYour team has failed to respond to my inquiry for 3.4 hours. This is affecting my business operations and I demand immediate action.\n\nIf I don't hear back within the next hour, I will be escalating this to your management and reconsidering our business relationship.\n\nDavid Thompson\nPremium Electronics",
+  "delay_info": {
+    "delay_minutes": 204,
+    "sla_minutes": 15,
+    "customer_impact": "severe",
+    "escalation_triggered": true,
+    "scenario_id": "email_1758990942_9490"
+  },
+  "customer_info": {
+    "name": "David Thompson",
+    "company": "Premium Electronics",
+    "phone": "+44-20-11223344"
+  },
+  "urgency": "high",
+  "business_impact": {
+    "customer_satisfaction_loss": 40.800000000000004,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 40.800000000000004,
+    "escalation_risk": 91.8
+  },
+  "sla_violation": true
+}

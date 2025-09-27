@@ -1,0 +1,38 @@
+{
+  "id": "ba630e89-9400-4225-a86f-dbb21bd65904",
+  "scenario_type": "missed_expedite",
+  "email_type": "expedite_request",
+  "timestamp": "2025-09-27T08:34:06.270925",
+  "delayed_timestamp": "2025-09-27T01:27:06.270932",
+  "from": "Maria Rodriguez <maria.rodriguez@precisioncomponentsltdde>",
+  "to": "support@happybuttons.de",
+  "subject": "EXPEDITE REQUEST: Willing to Pay 200% Premium for Rush Delivery",
+  "body": "RUSH ORDER AUTHORIZATION\n\nOur production line is down waiting for buttons. CEO has authorized unlimited expedite budget.\n\nWe need 25,277 units delivered within 24-48 hours. Money is no object.\n\nPlease call me immediately at +33-1-55443322.\n\nMaria Rodriguez\nOperations Director",
+  "delay_info": {
+    "delay_minutes": 427,
+    "sla_minutes": 30,
+    "opportunity_value": 13282.299809177519,
+    "profit_multiplier": 10,
+    "keywords_detected": [
+      "urgent",
+      "expedite",
+      "rush"
+    ],
+    "missed": true,
+    "competitor_switch": false,
+    "scenario_id": "expedite_1758954846_2493"
+  },
+  "customer_info": {
+    "name": "Maria Rodriguez",
+    "company": "Precision Components Ltd",
+    "phone": "+33-1-55443322"
+  },
+  "urgency": "critical",
+  "business_impact": {
+    "customer_satisfaction_loss": 50,
+    "potential_revenue_loss": 29692.0,
+    "reputation_damage": 30,
+    "escalation_risk": 90
+  },
+  "sla_violation": true
+}

@@ -1,0 +1,31 @@
+{
+  "id": "dcd183bc-f84f-4e58-a5e0-fc0416a26432",
+  "scenario_type": "late_triage",
+  "email_type": "complaint",
+  "timestamp": "2025-09-27T08:37:20.605526",
+  "delayed_timestamp": "2025-09-27T04:14:20.605530",
+  "from": "David Thompson <david.thompson@premiumelectronicsde>",
+  "to": "support@happybuttons.de",
+  "subject": "COMPLAINT: 4.4 Hour Delay in Response Time",
+  "body": "I am extremely disappointed with Happy Buttons' customer service. 4.4 hours without any acknowledgment is completely unacceptable in today's business environment.\n\nI'm considering switching suppliers if this continues.\n\nDavid Thompson",
+  "delay_info": {
+    "delay_minutes": 263,
+    "sla_minutes": 60,
+    "customer_impact": "high",
+    "escalation_triggered": true,
+    "scenario_id": "email_1758955040_4508"
+  },
+  "customer_info": {
+    "name": "David Thompson",
+    "company": "Premium Electronics",
+    "phone": "+44-20-11223344"
+  },
+  "urgency": "critical",
+  "business_impact": {
+    "customer_satisfaction_loss": 50,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 52.6,
+    "escalation_risk": 118.35
+  },
+  "sla_violation": true
+}

@@ -1,0 +1,31 @@
+{
+  "id": "e952ee07-8593-40b1-b761-9ae03cb22de7",
+  "scenario_type": "late_triage",
+  "email_type": "complaint",
+  "timestamp": "2025-09-27T08:37:20.606360",
+  "delayed_timestamp": "2025-09-27T07:34:20.606363",
+  "from": "Maria Rodriguez <maria.rodriguez@precisioncomponentsltdde>",
+  "to": "support@happybuttons.de",
+  "subject": "Formal Complaint: Poor Customer Service Response",
+  "body": "ESCALATION NOTICE:\n\nYour team has failed to respond to my inquiry for 1.1 hours. This is affecting my business operations and I demand immediate action.\n\nIf I don't hear back within the next hour, I will be escalating this to your management and reconsidering our business relationship.\n\nMaria Rodriguez\nPrecision Components Ltd",
+  "delay_info": {
+    "delay_minutes": 63,
+    "sla_minutes": 15,
+    "customer_impact": "high",
+    "escalation_triggered": true,
+    "scenario_id": "email_1758955040_4508_followup_1"
+  },
+  "customer_info": {
+    "name": "Maria Rodriguez",
+    "company": "Precision Components Ltd",
+    "phone": "+33-1-55443322"
+  },
+  "urgency": "medium",
+  "business_impact": {
+    "customer_satisfaction_loss": 12.600000000000001,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 12.600000000000001,
+    "escalation_risk": 28.349999999999998
+  },
+  "sla_violation": true
+}

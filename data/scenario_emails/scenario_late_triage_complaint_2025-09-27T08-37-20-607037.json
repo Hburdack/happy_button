@@ -1,0 +1,31 @@
+{
+  "id": "1ff28962-272a-45a6-b401-14c2c8957405",
+  "scenario_type": "late_triage",
+  "email_type": "complaint",
+  "timestamp": "2025-09-27T08:37:20.607037",
+  "delayed_timestamp": "2025-09-27T06:19:20.607041",
+  "from": "Marco Rossi <marco.rossi@italiandesignhousede>",
+  "to": "support@happybuttons.de",
+  "subject": "Escalation Required: No Response for 2.3 Hours",
+  "body": "I am extremely disappointed with Happy Buttons' customer service. 2.3 hours without any acknowledgment is completely unacceptable in today's business environment.\n\nI'm considering switching suppliers if this continues.\n\nMarco Rossi",
+  "delay_info": {
+    "delay_minutes": 138,
+    "sla_minutes": 60,
+    "customer_impact": "moderate",
+    "escalation_triggered": true,
+    "scenario_id": "email_1758955040_7291"
+  },
+  "customer_info": {
+    "name": "Marco Rossi",
+    "company": "Italian Design House",
+    "phone": "+39-02-33445566"
+  },
+  "urgency": "medium",
+  "business_impact": {
+    "customer_satisfaction_loss": 27.6,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 27.6,
+    "escalation_risk": 62.099999999999994
+  },
+  "sla_violation": true
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ mailbox_name.title() }} Mailbox - Happy Buttons</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --royal-blue: #2E4BC6;
+            --royal-purple: #7C3AED;
+            --royal-gold: #D97706;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8faff 0%, #e8f2ff 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, var(--royal-blue), var(--royal-purple));
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .email-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--royal-blue);
+        }
+
+        .email-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .email-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .email-content {
+            padding: 1.5rem;
+        }
+
+        .priority-high {
+            border-left-color: #dc3545;
+        }
+
+        .priority-critical {
+            border-left-color: #fd7e14;
+            animation: pulse 2s infinite;
+        }
+
+        .source-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+        }
+
+        .source-real_mailbox { background: #28a745; color: white; }
+        .source-scenario_emails { background: #fd7e14; color: white; }
+        .source-timewarp_simulation { background: #6f42c1; color: white; }
+        .source-enhanced_simulation { background: #20c997; color: white; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(253, 126, 20, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(253, 126, 20, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(253, 126, 20, 0); }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+
+        .stats-row {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1><i class="fas fa-envelope me-3"></i>{{ mailbox_name.title() }} Mailbox</h1>
+                    <p class="mb-0">{{ mailbox_name }}@h-bu.de</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="/" class="btn btn-light"><i class="fas fa-home me-2"></i>Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Mailbox Statistics -->
+        <div class="stats-row">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <h3 class="text-primary mb-1" id="total-emails">Loading...</h3>
+                    <p class="text-muted mb-0">Total Emails</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-success mb-1" id="today-emails">Loading...</h3>
+                    <p class="text-muted mb-0">Today's Emails</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-warning mb-1" id="unread-emails">Loading...</h3>
+                    <p class="text-muted mb-0">Recent Activity</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email List -->
+        <div id="email-list">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin fa-2x"></i>
+                <p class="mt-3">Loading emails...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load mailbox data
+        async function loadMailbox() {
+            try {
+                const response = await fetch(`/api/agents/mailbox/{{ mailbox_name }}`);
+                const data = await response.json();
+
+                // Update statistics
+                document.getElementById('total-emails').textContent = data.total_emails || 0;
+                document.getElementById('today-emails').textContent = data.today_emails || 0;
+                document.getElementById('unread-emails').textContent = data.recent_emails?.length || 0;
+
+                // Render emails
+                renderEmails(data.recent_emails || []);
+            } catch (error) {
+                console.error('Error loading mailbox:', error);
+                document.getElementById('email-list').innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Error loading emails. Please try again.
+                    </div>
+                `;
+            }
+        }
+
+        function renderEmails(emails) {
+            const emailList = document.getElementById('email-list');
+
+            if (emails.length === 0) {
+                emailList.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No emails in this mailbox</h5>
+                        <p class="text-muted">Check back later for new messages.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            emailList.innerHTML = emails.map(email => `
+                <div class="email-card priority-${email.priority || 'medium'}">
+                    <div class="email-header">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <div>
+                                <strong>${email.from || 'Unknown Sender'}</strong>
+                                <span class="source-badge source-${email.source || 'unknown'} ms-2">
+                                    ${(email.source || 'unknown').replace('_', ' ').toUpperCase()}
+                                </span>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-muted">${email.time || email.timestamp || 'Unknown time'}</small>
+                                ${email.priority === 'critical' ? '<i class="fas fa-exclamation-triangle text-warning ms-2"></i>' : ''}
+                                ${email.priority === 'high' ? '<i class="fas fa-exclamation-circle text-danger ms-2"></i>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="email-content">
+                        <h6 class="mb-2">${email.subject || 'No Subject'}</h6>
+                        <p class="text-muted mb-1">${email.content || 'No preview available'}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div>
+                                <span class="badge bg-secondary">${email.status || 'processed'}</span>
+                                ${email.scenario_info ? '<span class="badge bg-warning ms-1">Scenario</span>' : ''}
+                            </div>
+                            <small class="text-muted">
+                                <i class="fas fa-paper-plane me-1"></i>
+                                Routed to: ${email.routed_to || '{{ mailbox_name }}@h-bu.de'}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load mailbox on page load
+        document.addEventListener('DOMContentLoaded', loadMailbox);
+
+        // Refresh every 30 seconds
+        setInterval(loadMailbox, 30000);
+    </script>
+</body>
+</html>

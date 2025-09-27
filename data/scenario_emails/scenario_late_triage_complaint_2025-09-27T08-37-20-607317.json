@@ -1,0 +1,31 @@
+{
+  "id": "4aea8aa1-2e83-405b-bc84-86ddbcfef0be",
+  "scenario_type": "late_triage",
+  "email_type": "complaint",
+  "timestamp": "2025-09-27T08:37:20.607317",
+  "delayed_timestamp": "2025-09-27T06:42:20.607320",
+  "from": "Anna Kowalski <anna.kowalski@europeanmanufacturingcode>",
+  "to": "support@happybuttons.de",
+  "subject": "Escalation Required: No Response for 1.9 Hours",
+  "body": "ESCALATION NOTICE:\n\nYour team has failed to respond to my inquiry for 1.9 hours. This is affecting my business operations and I demand immediate action.\n\nIf I don't hear back within the next hour, I will be escalating this to your management and reconsidering our business relationship.\n\nAnna Kowalski\nEuropean Manufacturing Co",
+  "delay_info": {
+    "delay_minutes": 115,
+    "sla_minutes": 30,
+    "customer_impact": "moderate",
+    "escalation_triggered": false,
+    "scenario_id": "email_1758955040_6002"
+  },
+  "customer_info": {
+    "name": "Anna Kowalski",
+    "company": "European Manufacturing Co",
+    "phone": "+48-22-9988776"
+  },
+  "urgency": "medium",
+  "business_impact": {
+    "customer_satisfaction_loss": 23.0,
+    "potential_revenue_loss": 0,
+    "reputation_damage": 23.0,
+    "escalation_risk": 51.75
+  },
+  "sla_violation": true
+}

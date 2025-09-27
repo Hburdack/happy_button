@@ -223,6 +223,7 @@
                 <a class="nav-link active" href="/agents"><i class="fas fa-robot me-1"></i> Agents</a>
                 <a class="nav-link" href="/teams"><i class="fas fa-people-group me-1"></i> Teams</a>
                 <a class="nav-link" href="/kpi"><i class="fas fa-chart-line me-1"></i> KPIs</a>
+                <a class="nav-link" href="/scenarios"><i class="fas fa-exclamation-triangle me-1"></i> Scenarios</a>
                 <a class="nav-link" href="/config"><i class="fas fa-cogs me-1"></i> Config</a>
                 <!-- TimeWarp Control Widget -->
                 <div class="navbar-text timewarp-widget">
@@ -835,9 +836,13 @@
 
                 statusElement.className = 'status-badge ' +
                     (isActive ? (isBusy ? 'status-busy' : 'status-active') : 'status-inactive');
-                statusElement.innerHTML = `<i class="fas fa-circle me-1"></i>${
-                    isActive ? (isBusy ? 'Beschäftigt' : 'Aktiv') : 'Inaktiv'
-                }`;
+                // Show processing status when agent has processed emails
+                const hasProcessedEmails = agentData.processed_emails > 0;
+                const statusText = isActive ?
+                    (isBusy ? 'Beschäftigt' :
+                     (hasProcessedEmails ? 'Verarbeite' : 'Aktiv')) : 'Inaktiv';
+
+                statusElement.innerHTML = `<i class="fas fa-circle me-1"></i>${statusText}`;
             }
         }
 
@@ -846,7 +851,7 @@
             const queueElement = document.getElementById(`${agentName}-queue`);
             const errorsElement = document.getElementById(`${agentName}-errors`);
 
-            if (processedElement) processedElement.textContent = agentData.processed_tasks || 0;
+            if (processedElement) processedElement.textContent = agentData.processed_emails || agentData.processed_tasks || 0;
             if (queueElement) queueElement.textContent = agentData.queue_size || 0;
             if (errorsElement) errorsElement.textContent = agentData.error_count || 0;
         }
@@ -960,16 +965,38 @@
         }
 
         // Load initial data
-        function loadAgentData() {
+        async function loadAgentData() {
             showUpdateIndicator();
 
-            // Load agent statuses
-            fetch('/api/agents')
-                .then(response => response.json())
-                .then(data => {
-                    updateAgentData(data);
-                })
-                .catch(error => console.error('Error loading agent data:', error));
+            try {
+                // Load agent statuses
+                const response = await fetch('/api/agents');
+                const agents = await response.json();
+
+                // Fetch detailed stats for each agent
+                const agentDetails = {};
+                for (const agentName of Object.keys(agents)) {
+                    try {
+                        const detailResponse = await fetch(`/api/agents/${agentName}/details`);
+                        if (detailResponse.ok) {
+                            agentDetails[agentName] = await detailResponse.json();
+                        }
+                    } catch (error) {
+                        console.warn(`Failed to fetch details for ${agentName}:`, error);
+                    }
+                }
+
+                // Merge the details into agent data
+                for (const [agentName, agent] of Object.entries(agents)) {
+                    const details = agentDetails[agentName] || {};
+                    agent.processed_emails = details.processed_emails || 0;
+                    agent.status_detail = details.status || agent.status;
+                }
+
+                updateAgentData(agents);
+            } catch (error) {
+                console.error('Error loading agent data:', error);
+            }
 
             // Load email statistics
             fetch('/api/email/stats')
